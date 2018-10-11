@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -38,6 +39,9 @@ public class View extends JFrame{
 		
 		////////////////////////////CENTER//////////////////////////////////////////
 		
+		//GridLayout centerGrid = new GridLayout(2,2);
+		//central.setLayout(centerGrid);
+		
 		JLabel enterLogin = new JLabel("Login");
 		central.add(enterLogin);
 				
@@ -49,6 +53,9 @@ public class View extends JFrame{
 		
 		JTextField password = new JTextField(20);
 		central.add(password);
+		
+		JButton enter = new JButton("Log in");
+		central.add(enter);
 		
 		////////////////////////////////BOTTOM//////////////////////////////////////////
 		

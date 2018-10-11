@@ -10,11 +10,11 @@ import javax.swing.JTextField;
 
 public class View extends JFrame{
 
-	public View() {
+	public View(String name) {
 		
 		this.setVisible(true);
 		this.setSize(800, 600);
-		this.setTitle("Online Barber's Shop Appointments");
+		this.setTitle(name);
 		setupLoginFrame();
 		
 	}

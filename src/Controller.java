@@ -7,7 +7,7 @@ public class Controller implements ActionListener {
 	Model model;
 	
 	public Controller() {
-		this.view = new View();
+		this.view = new View ("Online Barber's Shop Appointments");
 		this.model = new Model();
 	}
 

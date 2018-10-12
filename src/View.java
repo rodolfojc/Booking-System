@@ -42,51 +42,82 @@ public class View extends JFrame{
 	}
 	
 	public JPanel newPanel() {
+		
 		return new JPanel();
 		
 	}
 	
+	public JTextField addTextField(int a, JPanel panel) {
+		
+		JTextField myText = new JTextField(a);
+		panel.add(myText);
+		return myText;
+		
+	}
+	
+	public JButton addButton(String name, JPanel panel) {
+		
+		JButton myButton= new JButton(name);
+		panel.add(myButton);
+		return myButton;
+	}
+	
+	public JLabel addLabel(String name, JPanel panel) {
+		
+		JLabel myLabel = new JLabel(name);
+		panel.add(myLabel);
+		return myLabel;
+	}
 	
 	public void setupLoginFrame() {
 		
+		setBorder(panel);
+		JPanel central = newPanel();
+		JPanel top = newPanel();
+		JPanel bottom = newPanel();
 		
+		addLabel("Welcome to the System Appointments",top);
+		addLabel("Login", central);
+		addTextField(10, central);
+		addLabel("Password", central);
+		addTextField(10, central);
+		addButton("LogIn", central);
 		
-		
-		BorderLayout boder = new BorderLayout();
-		this.setLayout(boder);
+		//BorderLayout boder = new BorderLayout();
+		//this.setLayout(boder);
 		
 		//GridLayout grid = new GridLayout();
 		//this.setLayout(grid);
 		
-		JPanel central = new JPanel();
-		JPanel top = new JPanel();
-		JPanel bottom = new JPanel();
+		//JPanel central = new JPanel();
+		//JPanel top = new JPanel();
+		//JPanel bottom = new JPanel();
 		
 		
 		//////////////////////////////////TOP///////////////////////////////////////
 		
-		JLabel welcome = new JLabel("Welcome to the System Appointments");
-		top.add(welcome);
+		//JLabel welcome = new JLabel("Welcome to the System Appointments");
+		//top.add(welcome);
 		
 		////////////////////////////CENTER//////////////////////////////////////////
 		
 		//GridLayout centerGrid = new GridLayout(2,2);
 		//central.setLayout(centerGrid);
 		
-		JLabel enterLogin = new JLabel("Login");
-		central.add(enterLogin);
+		//JLabel enterLogin = new JLabel("Login");
+		//central.add(enterLogin);
 				
-		JTextField user = new JTextField(20);
-		central.add(user);
+		//JTextField user = new JTextField(20);
+		//central.add(user);
 		
-		JLabel enterPassword = new JLabel("Password");
-		central.add(enterPassword);
+		//JLabel enterPassword = new JLabel("Password");
+		//central.add(enterPassword);
 		
-		JTextField password = new JTextField(20);
-		central.add(password);
+		//JTextField password = new JTextField(20);
+		//central.add(password);
 		
-		JButton enter = new JButton("Log in");
-		central.add(enter);
+		//JButton enter = new JButton("Log in");
+		//central.add(enter);
 		
 		////////////////////////////////BOTTOM//////////////////////////////////////////
 		

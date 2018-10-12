@@ -17,7 +17,7 @@ public class View extends JFrame{
 	public View(String name) {
 		
 		this.setVisible(true);
-		this.setSize(800, 600);
+		this.setSize(400, 600);
 		this.setTitle(name);
 		this.panel = new JPanel();
 		this.add(panel);
@@ -71,25 +71,27 @@ public class View extends JFrame{
 	
 	public void setupLoginFrame() {
 		
-		setBorder(panel);
-		JPanel central = newPanel();
+		setGrid(4,1,panel);
+		JPanel centralOne = newPanel();
+		JPanel centralTwo = newPanel();
 		JPanel top = newPanel();
 		JPanel bottom = newPanel();
 		
 		addLabel("Welcome to the System Appointments",top);
-		addLabel("Login", central);
-		addTextField(10, central);
-		addLabel("Password", central);
-		addTextField(10, central);
-		addButton("LogIn", central);
+		addLabel("Login", centralOne);
+		addTextField(10, centralOne);
+		addLabel("Password", centralTwo);
+		addTextField(10, centralTwo);
+		addButton("LogIn", bottom);
 		addLabel("New Customer?", bottom);
 		addButton("Register here", bottom);
 		
-		panel.add(top, BorderLayout.PAGE_START);
-		panel.add(central, BorderLayout.CENTER);
-		panel.add(bottom, BorderLayout.PAGE_END);
+		panel.add(top);
+		panel.add(centralOne);
+		panel.add(centralTwo);
+		panel.add(bottom);
 		
-		
+				
 		this.validate();
 		this.repaint();
 	}

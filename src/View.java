@@ -10,16 +10,47 @@ import javax.swing.JTextField;
 
 public class View extends JFrame{
 
+	private JPanel panel;
+	private GridLayout grid;
+	private BorderLayout border;
+	
 	public View(String name) {
 		
 		this.setVisible(true);
 		this.setSize(800, 600);
 		this.setTitle(name);
+		this.panel = new JPanel();
+		this.add(panel);
 		setupLoginFrame();
 		
 	}
 	
+	public GridLayout setGrid(int a, int b, JPanel panel) {
+		
+		grid = new GridLayout(a, b);
+		panel.setLayout(grid);
+		return grid;
+	
+	}
+	
+	public BorderLayout setBorder(JPanel panel) {
+		
+		border = new BorderLayout();
+		panel.setLayout(grid);
+		return border;
+	
+	}
+	
+	public JPanel newPanel() {
+		return new JPanel();
+		
+	}
+	
+	
 	public void setupLoginFrame() {
+		
+		
+		
 		
 		BorderLayout boder = new BorderLayout();
 		this.setLayout(boder);

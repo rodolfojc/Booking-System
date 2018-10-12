@@ -82,53 +82,8 @@ public class View extends JFrame{
 		addLabel("Password", central);
 		addTextField(10, central);
 		addButton("LogIn", central);
-		
-		//BorderLayout boder = new BorderLayout();
-		//this.setLayout(boder);
-		
-		//GridLayout grid = new GridLayout();
-		//this.setLayout(grid);
-		
-		//JPanel central = new JPanel();
-		//JPanel top = new JPanel();
-		//JPanel bottom = new JPanel();
-		
-		
-		//////////////////////////////////TOP///////////////////////////////////////
-		
-		//JLabel welcome = new JLabel("Welcome to the System Appointments");
-		//top.add(welcome);
-		
-		////////////////////////////CENTER//////////////////////////////////////////
-		
-		//GridLayout centerGrid = new GridLayout(2,2);
-		//central.setLayout(centerGrid);
-		
-		//JLabel enterLogin = new JLabel("Login");
-		//central.add(enterLogin);
-				
-		//JTextField user = new JTextField(20);
-		//central.add(user);
-		
-		//JLabel enterPassword = new JLabel("Password");
-		//central.add(enterPassword);
-		
-		//JTextField password = new JTextField(20);
-		//central.add(password);
-		
-		//JButton enter = new JButton("Log in");
-		//central.add(enter);
-		
-		////////////////////////////////BOTTOM//////////////////////////////////////////
-		
-		JLabel register = new JLabel("New Customer?");
-		bottom.add(register);
-		
-		JButton regButton = new JButton("Register here");
-		bottom.add(regButton);
-		
-		///////////////////////////////////////////////////////////////////////////////
-		
+		addLabel("New Customer?", bottom);
+		addButton("Register here", bottom);
 		
 		this.add(top, BorderLayout.PAGE_START);
 		this.add(central, BorderLayout.CENTER);

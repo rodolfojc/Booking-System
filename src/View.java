@@ -36,7 +36,7 @@ public class View extends JFrame{
 	public BorderLayout setBorder(JPanel panel) {
 		
 		border = new BorderLayout();
-		panel.setLayout(grid);
+		panel.setLayout(border);
 		return border;
 	
 	}
@@ -85,9 +85,9 @@ public class View extends JFrame{
 		addLabel("New Customer?", bottom);
 		addButton("Register here", bottom);
 		
-		this.add(top, BorderLayout.PAGE_START);
-		this.add(central, BorderLayout.CENTER);
-		this.add(bottom, BorderLayout.PAGE_END);
+		panel.add(top, BorderLayout.PAGE_START);
+		panel.add(central, BorderLayout.CENTER);
+		panel.add(bottom, BorderLayout.PAGE_END);
 		
 		
 		this.validate();

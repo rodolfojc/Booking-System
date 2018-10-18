@@ -9,6 +9,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -19,6 +22,7 @@ public class View extends JFrame{
 	private GridLayout grid;
 	private BorderLayout border;
 	private BoxLayout box;
+	private JMenuBar menu;
 	
 	public View(String name) {
 		
@@ -27,10 +31,13 @@ public class View extends JFrame{
 		this.setTitle(name);
 		this.panel = new JPanel();
 		this.add(panel);
+		this.menu = new JMenuBar();
+		this.setJMenuBar(menu);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.setDefaultLookAndFeelDecorated(true);
 		setupLoginFrame();
+		//setupRegisterFrame();
 		
 	}
 	
@@ -57,11 +64,21 @@ public class View extends JFrame{
 		return box;
 	}
 	
-	public JPanel newPanel() {
+	public JMenu addMenu(String name) {
 		
-		return new JPanel();
+		JMenu myMenu = new JMenu(name);
+		this.menu.add(myMenu);
+		return myMenu;
 		
 	}
+	
+	public JMenuItem addMenuItem(JMenu myMenu, String name) {
+		
+		JMenuItem myMenuItem = new JMenuItem(name);
+		myMenu.add(myMenuItem);
+		return myMenuItem;
+	}
+	
 	
 	public JTextField addTextField(int a, JPanel panel) {
 		
@@ -87,13 +104,20 @@ public class View extends JFrame{
 	
 	public void setupLoginFrame() {
 		
+		//this.setSize(400, 600);
 		//setGrid(4,1,panel);
 		setBox(panel,1);
-		JPanel centralOne = newPanel();
-		JPanel centralTwo = newPanel();
-		JPanel top = newPanel();
-		JPanel bottom = newPanel();
-		JPanel bottomTwo = newPanel();
+		
+		JMenu about = addMenu("Help");
+		addMenuItem(about, "About");
+		JMenu close = addMenu("Close");
+		addMenuItem(close, "Are you sure?");
+		
+		JPanel centralOne = new JPanel();
+		JPanel centralTwo = new JPanel();
+		JPanel top = new JPanel();
+		JPanel bottom = new JPanel();
+		JPanel bottomTwo = new JPanel();
 		
 		addLabel("Get Appointments",top);
 		addLabel("Login", centralOne);
@@ -125,6 +149,11 @@ public class View extends JFrame{
 		this.repaint();
 	}
 	
+	public void setupRegisterFrame() {
+		
+			
+		
+	}
 	
 	
 }

@@ -125,10 +125,10 @@ public class View extends JFrame{
 		addLabel("Password", centralTwo);
 		addTextField(10, centralTwo);
 		addButton("LogIn", bottom);
-		addLabel("New Customer/Provider?", bottomTwo);
+		addLabel("New Customer or Provider?", bottomTwo);
 		addButton("Register here", bottomTwo);
 		
-		panel.setBorder(new EmptyBorder(new Insets(130,120,140,120)));
+		panel.setBorder(new EmptyBorder(new Insets(150,125,150,125)));
 		
 		top.setBorder(BorderFactory.createTitledBorder("Welcome"));
 		panel.add(top);

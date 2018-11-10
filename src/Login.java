@@ -12,9 +12,9 @@ import javax.swing.border.EmptyBorder;
 
 public class Login extends JFrame{
 	
-	View login;
-	Controller controller;
-	JButton enter, reg;
+	private View login;
+	private Controller controller;
+	private JButton enter, reg;
 	JTextField email, password;
 		
 	public Login(Controller controller) {
@@ -29,6 +29,14 @@ public class Login extends JFrame{
 		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
 	}
 	
+	public String getEmail() {
+		return this.email.getText();
+	}
+	
+	public String getPass() {
+		return this.password.getText();
+	}
+	 
 	public void setupLoginFrame() {
 		//this.setSize(400, 600);
 		//setGrid(4,1,panel);

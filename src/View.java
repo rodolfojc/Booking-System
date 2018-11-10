@@ -15,8 +15,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import com.toedter.calendar.JDateChooser;
 
 public class View extends JFrame{
 
@@ -108,6 +112,22 @@ public class View extends JFrame{
 		JComboBox myComboBox = new JComboBox(options);
 		panel.add(myComboBox);
 		return myComboBox;
+	}
+	
+	public JDateChooser addCalen(JPanel panel) {
+		JDateChooser myDateChooser = new JDateChooser();
+		myDateChooser.setBounds(20, 20, 200, 20);
+		panel.add(myDateChooser);
+		return myDateChooser;
+	}
+	
+	public JScrollPane addTableS(String[][] data, String[] columnsName, JPanel panel) {
+		
+		JTable myTable = new JTable(data, columnsName);
+		JScrollPane myScroll = new JScrollPane(myTable);
+		panel.add(myScroll);
+		return myScroll;
+		
 	}
 	
 		

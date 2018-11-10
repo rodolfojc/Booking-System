@@ -11,10 +11,21 @@ public class Database {
 	Statement stmt = null;
 	ResultSet rs = null;
 	Register register;
+	Login login;
 	
 	public Database(Register register) {
 		
 		this.register = register;
+		connectDB();
+	}
+	
+	public Database(Login login) {
+		
+		this.login = login;
+		connectDB();
+	}
+		
+	public void connectDB() {
 		
 		try{
 			// Load the database driver
@@ -48,8 +59,6 @@ public class Database {
 		}
 	
 		
-		registerUser(this.register.getUserType());
-	
 	}
 	
 	public void registerUser(String type) {
@@ -105,6 +114,42 @@ public class Database {
 		}
 		
 	}
+	
+	public boolean loginUser(String user, String email, String password) {
+		
+		String query = "SELECT * FROM "+user+" WHERE email = '" + email + "' AND pass= '" + password + "';";
+			
+		try {
+			rs = stmt.executeQuery(query) ;
+			
+			// This code is telling us whether we have any results
+			// in our database or not
+			if (rs.isBeforeFirst()){
+				return true;
+			}
+			
+			// Close the result set, statement and the connection
+			rs.close() ;
+			stmt.close() ;
+			conn.close() ;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
  }
 	

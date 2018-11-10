@@ -13,32 +13,32 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class View extends JFrame{
 
-	private JPanel panel;
-	private GridLayout grid;
-	private BorderLayout border;
-	private BoxLayout box;
-	private JMenuBar menu;
-	
-	public View(String name) {
+	JPanel panel;
+	GridLayout grid;
+	BorderLayout border;
+	BoxLayout box;
+	JMenuBar menu;
+			
+	public View(String name, int width, int height, boolean Resizable) {
 		
 		this.setVisible(true);
-		this.setSize(400, 600);
+		this.setSize(width, height);
 		this.setTitle(name);
 		this.panel = new JPanel();
 		this.add(panel);
 		this.menu = new JMenuBar();
 		this.setJMenuBar(menu);
-		this.setResizable(false);
+		this.setResizable(Resizable);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
 		//this.setDefaultLookAndFeelDecorated(true);
-		setupLoginFrame();
-		//setupRegisterFrame();
-		
+				
 	}
 	
 	public GridLayout setGrid(int a, int b, JPanel panel) {
@@ -102,58 +102,5 @@ public class View extends JFrame{
 		return myLabel;
 	}
 	
-	public void setupLoginFrame() {
 		
-		//this.setSize(400, 600);
-		//setGrid(4,1,panel);
-		setBox(panel,1);
-		
-		JMenu about = addMenu("Help");
-		addMenuItem(about, "About");
-		JMenu close = addMenu("Close");
-		addMenuItem(close, "Are you sure?");
-		
-		JPanel centralOne = new JPanel();
-		JPanel centralTwo = new JPanel();
-		JPanel top = new JPanel();
-		JPanel bottom = new JPanel();
-		JPanel bottomTwo = new JPanel();
-		
-		addLabel("Get Appointments",top);
-		addLabel("Login", centralOne);
-		addTextField(10, centralOne);
-		addLabel("Password", centralTwo);
-		addTextField(10, centralTwo);
-		addButton("LogIn", bottom);
-		addLabel("New Customer/Provider?", bottomTwo);
-		addButton("Register here", bottomTwo);
-		
-		panel.setBorder(new EmptyBorder(new Insets(130,120,140,120)));
-		
-		top.setBorder(BorderFactory.createTitledBorder("Welcome"));
-		panel.add(top);
-		
-		//centralOne.setPreferredSize(new Dimension(5,10));
-		//centralOne.setBorder(BorderFactory.createBevelBorder(0));
-		panel.add(centralOne);
-		
-		//centralTwo.setPreferredSize(new Dimension(5,10));
-		//centralTwo.setBorder(BorderFactory.);
-		panel.add(centralTwo);
-		
-		panel.add(bottom);
-		panel.add(bottomTwo);
-		
-				
-		this.validate();
-		this.repaint();
-	}
-	
-	public void setupRegisterFrame() {
-		
-			
-		
-	}
-	
-	
 }

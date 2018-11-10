@@ -10,12 +10,14 @@ public class Controller implements ActionListener {
 	Login login;
 	Model model;
 	Database data;
+	CustomerView costView;
 	
 	
 	public Controller() {
 		
+		this.costView = new CustomerView();
 		//this.register = new Register(this);
-		this.login = new Login(this);
+		//this.login = new Login(this);
 		//this.view = new View ("Online Barber's Appointments", this, 400, 600, false);
 		//this.model = new Model();
 		

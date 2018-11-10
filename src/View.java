@@ -7,6 +7,7 @@ import java.awt.Insets;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -100,6 +101,13 @@ public class View extends JFrame{
 		JLabel myLabel = new JLabel(name);
 		panel.add(myLabel);
 		return myLabel;
+	}
+	
+	public JComboBox addComboB(String[] options, JPanel panel) {
+		
+		JComboBox myComboBox = new JComboBox(options);
+		panel.add(myComboBox);
+		return myComboBox;
 	}
 	
 		

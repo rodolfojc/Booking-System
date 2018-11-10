@@ -75,8 +75,8 @@ public class Login extends JFrame{
 		login.panel.add(bottomTwo);
 				
 						
-		this.validate();
-		this.repaint();
+		login.validate();
+		login.repaint();
 	}	
 	
 	

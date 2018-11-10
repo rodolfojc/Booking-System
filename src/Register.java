@@ -132,8 +132,8 @@ public class Register extends JFrame {
 		
 		reg.panel.add(regB);
 		
-		this.validate();
-		this.repaint();
+		reg.validate();
+		reg.repaint();
 		
 	}
 }

@@ -12,6 +12,11 @@ public class Database {
 	ResultSet rs = null;
 	Register register;
 	Login login;
+	CustomerView costView;
+	
+	public Database() {
+		connectDB();
+	}
 	
 	public Database(Register register) {
 		
@@ -24,7 +29,12 @@ public class Database {
 		this.login = login;
 		connectDB();
 	}
-		
+	
+	public Database(CustomerView costView) {
+		this.costView = costView;
+		connectDB();
+	}
+	
 	public void connectDB() {
 		
 		try{
@@ -142,8 +152,37 @@ public class Database {
 		
 	}
 	
+	public void customerLogged() {
+		
+		
+		String query= "SELECT cost_id, name, sur_name FROM costumers WHERE email='"+this.costView.getCustomerEmail()+"';";
+		
+		try {
+			
+			rs = stmt.executeQuery(query);
+		
+			while(rs.next()) {
+				costView.setCustomerID(rs.getString("cost_id"));
+				costView.setCustomerName(rs.getString("name"));
+				costView.setCustmerSurName(rs.getString("sur_name"));
+			}
+			
+			rs.close();
+			stmt.close() ;
+			conn.close() ;
+				
+		}catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	
-	
+		
+		
+		
+		
+		
+		
+	}
 	
 	
 	

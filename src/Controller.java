@@ -56,7 +56,7 @@ public class Controller implements ActionListener {
 				if(resultOne==true || resultTwo==true) {
 					JOptionPane.showMessageDialog(this.login,"Welcome!!");
 					if (resultOne) {
-						this.costView = new CustomerView();
+						this.costView = new CustomerView(email);
 					}else {
 						this.proView = new ProviderView();
 					}

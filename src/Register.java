@@ -68,7 +68,6 @@ public class Register extends JFrame {
 		
 		reg.setBox(reg.panel,1);
 		
-		
 		String [] userType = {"Customer", "Provider"};
 		JComboBox typeUs = new JComboBox(userType);
 		

@@ -6,15 +6,47 @@ import javax.swing.JPanel;
 
 public class CustomerView extends JFrame {
 	
-	View custView;
-	JComboBox option;
+	private View custView;
+	private JComboBox option;
+	private Database data;
+	private String customerID, custName, custSurName, custEmail;
 	
-	public CustomerView() {
+	public CustomerView(String email) {
 		
+		this.custEmail = email;
+		getUserData(email);
 		this.custView = new View("Customer Manager", 800, 600, true);
 		costumerViewSetup();
 	}
-
+	
+	public void setCustomerID(String custID) {
+		this.customerID = custID;
+	}
+	
+	public void setCustomerName(String custNam) {
+		this.custName = custNam;
+	}
+	
+	public void setCustmerSurName(String custSur) {
+		this.custSurName = custSur;
+	}
+	
+	//public void setCustomerEmail(String custEmail) {
+	//	this.custEmail = custEmail;
+	//}
+	
+	public String getCustomerEmail() {
+		return this.custEmail;
+	}
+	
+	
+	public void getUserData(String email) {
+		
+		data = new Database(this);
+		data.customerLogged();
+			
+	}
+	
 	public void costumerViewSetup() {
 		
 		String[] searchOp = {"Name", "Location"};
@@ -27,7 +59,7 @@ public class CustomerView extends JFrame {
 		JPanel right = new JPanel();
 		JPanel buttom = new JPanel();
 		
-		custView.addLabel("Welcome XXXXX", top);
+		custView.addLabel("Welcome "+this.custName+" "+this.custSurName+"", top);
 		
 		custView.addLabel("Find appointment by: ", left);
 		option = custView.addComboB(searchOp, left);

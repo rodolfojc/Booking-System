@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -29,6 +30,7 @@ public class View extends JFrame{
 	BorderLayout border;
 	BoxLayout box;
 	JMenuBar menu;
+	JTable myTable;
 			
 	public View(String name, int width, int height, boolean Resizable) {
 		
@@ -121,10 +123,15 @@ public class View extends JFrame{
 		return myDateChooser;
 	}
 	
-	public JScrollPane addTableS(String[][] data, String[] columnsName, JPanel panel) {
+	public JScrollPane addTableS(String[][] data, String[] columnsName, JPanel panel, String title) {
 		
-		JTable myTable = new JTable(data, columnsName);
+		myTable = new JTable(data, columnsName);
+		myTable.setSize(200, 300);
 		JScrollPane myScroll = new JScrollPane(myTable);
+		panel.setBorder(BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
+                title,
+                TitledBorder.CENTER,
+                TitledBorder.TOP));
 		panel.add(myScroll);
 		return myScroll;
 		

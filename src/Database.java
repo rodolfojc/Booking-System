@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 public class Database {
 	
 	Connection conn = null;
@@ -208,11 +210,120 @@ public class Database {
 		}catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+	    }
+	  }	
+	
+	public void addAvailability() {
+		
+		try {
+			
+			String query = "INSERT INTO availabilities (pro_id, name, sur_name, date, time, location, available)"
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		
+			PreparedStatement preparedStmt = conn.prepareStatement(query);
+			preparedStmt.setString(1, this.proView.getProviderID());
+			preparedStmt.setString(2, this.proView.getProviderName());
+			preparedStmt.setString(3, this.proView.getProviderSurName());
+			preparedStmt.setString(4, this.proView.getDatE());
+			preparedStmt.setString(5, this.proView.getHour());
+			preparedStmt.setString(6, this.proView.getProviderLocation());
+			preparedStmt.setString(7, "Yes");
+			
+			preparedStmt.execute();
+			conn.close();
+			
+		}catch (Exception e)
+	    	{
+		      	JOptionPane.showMessageDialog(this.proView, "Ups, there is a error! try again later", "Data Error!", JOptionPane.ERROR_MESSAGE);
+				System.err.println("Got an exception!");
+				System.err.println(e.getMessage());
+		    }
+		JOptionPane.showMessageDialog(this.proView, "Your availability has been added");
+		
 	}
 	
+		public void availableProvTable() {
+			
+			String query = "SELECT date, time FROM availabilities av INNER JOIN providers pr ON av.pro_id = pr.pro_id  WHERE email='"+this.proView.getProviderEmail()+"';";
+			String[][] data= new String[20][2];
+			
+			try {
+				
+				rs = stmt.executeQuery(query);
+				int i = 0;
+				
+				while(rs.next()) {
+					
+					data[i][0] = rs.getString("date");
+					data[i][1] = rs.getString("time");
+					i++;
+				}
+				
+				rs.close();
+				stmt.close() ;
+				conn.close() ;
+				
+				this.proView.setCopyDataAvai(data);
+					
+			}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+		  
+		
+			
+			
+		}
+		
+		public void availableCosTable() {
+			
+			String query = "SELECT name, sur_name, date, time FROM availabilities;";
+			String[][] data= new String[20][4];
+			
+			try {
+				
+				rs = stmt.executeQuery(query);
+				int i = 0;
+				
+				while(rs.next()) {
+					
+					data[i][0] = rs.getString("name");
+					data[i][1] = rs.getString("sur_name");
+					data[i][2] = rs.getString("date");
+					data[i][3] = rs.getString("time");
+					i++;
+				}
+				
+				rs.close();
+				stmt.close() ;
+				conn.close() ;
+				
+				this.costView.setCopyDataAvai(data);
+				
+					
+			}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+		  
+		
+			
+			
+		}
 	
 	
-	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
  
 }

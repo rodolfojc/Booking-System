@@ -17,10 +17,10 @@ public class Controller implements ActionListener {
 	
 	public Controller() {
 		
-		//this.proView = new ProviderView();
-		//this.costView = new CustomerView();
+		//this.proView = new ProviderView(this, "ce@.com");
+		this.costView = new CustomerView(this, "ro@.com");
 		//this.register = new Register(this);
-		this.login = new Login(this);
+		//this.login = new Login(this);
 		//this.view = new View ("Online Barber's Appointments", this, 400, 600, false);
 		//this.model = new Model();
 		
@@ -67,10 +67,14 @@ public class Controller implements ActionListener {
 		}
 		
 		if(e.getActionCommand().equals("Add")) {
-			String date = this.proView.getDatE();
-			System.out.println(date);
-			String hr = this.proView.getHour();
-			System.out.println(hr);
+			
+			Database data = new Database(proView);
+			data.addAvailability();
+						
+			//String date = this.proView.getDatE();
+			//System.out.println(date);
+			//String hr = this.proView.getHour();
+			//System.out.println(hr);
 		}
 		
 		

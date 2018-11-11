@@ -9,12 +9,14 @@ public class CustomerView extends JFrame {
 	private View custView;
 	private JComboBox option;
 	private Database data;
+	private Controller controller;
 	private String customerID, custName, custSurName, custEmail;
 	
-	public CustomerView(String email) {
+	public CustomerView(Controller controller, String email) {
 		
+		this.controller = controller;
 		this.custEmail = email;
-		getUserData(email);
+		getUserData(this.custEmail);
 		this.custView = new View("Customer Manager", 800, 600, true);
 		costumerViewSetup();
 	}

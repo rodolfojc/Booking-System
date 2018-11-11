@@ -1,5 +1,7 @@
 import java.awt.BorderLayout;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -7,15 +9,56 @@ import com.toedter.calendar.JDateChooser;
 
 public class ProviderView extends JFrame {
 	
-	View proView;
+	private View proView;
+	private Database data;
+	private Controller controller;
+	private JButton add;
+	private JDateChooser calendar;
+	private JComboBox hr;
+	private String provID, proName, proSurName, proEmail, proLocation;
 	
-	public ProviderView () {
+	public ProviderView (Controller controller, String email) {
 		
+		this.controller = controller;
+		this.proEmail = email;
+		getUserData(this.proEmail);
 		this.proView = new View("Provider Manager", 900, 600, true);
 		providerViewSetup();
-		
 	}
 	
+	public String getDatE() {
+		return calendar.getDate().toGMTString();
+	}
+	
+	public String getHour() {
+		return hr.getName();
+	}
+	
+	public void setProviderID(String proID) {
+		this.provID = proID;
+	}	
+	
+	public void setProviderName(String proNam) {
+		this.proName = proNam;
+	}
+	
+	public void setProviderSurName(String proSur) {
+		this.proSurName = proSur;
+	}
+	
+	public void setProviderLocation(String proLoc) {
+		this.proLocation = proLoc;
+	}
+	
+	public String getProviderEmail() {
+		return this.proEmail;
+	}
+	
+	public void getUserData(String email) {
+			data = new Database(this);
+			data.providerLogged();
+	}
+		
 	public void providerViewSetup() {
 
 		String[] hrs= {"8:00", "8:30", "9:00", "9:30", "10:00", "10:30",
@@ -29,13 +72,16 @@ public class ProviderView extends JFrame {
 		proView.setBorder(proView.panel);
 		
 		JPanel top = new JPanel();
-		proView.addLabel("Welcome XXXXX", top);
+		proView.addLabel("Welcome "+this.proName+" "+this.proSurName+"", top);
 	
 		JPanel left = new JPanel();
 		proView.addLabel("Add Availability: ", left);
-		proView.addCalen(left);
-		proView.addComboB(hrs, left);
-		proView.addButton("Add", left);
+		calendar = proView.addCalen(left);
+		hr = proView.addComboB(hrs, left);
+		
+		add = proView.addButton("Add", left);
+		add.setActionCommand("Add");
+		add.addActionListener(controller);
 		
 		JPanel center = new JPanel();
 		proView.addTableS(data, columnsNam, center);

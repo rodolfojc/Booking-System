@@ -13,8 +13,14 @@ public class Database {
 	Register register;
 	Login login;
 	CustomerView costView;
+	ProviderView proView;
 	
 	public Database() {
+		connectDB();
+	}
+	
+	public Database(ProviderView proView) {
+		this.proView = proView;
 		connectDB();
 	}
 	
@@ -76,8 +82,8 @@ public class Database {
 		if (type.equals("Costumer")) {
 			try {
 				
-				String query = "INSERT INTO costumers (name, sur_name, mob_num, email, address, pass)"
-						+ "VALUES (?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO costumers (name, sur_name, mob_num, email, address, pass, appoint)"
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 			
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
 				preparedStmt.setString(1, this.register.getName());
@@ -86,6 +92,7 @@ public class Database {
 				preparedStmt.setString(4, this.register.getEmail());
 				preparedStmt.setString(5, this.register.getAddress());
 				preparedStmt.setString(6, this.register.getPass());
+				preparedStmt.setString(7, "No");
 				
 				preparedStmt.execute();
 				conn.close();
@@ -101,8 +108,8 @@ public class Database {
 			
 				try {
 				
-				String query = "INSERT INTO providers (name, sur_name, mob_num, email, address, pass, location)"
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO providers (name, sur_name, mob_num, email, address, pass, location, status)"
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
 				preparedStmt.setString(1, this.register.getName());
@@ -112,6 +119,7 @@ public class Database {
 				preparedStmt.setString(5, this.register.getAddress());
 				preparedStmt.setString(6, this.register.getPass());
 				preparedStmt.setString(7, this.register.getLoc());
+				preparedStmt.setString(8, "Pending");
 				
 				preparedStmt.execute();
 				conn.close();
@@ -174,23 +182,39 @@ public class Database {
 		}catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+		}
 	}
 	
+	public void providerLogged() {
 		
 		
+		String query= "SELECT pro_id, name, sur_name, location FROM providers WHERE email='"+this.proView.getProviderEmail()+"';";
 		
+		try {
+			
+			rs = stmt.executeQuery(query);
 		
-		
-		
+			while(rs.next()) {
+				proView.setProviderID(rs.getString("pro_id"));
+				proView.setProviderName(rs.getString("name"));
+				proView.setProviderSurName(rs.getString("sur_name"));
+				proView.setProviderLocation(rs.getString("location"));
+			}
+			
+			rs.close();
+			stmt.close() ;
+			conn.close() ;
+				
+		}catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
 	
 	
 	
+	}	
 	
-	
-	
-	
- }
-	
+ 
+}
 	
 

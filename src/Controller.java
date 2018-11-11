@@ -56,16 +56,25 @@ public class Controller implements ActionListener {
 				if(resultOne==true || resultTwo==true) {
 					JOptionPane.showMessageDialog(this.login,"Welcome!!");
 					if (resultOne) {
-						this.costView = new CustomerView(email);
+						this.costView = new CustomerView(this, email);
 					}else {
-						this.proView = new ProviderView();
+						this.proView = new ProviderView(this, email);
 					}
 				}else {
 					JOptionPane.showMessageDialog(this.login,"Incorrect, please try again!");
 				}
 			
 		}
-				
+		
+		if(e.getActionCommand().equals("Add")) {
+			String date = this.proView.getDatE();
+			System.out.println(date);
+			String hr = this.proView.getHour();
+			System.out.println(hr);
+		}
+		
+		
+		
 	}
 
 }

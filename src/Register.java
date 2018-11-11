@@ -68,11 +68,11 @@ public class Register extends JFrame {
 		
 		reg.setBox(reg.panel,1);
 		
-		String [] userType = {"Customer", "Provider"};
-		JComboBox typeUs = new JComboBox(userType);
+		//String [] userType = {"Customer", "Provider"};
+		//JComboBox typeUs = new JComboBox(userType);
 		
-		JPanel typeCombo = new JPanel();
-		typeCombo.add(typeUs);
+		//JPanel typeCombo = new JPanel();
+		//typeCombo.add(typeUs);
 		
 		JPanel name = new JPanel();
 		JPanel surname = new JPanel();
@@ -117,7 +117,7 @@ public class Register extends JFrame {
 		regB.add(register);
 		
 		reg.panel.setBorder(new EmptyBorder(new Insets(20,65,20,65)));
-		reg.panel.add(typeCombo);
+		//reg.panel.add(typeCombo);
 		reg.panel.add(name);
 		reg.panel.add(surname);
 		reg.panel.add(password);

@@ -239,7 +239,7 @@ public class Database {
 				System.err.println(e.getMessage());
 		    }
 		JOptionPane.showMessageDialog(this.proView, "Your availability has been added");
-		
+		proView.addTableProView();
 	}
 	
 		public void availableProvTable() {
@@ -264,7 +264,8 @@ public class Database {
 				conn.close() ;
 				
 				this.proView.setCopyDataAvai(data);
-					
+				
+													
 			}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

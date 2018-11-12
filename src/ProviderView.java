@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import com.toedter.calendar.JDateChooser;
@@ -19,6 +20,8 @@ public class ProviderView extends JFrame {
 	private JDateChooser calendar;
 	private JComboBox hr;
 	private JTable table;
+	private JPanel center;
+	private JScrollPane scroll;
 	private String[][] dataTableAvai;
 	private String provID, proName, proSurName, proEmail, proLocation;
 	private String [] hrs = {"8:00", "8:30", "9:00", "9:30", "10:00", "10:30",
@@ -114,11 +117,12 @@ public class ProviderView extends JFrame {
 		add.setActionCommand("Add");
 		add.addActionListener(controller);
 		
-		JPanel center = new JPanel();
+		this.center = new JPanel();
 		Database data = new Database(this);
 		data.availableProvTable();
 		
-		proView.addTableS(dataTableAvai, columnsNam, center, "My Availabilites");
+		
+		scroll = proView.addTableS(dataTableAvai, columnsNam, center, "My Availabilites");
 		
 		
 		//JPanel right = new JPanel();
@@ -135,6 +139,18 @@ public class ProviderView extends JFrame {
 	    
 		
 	}
+	
+		public void addTableProView() {
+			
+			Database data = new Database(this);
+			data.availableProvTable();
+			String[] columnsNam = {"Date", "Time"};
+			scroll = proView.addTableS(dataTableAvai, columnsNam, center, "My Availabilites");
+			proView.panel.add(center, BorderLayout.CENTER);
+			proView.myTable.revalidate();
+			proView.validate();
+			proView.repaint();
+		}
 	
 	
 	

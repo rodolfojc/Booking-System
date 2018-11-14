@@ -152,7 +152,10 @@ public class ProviderView extends JFrame {
 			proView.repaint();
 		}
 	
-	
+		public void UpdateFrame() {
+			proView.panel.removeAll();
+			providerViewSetup();
+		}
 	
 	
 	

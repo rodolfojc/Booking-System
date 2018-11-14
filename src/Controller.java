@@ -11,7 +11,7 @@ public class Controller implements ActionListener {
 	Login login;
 	Model model;
 	Database data;
-	CustomerView costView;
+	CustomerView custView;
 	ProviderView proView;
 	
 	
@@ -56,7 +56,7 @@ public class Controller implements ActionListener {
 				if(resultOne==true || resultTwo==true) {
 					JOptionPane.showMessageDialog(this.login,"Welcome!!");
 					if (resultOne) {
-						this.costView = new CustomerView(this, email);
+						this.custView = new CustomerView(this, email);
 					}else {
 						this.proView = new ProviderView(this, email);
 					}
@@ -75,7 +75,7 @@ public class Controller implements ActionListener {
 		
 		if (e.getActionCommand().equals("Get Appoint")) {
 			
-			Database data = new Database(this.costView);
+			Database data = new Database(this.custView);
 			
 			
 		}

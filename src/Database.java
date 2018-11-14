@@ -239,7 +239,8 @@ public class Database {
 				System.err.println(e.getMessage());
 		    }
 		JOptionPane.showMessageDialog(this.proView, "Your availability has been added");
-		//proView.addTableProView();
+		this.proView.UpdateFrame();
+		
 	}
 	
 		public void availableProvTable() {

@@ -17,10 +17,10 @@ public class Controller implements ActionListener {
 	
 	public Controller() {
 		
-		this.proView = new ProviderView(this, "ce@.com");
+		//this.proView = new ProviderView(this, "ce@.com");
 		//this.costView = new CustomerView(this, "ro@.com");
 		//this.register = new Register(this);
-		//this.login = new Login(this);
+		this.login = new Login(this);
 		//this.view = new View ("Online Barber's Appointments", this, 400, 600, false);
 		//this.model = new Model();
 		
@@ -48,7 +48,7 @@ public class Controller implements ActionListener {
 			String password = login.getPass();
 		
 			data = new Database(login);
-			boolean resultOne = data.loginUser("costumers", email, password);
+			boolean resultOne = data.loginUser("custumers", email, password);
 			
 			Database connProv = new Database(login);
 			boolean resultTwo = connProv.loginUser("providers", email, password);
@@ -68,13 +68,16 @@ public class Controller implements ActionListener {
 		
 		if(e.getActionCommand().equals("Add")) {
 			
-			Database data = new Database(proView);
+			Database data = new Database(this.proView);
 			data.addAvailability();
 						
-			//String date = this.proView.getDatE();
-			//System.out.println(date);
-			//String hr = this.proView.getHour();
-			//System.out.println(hr);
+		}
+		
+		if (e.getActionCommand().equals("Get Appoint")) {
+			
+			Database data = new Database(this.costView);
+			
+			
 		}
 		
 		

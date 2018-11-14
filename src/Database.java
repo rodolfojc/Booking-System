@@ -84,7 +84,7 @@ public class Database {
 		if (type.equals("Costumer")) {
 			try {
 				
-				String query = "INSERT INTO costumers (name, sur_name, mob_num, email, address, pass, appoint)"
+				String query = "INSERT INTO custumers (cust_name, cust_surname, mob_num, email, address, pass, appoint)"
 						+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 			
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -110,7 +110,7 @@ public class Database {
 			
 				try {
 				
-				String query = "INSERT INTO providers (name, sur_name, mob_num, email, address, pass, location, status)"
+				String query = "INSERT INTO providers (pro_name, pro_surname, mob_num, email, address, pass, location, status)"
 						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -165,16 +165,16 @@ public class Database {
 	public void customerLogged() {
 		
 		
-		String query= "SELECT cost_id, name, sur_name FROM costumers WHERE email='"+this.costView.getCustomerEmail()+"';";
+		String query= "SELECT cust_id, cust_name, cust_surname FROM custumers WHERE email='"+this.costView.getCustomerEmail()+"';";
 		
 		try {
 			
 			rs = stmt.executeQuery(query);
 		
 			while(rs.next()) {
-				costView.setCustomerID(rs.getString("cost_id"));
-				costView.setCustomerName(rs.getString("name"));
-				costView.setCustmerSurName(rs.getString("sur_name"));
+				costView.setCustomerID(rs.getInt("cust_id"));
+				costView.setCustomerName(rs.getString("cust_name"));
+				costView.setCustmerSurName(rs.getString("cust_surname"));
 			}
 			
 			rs.close();
@@ -190,7 +190,7 @@ public class Database {
 	public void providerLogged() {
 		
 		
-		String query= "SELECT pro_id, name, sur_name, location FROM providers WHERE email='"+this.proView.getProviderEmail()+"';";
+		String query= "SELECT pro_id, pro_name, pro_surname, location FROM providers WHERE email='"+this.proView.getProviderEmail()+"';";
 		
 		try {
 			
@@ -198,8 +198,8 @@ public class Database {
 		
 			while(rs.next()) {
 				proView.setProviderID(rs.getString("pro_id"));
-				proView.setProviderName(rs.getString("name"));
-				proView.setProviderSurName(rs.getString("sur_name"));
+				proView.setProviderName(rs.getString("pro_name"));
+				proView.setProviderSurName(rs.getString("pro_surname"));
 				proView.setProviderLocation(rs.getString("location"));
 			}
 			
@@ -217,7 +217,7 @@ public class Database {
 		
 		try {
 			
-			String query = "INSERT INTO availabilities (pro_id, name, sur_name, date, time, location, available)"
+			String query = "INSERT INTO availabilities (pro_id, pro_name, pro_surname, date, time, location, available)"
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 		
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
@@ -239,7 +239,7 @@ public class Database {
 				System.err.println(e.getMessage());
 		    }
 		JOptionPane.showMessageDialog(this.proView, "Your availability has been added");
-		proView.addTableProView();
+		//proView.addTableProView();
 	}
 	
 		public void availableProvTable() {
@@ -278,8 +278,8 @@ public class Database {
 		
 		public void availableCosTable() {
 			
-			String query = "SELECT name, sur_name, date, time FROM availabilities;";
-			String[][] data= new String[20][4];
+			String query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities;";
+			String[][] data= new String[20][5];
 			
 			try {
 				
@@ -288,10 +288,11 @@ public class Database {
 				
 				while(rs.next()) {
 					
-					data[i][0] = rs.getString("name");
-					data[i][1] = rs.getString("sur_name");
-					data[i][2] = rs.getString("date");
-					data[i][3] = rs.getString("time");
+					data[i][0] = rs.getString("avai_ref");
+					data[i][1] = rs.getString("pro_name");
+					data[i][2] = rs.getString("pro_surname");
+					data[i][3] = rs.getString("date");
+					data[i][4] = rs.getString("time");
 					i++;
 				}
 				
@@ -309,6 +310,36 @@ public class Database {
 		  
 		
 			
+			
+		}
+		
+		public void bookApointment() {
+			
+			try {
+				
+				String query = "INSERT INTO appointments (cust_id, cust_name, cust_surname, "
+						+ "pro_id, pro_name, pro_surname, date, time, status,)"
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			
+				PreparedStatement preparedStmt = conn.prepareStatement(query);
+				preparedStmt.setInt(1, costView.getCustomerID());
+				preparedStmt.setString(2, this.proView.getProviderName());
+				preparedStmt.setString(3, this.proView.getProviderSurName());
+				preparedStmt.setString(4, this.proView.getDatE());
+				preparedStmt.setString(5, this.proView.getHour());
+				preparedStmt.setString(6, this.proView.getProviderLocation());
+				preparedStmt.setString(7, "Yes");
+				
+				preparedStmt.execute();
+				conn.close();
+				
+			}catch (Exception e)
+		    	{
+			      	JOptionPane.showMessageDialog(this.proView, "Ups, there is a error! try again later", "Data Error!", JOptionPane.ERROR_MESSAGE);
+					System.err.println("Got an exception!");
+					System.err.println(e.getMessage());
+			    }
+			JOptionPane.showMessageDialog(this.proView, "Your availability has been added");
 			
 		}
 	

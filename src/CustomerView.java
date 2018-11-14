@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Insets;
 import java.util.Arrays;
 
 import javax.swing.JButton;
@@ -8,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -17,10 +19,11 @@ public class CustomerView extends JFrame {
 	private JComboBox option;
 	private Database data;
 	private Controller controller;
-	private JButton search;
+	private JButton search, get;
 	private JTable table;
-	private String customerID, custName, custSurName, custEmail;
+	private String custName, custSurName, custEmail;
 	private String [][] dataTableAvai;
+	private int selectedRow, customerID;
 	
 	public CustomerView(Controller controller, String email) {
 		
@@ -31,12 +34,24 @@ public class CustomerView extends JFrame {
 		costumerViewSetup();
 	}
 	
+	public int getSelectedRowT() {
+		return this.selectedRow;
+	}	
+	
 	public void setCopyDataAvai(String[][] data) {
 		this.dataTableAvai = Arrays.copyOf(data, data.length);
 	}
 	
-	public void setCustomerID(String custID) {
+	public String getDataAvai(int a, int b) {
+		return this.dataTableAvai[a][b];
+	}
+	
+	public void setCustomerID(int custID) {
 		this.customerID = custID;
+	}
+	
+	public int getCustomerID() {
+		return this.customerID;
 	}
 	
 	public void setCustomerName(String custNam) {
@@ -65,28 +80,40 @@ public class CustomerView extends JFrame {
 	
 	public void costumerViewSetup() {
 		
-		String[] columnsNam = {"Name", "Surname", "Date", "Time"};
-		dataTableAvai = new String[40][4];
-				
+		String[] columnsNam = {"Reference,", "Name", "Surname", "Date", "Time"};
+		dataTableAvai = new String[40][5];
 		String[] searchOp = {"Name", "Location"};
-		
 		custView.setBorder(custView.panel);
 		
 		JPanel top = new JPanel();
-		JPanel left = new JPanel();
-		
-		JPanel right = new JPanel();
-		JPanel buttom = new JPanel();
-		
 		custView.addLabel("Welcome "+this.custName+" "+this.custSurName+"", top);
 		
-		custView.addLabel("Find appointment by: ", left);
-		option = custView.addComboB(searchOp, left);
-		int opt = option.getSelectedIndex();
-		System.out.print(opt);
-		search = custView.addButton("Search", left);
+		
+		JPanel left = new JPanel();
+		custView.setBorder(left);
+		
+		JPanel inLeftTop = new JPanel();
+		custView.addLabel("Find appointment by: ", inLeftTop);
+		option = custView.addComboB(searchOp, inLeftTop);
+		search = custView.addButton("Search", inLeftTop);
 		search.setActionCommand("Search");
 		search.addActionListener(controller);
+		inLeftTop.setBorder(new EmptyBorder(new Insets(50,0,0,0)));
+		
+		JPanel inLeftCenter = new JPanel();
+		get = custView.addButton("Get Appointment", inLeftCenter);
+		get.setActionCommand("Get Appoint");
+		get.addActionListener(controller);
+		
+		inLeftCenter.setBorder(new EmptyBorder(new Insets(80,0,0,0)));
+		
+		JPanel inLeftButtom = new JPanel();
+		custView.addButton("Logout", inLeftButtom);
+		inLeftButtom.setBorder(new EmptyBorder(new Insets(0,0,100,0)));
+		
+		left.add(inLeftTop, BorderLayout.PAGE_START);
+		left.add(inLeftCenter, BorderLayout.CENTER);
+		left.add(inLeftButtom, BorderLayout.PAGE_END);
 		
 		JPanel center = new JPanel();
 		Database data = new Database(this);
@@ -101,7 +128,7 @@ public class CustomerView extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
 				if(!model.isSelectionEmpty()) {
-					int selectedRow = model.getMinSelectionIndex();
+					selectedRow = model.getMinSelectionIndex();
 					JOptionPane.showMessageDialog(custView, "Appointment selected: "+dataTableAvai[selectedRow][0]+" "
 							+ ""+dataTableAvai[selectedRow][1]+" "
 									+ "on "+dataTableAvai[selectedRow][2]+" "
@@ -109,6 +136,8 @@ public class CustomerView extends JFrame {
 				}
 			}
 		});
+		
+		
 		//custView.panel.add(top);
 		//custView.panel.add(left);
 		custView.panel.add(top, BorderLayout.PAGE_START);

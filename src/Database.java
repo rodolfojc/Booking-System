@@ -14,7 +14,7 @@ public class Database {
 	ResultSet rs = null;
 	Register register;
 	Login login;
-	CustomerView costView;
+	CustomerView custView;
 	ProviderView proView;
 	
 	public Database() {
@@ -38,8 +38,8 @@ public class Database {
 		connectDB();
 	}
 	
-	public Database(CustomerView costView) {
-		this.costView = costView;
+	public Database(CustomerView custView) {
+		this.custView = custView;
 		connectDB();
 	}
 	
@@ -165,16 +165,16 @@ public class Database {
 	public void customerLogged() {
 		
 		
-		String query= "SELECT cust_id, cust_name, cust_surname FROM custumers WHERE email='"+this.costView.getCustomerEmail()+"';";
+		String query= "SELECT cust_id, cust_name, cust_surname FROM custumers WHERE email='"+this.custView.getCustomerEmail()+"';";
 		
 		try {
 			
 			rs = stmt.executeQuery(query);
 		
 			while(rs.next()) {
-				costView.setCustomerID(rs.getInt("cust_id"));
-				costView.setCustomerName(rs.getString("cust_name"));
-				costView.setCustmerSurName(rs.getString("cust_surname"));
+				custView.setCustomerID(rs.getInt("cust_id"));
+				custView.setCustomerName(rs.getString("cust_name"));
+				custView.setCustmerSurName(rs.getString("cust_surname"));
 			}
 			
 			rs.close();
@@ -301,7 +301,7 @@ public class Database {
 				stmt.close() ;
 				conn.close() ;
 				
-				this.costView.setCopyDataAvai(data);
+				this.custView.setCopyDataAvai(data);
 				
 					
 			}catch (SQLException e) {
@@ -323,7 +323,7 @@ public class Database {
 						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
-				preparedStmt.setInt(1, costView.getCustomerID());
+				preparedStmt.setInt(1, custView.getCustomerID());
 				preparedStmt.setString(2, this.proView.getProviderName());
 				preparedStmt.setString(3, this.proView.getProviderSurName());
 				preparedStmt.setString(4, this.proView.getDatE());
@@ -344,7 +344,50 @@ public class Database {
 			
 		}
 	
-	
+		public void searchProvider(String by, String input) {
+			
+			String query="";
+			String[][] data= new String[20][5];
+			
+			if(by.equals("Name")) {
+				query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities WHERE pro_name='"+input+"';";
+			}
+			else if(by.equals("Location")){
+				query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities WHERE location='"+input+"';";
+			}
+			else {
+				query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities;";
+			}
+			
+			try {
+				
+				rs = stmt.executeQuery(query);
+				int i = 0;
+				
+				while(rs.next()) {
+					
+					data[i][0] = rs.getString("avai_ref");
+					data[i][1] = rs.getString("pro_name");
+					data[i][2] = rs.getString("pro_surname");
+					data[i][3] = rs.getString("date");
+					data[i][4] = rs.getString("time");
+					i++;
+				}
+				
+				rs.close();
+				stmt.close() ;
+				conn.close() ;
+				
+				this.custView.setCopyDataAvai(data);
+				
+					
+			}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		    }
+			
+			
+		}
 	
 	
 	

@@ -18,9 +18,9 @@ public class Controller implements ActionListener {
 	public Controller() {
 		
 		//this.proView = new ProviderView(this, "ce@.com");
-		//this.costView = new CustomerView(this, "ro@.com");
+		this.custView = new CustomerView(this, "ro@.com");
 		//this.register = new Register(this);
-		this.login = new Login(this);
+		//this.login = new Login(this);
 		//this.view = new View ("Online Barber's Appointments", this, 400, 600, false);
 		//this.model = new Model();
 		
@@ -73,10 +73,18 @@ public class Controller implements ActionListener {
 						
 		}
 		
+		if (e.getActionCommand().equals("Search")){
+			
+			Database data = new Database(this.custView);
+			data.searchProvider(custView.getByOption(), custView.getByField());
+			this.custView.UpdateFrame();
+		}
+			
+			
+			
 		if (e.getActionCommand().equals("Get Appoint")) {
 			
 			Database data = new Database(this.custView);
-			
 			
 		}
 		

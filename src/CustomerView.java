@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.util.Arrays;
 
@@ -7,7 +8,9 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -23,7 +26,12 @@ public class CustomerView extends JFrame {
 	private JTable table;
 	private String custName, custSurName, custEmail;
 	private String [][] dataTableAvai;
+	private JScrollPane scroll;
+	private JTextField byInput;
+	private String byOption, byField;
+	String[] searchOp = {"Name", "Location"};
 	private int selectedRow, customerID;
+	private boolean tableflag=true;
 	
 	public CustomerView(Controller controller, String email) {
 		
@@ -31,7 +39,16 @@ public class CustomerView extends JFrame {
 		this.custEmail = email;
 		getUserData(this.custEmail);
 		this.custView = new View("Customer Manager", 800, 600, true);
+		this.dataTableAvai = new String[50][5];
 		costumerViewSetup();
+	}
+	
+	public String getByOption() {
+		return searchOp[option.getSelectedIndex()];
+	}
+	
+	public String getByField() {
+		return byInput.getText();
 	}
 	
 	public int getSelectedRowT() {
@@ -81,8 +98,6 @@ public class CustomerView extends JFrame {
 	public void costumerViewSetup() {
 		
 		String[] columnsNam = {"Reference,", "Name", "Surname", "Date", "Time"};
-		dataTableAvai = new String[40][5];
-		String[] searchOp = {"Name", "Location"};
 		custView.setBorder(custView.panel);
 		
 		JPanel top = new JPanel();
@@ -95,17 +110,15 @@ public class CustomerView extends JFrame {
 		JPanel inLeftTop = new JPanel();
 		custView.addLabel("Find appointment by: ", inLeftTop);
 		option = custView.addComboB(searchOp, inLeftTop);
-		search = custView.addButton("Search", inLeftTop);
-		search.setActionCommand("Search");
-		search.addActionListener(controller);
+		byInput = custView.addTextField(10, inLeftTop);
+		
 		inLeftTop.setBorder(new EmptyBorder(new Insets(50,0,0,0)));
 		
 		JPanel inLeftCenter = new JPanel();
-		get = custView.addButton("Get Appointment", inLeftCenter);
-		get.setActionCommand("Get Appoint");
-		get.addActionListener(controller);
-		
-		inLeftCenter.setBorder(new EmptyBorder(new Insets(80,0,0,0)));
+		search = custView.addButton("Search", inLeftCenter);
+		search.setActionCommand("Search");
+		search.addActionListener(controller);
+		inLeftCenter.setBorder(new EmptyBorder(new Insets(15,0,0,0)));
 		
 		JPanel inLeftButtom = new JPanel();
 		custView.addButton("Logout", inLeftButtom);
@@ -117,10 +130,10 @@ public class CustomerView extends JFrame {
 		
 		JPanel center = new JPanel();
 		Database data = new Database(this);
-		data.availableCosTable();
+		if (this.tableflag) {data.searchProvider("All","All");}
 		
-		custView.addTableS(dataTableAvai, columnsNam, center, "Availabilites");
-		//custView.myTable.setDefaultEditor(Object.class, null);
+		scroll = custView.addTableS(dataTableAvai, columnsNam, center, "Availabilites");
+		scroll.setPreferredSize(new Dimension(400,250));
 		ListSelectionModel model = custView.myTable.getSelectionModel();
 		model.addListSelectionListener(new ListSelectionListener() {
 
@@ -137,6 +150,10 @@ public class CustomerView extends JFrame {
 			}
 		});
 		
+		get = custView.addButton("Get Appointment", center);
+		get.setActionCommand("Get Appoint");
+		get.addActionListener(controller);
+		
 		
 		//custView.panel.add(top);
 		//custView.panel.add(left);
@@ -146,10 +163,13 @@ public class CustomerView extends JFrame {
 		
 		custView.validate();
 		custView.repaint();
-		
-		
-		
-		
+				
+	}
+	
+	public void UpdateFrame() {
+		custView.panel.removeAll();
+		this.tableflag=false;
+		costumerViewSetup();
 	}
 
 

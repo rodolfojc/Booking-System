@@ -278,7 +278,7 @@ public class Database {
 			
 			
 		}
-		
+		//ERASE
 		public void availableCosTable() {
 			
 			String query = "SELECT av.avai_ref, pr.pro_name, pr.pro_surname, av.date, av.time FROM availabilities av "
@@ -356,21 +356,20 @@ public class Database {
 			try {
 			
 				if(by.equals("Name")) {
-					query = "SELECT av.avai_ref, pr.pro_name, pr.pro_surname, av.date, av.time FROM availabilities AS av"
-						+ "INNER JOIN providers AS pr ON av.pro_id = pr.pro_id WHERE pr.pro_name='"+input+"';";
+					query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities"
+						+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id WHERE providers.pro_name='"+input+"';";
 				}
 				else if(by.equals("Location")){
-					query = "SELECT av.avai_ref, pr.pro_name, pr.pro_surname, av.date, av.time FROM availabilities AS av "
-							+ "INNER JOIN providers AS pr ON av.pro_id = pr.pro_id WHERE pr.location='"+input+"';";
+					query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities"
+						+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id WHERE providers.location='"+input+"';";
 				}
 				else {
 					query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities "
 						+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id;";
 				}
 				
-				System.out.println("Hola");
 				rs = stmt.executeQuery(query);
-				System.out.println("Hola2");
+				
 				int i = 0;
 				
 				while(rs.next()) {

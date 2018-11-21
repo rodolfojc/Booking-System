@@ -364,8 +364,8 @@ public class Database {
 							+ "INNER JOIN providers AS pr ON av.pro_id = pr.pro_id WHERE pr.location='"+input+"';";
 				}
 				else {
-					query = "SELECT av.avai_ref, pr.pro_name, pr.pro_surname, av.date, time FROM availabilities AS av"
-						+ "INNER JOIN providers AS pr ON av.pro_id = pr.pro_id;";
+					query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities "
+						+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id;";
 				}
 				
 				System.out.println("Hola");

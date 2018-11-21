@@ -23,7 +23,8 @@ public class ProviderView extends JFrame {
 	private JPanel center;
 	private JScrollPane scroll;
 	private String[][] dataTableAvai;
-	private String provID, proName, proSurName, proEmail, proLocation;
+	private int proID;
+	private String proName, proSurName, proEmail, proLocation;
 	private String [] hrs = {"8:00", "8:30", "9:00", "9:30", "10:00", "10:30",
 			"11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
 			"14:00", "14:30", "15:00", "15:30", "16:00", "16:30",
@@ -53,12 +54,12 @@ public class ProviderView extends JFrame {
 		return hrs[hr.getSelectedIndex()];
 	}
 	
-	public void setProviderID(String proID) {
-		this.provID = proID;
+	public void setProviderID(int proID) {
+		this.proID = proID;
 	}	
 	
-	public String getProviderID() {
-		return this.provID;
+	public int getProviderID() {
+		return this.proID;
 	}
 	
 	public void setProviderName(String proNam) {

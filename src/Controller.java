@@ -48,7 +48,7 @@ public class Controller implements ActionListener {
 			String password = login.getPass();
 		
 			data = new Database(login);
-			boolean resultOne = data.loginUser("custumers", email, password);
+			boolean resultOne = data.loginUser("customers", email, password);
 			
 			Database connProv = new Database(login);
 			boolean resultTwo = connProv.loginUser("providers", email, password);
@@ -84,8 +84,8 @@ public class Controller implements ActionListener {
 			
 		if (e.getActionCommand().equals("Get Appoint")) {
 			
-			Database data = new Database(this.custView);
-			
+			Database data = new Database(this.custView, this.proView);
+			data.bookAppointment();
 		}
 		
 		

@@ -44,8 +44,8 @@ public class Register extends JFrame {
 		return this.txtPass.getText();
 	}
 	
-	public int getMob() {
-		return Integer.parseInt(this.txtMob.getText());
+	public String getMob() {
+		return this.txtMob.getText();
 	}
 	
 	public String getEmail() {

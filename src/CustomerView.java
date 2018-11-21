@@ -43,6 +43,14 @@ public class CustomerView extends JFrame {
 		costumerViewSetup();
 	}
 	
+	public String getCustName() {
+		return this.custName;
+	}
+	
+	public String getCustSurN() {
+		return this.custSurName;
+	}
+	
 	public String getByOption() {
 		return searchOp[option.getSelectedIndex()];
 	}
@@ -144,8 +152,9 @@ public class CustomerView extends JFrame {
 					selectedRow = model.getMinSelectionIndex();
 					JOptionPane.showMessageDialog(custView, "Appointment selected: "+dataTableAvai[selectedRow][0]+" "
 							+ ""+dataTableAvai[selectedRow][1]+" "
-									+ "on "+dataTableAvai[selectedRow][2]+" "
-											+ "at "+dataTableAvai[selectedRow][3]+" o'clock");
+									+ ""+dataTableAvai[selectedRow][2]+" "
+											+ "on "+dataTableAvai[selectedRow][3]+" "
+													+ "at "+dataTableAvai[selectedRow][4]+" o'clock");
 				}
 			}
 		});

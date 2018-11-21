@@ -43,6 +43,12 @@ public class Database {
 		connectDB();
 	}
 	
+	public Database(CustomerView custView, ProviderView proView) {
+		this.custView = custView;
+		this.proView = proView;
+		connectDB();
+	}
+	
 	public void connectDB() {
 		
 		try{
@@ -84,18 +90,17 @@ public class Database {
 		if (type.equals("Costumer")) {
 			try {
 				
-				String query = "INSERT INTO custumers (cust_name, cust_surname, mob_num, email, address, pass, appoint)"
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO customers (cust_name, cust_surname, mob_num, email, address, pass)"
+						+ "VALUES (?, ?, ?, ?, ?, ?)";
 			
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
 				preparedStmt.setString(1, this.register.getName());
 				preparedStmt.setString(2, this.register.getSur());
-				preparedStmt.setInt(3, this.register.getMob());;
+				preparedStmt.setString(3, this.register.getMob());;
 				preparedStmt.setString(4, this.register.getEmail());
 				preparedStmt.setString(5, this.register.getAddress());
 				preparedStmt.setString(6, this.register.getPass());
-				preparedStmt.setString(7, "No");
-				
+								
 				preparedStmt.execute();
 				conn.close();
 				
@@ -116,7 +121,7 @@ public class Database {
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
 				preparedStmt.setString(1, this.register.getName());
 				preparedStmt.setString(2, this.register.getSur());
-				preparedStmt.setInt(3, this.register.getMob());;
+				preparedStmt.setString(3, this.register.getMob());;
 				preparedStmt.setString(4, this.register.getEmail());
 				preparedStmt.setString(5, this.register.getAddress());
 				preparedStmt.setString(6, this.register.getPass());
@@ -165,7 +170,7 @@ public class Database {
 	public void customerLogged() {
 		
 		
-		String query= "SELECT cust_id, cust_name, cust_surname FROM custumers WHERE email='"+this.custView.getCustomerEmail()+"';";
+		String query= "SELECT cust_id, cust_name, cust_surname FROM customers WHERE email='"+this.custView.getCustomerEmail()+"';";
 		
 		try {
 			
@@ -197,7 +202,7 @@ public class Database {
 			rs = stmt.executeQuery(query);
 		
 			while(rs.next()) {
-				proView.setProviderID(rs.getString("pro_id"));
+				proView.setProviderID(rs.getInt("pro_id"));
 				proView.setProviderName(rs.getString("pro_name"));
 				proView.setProviderSurName(rs.getString("pro_surname"));
 				proView.setProviderLocation(rs.getString("location"));
@@ -217,17 +222,14 @@ public class Database {
 		
 		try {
 			
-			String query = "INSERT INTO availabilities (pro_id, pro_name, pro_surname, date, time, location, available)"
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String query = "INSERT INTO availabilities (pro_id, date, time, available)"
+					+ "VALUES (?, ?, ?, ?)";
 		
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
-			preparedStmt.setString(1, this.proView.getProviderID());
-			preparedStmt.setString(2, this.proView.getProviderName());
-			preparedStmt.setString(3, this.proView.getProviderSurName());
-			preparedStmt.setString(4, this.proView.getDatE());
-			preparedStmt.setString(5, this.proView.getHour());
-			preparedStmt.setString(6, this.proView.getProviderLocation());
-			preparedStmt.setString(7, "Yes");
+			preparedStmt.setInt(1, this.proView.getProviderID());
+			preparedStmt.setString(2, this.proView.getDatE());
+			preparedStmt.setString(3, this.proView.getHour());
+			preparedStmt.setString(4, "Yes");
 			
 			preparedStmt.execute();
 			conn.close();
@@ -279,7 +281,8 @@ public class Database {
 		
 		public void availableCosTable() {
 			
-			String query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities;";
+			String query = "SELECT av.avai_ref, pr.pro_name, pr.pro_surname, av.date, av.time FROM availabilities av "
+					+ "INNER JOIN providers pr ON av.pro_id = pr.pro_id;";
 			String[][] data= new String[20][5];
 			
 			try {
@@ -314,33 +317,34 @@ public class Database {
 			
 		}
 		
-		public void bookApointment() {
+		public void bookAppointment() {
 			
 			try {
 				
-				String query = "INSERT INTO appointments (cust_id, cust_name, cust_surname, "
-						+ "pro_id, pro_name, pro_surname, date, time, status,)"
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO appointments (cust_name, cust_surname, "
+						+ "pro_name, pro_surname, date, time, status)"
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 			
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
-				preparedStmt.setInt(1, custView.getCustomerID());
-				preparedStmt.setString(2, this.proView.getProviderName());
-				preparedStmt.setString(3, this.proView.getProviderSurName());
-				preparedStmt.setString(4, this.proView.getDatE());
-				preparedStmt.setString(5, this.proView.getHour());
-				preparedStmt.setString(6, this.proView.getProviderLocation());
-				preparedStmt.setString(7, "Yes");
+				
+				preparedStmt.setString(1, this.custView.getCustName());
+				preparedStmt.setString(2, this.custView.getCustSurN());
+				preparedStmt.setString(3, this.custView.getDataAvai(this.custView.getSelectedRowT(),1));
+				preparedStmt.setString(4, this.custView.getDataAvai(this.custView.getSelectedRowT(),2));
+				preparedStmt.setString(5, this.custView.getDataAvai(this.custView.getSelectedRowT(),3));
+				preparedStmt.setString(6, this.custView.getDataAvai(this.custView.getSelectedRowT(),4));
+				preparedStmt.setString(7, "Pending");
 				
 				preparedStmt.execute();
 				conn.close();
 				
 			}catch (Exception e)
 		    	{
-			      	JOptionPane.showMessageDialog(this.proView, "Ups, there is a error! try again later", "Data Error!", JOptionPane.ERROR_MESSAGE);
+			      	JOptionPane.showMessageDialog(this.custView, "Ups, there is a error! try again later", "Data Error!", JOptionPane.ERROR_MESSAGE);
 					System.err.println("Got an exception!");
 					System.err.println(e.getMessage());
 			    }
-			JOptionPane.showMessageDialog(this.proView, "Your availability has been added");
+			JOptionPane.showMessageDialog(this.custView, "Your appointment has been added");
 			
 		}
 	
@@ -349,19 +353,24 @@ public class Database {
 			String query="";
 			String[][] data= new String[20][5];
 			
-			if(by.equals("Name")) {
-				query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities WHERE pro_name='"+input+"';";
-			}
-			else if(by.equals("Location")){
-				query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities WHERE location='"+input+"';";
-			}
-			else {
-				query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities;";
-			}
-			
 			try {
+			
+				if(by.equals("Name")) {
+					query = "SELECT av.avai_ref, pr.pro_name, pr.pro_surname, av.date, av.time FROM availabilities AS av"
+						+ "INNER JOIN providers AS pr ON av.pro_id = pr.pro_id WHERE pr.pro_name='"+input+"';";
+				}
+				else if(by.equals("Location")){
+					query = "SELECT av.avai_ref, pr.pro_name, pr.pro_surname, av.date, av.time FROM availabilities AS av "
+							+ "INNER JOIN providers AS pr ON av.pro_id = pr.pro_id WHERE pr.location='"+input+"';";
+				}
+				else {
+					query = "SELECT av.avai_ref, pr.pro_name, pr.pro_surname, av.date, time FROM availabilities AS av"
+						+ "INNER JOIN providers AS pr ON av.pro_id = pr.pro_id;";
+				}
 				
+				System.out.println("Hola");
 				rs = stmt.executeQuery(query);
+				System.out.println("Hola2");
 				int i = 0;
 				
 				while(rs.next()) {

@@ -126,7 +126,7 @@ public class Database {
 				preparedStmt.setString(5, this.register.getAddress());
 				preparedStmt.setString(6, this.register.getPass());
 				preparedStmt.setString(7, this.register.getLoc());
-				preparedStmt.setString(8, "Pending");
+				preparedStmt.setString(8, "unconfirmed");
 				
 				preparedStmt.execute();
 				conn.close();
@@ -227,7 +227,7 @@ public class Database {
 		
 			PreparedStatement preparedStmt = conn.prepareStatement(query);
 			preparedStmt.setInt(1, this.proView.getProviderID());
-			preparedStmt.setString(2, this.proView.getDatE());
+			preparedStmt.setDate(2, this.proView.getDatE());
 			preparedStmt.setString(3, this.proView.getHour());
 			preparedStmt.setString(4, "Yes");
 			
@@ -321,20 +321,14 @@ public class Database {
 			
 			try {
 				
-				String query = "INSERT INTO appointments (cust_name, cust_surname, "
-						+ "pro_name, pro_surname, date, time, status)"
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+				String query = "INSERT INTO appointments (avai_ref, cust_id, comments) "
+						+ "VALUES (?, ?, ?)";
 			
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
 				
-				preparedStmt.setString(1, this.custView.getCustName());
-				preparedStmt.setString(2, this.custView.getCustSurN());
-				preparedStmt.setString(3, this.custView.getDataAvai(this.custView.getSelectedRowT(),1));
-				preparedStmt.setString(4, this.custView.getDataAvai(this.custView.getSelectedRowT(),2));
-				preparedStmt.setString(5, this.custView.getDataAvai(this.custView.getSelectedRowT(),3));
-				preparedStmt.setString(6, this.custView.getDataAvai(this.custView.getSelectedRowT(),4));
-				preparedStmt.setString(7, "Pending");
-				
+				preparedStmt.setString(1, this.custView.getDataAvai(this.custView.getSelectedRowT(),0));
+				preparedStmt.setInt(2, this.custView.getCustomerID());
+				preparedStmt.setString(3, "No");				
 				preparedStmt.execute();
 				conn.close();
 				

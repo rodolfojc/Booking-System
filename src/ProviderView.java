@@ -1,4 +1,6 @@
 import java.awt.BorderLayout;
+import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
@@ -39,10 +41,18 @@ public class ProviderView extends JFrame {
 		providerViewSetup();
 	}
 	
-	public String getDatE() {
-		SimpleDateFormat myDate = new SimpleDateFormat("dd-MM-yyyy"); //"yyyy-MM-dd"
-		String date = myDate.format(calendar.getDate());
-		return date;		
+	public java.sql.Date getDatE() throws ParseException {
+		SimpleDateFormat myDateSimp = new SimpleDateFormat("yyy-MM-dd"); //"yyyy-MM-dd"
+		String dateStr = myDateSimp.format(calendar.getDate());
+		java.util.Date getCalendar;
+		java.sql.Date dateSql;
+		getCalendar = myDateSimp.parse(dateStr);
+		dateSql = new java.sql.Date(getCalendar.getTime());
+		//String date = myDateSimp.format(calendar.getDate());
+		//myDateSimp.applyPattern(calendar.getDate());
+		//Date myDate = myDateSimp.parse(myDateSimp.format(calendar.getDate());
+		//String date = myDate.format(calendar.getDate());
+		return dateSql;		
 		//return calendar.getDate().toGMTString();
 	}
 	

@@ -17,8 +17,8 @@ public class Controller implements ActionListener {
 	
 	public Controller() {
 		
-		//this.proView = new ProviderView(this, "ce@.com");
-		this.custView = new CustomerView(this, "ro@.com");
+		//this.proView = new ProviderView(this, "ke@.com");
+		this.custView = new CustomerView(this, "jo@.com");
 		//this.register = new Register(this);
 		//this.login = new Login(this);
 		//this.view = new View ("Online Barber's Appointments", this, 400, 600, false);

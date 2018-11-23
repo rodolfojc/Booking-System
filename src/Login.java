@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -16,6 +17,7 @@ public class Login extends JFrame{
 	private Controller controller;
 	private JButton enter, reg;
 	JTextField email, password;
+	JPasswordField passwordIn;
 		
 	public Login(Controller controller) {
 		login = new View ("Online Barber's Appointments", 400, 600, true);
@@ -35,6 +37,11 @@ public class Login extends JFrame{
 	
 	public String getPass() {
 		return this.password.getText();
+	}
+	
+	
+	public String getPassField() {
+		return new String(this.passwordIn.getPassword());
 	}
 	 
 	public void setupLoginFrame() {
@@ -58,7 +65,11 @@ public class Login extends JFrame{
 		login.addLabel("Email", centralOne);
 		email = login.addTextField(10, centralOne);
 		login.addLabel("Password", centralTwo);
-		password = login.addTextField(10, centralTwo);
+		
+		//password = login.addTextField(10, centralTwo);// ERASE
+		passwordIn = login.addPassField(10, centralTwo);
+		
+		
 		enter = login.addButton("Login", bottom);
 		enter.setActionCommand("Enter");
 		enter.addActionListener(controller);

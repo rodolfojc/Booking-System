@@ -18,9 +18,9 @@ public class Controller implements ActionListener {
 	public Controller() {
 		
 		//this.proView = new ProviderView(this, "ke@.com");
-		this.custView = new CustomerView(this, "jo@.com");
+		//this.custView = new CustomerView(this, "jo@.com");
 		//this.register = new Register(this);
-		//this.login = new Login(this);
+		this.login = new Login(this);
 		//this.view = new View ("Online Barber's Appointments", this, 400, 600, false);
 		//this.model = new Model();
 		
@@ -45,7 +45,8 @@ public class Controller implements ActionListener {
 		if(e.getActionCommand().equals("Enter")) {
 		
 			String email = login.getEmail();
-			String password = login.getPass();
+			String password = login.getPassField();
+			//String password = login.getPass();//ERASE
 		
 			data = new Database(login);
 			boolean resultOne = data.loginUser("customers", email, password);

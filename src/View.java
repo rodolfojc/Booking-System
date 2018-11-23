@@ -14,6 +14,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -93,6 +94,13 @@ public class View extends JFrame{
 		panel.add(myText);
 		return myText;
 		
+	}
+	
+	public JPasswordField addPassField(int a, JPanel panel) {
+		
+		JPasswordField myPass = new JPasswordField(a);
+		panel.add(myPass);
+		return myPass;
 	}
 	
 	public JButton addButton(String name, JPanel panel) {

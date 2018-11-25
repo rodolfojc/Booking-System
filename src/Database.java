@@ -91,7 +91,7 @@ public class Database {
 			try {
 				
 				String query = "INSERT INTO customers (cust_name, cust_surname, mob_num, email, address, pass)"
-						+ "VALUES (?, ?, ?, ?, ?, ?)";
+						+ "VALUES (?, ?, ?, ?, ?, SHA2(?,512))";
 			
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
 				preparedStmt.setString(1, this.register.getName());
@@ -116,7 +116,7 @@ public class Database {
 				try {
 				
 				String query = "INSERT INTO providers (pro_name, pro_surname, mob_num, email, address, pass, location, status)"
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+						+ "VALUES (?, ?, ?, ?, ?, SHA2(?,512), ?, ?)";
 			
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
 				preparedStmt.setString(1, this.register.getName());
@@ -142,7 +142,7 @@ public class Database {
 	
 	public boolean loginUser(String user, String email, String password) {
 		
-		String query = "SELECT * FROM "+user+" WHERE email = '" + email + "' AND pass= '" + password + "';";
+		String query = "SELECT * FROM "+user+" WHERE email = '" + email + "' AND pass= SHA2('"+ password + "',512);";
 			
 		try {
 			rs = stmt.executeQuery(query) ;

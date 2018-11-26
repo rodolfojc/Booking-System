@@ -40,7 +40,7 @@ public class View extends JFrame{
 		this.setSize(width, height);
 		this.setTitle(name);
 		this.panel = new JPanel();
-		this.myTable = new JTable[5];
+		this.myTable = new JTable[7];
 		this.add(panel);
 		this.menu = new JMenuBar();
 		this.setJMenuBar(menu);

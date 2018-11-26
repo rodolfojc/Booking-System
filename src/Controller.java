@@ -17,7 +17,7 @@ public class Controller implements ActionListener {
 	
 	public Controller() {
 		
-		this.proView = new ProviderView(this, "ke@.com");
+		this.proView = new ProviderView(this, "vi@vi.vom");
 		//this.custView = new CustomerView(this, "ro@ro.com");
 		//this.register = new Register(this);
 		//this.login = new Login(this);
@@ -92,8 +92,13 @@ public class Controller implements ActionListener {
 			dataTwo.setAppointment(avai_ref);
 		}
 		
+		if (e.getActionCommand().equals("Confirm")) {
+			Database data = new Database(this.proView);
+			String avai_ref = this.proView.getDataBooked(this.proView.getSelectedRowT(),0);
+			data.comfirmAppointPro(avai_ref);
+		}
 		
-		
+				
 	}
 
 }

@@ -56,12 +56,8 @@ public class ProviderView extends JFrame {
 		java.sql.Date dateSql;
 		getCalendar = myDateSimp.parse(dateStr);
 		dateSql = new java.sql.Date(getCalendar.getTime());
-		//String date = myDateSimp.format(calendar.getDate());
-		//myDateSimp.applyPattern(calendar.getDate());
-		//Date myDate = myDateSimp.parse(myDateSimp.format(calendar.getDate());
-		//String date = myDate.format(calendar.getDate());
 		return dateSql;		
-		//return calendar.getDate().toGMTString();
+		
 	}
 	
 	public void setCopyDataAvai(String[][] data) {
@@ -71,6 +67,14 @@ public class ProviderView extends JFrame {
 	public void setCopyDataBooked(String[][] data) {
 		this.dataTableBooked = Arrays.copyOf(data, data.length);
 	}
+	
+	public String getDataBooked (int a, int b) {
+		return this.dataTableBooked[a][b];
+	}
+	
+	public int getSelectedRowT() {
+		return this.selectedRow;
+	}	
 	
 	public String getHour() {
 		return hrs[hr.getSelectedIndex()];
@@ -124,7 +128,7 @@ public class ProviderView extends JFrame {
 	public void providerViewSetup() {
 
 		String[] columnsNamAvai = {"Date", "Time"};
-		String[] columnsNamAppoint = {"Name", "Surname", "Date", "Time"};
+		String[] columnsNamAppoint = {"Reference", "Name", "Surname", "Date", "Time"};
 		
 		
 		dataTableAvai = new String[40][2];
@@ -166,8 +170,9 @@ public class ProviderView extends JFrame {
 					JOptionPane.showMessageDialog(proView, "Appointment selected: "
 							+ ""+dataTableBooked[selectedRow][0]+" "
 									+ ""+dataTableBooked[selectedRow][1]+" "
-											+ "on "+dataTableBooked[selectedRow][2]+" "
-													+ "at "+dataTableBooked[selectedRow][3]+" o'clock");
+											+ " "+dataTableBooked[selectedRow][2]+" "
+												+ "on "+dataTableBooked[selectedRow][3]+" "
+														+ "at "+dataTableBooked[selectedRow][4]+"o'clock");
 				}
 			}
 		});

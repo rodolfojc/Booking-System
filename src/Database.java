@@ -247,11 +247,12 @@ public class Database {
 	
 	public void toBeConfirmPro() {
 		
-		String query = "SELECT cust_name, cust_surname, date, time FROM appointments INNER JOIN customers "
-				+ "ON customers.cust_id = appointments.cust_id INNER JOIN availabilities "
-					+ "ON availabilities.avai_ref = appointments.avai_ref WHERE availabilities.pro_id = '"+this.proView.getProviderID()+"' "
-						+ "AND availabilities.available='unconfirmed';";
-		String[][] data= new String[20][4];
+		String query = "SELECT cust_name, cust_surname, date, time, availabilities.avai_ref FROM appointments "
+				+ "INNER JOIN customers ON customers.cust_id = appointments.cust_id "
+					+ "INNER JOIN availabilities ON availabilities.avai_ref = appointments.avai_ref "
+						+ "WHERE availabilities.pro_id = '"+this.proView.getProviderID()+"' "
+							+ "AND availabilities.available='unconfirmed';";
+		String[][] data= new String[20][5];
 		
 		try {
 			
@@ -260,10 +261,12 @@ public class Database {
 			
 			while(rs.next()) {
 				
-				data[i][0] = rs.getString("cust_name");
-				data[i][1] = rs.getString("cust_surname");
-				data[i][2] = rs.getString("date");
-				data[i][3] = rs.getString("time");
+				data[i][0] = rs.getString("avai_ref");
+				data[i][1] = rs.getString("cust_name");
+				data[i][2] = rs.getString("cust_surname");
+				data[i][3] = rs.getString("date");
+				data[i][4] = rs.getString("time");
+				
 				i++;
 			}
 			
@@ -395,6 +398,26 @@ public class Database {
 					System.err.println(e.getMessage());
 			    }
 			this.custView.UpdateFrame(true);	
+		}
+		
+		public void comfirmAppointPro(String avai_reference) {
+			
+			try {
+				
+				String query = "UPDATE availabilities SET available='confirmed' WHERE avai_ref='"+avai_reference+"';";
+				
+				PreparedStatement preparedStmt = conn.prepareStatement(query);
+				preparedStmt.execute();
+				conn.close();
+				
+			}catch (Exception e)
+		    	{
+			      	
+					System.err.println("Got an exception!");
+					System.err.println(e.getMessage());
+			    }
+			JOptionPane.showMessageDialog(this.proView, "The appointment has been confirm. Thanks");
+			this.proView.UpdateFrame();	
 		}
 		
 			

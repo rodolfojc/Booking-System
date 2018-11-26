@@ -134,11 +134,15 @@ public class View extends JFrame{
 		return myDateChooser;
 	}
 	
-	public JScrollPane addTableS(int tableNum, String[][] data, String[] columnsName, JPanel panel) {
+	public JScrollPane addTableS(int tableNum, String[][] data, String[] columnsName, JPanel panel, String title) {
 		
 		myTable[tableNum] = new JTable(data, columnsName);
-		myTable[tableNum].setSize(200, 300);
+		myTable[tableNum].setSize(100, 200);
 		JScrollPane myScroll = new JScrollPane(myTable[tableNum]);
+		panel.setBorder(BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
+                title,
+                TitledBorder.CENTER,
+                TitledBorder.TOP));
 		panel.add(myScroll);
 		return myScroll;
 		

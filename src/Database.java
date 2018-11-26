@@ -245,6 +245,41 @@ public class Database {
 		
 	}
 	
+	public void toBeConfirmPro() {
+		
+		String query = "SELECT cust_name, cust_surname, date, time FROM appointments INNER JOIN customers "
+				+ "ON customers.cust_id = appointments.cust_id INNER JOIN availabilities "
+					+ "ON availabilities.avai_ref = appointments.avai_ref WHERE availabilities.pro_id = '"+this.proView.getProviderID()+"' "
+						+ "AND availabilities.available='unconfirmed';";
+		String[][] data= new String[20][4];
+		
+		try {
+			
+			rs = stmt.executeQuery(query);
+			int i = 0;
+			
+			while(rs.next()) {
+				
+				data[i][0] = rs.getString("cust_name");
+				data[i][1] = rs.getString("cust_surname");
+				data[i][2] = rs.getString("date");
+				data[i][3] = rs.getString("time");
+				i++;
+			}
+			
+			rs.close();
+			stmt.close() ;
+			conn.close() ;
+			
+			this.proView.setCopyDataBooked(data);
+			
+												
+		}catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	}
+		
 		public void availableProvTable() {
 			
 			String query = "SELECT date, time FROM availabilities av INNER JOIN providers pr ON av.pro_id = pr.pro_id  "
@@ -275,9 +310,6 @@ public class Database {
 			e.printStackTrace();
 		    }
 		  
-		
-			
-			
 		}
 		//ERASE
 		public void availableCosTable() {

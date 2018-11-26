@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,10 +9,14 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -24,11 +29,12 @@ public class ProviderView extends JFrame {
 	private JDateChooser calendar;
 	private JComboBox hr;
 	private JTable table;
-	private JPanel center;
 	private JScrollPane scrollAvaiTable, scrollBookedTable;
 	private String[][] dataTableAvai, dataTableBooked;
 	private int proID;
 	private String proName, proSurName, proEmail, proLocation;
+	private int selectedRow;
+	private JButton confirm;
 	private String [] hrs = {"8:00", "8:30", "9:00", "9:30", "10:00", "10:30",
 			"11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
 			"14:00", "14:30", "15:00", "15:30", "16:00", "16:30",
@@ -39,7 +45,7 @@ public class ProviderView extends JFrame {
 		this.controller = controller;
 		this.proEmail = email;
 		getUserData(this.proEmail);
-		this.proView = new View("Provider Manager", 900, 600, true);
+		this.proView = new View("Provider Manager", 1200, 600, true);
 		providerViewSetup();
 	}
 	
@@ -60,6 +66,10 @@ public class ProviderView extends JFrame {
 	
 	public void setCopyDataAvai(String[][] data) {
 		this.dataTableAvai = Arrays.copyOf(data, data.length);
+	}
+	
+	public void setCopyDataBooked(String[][] data) {
+		this.dataTableBooked = Arrays.copyOf(data, data.length);
 	}
 	
 	public String getHour() {
@@ -114,7 +124,7 @@ public class ProviderView extends JFrame {
 	public void providerViewSetup() {
 
 		String[] columnsNamAvai = {"Date", "Time"};
-		String[] columnsNamAppoint = {"Customer Name", "Customer Surname", "Date", "Time"};
+		String[] columnsNamAppoint = {"Name", "Surname", "Date", "Time"};
 		
 		
 		dataTableAvai = new String[40][2];
@@ -133,48 +143,50 @@ public class ProviderView extends JFrame {
 		add.setActionCommand("Add");
 		add.addActionListener(controller);
 		
-		scrollBookedTable = proView.addTableS(1, dataTableBooked, columnsNamAppoint, center, "Appointment to be confirm");
-		
-		this.center = new JPanel();
-		this.center.setBorder(BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
-                title,
-                TitledBorder.CENTER,
-                TitledBorder.TOP));
-		
-		
+		JPanel center = new JPanel();
 		Database data = new Database(this);
 		data.availableProvTable();
 		
-		
 		scrollAvaiTable = proView.addTableS(0, dataTableAvai, columnsNamAvai, center, "My Availabilites");
+		scrollAvaiTable.setPreferredSize(new Dimension(400,250));
 		
-		
-		//JPanel right = new JPanel();
-		//JPanel buttom = new JPanel();
+		JPanel rightTable = new JPanel();
+		Database dataBooked = new Database(this);
+		dataBooked.toBeConfirmPro();
+		scrollBookedTable = proView.addTableS(1, dataTableBooked, columnsNamAppoint, rightTable, "Appointments to be confirm");
+		scrollBookedTable.setPreferredSize(new Dimension(400,250));
+		ListSelectionModel model = this.proView.myTable[1].getSelectionModel();
+		model.addListSelectionListener(new ListSelectionListener() {
 
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				// TODO Auto-generated method stub
+				if(!model.isSelectionEmpty()) {
+					selectedRow = model.getMinSelectionIndex();
+					JOptionPane.showMessageDialog(proView, "Appointment selected: "
+							+ ""+dataTableBooked[selectedRow][0]+" "
+									+ ""+dataTableBooked[selectedRow][1]+" "
+											+ "on "+dataTableBooked[selectedRow][2]+" "
+													+ "at "+dataTableBooked[selectedRow][3]+" o'clock");
+				}
+			}
+		});
+		
+		confirm = this.proView.addButton("Confirm", rightTable);
+		confirm.setActionCommand("Confirm");
+		confirm.addActionListener(controller);
+		
+			
 		proView.panel.add(top, BorderLayout.PAGE_START);
 		proView.panel.add(left, BorderLayout.LINE_START);
 		proView.panel.add(center, BorderLayout.CENTER);
+		proView.panel.add(rightTable, BorderLayout.EAST);
 		
-	    //String date = dateChooser.getDate().toString();
-	    //System.out.println(date);
 	    proView.validate();
 	    proView.repaint();
 	    
 		
 	}
-	
-		public void addTableProView() {
-			
-			Database data = new Database(this);
-			data.availableProvTable();
-			String[] columnsNam = {"Date", "Time"};
-			scrollAvaiTable = proView.addTableS(0, dataTableAvai, columnsNam, center, "My Availabilites");
-			proView.panel.add(center, BorderLayout.CENTER);
-			proView.myTable[0].revalidate();
-			proView.validate();
-			proView.repaint();
-		}
 	
 		public void UpdateFrame() {
 			proView.panel.removeAll();

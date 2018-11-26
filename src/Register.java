@@ -1,4 +1,7 @@
 import java.awt.Insets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -35,6 +38,10 @@ public class Register extends JFrame {
 		setupRegisterFrame();
 		}
 	
+	public View getReg() {
+		return this.reg;
+	}
+	
 	public String getName() {
 		return this.txtName.getText();
 	}
@@ -65,6 +72,18 @@ public class Register extends JFrame {
 	
 	public String getUserType() {
 		return this.type;
+	}
+	
+	public java.sql.Date getRegDatE() throws ParseException {
+		Date now = new Date();
+		SimpleDateFormat myDateSimp = new SimpleDateFormat("yyy-MM-dd"); //"yyyy-MM-dd"
+		String dateStr = myDateSimp.format(now);
+		java.util.Date getCalendar;
+		java.sql.Date dateSql;
+		getCalendar = myDateSimp.parse(dateStr);
+		dateSql = new java.sql.Date(getCalendar.getTime());
+		return dateSql;		
+		
 	}
 	
 	public void setupRegisterFrame() {

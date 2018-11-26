@@ -25,10 +25,8 @@ public class Login extends JFrame{
 		setupLoginFrame();
 	}
 
-	public void close() {
-		
-		WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSED);
-		Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
+	public View getLogin() {
+		return this.login;
 	}
 	
 	public String getEmail() {

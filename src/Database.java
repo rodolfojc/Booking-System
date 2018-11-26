@@ -87,6 +87,8 @@ public class Database {
 	
 	public void registerUser(String type) {
 		
+		boolean flag=true;
+		
 		if (type.equals("Customer")) {
 			try {
 				
@@ -106,17 +108,24 @@ public class Database {
 				
 			}catch (Exception e)
 		    	{
-			      System.err.println("Got an exception!");
+			      JOptionPane.showMessageDialog(this.register, "Ups, there is a problem, try again!");
+			      flag=false;
+				  System.err.println("Got an exception!");
 			      System.err.println(e.getMessage());
 			    }
+			
+			if(flag==true) JOptionPane.showMessageDialog(this.register, "Your account has been created "
+					+this.register.getName()+" . Now you can login, thanks");
+			this.register.getReg().dispose();
+			
 		}
 		
 		if (type.equals("Provider")) {
 			
 				try {
 				
-				String query = "INSERT INTO providers (pro_name, pro_surname, mob_num, email, address, pass, location, status)"
-						+ "VALUES (?, ?, ?, ?, ?, SHA2(?,512), ?, ?)";
+				String query = "INSERT INTO providers (pro_name, pro_surname, mob_num, email, address, pass, location, status, reg_day)"
+						+ "VALUES (?, ?, ?, ?, ?, SHA2(?,512), ?, ?, ?)";
 			
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
 				preparedStmt.setString(1, this.register.getName());
@@ -127,15 +136,22 @@ public class Database {
 				preparedStmt.setString(6, this.register.getPassField());
 				preparedStmt.setString(7, this.register.getLoc());
 				preparedStmt.setString(8, "unconfirmed");
+				preparedStmt.setDate(9, this.register.getRegDatE());
 				
 				preparedStmt.execute();
 				conn.close();
 				
 			}catch (Exception e)
 		    	{
+				  JOptionPane.showMessageDialog(this.register, "Ups, there is a problem, try again!");
+			      flag=false;
 			      System.err.println("Got an exception!");
 			      System.err.println(e.getMessage());
 			    }
+		
+			if(flag==true) JOptionPane.showMessageDialog(this.register, "Your account has been created "
+						+this.register.getName()+" . Please, wait until an administrator validate your account, thanks");
+			this.register.getReg().dispose();
 		}
 		
 	}

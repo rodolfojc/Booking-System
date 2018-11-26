@@ -4,12 +4,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -23,8 +25,8 @@ public class ProviderView extends JFrame {
 	private JComboBox hr;
 	private JTable table;
 	private JPanel center;
-	private JScrollPane scroll;
-	private String[][] dataTableAvai;
+	private JScrollPane scrollAvaiTable, scrollBookedTable;
+	private String[][] dataTableAvai, dataTableBooked;
 	private int proID;
 	private String proName, proSurName, proEmail, proLocation;
 	private String [] hrs = {"8:00", "8:30", "9:00", "9:30", "10:00", "10:30",
@@ -111,8 +113,12 @@ public class ProviderView extends JFrame {
 		
 	public void providerViewSetup() {
 
-		String[] columnsNam = {"Date", "Time"};
+		String[] columnsNamAvai = {"Date", "Time"};
+		String[] columnsNamAppoint = {"Customer Name", "Customer Surname", "Date", "Time"};
+		
+		
 		dataTableAvai = new String[40][2];
+		dataTableBooked = new String[40][4];
 		
 		proView.setBorder(proView.panel);
 		
@@ -123,17 +129,24 @@ public class ProviderView extends JFrame {
 		proView.addLabel("Add Availability: ", left);
 		calendar = proView.addCalen(left);
 		hr = proView.addComboB(hrs, left);
-		
 		add = proView.addButton("Add", left);
 		add.setActionCommand("Add");
 		add.addActionListener(controller);
 		
+		scrollBookedTable = proView.addTableS(1, dataTableBooked, columnsNamAppoint, center, "Appointment to be confirm");
+		
 		this.center = new JPanel();
+		this.center.setBorder(BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
+                title,
+                TitledBorder.CENTER,
+                TitledBorder.TOP));
+		
+		
 		Database data = new Database(this);
 		data.availableProvTable();
 		
 		
-		scroll = proView.addTableS(dataTableAvai, columnsNam, center, "My Availabilites");
+		scrollAvaiTable = proView.addTableS(0, dataTableAvai, columnsNamAvai, center, "My Availabilites");
 		
 		
 		//JPanel right = new JPanel();
@@ -156,9 +169,9 @@ public class ProviderView extends JFrame {
 			Database data = new Database(this);
 			data.availableProvTable();
 			String[] columnsNam = {"Date", "Time"};
-			scroll = proView.addTableS(dataTableAvai, columnsNam, center, "My Availabilites");
+			scrollAvaiTable = proView.addTableS(0, dataTableAvai, columnsNam, center, "My Availabilites");
 			proView.panel.add(center, BorderLayout.CENTER);
-			proView.myTable.revalidate();
+			proView.myTable[0].revalidate();
 			proView.validate();
 			proView.repaint();
 		}

@@ -140,9 +140,9 @@ public class CustomerView extends JFrame {
 		Database data = new Database(this);
 		if (this.tableflag) {data.searchProvider("All","All");}
 		
-		scroll = custView.addTableS(dataTableAvai, columnsNam, center, "Availabilites");
+		scroll = custView.addTableS(0, dataTableAvai, columnsNam, center);
 		scroll.setPreferredSize(new Dimension(400,250));
-		ListSelectionModel model = custView.myTable.getSelectionModel();
+		ListSelectionModel model = custView.myTable[0].getSelectionModel();
 		model.addListSelectionListener(new ListSelectionListener() {
 
 			@Override

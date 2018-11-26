@@ -32,7 +32,7 @@ public class View extends JFrame{
 	BorderLayout border;
 	BoxLayout box;
 	JMenuBar menu;
-	JTable myTable;
+	JTable[] myTable;
 			
 	public View(String name, int width, int height, boolean Resizable) {
 		
@@ -40,6 +40,7 @@ public class View extends JFrame{
 		this.setSize(width, height);
 		this.setTitle(name);
 		this.panel = new JPanel();
+		this.myTable = new JTable[5];
 		this.add(panel);
 		this.menu = new JMenuBar();
 		this.setJMenuBar(menu);
@@ -133,15 +134,11 @@ public class View extends JFrame{
 		return myDateChooser;
 	}
 	
-	public JScrollPane addTableS(String[][] data, String[] columnsName, JPanel panel, String title) {
+	public JScrollPane addTableS(int tableNum, String[][] data, String[] columnsName, JPanel panel) {
 		
-		myTable = new JTable(data, columnsName);
-		myTable.setSize(200, 300);
-		JScrollPane myScroll = new JScrollPane(myTable);
-		panel.setBorder(BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
-                title,
-                TitledBorder.CENTER,
-                TitledBorder.TOP));
+		myTable[tableNum] = new JTable(data, columnsName);
+		myTable[tableNum].setSize(200, 300);
+		JScrollPane myScroll = new JScrollPane(myTable[tableNum]);
 		panel.add(myScroll);
 		return myScroll;
 		

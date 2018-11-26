@@ -247,7 +247,8 @@ public class Database {
 	
 		public void availableProvTable() {
 			
-			String query = "SELECT date, time FROM availabilities av INNER JOIN providers pr ON av.pro_id = pr.pro_id  WHERE email='"+this.proView.getProviderEmail()+"';";
+			String query = "SELECT date, time FROM availabilities av INNER JOIN providers pr ON av.pro_id = pr.pro_id  "
+					+ "WHERE email='"+this.proView.getProviderEmail()+"' AND available='Yes';";
 			String[][] data= new String[20][2];
 			
 			try {

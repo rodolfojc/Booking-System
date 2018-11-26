@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -45,6 +46,7 @@ public class View extends JFrame{
 		this.setResizable(Resizable);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
+		this.getContentPane().setBackground(new java.awt.Color(204, 166, 166));
 		//this.setDefaultLookAndFeelDecorated(true);
 				
 	}

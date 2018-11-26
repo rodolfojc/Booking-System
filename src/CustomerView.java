@@ -175,9 +175,9 @@ public class CustomerView extends JFrame {
 				
 	}
 	
-	public void UpdateFrame() {
+	public void UpdateFrame(boolean active) {
 		custView.panel.removeAll();
-		this.tableflag=false;
+		this.tableflag=active;
 		costumerViewSetup();
 	}
 

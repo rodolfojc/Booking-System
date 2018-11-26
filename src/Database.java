@@ -87,7 +87,7 @@ public class Database {
 	
 	public void registerUser(String type) {
 		
-		if (type.equals("Costumer")) {
+		if (type.equals("Customer")) {
 			try {
 				
 				String query = "INSERT INTO customers (cust_name, cust_surname, mob_num, email, address, pass)"
@@ -99,7 +99,7 @@ public class Database {
 				preparedStmt.setString(3, this.register.getMob());;
 				preparedStmt.setString(4, this.register.getEmail());
 				preparedStmt.setString(5, this.register.getAddress());
-				preparedStmt.setString(6, this.register.getPass());
+				preparedStmt.setString(6, this.register.getPassField());
 								
 				preparedStmt.execute();
 				conn.close();
@@ -124,7 +124,7 @@ public class Database {
 				preparedStmt.setString(3, this.register.getMob());;
 				preparedStmt.setString(4, this.register.getEmail());
 				preparedStmt.setString(5, this.register.getAddress());
-				preparedStmt.setString(6, this.register.getPass());
+				preparedStmt.setString(6, this.register.getPassField());
 				preparedStmt.setString(7, this.register.getLoc());
 				preparedStmt.setString(8, "unconfirmed");
 				
@@ -313,12 +313,12 @@ public class Database {
 		    }
 		  
 		
-			
-			
+						
 		}
 		
-		public void bookAppointment() {
+		public String bookAppointment() {
 			
+						
 			try {
 				
 				String query = "INSERT INTO appointments (avai_ref, cust_id, comments) "
@@ -340,7 +340,35 @@ public class Database {
 			    }
 			JOptionPane.showMessageDialog(this.custView, "Your appointment has been added");
 			
+			return this.custView.getDataAvai(this.custView.getSelectedRowT(),0);
+			
+		
 		}
+		
+		public void setAppointment(String avai_reference) {
+			
+			try {
+				
+				String query = "UPDATE availabilities SET available='unconfirmed' WHERE avai_ref='"+avai_reference+"';";
+				
+				PreparedStatement preparedStmt = conn.prepareStatement(query);
+				preparedStmt.execute();
+				conn.close();
+				
+			}catch (Exception e)
+		    	{
+			      	
+					System.err.println("Got an exception!");
+					System.err.println(e.getMessage());
+			    }
+			this.custView.UpdateFrame(true);	
+		}
+		
+			
+			
+			
+			
+		
 	
 		public void searchProvider(String by, String input) {
 			
@@ -351,15 +379,17 @@ public class Database {
 			
 				if(by.equals("Name")) {
 					query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities"
-						+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id WHERE providers.pro_name='"+input+"';";
+						+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id WHERE providers.pro_name='"+input+"' AND "
+								+ "availabilities.available='Yes';";
 				}
 				else if(by.equals("Location")){
 					query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities"
-						+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id WHERE providers.location='"+input+"';";
+						+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id WHERE providers.location='"+input+"' AND "
+								+ "availabilities.available='Yes';";
 				}
 				else {
 					query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities "
-						+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id;";
+						+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id WHERE availabilities.available='Yes';";
 				}
 				
 				rs = stmt.executeQuery(query);

@@ -1,10 +1,12 @@
 import java.awt.Insets;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -12,10 +14,11 @@ import javax.swing.border.EmptyBorder;
 public class Register extends JFrame {
 
 	private JTextField txtName, txtSur, txtPass, txtVPass, txtMob, txtEmail, txtAddress, txtLocation;
+	private JPasswordField pass;
 	private View reg;
 	private Controller controller;
 	private String type;
-	private String[] _OPT = {"Costumer", "Provider"};
+	private String[] _OPT = {"Customer", "Provider"};
 	
 	public Register(Controller controller) {
 		
@@ -40,8 +43,8 @@ public class Register extends JFrame {
 		return this.txtSur.getText();
 	}
 	
-	public String getPass() {
-		return this.txtPass.getText();
+	public String getPassField() {
+		return new String(this.pass.getPassword());
 	}
 	
 	public String getMob() {
@@ -74,10 +77,11 @@ public class Register extends JFrame {
 		//JPanel typeCombo = new JPanel();
 		//typeCombo.add(typeUs);
 		
+		JPanel top = new JPanel();
 		JPanel name = new JPanel();
 		JPanel surname = new JPanel();
 		JPanel password = new JPanel();
-		JPanel verPassword = new JPanel();
+		//JPanel verPassword = new JPanel();
 		JPanel mobile = new JPanel();
 		JPanel email = new JPanel();
 		JPanel address= new JPanel();
@@ -90,14 +94,17 @@ public class Register extends JFrame {
 		//type.add(customer);
 		//type.add(provider);
 		
+		top.setBorder(BorderFactory.createTitledBorder("Sing up for FREE"));		
+		reg.addLabel(this.type.toUpperCase()+" REGISTRATION", top);
 		reg.addLabel("Name", name);
 		txtName = reg.addTextField(20, name);
 		reg.addLabel("Surname", surname);
 		txtSur = reg.addTextField(20, surname);
-		reg.addLabel("Password", password);
-		txtPass = reg.addTextField(20, password);
-		reg.addLabel("Re-entry Password", verPassword);
-		txtVPass = reg.addTextField(20, verPassword);
+		reg.addLabel("Set a Password", password);
+		pass = reg.addPassField(20, password);
+		//txtPass = reg.addTextField(20, password);
+		//reg.addLabel("Re-entry Password", verPassword);
+		//txtVPass = reg.addTextField(20, verPassword);
 		reg.addLabel("Mobile", mobile);
 		txtMob = reg.addTextField(20, mobile);
 		reg.addLabel("Email", email);
@@ -116,12 +123,13 @@ public class Register extends JFrame {
 		
 		regB.add(register);
 		
-		reg.panel.setBorder(new EmptyBorder(new Insets(20,65,20,65)));
+		reg.panel.setBorder(new EmptyBorder(new Insets(40,65,20,65)));
 		//reg.panel.add(typeCombo);
+		reg.panel.add(top);
 		reg.panel.add(name);
 		reg.panel.add(surname);
 		reg.panel.add(password);
-		reg.panel.add(verPassword);
+		//reg.panel.add(verPassword);
 		reg.panel.add(mobile);
 		reg.panel.add(email);
 		reg.panel.add(address);

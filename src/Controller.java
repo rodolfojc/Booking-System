@@ -18,9 +18,9 @@ public class Controller implements ActionListener {
 	public Controller() {
 		
 		//this.proView = new ProviderView(this, "ke@.com");
-		//this.custView = new CustomerView(this, "jo@.com");
+		this.custView = new CustomerView(this, "ro@ro.com");
 		//this.register = new Register(this);
-		this.login = new Login(this);
+		//this.login = new Login(this);
 		//this.view = new View ("Online Barber's Appointments", this, 400, 600, false);
 		//this.model = new Model();
 		
@@ -30,7 +30,8 @@ public class Controller implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		if(e.getActionCommand().equals("Open_Register")) {
-			//login.close();
+			//this.login.setVisible(false);
+			//this.login.dispose();
 			this.register = new Register(this);
 		}
 		
@@ -78,15 +79,17 @@ public class Controller implements ActionListener {
 			
 			Database data = new Database(this.custView);
 			data.searchProvider(custView.getByOption(), custView.getByField());
-			this.custView.UpdateFrame();
+			this.custView.UpdateFrame(false);
 		}
 			
 			
 			
 		if (e.getActionCommand().equals("Get Appoint")) {
 			
-			Database data = new Database(this.custView, this.proView);
-			data.bookAppointment();
+			Database data = new Database(this.custView);
+			String avai_ref = data.bookAppointment();
+			Database dataTwo = new Database(this.custView);
+			dataTwo.setAppointment(avai_ref);
 		}
 		
 		

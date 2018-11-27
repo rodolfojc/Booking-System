@@ -16,6 +16,7 @@ public class Database {
 	Login login;
 	CustomerView custView;
 	ProviderView proView;
+	AdminView adminView;
 	
 	public Database() {
 		connectDB();

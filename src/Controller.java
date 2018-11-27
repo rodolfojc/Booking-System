@@ -23,7 +23,7 @@ public class Controller implements ActionListener {
 		//this.login = new Login(this);
 		//this.view = new View ("Online Barber's Appointments", this, 400, 600, false);
 		//this.model = new Model();
-		this.adminView = new AdminView();
+		//this.adminView = new AdminView();
 	}
 
 	@Override

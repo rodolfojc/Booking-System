@@ -49,11 +49,11 @@ public class AdminDBQ {
 	}
 		
 		
-	public void deleteCustOrPro(String userType, String userIDtype, String userID) {
+	public void deleteRow(String from, String column, String ID, String errorMg, String confMg) {
 		
 		boolean flag = true;
 		
-		String query = "DELETE FROM "+userType+" WHERE "+userIDtype+"="+userID+";";
+		String query = "DELETE FROM "+from+" WHERE "+column+"="+ID+";";
 		
 		try {
 			
@@ -63,13 +63,12 @@ public class AdminDBQ {
 			
 		}catch (Exception e)
 	    	{
-		      	JOptionPane.showMessageDialog(this.adminView, "Ups, there is a problem, please be sure the user does not have"
-		      			+ " any availability or appointment registered.", "Error", JOptionPane.ERROR_MESSAGE);
+		      	JOptionPane.showMessageDialog(this.adminView, errorMg, "Error", JOptionPane.ERROR_MESSAGE);
 		      	flag=false;
 				System.err.println("Got an exception!");
 				System.err.println(e.getMessage());
 		    }
-		if(flag)JOptionPane.showMessageDialog(this.adminView, "The user has been DELETED!");
+		if(flag)JOptionPane.showMessageDialog(this.adminView, confMg);
 	}
 	
 	
@@ -109,13 +108,13 @@ public class AdminDBQ {
 	
 	}
 	
-	public void validatePro(String pro_ID) {
+	public void updateRow(String table, String attribute, String value, String where, String ID, String errorMg, String confMg) {
 		
 		boolean flag=true;
 		
 		try {
 			
-			String query = "UPDATE providers SET status='confirmed' WHERE pro_id='"+pro_ID+"';";
+			String query = "UPDATE "+table+" SET "+attribute+"='"+value+"' WHERE "+where+"='"+ID+"';";
 			
 			PreparedStatement preparedStmt = this.data.conn.prepareStatement(query);
 			preparedStmt.execute();
@@ -123,13 +122,12 @@ public class AdminDBQ {
 			
 		}catch (Exception e)
 	    	{
-		      	JOptionPane.showMessageDialog(this.adminView, "Ups, there is an internal error, please try again", 
-		      			"Error", JOptionPane.ERROR_MESSAGE);
+		      	JOptionPane.showMessageDialog(this.adminView, errorMg, "Error",  JOptionPane.ERROR_MESSAGE);
 		      	flag=false;
 				System.err.println("Got an exception!");
 				System.err.println(e.getMessage());
 		    }
-		if(flag)JOptionPane.showMessageDialog(this.adminView, "Provider ID "+pro_ID+" has been CONFIRMED");
+		if(flag)JOptionPane.showMessageDialog(this.adminView, confMg);
 				
 	}
 	
@@ -169,8 +167,6 @@ public class AdminDBQ {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		}
-		
-		
 	}
 	
 	public void getAppointments() {

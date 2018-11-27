@@ -76,6 +76,14 @@ public class AdminView extends JFrame{
 		return this.selectedRowPro;
 	}
 	
+	public int getSelectedRowAvai() {
+		return this.selectedRowAvai;
+	}
+	
+	public int getSelectedRowAppoint() {
+		return this.selectedRowAppoint;
+	}
+	
 	
 	public void AdmindViewSetup() {
 		

@@ -106,9 +106,35 @@ public class AdminDBQ {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 		}
-		
-		
+	
 	}
+	
+	public void validatePro(String pro_ID) {
+		
+		boolean flag=true;
+		
+		try {
+			
+			String query = "UPDATE providers SET status='confirmed' WHERE pro_id='"+pro_ID+"';";
+			
+			PreparedStatement preparedStmt = this.data.conn.prepareStatement(query);
+			preparedStmt.execute();
+			this.data.conn.close();
+			
+		}catch (Exception e)
+	    	{
+		      	JOptionPane.showMessageDialog(this.adminView, "Ups, there is an internal error, please try again", 
+		      			"Error", JOptionPane.ERROR_MESSAGE);
+		      	flag=false;
+				System.err.println("Got an exception!");
+				System.err.println(e.getMessage());
+		    }
+		if(flag)JOptionPane.showMessageDialog(this.adminView, "Provider ID "+pro_ID+" has been CONFIRMED");
+				
+	}
+	
+	
+	
 	
 	public void getAvailabilities() {
 		

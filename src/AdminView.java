@@ -153,7 +153,7 @@ public class AdminView extends JFrame{
 		this.proDele.addActionListener(adminController);
 		
 		this.proValid = this.adminView.addButton("Validate", prov);
-		this.proValid.setActionCommand("Validate Customer");
+		this.proValid.setActionCommand("Validate Provider");
 		this.proValid.addActionListener(adminController);
 		
 		

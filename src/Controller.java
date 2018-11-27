@@ -20,7 +20,7 @@ public class Controller implements ActionListener {
 		//this.proView = new ProviderView(this, "vi@vi.vom");
 		//this.custView = new CustomerView(this, "ro@ro.com");
 		//this.register = new Register(this);
-		//this.login = new Login(this);
+		this.login = new Login(this);
 		//this.view = new View ("Online Barber's Appointments", this, 400, 600, false);
 		//this.model = new Model();
 		//this.adminView = new AdminView();
@@ -53,22 +53,29 @@ public class Controller implements ActionListener {
 					
 			data = new Database(login);
 			boolean resultOne = data.loginUser("customers", email, password);
-			
+						
 			Database connProv = new Database(login);
 			boolean resultTwo = connProv.loginUser("providers", email, password);
+			
+			Database proSta = new Database(login);
+			String status = proSta.getProStatus(email);
 		
 				if(resultOne==true || resultTwo==true) {
-					JOptionPane.showMessageDialog(this.login,"Welcome!!");
 					if (resultOne) {
+						JOptionPane.showMessageDialog(this.login,"Welcome!!");
 						this.custView = new CustomerView(this, email);
-					}else {
+					}else if (resultTwo==true && status.equals("Confirmed")){
+						JOptionPane.showMessageDialog(this.login,"Welcome!!");
 						this.proView = new ProviderView(this, email);
-					}
-				}else {
-					JOptionPane.showMessageDialog(this.login,"Incorrect, please try again!");
+					}else if (resultTwo==true && status.equals("Pending")){
+						JOptionPane.showMessageDialog(this.login,"Your account is not CONFIRMED, please wait or contact "
+								+ "an administrator to validate your information account, thanks!");
+					}}
+					else {
+						JOptionPane.showMessageDialog(this.login,"Incorrect, please try again!");
 				}
-			
-		}
+			}
+		
 		
 		if(e.getActionCommand().equals("Add")) {
 			

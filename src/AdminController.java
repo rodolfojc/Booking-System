@@ -26,6 +26,12 @@ public class AdminController implements ActionListener {
 			data.deleteCustOrPro("providers", "pro_ID", this.adminView.getDataPro(this.adminView.getSelectedRowPro(), 0));
 			adminView.UpdateFrame();
 		}
+		
+		if (e.getActionCommand().equals("Validate Provider")) {
+			AdminDBQ data = new AdminDBQ(this.adminView);
+			data.validatePro(this.adminView.getDataPro(this.adminView.getSelectedRowPro(), 0));
+			adminView.UpdateFrame();
+		}
 
 }
 }

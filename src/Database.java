@@ -136,7 +136,7 @@ public class Database {
 				preparedStmt.setString(5, this.register.getAddress());
 				preparedStmt.setString(6, this.register.getPassField());
 				preparedStmt.setString(7, this.register.getLoc());
-				preparedStmt.setString(8, "unconfirmed");
+				preparedStmt.setString(8, "Pending");
 				preparedStmt.setDate(9, this.register.getRegDatE());
 				
 				preparedStmt.execute();
@@ -182,6 +182,32 @@ public class Database {
 		
 		return false;
 		
+	}
+	
+	public String getProStatus(String email) {
+		
+		String query = "SELECT status FROM providers WHERE email='"+email+"';";
+		String result="";
+		
+		try {
+			
+			rs = stmt.executeQuery(query);
+			
+			while(rs.next()) {
+				result=rs.getString("status");
+			}
+			
+			rs.close();
+			stmt.close() ;
+			conn.close() ;
+			
+			
+		}catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		
+		}
+		return result;
 	}
 	
 	public void customerLogged() {

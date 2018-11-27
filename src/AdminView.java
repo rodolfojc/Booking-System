@@ -1,4 +1,5 @@
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.util.Arrays;
 
 import javax.swing.JButton;
@@ -7,17 +8,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class AdminView extends JFrame{
 
-	View adminView;
-	AdminController adminController;
+	private View adminView;
+	private AdminController adminController;
 	
 	private String [][] dataCust, dataPro, dataAvai, dataAppoint, dataAdmin;
 	private JScrollPane srCust, srPro, srAvai, srAppoint, srAdmin;
-	private JButton custDel, proDele, proValid, avaiDele, appointDele, adminAdd, adminDele;
+	private JButton custDel, proDele, proValid, avaiDele, appointDele, appointManage, adminAdd, adminDele, logout, updateTables;
 	private int selectedRowCust, selectedRowPro, selectedRowAvai, selectedRowAppoint, selectedRowAdmin;
 	
 	public AdminView(AdminController AdminController) {
@@ -26,6 +28,10 @@ public class AdminView extends JFrame{
 		this.adminView = new View("Administrators Manager", 1300, 800, true);
 		AdmindViewSetup();
 		
+	}
+	
+	public View getAdminView() {
+		return this.adminView;
 	}
 	
 	public void setCopyDataCust(String[][] data) {
@@ -82,6 +88,10 @@ public class AdminView extends JFrame{
 	
 	public int getSelectedRowAppoint() {
 		return this.selectedRowAppoint;
+	}
+	
+	public int getSelectedRowAdmin() {
+		return this.selectedRowAdmin;
 	}
 	
 	
@@ -223,6 +233,10 @@ public class AdminView extends JFrame{
 		this.appointDele.setActionCommand("Delete Appointment");
 		this.appointDele.addActionListener(adminController);
 		
+		this.appointManage = this.adminView.addButton("Manage Comments", appoints);
+		this.appointManage.setActionCommand("Manage");
+		this.appointManage.addActionListener(adminController);
+		
 		///////////////////////////////////////////////////////////////////////////////////////////
 		JPanel admins = new JPanel();
 		AdminDBQ dataAdminConn = new AdminDBQ(this);
@@ -257,15 +271,25 @@ public class AdminView extends JFrame{
 		this.adminDele.addActionListener(adminController);
 		
 		///////////////////////////////////////////////////////////////////////////////////////////
-		JPanel comments = new JPanel();
-		//scroll.setPreferredSize(new Dimension(400,250));
+		JPanel controlPanel = new JPanel();
+		controlPanel.setBorder(new EmptyBorder(new Insets(150,0,0,0)));
+		
+		updateTables = this.adminView.addButton("Update Tables", controlPanel);
+		updateTables.setActionCommand("Update Tables");
+		updateTables.addActionListener(adminController);
+		
+		logout = this.adminView.addButton("Logout", controlPanel);
+		logout.setActionCommand("Logout");
+		logout.addActionListener(adminController);
+		
+		
 		
 		this.adminView.panel.add(cust);
 		this.adminView.panel.add(prov);
 		this.adminView.panel.add(avail);
 		this.adminView.panel.add(appoints);
 		this.adminView.panel.add(admins);
-		this.adminView.panel.add(comments);
+		this.adminView.panel.add(controlPanel);
 		
 		
 		this.adminView.validate();

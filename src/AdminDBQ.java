@@ -239,6 +239,36 @@ public class AdminDBQ {
 		
 	}
 	
+	public void createAdmin(String user, String pass) {
+		
+		boolean flag=true;
+		
+		String query = "INSERT INTO administrators (admin_user, admin_pass, privilege) "
+				+ "VALUES (?, SHA2(?,512), ?)";
+		
+		try {
+			
+			PreparedStatement preparedStmt = this.data.conn.prepareStatement(query);
+			preparedStmt.setString(1, user);
+			preparedStmt.setString(2, pass);
+			preparedStmt.setString(3, "2");
+		
+			preparedStmt.execute();
+			this.data.conn.close();
+			
+		}catch (Exception e)
+	    	{
+			  JOptionPane.showMessageDialog(this.adminView, "Ups, there is a problem, try again!");
+		      flag=false;
+		      System.err.println("Got an exception!");
+		      System.err.println(e.getMessage());
+		    }
+	
+		if(flag==true) JOptionPane.showMessageDialog(this.adminView, "The admin has been CREATED ");
+		
+	}
+	
+	
 	
 	
 	

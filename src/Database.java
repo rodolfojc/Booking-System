@@ -131,7 +131,7 @@ public class Database {
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
 				preparedStmt.setString(1, this.register.getName());
 				preparedStmt.setString(2, this.register.getSur());
-				preparedStmt.setString(3, this.register.getMob());;
+				preparedStmt.setString(3, this.register.getMob());
 				preparedStmt.setString(4, this.register.getEmail());
 				preparedStmt.setString(5, this.register.getAddress());
 				preparedStmt.setString(6, this.register.getPassField());

@@ -5,12 +5,12 @@ import javax.swing.JOptionPane;
 
 public class AdminController implements ActionListener {
 
-	AdminView adminView;
-	
-	public AdminController () {
+	private AdminView adminView;
 		
-		this.adminView = new AdminView(this);
-	
+	public AdminController (String AdminUser) {
+		
+		this.adminView = new AdminView(this, AdminUser);
+		
 	}
 	
 	@Override

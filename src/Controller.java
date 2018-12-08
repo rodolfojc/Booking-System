@@ -14,6 +14,7 @@ public class Controller implements ActionListener {
 	CustomerView custView;
 	ProviderView proView;
 	AdminView adminView;
+	AdminController adminController;
 	
 	public Controller() {
 		
@@ -51,21 +52,27 @@ public class Controller implements ActionListener {
 			String email = login.getEmail();
 			String password = login.getPassField();
 					
-			data = new Database(login);
-			boolean resultOne = data.loginUser("customers", email, password);
+			Database connCust = new Database(login);
+			boolean resultOne = connCust.loginUser("customers", email, password, false);
 						
 			Database connProv = new Database(login);
-			boolean resultTwo = connProv.loginUser("providers", email, password);
+			boolean resultTwo = connProv.loginUser("providers", email, password, false);
+			
+			Database connAdmin = new Database(login);
+			boolean resultThree = connAdmin.loginUser("administrators", email, password, true);
 			
 			Database proSta = new Database(login);
 			String status = proSta.getProStatus(email);
 		
-				if(resultOne==true || resultTwo==true) {
+				if(resultOne==true || resultTwo==true || resultThree==true) {
 					if (resultOne) {
-						JOptionPane.showMessageDialog(this.login,"Welcome!!");
+						JOptionPane.showMessageDialog(this.login,"Welcome Customer!!");
 						this.custView = new CustomerView(this, email);
+					}else if (resultThree==true) {
+						JOptionPane.showMessageDialog(this.login,"Welcome Admin!!");
+						this.adminController = new AdminController(email);
 					}else if (resultTwo==true && status.equals("Confirmed")){
-						JOptionPane.showMessageDialog(this.login,"Welcome!!");
+						JOptionPane.showMessageDialog(this.login,"Welcome Provider!!");
 						this.proView = new ProviderView(this, email);
 					}else if (resultTwo==true && status.equals("Pending")){
 						JOptionPane.showMessageDialog(this.login,"Your account is not CONFIRMED, please wait or contact "

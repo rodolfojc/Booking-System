@@ -157,10 +157,16 @@ public class Database {
 		
 	}
 	
-	public boolean loginUser(String user, String email, String password) {
+	public boolean loginUser(String user, String email, String password, boolean flag) {
 		
-		String query = "SELECT * FROM "+user+" WHERE email = '" + email + "' AND pass= SHA2('"+ password + "',512);";
-			
+		String query;
+		
+		if (flag) {
+			query = "SELECT * FROM "+user+" WHERE admin_user = '" + email + "' AND admin_pass= SHA2('"+ password + "',512);";
+		}else {
+			query = "SELECT * FROM "+user+" WHERE email = '" + email + "' AND pass= SHA2('"+ password + "',512);";
+		}
+		
 		try {
 			rs = stmt.executeQuery(query) ;
 			

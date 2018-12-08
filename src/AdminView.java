@@ -16,15 +16,16 @@ public class AdminView extends JFrame{
 
 	private View adminView;
 	private AdminController adminController;
-	
+	private String adminUser;
 	private String [][] dataCust, dataPro, dataAvai, dataAppoint, dataAdmin;
 	private JScrollPane srCust, srPro, srAvai, srAppoint, srAdmin;
 	private JButton custDel, proDele, proValid, avaiDele, appointDele, appointManage, adminAdd, adminDele, logout, updateTables;
 	private int selectedRowCust, selectedRowPro, selectedRowAvai, selectedRowAppoint, selectedRowAdmin;
 	
-	public AdminView(AdminController AdminController) {
+	public AdminView(AdminController AdminController, String adminUser) {
 		
 		this.adminController = AdminController;
+		this.adminUser = adminUser;
 		this.adminView = new View("Administrators Manager", 1300, 800, true);
 		AdmindViewSetup();
 		
@@ -263,10 +264,16 @@ public class AdminView extends JFrame{
 		
 		
 		this.adminAdd = this.adminView.addButton("Add", admins);
+		if (!this.adminUser.equals("admin@admin.admin")) {
+			this.adminAdd.setEnabled(false);
+		}
 		this.adminAdd.setActionCommand("Add Admin");
 		this.adminAdd.addActionListener(adminController);
 		
 		this.adminDele = this.adminView.addButton("Delete", admins);
+		if (!this.adminUser.equals("admin@admin.admin")) {
+			this.adminDele.setEnabled(false);
+		}
 		this.adminDele.setActionCommand("Delete Admin");
 		this.adminDele.addActionListener(adminController);
 		
@@ -274,6 +281,7 @@ public class AdminView extends JFrame{
 		JPanel controlPanel = new JPanel();
 		controlPanel.setBorder(new EmptyBorder(new Insets(150,0,0,0)));
 		
+		this.adminView.addLabel("Admin: "+this.adminUser+"", controlPanel);
 		updateTables = this.adminView.addButton("Update Tables", controlPanel);
 		updateTables.setActionCommand("Update Tables");
 		updateTables.addActionListener(adminController);

@@ -300,7 +300,7 @@ public class Database {
 				+ "INNER JOIN customers ON customers.cust_id = appointments.cust_id "
 					+ "INNER JOIN availabilities ON availabilities.avai_ref = appointments.avai_ref "
 						+ "WHERE availabilities.pro_id = '"+this.proView.getProviderID()+"' "
-							+ "AND availabilities.available='unconfirmed';";
+							+ "AND availabilities.available='Unconfirmed';";
 		String[][] data= new String[20][5];
 		
 		try {
@@ -434,7 +434,7 @@ public class Database {
 			
 			try {
 				
-				String query = "UPDATE availabilities SET available='unconfirmed' WHERE avai_ref='"+avai_reference+"';";
+				String query = "UPDATE availabilities SET available='Unconfirmed' WHERE avai_ref='"+avai_reference+"';";
 				
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
 				preparedStmt.execute();
@@ -453,7 +453,7 @@ public class Database {
 			
 			try {
 				
-				String query = "UPDATE availabilities SET available='confirmed' WHERE avai_ref='"+avai_reference+"';";
+				String query = "UPDATE availabilities SET available='Confirmed' WHERE avai_ref='"+avai_reference+"';";
 				
 				PreparedStatement preparedStmt = conn.prepareStatement(query);
 				preparedStmt.execute();
@@ -465,7 +465,7 @@ public class Database {
 					System.err.println("Got an exception!");
 					System.err.println(e.getMessage());
 			    }
-			JOptionPane.showMessageDialog(this.proView, "The appointment has been confirm. Thanks");
+			JOptionPane.showMessageDialog(this.proView, "The appointment has been confirmed. Thanks");
 			this.proView.UpdateFrame();	
 		}
 		

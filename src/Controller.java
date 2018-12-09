@@ -13,13 +13,12 @@ public class Controller implements ActionListener {
 	Database data;
 	CustomerView custView;
 	ProviderView proView;
-	AdminView adminView;
 	AdminController adminController;
 	
 	public Controller() {
 		
-		//this.proView = new ProviderView(this, "vi@vi.vom");
-		//this.custView = new CustomerView(this, "ro@ro.com");
+		//this.proView = new ProviderView(this, "jean@jean.com");
+		//this.custView = new CustomerView(this, "rodolfo@rodolfo.com");
 		//this.register = new Register(this);
 		this.login = new Login(this);
 		//this.view = new View ("Online Barber's Appointments", this, 400, 600, false);
@@ -39,11 +38,38 @@ public class Controller implements ActionListener {
 		
 		if(e.getActionCommand().equals("User_Register")) {
 		
-			//this.login.getLogin().setVisible(false);
-			this.login.dispose();
-			data = new Database(this.register);
-			data.registerUser(this.register.getUserType());
-			//this.login.getLogin().setVisible(true);
+			boolean flag = true;
+			
+			if (!this.register.getName().matches("(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){0,24}$")) {
+				JOptionPane.showMessageDialog(register, "The name is not correct or it is empty, "
+						+ "try again", "Name Error", JOptionPane.ERROR_MESSAGE);
+				flag=false;
+			}if (!this.register.getSur().matches("(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){0,24}$")) {
+				JOptionPane.showMessageDialog(register, "The surname is not correct or it is empty, "
+						+ "try again", "Surname Error", JOptionPane.ERROR_MESSAGE);
+				flag=false;
+			}if (!this.register.getPassField().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,12}$")) {
+					JOptionPane.showMessageDialog(register, "The password you have submited is not valid, "
+							+ "it must be minimum of 8 characteres up to 12, including at least one uppercase alpha character, "
+							+ "one special character '@#$%^&+=', and one number. ", "Password Invalid", JOptionPane.ERROR_MESSAGE);
+					flag=false;
+			}if (!this.register.getMob().matches("\\d{8,10}")) {
+				JOptionPane.showMessageDialog(register, "The mobile is not correct, it must be at least 10 digits, "
+						+ "try again", "Mobile Error", JOptionPane.ERROR_MESSAGE);
+				flag=false;
+			}if (!this.register.getEmail().matches("^(.+)@(.+)$")) {
+				JOptionPane.showMessageDialog(register, "The email is not correct or it is empty, "
+						+ "try again", "Email Error", JOptionPane.ERROR_MESSAGE);
+			}if (this.register.getAddress().length()<=7) {
+				JOptionPane.showMessageDialog(register, "The address is not correct or it is empty, "
+						+ "try again", "Address Error", JOptionPane.ERROR_MESSAGE);
+				flag=false;
+			
+			}if (flag==true) {
+		
+				data = new Database(this.register);
+				data.registerUser(this.register.getUserType());
+			}
 			
 		}
 		

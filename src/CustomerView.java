@@ -32,12 +32,24 @@ public class CustomerView extends JFrame {
 	String[] searchOp = {"Name", "Location"};
 	private int selectedRow, customerID;
 	private boolean tableflag=true;
+	private CustomerController custController;
+	private CustomerDBQ custDB;
 	
 	public CustomerView(Controller controller, String email) {
 		
 		this.controller = controller;
 		this.custEmail = email;
-		getUserData(this.custEmail);
+		getUserData();
+		this.custView = new View("Customer Manager", 800, 600, true);
+		this.dataTableAvai = new String[50][5];
+		costumerViewSetup();
+	}
+	
+	public CustomerView(CustomerController CustController, String email) {
+		
+		this.custController = CustController;
+		this.custEmail = email;
+		getUserData();
 		this.custView = new View("Customer Manager", 800, 600, true);
 		this.dataTableAvai = new String[50][5];
 		costumerViewSetup();
@@ -96,10 +108,12 @@ public class CustomerView extends JFrame {
 	}
 	
 	
-	public void getUserData(String email) {
+	public void getUserData() {
 		
-		data = new Database(this);
-		data.customerLogged();
+		CustomerDBQ custDB = new CustomerDBQ(this);
+		custDB.customerLogged();
+		//data = new Database(this);
+		//data.customerLogged();
 			
 	}
 	
@@ -125,7 +139,8 @@ public class CustomerView extends JFrame {
 		JPanel inLeftCenter = new JPanel();
 		search = custView.addButton("Search", inLeftCenter);
 		search.setActionCommand("Search");
-		search.addActionListener(controller);
+		//search.addActionListener(controller);
+		search.addActionListener(custController);
 		inLeftCenter.setBorder(new EmptyBorder(new Insets(15,0,0,0)));
 		
 		JPanel inLeftButtom = new JPanel();
@@ -137,8 +152,9 @@ public class CustomerView extends JFrame {
 		left.add(inLeftButtom, BorderLayout.PAGE_END);
 		
 		JPanel center = new JPanel();
-		Database data = new Database(this);
-		if (this.tableflag) {data.searchProvider("All","All");}
+		CustomerDBQ custDB = new CustomerDBQ(this);
+		//Database data = new Database(this);
+		if (this.tableflag) {custDB.searchProvider("All","All");}
 		
 		scroll = custView.addTableS(0, dataTableAvai, columnsNam, center, "Availabilities");
 		scroll.setPreferredSize(new Dimension(400,250));
@@ -161,8 +177,8 @@ public class CustomerView extends JFrame {
 		
 		get = custView.addButton("Get Appointment", center);
 		get.setActionCommand("Get Appoint");
-		get.addActionListener(controller);
-		
+		//get.addActionListener(controller);
+		get.addActionListener(custController);
 		
 		//custView.panel.add(top);
 		//custView.panel.add(left);

@@ -14,6 +14,7 @@ public class Controller implements ActionListener {
 	CustomerView custView;
 	ProviderView proView;
 	AdminController adminController;
+	CustomerController custController;
 	
 	public Controller() {
 		
@@ -93,7 +94,8 @@ public class Controller implements ActionListener {
 				if(resultOne==true || resultTwo==true || resultThree==true) {
 					if (resultOne) {
 						JOptionPane.showMessageDialog(this.login,"Welcome Customer!!");
-						this.custView = new CustomerView(this, email);
+						//this.custView = new CustomerView(this, email);
+						this.custController = new CustomerController(email);
 					}else if (resultThree==true) {
 						JOptionPane.showMessageDialog(this.login,"Welcome Admin!!");
 						this.adminController = new AdminController(email);

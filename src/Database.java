@@ -483,13 +483,13 @@ public class Database {
 			try {
 			
 				if(by.equals("Name")) {
-					query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities"
+					query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities "
 						+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id WHERE providers.pro_name='"+input+"' AND "
 								+ "availabilities.available='Yes';";
 				}
 				else if(by.equals("Location")){
-					query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities"
-						+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id WHERE providers.location='"+input+"' AND "
+					query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities "
+							+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id WHERE providers.location='"+input+"' AND "
 								+ "availabilities.available='Yes';";
 				}
 				else {

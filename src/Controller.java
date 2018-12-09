@@ -15,6 +15,7 @@ public class Controller implements ActionListener {
 	ProviderView proView;
 	AdminController adminController;
 	CustomerController custController;
+	ProviderController proController;
 	
 	public Controller() {
 		
@@ -101,7 +102,8 @@ public class Controller implements ActionListener {
 						this.adminController = new AdminController(email);
 					}else if (resultTwo==true && status.equals("Confirmed")){
 						JOptionPane.showMessageDialog(this.login,"Welcome Provider!!");
-						this.proView = new ProviderView(this, email);
+						this.proController = new ProviderController(email);
+						//this.proView = new ProviderView(this, email);
 					}else if (resultTwo==true && status.equals("Pending")){
 						JOptionPane.showMessageDialog(this.login,"Your account is not CONFIRMED, please wait or contact "
 								+ "an administrator to validate your information account, thanks!");

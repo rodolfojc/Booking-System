@@ -25,6 +25,7 @@ public class ProviderView extends JFrame {
 	private View proView;
 	private Database forUserData;
 	private Controller controller;
+	private ProviderController proController;
 	private JButton add;
 	private JDateChooser calendar;
 	private JComboBox hr;
@@ -40,9 +41,18 @@ public class ProviderView extends JFrame {
 			"14:00", "14:30", "15:00", "15:30", "16:00", "16:30",
 			"17:00", "17:30", "18:00", "18:30", "19:00", "19:30"};
 	
-	public ProviderView (Controller controller, String email) {
+	/*public ProviderView (Controller controller, String email) {
 		
 		this.controller = controller;
+		this.proEmail = email;
+		getUserData(this.proEmail);
+		this.proView = new View("Provider Manager", 1200, 600, true);
+		providerViewSetup();
+	}*/
+	
+	public ProviderView (ProviderController proController, String email) {
+		
+		this.proController = proController;
 		this.proEmail = email;
 		getUserData(this.proEmail);
 		this.proView = new View("Provider Manager", 1200, 600, true);
@@ -121,8 +131,8 @@ public class ProviderView extends JFrame {
 	}
 	
 	public void getUserData(String email) {
-			forUserData = new Database(this);
-			forUserData.providerLogged();
+		ProviderDBQ proDB = new ProviderDBQ(this);
+		proDB.providerLogged();
 	}
 		
 	public void providerViewSetup() {
@@ -145,18 +155,21 @@ public class ProviderView extends JFrame {
 		hr = proView.addComboB(hrs, left);
 		add = proView.addButton("Add", left);
 		add.setActionCommand("Add");
-		add.addActionListener(controller);
+		//add.addActionListener(controller);
+		add.addActionListener(proController);
 		
 		JPanel center = new JPanel();
-		Database data = new Database(this);
-		data.availableProvTable();
+		ProviderDBQ proDB = new ProviderDBQ(this);
+		//Database data = new Database(this);
+		proDB.availableProvTable();
 		
 		scrollAvaiTable = proView.addTableS(0, dataTableAvai, columnsNamAvai, center, "My Availabilites");
 		scrollAvaiTable.setPreferredSize(new Dimension(400,250));
 		
 		JPanel rightTable = new JPanel();
-		Database dataBooked = new Database(this);
-		dataBooked.toBeConfirmPro();
+		ProviderDBQ proDBbooked = new ProviderDBQ(this);
+		//Database dataBooked = new Database(this);
+		proDBbooked.toBeConfirmPro();
 		scrollBookedTable = proView.addTableS(1, dataTableBooked, columnsNamAppoint, rightTable, "Appointments to be confirm");
 		scrollBookedTable.setPreferredSize(new Dimension(400,250));
 		ListSelectionModel model = this.proView.myTable[1].getSelectionModel();
@@ -179,7 +192,8 @@ public class ProviderView extends JFrame {
 		
 		confirm = this.proView.addButton("Confirm", rightTable);
 		confirm.setActionCommand("Confirm");
-		confirm.addActionListener(controller);
+		confirm.addActionListener(proController);
+		//confirm.addActionListener(controller);
 		
 			
 		proView.panel.add(top, BorderLayout.PAGE_START);

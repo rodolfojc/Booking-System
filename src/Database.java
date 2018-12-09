@@ -14,15 +14,15 @@ public class Database {
 	ResultSet rs = null;
 	Register register;
 	Login login;
-	CustomerView custView;
-	ProviderView proView;
-	AdminView adminView;
+	//CustomerView custView;
+	//ProviderView proView;
+	//AdminView adminView;
 	
 	public Database() {
 		connectDB();
 	}
 	
-	public Database(ProviderView proView) {
+	/*public Database(ProviderView proView) {
 		this.proView = proView;
 		connectDB();
 	}
@@ -48,7 +48,7 @@ public class Database {
 		this.custView = custView;
 		this.proView = proView;
 		connectDB();
-	}
+	}*/
 	
 	public void connectDB() {
 		
@@ -216,7 +216,7 @@ public class Database {
 		return result;
 	}
 	
-	public void customerLogged() {
+	/*public void customerLogged() {
 		
 		
 		String query= "SELECT cust_id, cust_name, cust_surname FROM customers WHERE email='"+this.custView.getCustomerEmail()+"';";
@@ -524,7 +524,7 @@ public class Database {
 		    }
 			
 			
-		}
+		}*/
 	
 	
 	

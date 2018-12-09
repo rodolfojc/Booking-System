@@ -35,7 +35,7 @@ public class CustomerView extends JFrame {
 	private CustomerController custController;
 	private CustomerDBQ custDB;
 	
-	public CustomerView(Controller controller, String email) {
+	/*public CustomerView(Controller controller, String email) {
 		
 		this.controller = controller;
 		this.custEmail = email;
@@ -43,7 +43,7 @@ public class CustomerView extends JFrame {
 		this.custView = new View("Customer Manager", 800, 600, true);
 		this.dataTableAvai = new String[50][5];
 		costumerViewSetup();
-	}
+	}*/
 	
 	public CustomerView(CustomerController CustController, String email) {
 		

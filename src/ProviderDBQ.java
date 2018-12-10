@@ -104,12 +104,12 @@ public class ProviderDBQ {
 	
 	public void toBeConfirmPro() {
 		
-		String query = "SELECT cust_name, cust_surname, date, time, availabilities.avai_ref FROM appointments "
+		String query = "SELECT cust_name, cust_surname, date, time, availabilities.avai_ref, available FROM appointments "
 				+ "INNER JOIN customers ON customers.cust_id = appointments.cust_id "
 					+ "INNER JOIN availabilities ON availabilities.avai_ref = appointments.avai_ref "
-						+ "WHERE availabilities.pro_id = '"+this.proView.getProviderID()+"' "
-							+ "AND availabilities.available='Unconfirmed';";
-		String[][] data= new String[20][5];
+						+ "WHERE availabilities.pro_id = '"+this.proView.getProviderID()+"';";
+							//+ "AND availabilities.available='Unconfirmed';";
+		String[][] data= new String[20][6];
 		
 		try {
 			
@@ -123,6 +123,7 @@ public class ProviderDBQ {
 				data[i][2] = this.proDB.rs.getString("cust_surname");
 				data[i][3] = this.proDB.rs.getString("date");
 				data[i][4] = this.proDB.rs.getString("time");
+				data[i][5] = this.proDB.rs.getString("available");
 				
 				i++;
 			}
@@ -189,6 +190,29 @@ public class ProviderDBQ {
 		try {
 			
 			String query = "UPDATE availabilities SET available='Cancelled' WHERE avai_ref='"+avai_reference+"';";
+			
+			PreparedStatement preparedStmt = this.proDB.conn.prepareStatement(query);
+			preparedStmt.execute();
+			this.proDB.conn.close();
+			
+		}catch (Exception e)
+	    	{
+				JOptionPane.showMessageDialog(this.proView, errorMg, "Error", JOptionPane.ERROR_MESSAGE);
+				flag=false;
+				System.err.println("Got an exception!");
+				System.err.println(e.getMessage());
+		    }
+		if(flag)JOptionPane.showMessageDialog(this.proView, confMg);
+		
+	}
+	
+	public void setCompletedAppointPro(String avai_reference, String errorMg, String confMg) {
+		
+		boolean flag = true;
+		
+		try {
+			
+			String query = "UPDATE availabilities SET available='COMPLETED' WHERE avai_ref='"+avai_reference+"';";
 			
 			PreparedStatement preparedStmt = this.proDB.conn.prepareStatement(query);
 			preparedStmt.execute();

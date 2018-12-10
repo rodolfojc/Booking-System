@@ -6,7 +6,7 @@ public class Main {
 		new Controller();
 		//new AdminController();
 		//new CustomerController("rodolfo@rodolfo.com");
-		//new ProviderController("jean@jean.com");
+		//new ProviderController("victor@victor.com");
 	}
 
 }

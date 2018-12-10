@@ -137,10 +137,15 @@ public class Register extends JFrame {
 		}
 		
 		JButton register = new JButton("Register");
-		register.setActionCommand("User_Register");
+		register.setActionCommand("Register");
 		register.addActionListener(controller);
 		
+		JButton cancel = new JButton("Cancel");
+		cancel.setActionCommand("Cancel");
+		cancel.addActionListener(controller);
+		
 		regB.add(register);
+		regB.add(cancel);
 		
 		reg.panel.setBorder(new EmptyBorder(new Insets(40,65,20,65)));
 		//reg.panel.add(typeCombo);

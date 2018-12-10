@@ -58,6 +58,15 @@ public class ProviderController implements ActionListener {
 			this.proView.UpdateFrame();
 		}
 		
+		if (e.getActionCommand().equals("Completed")) {
+			String errorMg = "Ups, there is an internal problem, please contact an administrator";
+			String confMg = "Appointment has been set COMPLETED!";
+			ProviderDBQ proDB = new ProviderDBQ(this.proView);
+			proDB.setCompletedAppointPro(this.proView.getDataBooked(this.proView.getSelectedRowT(), 0), errorMg, confMg);;
+			this.proView.UpdateFrame();
+		}
+		
+		
 		
 	}
 

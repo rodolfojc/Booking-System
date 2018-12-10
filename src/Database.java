@@ -222,6 +222,35 @@ public class Database {
 		return result;
 	}
 	
+	public boolean emailVerification(String user, String email) {
+		
+				
+			String query = "SELECT * FROM "+user+" WHERE email = '" + email + "';";
+		
+		
+		try {
+			rs = stmt.executeQuery(query) ;
+			
+			// This code is telling us whether we have any results
+			// in our database or not
+			if (rs.isBeforeFirst()){
+				return true;
+			}
+			
+			// Close the result set, statement and the connection
+			rs.close() ;
+			stmt.close() ;
+			conn.close() ;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+}
+	
 	/*public void customerLogged() {
 		
 		
@@ -545,6 +574,6 @@ public class Database {
 	
 	
  
-}
+
 	
 

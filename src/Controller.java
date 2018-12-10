@@ -25,15 +25,23 @@ public class Controller implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getActionCommand().equals("Open_Register")) {
+		if(e.getActionCommand().equals("Open Register")) {
 			
 			this.register = new Register(this);
+			this.login.getLogin().setVisible(false);
 						
 		}
 		
-		if(e.getActionCommand().equals("User_Register")) {
+		if(e.getActionCommand().equals("Register")) {
 		
+			
+			boolean custEmail, proEmail;
 			boolean flag = true;
+			
+			Database emailVerOne = new Database();
+			Database emailVerTwo = new Database();
+			custEmail = emailVerOne.emailVerification("customers", this.register.getEmail());
+			proEmail = emailVerTwo.emailVerification("providers", this.register.getEmail());
 			
 			if (!this.register.getName().matches("(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){0,24}$")) {
 				JOptionPane.showMessageDialog(register, "The name is not correct or it is empty, "
@@ -43,7 +51,7 @@ public class Controller implements ActionListener {
 				JOptionPane.showMessageDialog(register, "The surname is not correct or it is empty, "
 						+ "try again", "Surname Error", JOptionPane.ERROR_MESSAGE);
 				flag=false;
-			}if (!this.register.getPassField().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,12}$")) {
+			}if (!this.register.getPassField().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#!$%^&+=])(?=\\S+$).{8,12}$")) {
 					JOptionPane.showMessageDialog(register, "The password you have submited is not valid, "
 							+ "it must be minimum of 8 characteres up to 12, including at least one uppercase alpha character, "
 							+ "one special character '@#$%^&+=', and one number. ", "Password Invalid", JOptionPane.ERROR_MESSAGE);
@@ -60,12 +68,25 @@ public class Controller implements ActionListener {
 						+ "try again", "Address Error", JOptionPane.ERROR_MESSAGE);
 				flag=false;
 			
+			}if (custEmail==true || proEmail==true){
+				JOptionPane.showMessageDialog(register, "The email is already registered, "
+						+ "please enter a different email address and try again!", "Email Error", JOptionPane.ERROR_MESSAGE);
+				flag=false;
+			
 			}if (flag==true) {
 		
 				data = new Database(this.register);
 				data.registerUser(this.register.getUserType());
+				this.login.getLogin().setVisible(true);
 			}
 			
+		}
+		
+		if(e.getActionCommand().equals("Cancel")) {
+			
+			this.login.getLogin().setVisible(true);
+			this.register.getReg().dispose();
+						
 		}
 		
 		if(e.getActionCommand().equals("Enter")) {
@@ -108,6 +129,8 @@ public class Controller implements ActionListener {
 						JOptionPane.showMessageDialog(this.login,"Incorrect, please try again!");
 				}
 			}
+		
+		
 		
 		
 		/*if(e.getActionCommand().equals("Add")) {

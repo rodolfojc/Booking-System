@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -44,9 +45,8 @@ public class View extends JFrame{
 		this.setResizable(Resizable);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		this.getContentPane().setBackground(new java.awt.Color(204, 166, 166));
-		//this.setDefaultLookAndFeelDecorated(true);
-				
+		this.getContentPane().setBackground(Color.getHSBColor(169, 206, 6));
+						
 	}
 	
 	public void setGrid(int a, int b, JPanel panel) {
@@ -102,6 +102,9 @@ public class View extends JFrame{
 	public JButton addButton(String name, JPanel panel) {
 		
 		JButton myButton= new JButton(name);
+		myButton.setBackground(Color.getHSBColor(229, 162, 61));
+		myButton.setContentAreaFilled(false);
+		myButton.setOpaque(true);
 		panel.add(myButton);
 		return myButton;
 	}

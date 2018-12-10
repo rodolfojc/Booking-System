@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -16,8 +17,8 @@ public class Login extends JFrame{
 	private View login;
 	private Controller controller;
 	private JButton enter, reg;
-	JTextField email, password;
-	JPasswordField passwordIn;
+	private JTextField email;
+	private JPasswordField passwordIn;
 		
 	public Login(Controller controller) {
 		login = new View ("Online Barber's Appointments", 400, 600, true);
@@ -33,17 +34,12 @@ public class Login extends JFrame{
 		return this.email.getText();
 	}
 	
-	public String getPass() {
-		return this.password.getText();
-	}
-	
-	
 	public String getPassField() {
 		return new String(this.passwordIn.getPassword());
 	}
 	 
 	public void setupLoginFrame() {
-				
+		
 		login.setBox(login.panel,1);
 				
 		JMenu about = login.addMenu("Help");
@@ -62,7 +58,6 @@ public class Login extends JFrame{
 		email = login.addTextField(10, centralOne);
 		login.addLabel("Password", centralTwo);
 		
-		//password = login.addTextField(10, centralTwo);// ERASE
 		passwordIn = login.addPassField(10, centralTwo);
 		
 		
@@ -71,7 +66,7 @@ public class Login extends JFrame{
 		enter.addActionListener(controller);
 		login.addLabel("Not yet a member??", bottomTwo);
 		reg = login.addButton("Register here!", bottomTwo);
-		reg.setActionCommand("Open_Register");
+		reg.setActionCommand("Open Register");
 		reg.addActionListener(controller);
 				
 		login.panel.setBorder(new EmptyBorder(new Insets(130,120,140,120)));

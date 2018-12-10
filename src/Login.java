@@ -43,9 +43,7 @@ public class Login extends JFrame{
 	}
 	 
 	public void setupLoginFrame() {
-		//this.setSize(400, 600);
-		//setGrid(4,1,panel);
-		
+				
 		login.setBox(login.panel,1);
 				
 		JMenu about = login.addMenu("Help");
@@ -71,8 +69,8 @@ public class Login extends JFrame{
 		enter = login.addButton("Login", bottom);
 		enter.setActionCommand("Enter");
 		enter.addActionListener(controller);
-		login.addLabel("New Customer/Provider?", bottomTwo);
-		reg = login.addButton("Register here", bottomTwo);
+		login.addLabel("Not yet a member??", bottomTwo);
+		reg = login.addButton("Register here!", bottomTwo);
 		reg.setActionCommand("Open_Register");
 		reg.addActionListener(controller);
 				

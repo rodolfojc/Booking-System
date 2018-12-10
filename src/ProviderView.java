@@ -72,6 +72,10 @@ public class ProviderView extends JFrame {
 		
 	}
 	
+	public View getProView () {
+		return this.proView;
+	}
+	
 	public void setCopyDataAvai(String[][] data) {
 		this.dataTableAvai = Arrays.copyOf(data, data.length);
 	}
@@ -84,8 +88,16 @@ public class ProviderView extends JFrame {
 		return this.dataTableBooked[a][b];
 	}
 	
+	public String getDataAvai (int a, int b) {
+		return this.dataTableAvai[a][b];
+	}
+	
 	public int getSelectedRowT() {
 		return this.selectedRow;
+	}	
+	
+	public int getSelectedRowTwo() {
+		return this.selectedRowTow;
 	}	
 	
 	public String getHour() {
@@ -139,7 +151,7 @@ public class ProviderView extends JFrame {
 		
 	public void providerViewSetup() {
 
-		String[] columnsNamAvai = {"Date", "Time"};
+		String[] columnsNamAvai = {"Reference", "Date", "Time"};
 		String[] columnsNamAppoint = {"Reference", "Name", "Surname", "Date", "Time"};
 		
 		
@@ -192,8 +204,9 @@ public class ProviderView extends JFrame {
 				if(!modelTwo.isSelectionEmpty()) {
 					selectedRowTow = modelTwo.getMinSelectionIndex();
 					JOptionPane.showMessageDialog(proView, "Availability selected: "
-							+ ""+dataTableAvai[selectedRowTow][0]+" "
-									+ ""+dataTableAvai[selectedRowTow][1]+" ");
+							+ "Ref: "+dataTableAvai[selectedRowTow][0]+" "
+									+ "date "+dataTableAvai[selectedRowTow][1]+" "
+											+ "time "+dataTableAvai[selectedRowTow][2]+"");
 				}
 			}
 		});

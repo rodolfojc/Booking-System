@@ -71,9 +71,9 @@ public class ProviderDBQ {
 	
 	public void availableProvTable() {
 		
-		String query = "SELECT date, time FROM availabilities av INNER JOIN providers pr ON av.pro_id = pr.pro_id  "
+		String query = "SELECT avai_ref, date, time FROM availabilities av INNER JOIN providers pr ON av.pro_id = pr.pro_id  "
 				+ "WHERE email='"+this.proView.getProviderEmail()+"' AND available='Yes';";
-		String[][] data= new String[20][2];
+		String[][] data= new String[20][3];
 		
 		try {
 			
@@ -82,8 +82,9 @@ public class ProviderDBQ {
 			
 			while(this.proDB.rs.next()) {
 				
-				data[i][0] = this.proDB.rs.getString("date");
-				data[i][1] = this.proDB.rs.getString("time");
+				data[i][0] = this.proDB.rs.getString("avai_ref");
+				data[i][1] = this.proDB.rs.getString("date");
+				data[i][2] = this.proDB.rs.getString("time");
 				i++;
 			}
 			
@@ -159,8 +160,50 @@ public class ProviderDBQ {
 		this.proView.UpdateFrame();	
 	}
 	
+	public void deleteRow(String from, String column, String ID, String errorMg, String confMg) {
+		
+		boolean flag = true;
+		
+		String query = "DELETE FROM "+from+" WHERE "+column+"="+ID+";";
+		
+		try {
+			
+			PreparedStatement preparedStmt = this.proDB.conn.prepareStatement(query);
+			preparedStmt.execute();
+			this.proDB.conn.close();
+			
+		}catch (Exception e)
+	    	{
+		      	JOptionPane.showMessageDialog(this.proView, errorMg, "Error", JOptionPane.ERROR_MESSAGE);
+		      	flag=false;
+				System.err.println("Got an exception!");
+				System.err.println(e.getMessage());
+		    }
+		if(flag)JOptionPane.showMessageDialog(this.proView, confMg);
+	}
 	
-	
+	public void cancelAppointPro(String avai_reference, String errorMg, String confMg) {
+		
+		boolean flag = true;
+		
+		try {
+			
+			String query = "UPDATE availabilities SET available='Cancelled' WHERE avai_ref='"+avai_reference+"';";
+			
+			PreparedStatement preparedStmt = this.proDB.conn.prepareStatement(query);
+			preparedStmt.execute();
+			this.proDB.conn.close();
+			
+		}catch (Exception e)
+	    	{
+				JOptionPane.showMessageDialog(this.proView, errorMg, "Error", JOptionPane.ERROR_MESSAGE);
+				flag=false;
+				System.err.println("Got an exception!");
+				System.err.println(e.getMessage());
+		    }
+		if(flag)JOptionPane.showMessageDialog(this.proView, confMg);
+		
+	}
 	
 	
 	

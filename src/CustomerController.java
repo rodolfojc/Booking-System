@@ -36,12 +36,6 @@ public class CustomerController implements ActionListener{
 			custDBTwo.setAppointment(avai_ref);
 		}
 		
-		if(e.getActionCommand().equals("Logout")) {
-			JOptionPane.showMessageDialog(this.custView, "See you soon!", "Logout", JOptionPane.INFORMATION_MESSAGE);
-			this.custView.getCustView().dispose();
-			this.login.getLogin().setVisible(true);
-		}
-		
 		if (e.getActionCommand().equals("Cancel")) {
 			String errorMg = "Ups, there is an internal problem, please contact an administrator";
 			String confMg = "Appointment has been CANCELLED!";
@@ -66,6 +60,12 @@ public class CustomerController implements ActionListener{
 			custDB.updateRow("appointments", "comments","Customer: "+comment+"", "appoint_ref", this.custView.getTableStatus(this.custView.getSelectedRowTTwo(), 0), errorMg, confMg);
 			this.custView.UpdateFrame(false);
 			
+		}
+		
+		if(e.getActionCommand().equals("Logout")) {
+			JOptionPane.showMessageDialog(this.custView, "See you soon!", "Logout", JOptionPane.INFORMATION_MESSAGE);
+			this.custView.getCustView().dispose();
+			this.login.getLogin().setVisible(true);
 		}
 		
 		

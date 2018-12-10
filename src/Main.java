@@ -3,10 +3,10 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//new Controller();
+		new Controller();
 		//new AdminController();
 		//new CustomerController("rodolfo@rodolfo.com");
-		new ProviderController("jean@jean.com");
+		//new ProviderController("jean@jean.com");
 	}
 
 }

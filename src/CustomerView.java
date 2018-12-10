@@ -21,16 +21,16 @@ public class CustomerView extends JFrame {
 	private View custView;
 	private JComboBox option;
 	private Database data;
-	private Controller controller;
-	private JButton search, get;
+	//private Controller controller;
+	private JButton search, get, logout, cancel, set;
 	private JTable table;
 	private String custName, custSurName, custEmail;
-	private String [][] dataTableAvai;
-	private JScrollPane scroll;
+	private String [][] dataTableAvai, dataTableStatus;;
+	private JScrollPane scrollAvai, scrollStatus;
 	private JTextField byInput;
 	private String byOption, byField;
 	String[] searchOp = {"Name", "Location"};
-	private int selectedRow, customerID;
+	private int selectedRow, selectedRowTwo, customerID;
 	private boolean tableflag=true;
 	private CustomerController custController;
 	private CustomerDBQ custDB;
@@ -50,9 +50,14 @@ public class CustomerView extends JFrame {
 		this.custController = CustController;
 		this.custEmail = email;
 		getUserData();
-		this.custView = new View("Customer Manager", 800, 600, true);
+		this.custView = new View("Customer Manager", 960, 550, true);
 		this.dataTableAvai = new String[50][5];
+		this.dataTableStatus = new String[10][7];
 		costumerViewSetup();
+	}
+	
+	public View getCustView() {
+		return this.custView;
 	}
 	
 	public String getCustName() {
@@ -73,6 +78,10 @@ public class CustomerView extends JFrame {
 	
 	public int getSelectedRowT() {
 		return this.selectedRow;
+	}
+	
+	public int getSelectedRowTTwo() {
+		return this.selectedRowTwo;
 	}	
 	
 	public void setCopyDataAvai(String[][] data) {
@@ -81,6 +90,14 @@ public class CustomerView extends JFrame {
 	
 	public String getDataAvai(int a, int b) {
 		return this.dataTableAvai[a][b];
+	}
+	
+	public String getTableStatus(int a, int b) {
+		return this.dataTableStatus[a][b];
+	}
+	
+	public void setCopyTableStatus(String[][] data) {
+		this.dataTableStatus = Arrays.copyOf(data, data.length);
 	}
 	
 	public void setCustomerID(int custID) {
@@ -99,10 +116,6 @@ public class CustomerView extends JFrame {
 		this.custSurName = custSur;
 	}
 	
-	//public void setCustomerEmail(String custEmail) {
-	//	this.custEmail = custEmail;
-	//}
-	
 	public String getCustomerEmail() {
 		return this.custEmail;
 	}
@@ -119,8 +132,11 @@ public class CustomerView extends JFrame {
 	
 	public void costumerViewSetup() {
 		
-		String[] columnsNam = {"Reference,", "Name", "Surname", "Date", "Time"};
 		custView.setBorder(custView.panel);
+		
+		String[] columnsNam = {"Nro. Ref", "Name", "Surname", "Date", "Time"};
+		String[] statusColumnsNam = {"Nro. Ref.", "Name", "Surname", "Date", "Time", "Status", "Comments"};
+		
 		
 		JPanel top = new JPanel();
 		custView.addLabel("Welcome "+this.custName+" "+this.custSurName+"", top);
@@ -144,7 +160,9 @@ public class CustomerView extends JFrame {
 		inLeftCenter.setBorder(new EmptyBorder(new Insets(15,0,0,0)));
 		
 		JPanel inLeftButtom = new JPanel();
-		custView.addButton("Logout", inLeftButtom);
+		logout = custView.addButton("Logout", inLeftButtom);
+		logout.setActionCommand("Logout");
+		logout.addActionListener(custController);
 		inLeftButtom.setBorder(new EmptyBorder(new Insets(0,0,100,0)));
 		
 		left.add(inLeftTop, BorderLayout.PAGE_START);
@@ -152,12 +170,22 @@ public class CustomerView extends JFrame {
 		left.add(inLeftButtom, BorderLayout.PAGE_END);
 		
 		JPanel center = new JPanel();
+		//this.custView.setGrid(1, 2, center);
+		this.custView.setBox(center, 1);
+		JPanel tableCenter = new JPanel();
+		this.custView.setBox(tableCenter, 1);
+		JPanel buttonCenter = new JPanel();
+		JPanel tableStatus = new JPanel();
+		center.add(tableCenter);
+		
+		//center.add(buttonCenter);
+		center.add(tableStatus);
 		CustomerDBQ custDB = new CustomerDBQ(this);
 		//Database data = new Database(this);
 		if (this.tableflag) {custDB.searchProvider("All","All");}
 		
-		scroll = custView.addTableS(0, dataTableAvai, columnsNam, center, "Availabilities");
-		scroll.setPreferredSize(new Dimension(400,250));
+		scrollAvai = custView.addTableS(0, dataTableAvai, columnsNam, tableCenter, "Availabilities");
+		scrollAvai.setPreferredSize(new Dimension(400,150));
 		ListSelectionModel model = custView.myTable[0].getSelectionModel();
 		model.addListSelectionListener(new ListSelectionListener() {
 
@@ -174,11 +202,50 @@ public class CustomerView extends JFrame {
 				}
 			}
 		});
-		
-		get = custView.addButton("Get Appointment", center);
+		tableCenter.add(buttonCenter);
+		get = custView.addButton("Get Appointment", buttonCenter);
 		get.setActionCommand("Get Appoint");
 		//get.addActionListener(controller);
 		get.addActionListener(custController);
+		
+		CustomerDBQ custDBAppoint = new CustomerDBQ(this);
+		custDBAppoint.searchAppointRecord();
+		scrollStatus = custView.addTableS(1, dataTableStatus, statusColumnsNam, tableStatus, "Appointments");
+		scrollStatus.setPreferredSize(new Dimension(600,100));
+		center.add(tableStatus);
+		ListSelectionModel modeltwo = custView.myTable[1].getSelectionModel();
+		modeltwo.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				// TODO Auto-generated method stub
+				if(!modeltwo.isSelectionEmpty()) {
+					selectedRowTwo = modeltwo.getMinSelectionIndex();
+					JOptionPane.showMessageDialog(custView, "Appointment selected: "+dataTableStatus[selectedRowTwo][0]+" "
+							+ ""+dataTableStatus[selectedRowTwo][1]+" "
+									+ ""+dataTableStatus[selectedRowTwo][2]+" "
+											+ "on "+dataTableStatus[selectedRowTwo][3]+" "
+													+ "at "+dataTableStatus[selectedRowTwo][4]+" o'clock"
+															+ " STATUS "+dataTableStatus[selectedRowTwo][5]+"");
+				}
+			}
+		});
+		
+		JPanel delBtn = new JPanel();
+		cancel = this.custView.addButton("Cancel", delBtn);
+		tableStatus.add(delBtn);
+		cancel.setActionCommand("Cancel");
+		cancel.addActionListener(custController);
+		
+		
+		JPanel comentBtn = new JPanel();
+		set = this.custView.addButton("Set a feetback/complain", comentBtn);
+		tableStatus.add(comentBtn);
+		set.setActionCommand("Set");
+		set.addActionListener(custController);
+		
+		
+		
 		
 		//custView.panel.add(top);
 		//custView.panel.add(left);

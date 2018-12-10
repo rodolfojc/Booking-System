@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -26,7 +28,7 @@ public class ProviderView extends JFrame {
 	private Database forUserData;
 	private Controller controller;
 	private ProviderController proController;
-	private JButton add;
+	private JButton add, logout;
 	private JDateChooser calendar;
 	private JComboBox hr;
 	private JTable table;
@@ -34,7 +36,7 @@ public class ProviderView extends JFrame {
 	private String[][] dataTableAvai, dataTableBooked;
 	private int proID;
 	private String proName, proSurName, proEmail, proLocation;
-	private int selectedRow;
+	private int selectedRow, selectedRowTow;
 	private JButton confirm;
 	private String [] hrs = {"8:00", "8:30", "9:00", "9:30", "10:00", "10:30",
 			"11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
@@ -55,7 +57,7 @@ public class ProviderView extends JFrame {
 		this.proController = proController;
 		this.proEmail = email;
 		getUserData(this.proEmail);
-		this.proView = new View("Provider Manager", 1200, 600, true);
+		this.proView = new View("Provider Manager", 1200, 400, true);
 		providerViewSetup();
 	}
 	
@@ -150,27 +152,64 @@ public class ProviderView extends JFrame {
 		proView.addLabel("Welcome "+this.proName+" "+this.proSurName+"", top);
 	
 		JPanel left = new JPanel();
-		proView.addLabel("Add Availability: ", left);
-		calendar = proView.addCalen(left);
-		hr = proView.addComboB(hrs, left);
-		add = proView.addButton("Add", left);
+		proView.setBorder(left);
+		
+		JPanel inleftTop = new JPanel();
+		proView.addLabel("Add Availability: ", inleftTop);
+		calendar = proView.addCalen(inleftTop);
+		hr = proView.addComboB(hrs, inleftTop);
+		
+		JPanel inLeftCenter = new JPanel();
+		add = proView.addButton("Add", inLeftCenter);
 		add.setActionCommand("Add");
 		//add.addActionListener(controller);
 		add.addActionListener(proController);
 		
+		JPanel inLeftButtom = new JPanel();
+		logout = proView.addButton("Logout", inLeftButtom);
+		logout.setActionCommand("Logout");
+		logout.addActionListener(proController);
+		inLeftButtom.setBorder(new EmptyBorder(new Insets(0,0,100,0)));
+		
+		left.add(inleftTop, BorderLayout.PAGE_START);
+		left.add(inLeftCenter, BorderLayout.CENTER);
+		left.add(inLeftButtom, BorderLayout.PAGE_END);
+		
 		JPanel center = new JPanel();
+		this.proView.setBox(center, 1);
 		ProviderDBQ proDB = new ProviderDBQ(this);
 		//Database data = new Database(this);
 		proDB.availableProvTable();
 		
 		scrollAvaiTable = proView.addTableS(0, dataTableAvai, columnsNamAvai, center, "My Availabilites");
 		scrollAvaiTable.setPreferredSize(new Dimension(400,250));
+		ListSelectionModel modelTwo = this.proView.myTable[0].getSelectionModel();
+		modelTwo.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				// TODO Auto-generated method stub
+				if(!modelTwo.isSelectionEmpty()) {
+					selectedRowTow = modelTwo.getMinSelectionIndex();
+					JOptionPane.showMessageDialog(proView, "Availability selected: "
+							+ ""+dataTableAvai[selectedRowTow][0]+" "
+									+ ""+dataTableAvai[selectedRowTow][1]+" ");
+				}
+			}
+		});
+		
+		JPanel delAvai = new JPanel();
+		confirm = this.proView.addButton("Delete", delAvai);
+		center.add(delAvai);
+		confirm.setActionCommand("Delete");
+		confirm.addActionListener(proController);
 		
 		JPanel rightTable = new JPanel();
+		this.proView.setBox(rightTable, 1);
 		ProviderDBQ proDBbooked = new ProviderDBQ(this);
 		//Database dataBooked = new Database(this);
 		proDBbooked.toBeConfirmPro();
-		scrollBookedTable = proView.addTableS(1, dataTableBooked, columnsNamAppoint, rightTable, "Appointments to be confirm");
+		scrollBookedTable = proView.addTableS(1, dataTableBooked, columnsNamAppoint, rightTable, "Appointments");
 		scrollBookedTable.setPreferredSize(new Dimension(400,250));
 		ListSelectionModel model = this.proView.myTable[1].getSelectionModel();
 		model.addListSelectionListener(new ListSelectionListener() {
@@ -189,11 +228,16 @@ public class ProviderView extends JFrame {
 				}
 			}
 		});
-		
-		confirm = this.proView.addButton("Confirm", rightTable);
+		JPanel appointBtns = new JPanel();
+		confirm = this.proView.addButton("Confirm", appointBtns);
+		rightTable.add(appointBtns);
 		confirm.setActionCommand("Confirm");
 		confirm.addActionListener(proController);
-		//confirm.addActionListener(controller);
+		
+		
+		confirm = this.proView.addButton("Cancel", appointBtns);
+		confirm.setActionCommand("Cancel");
+		confirm.addActionListener(proController);
 		
 			
 		proView.panel.add(top, BorderLayout.PAGE_START);

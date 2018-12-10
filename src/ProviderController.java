@@ -3,11 +3,19 @@ import java.awt.event.ActionListener;
 
 public class ProviderController implements ActionListener {
 
-	ProviderView proView;
+	private ProviderView proView;
+	private Login login;
+	
+	public ProviderController(String email, Login Login) {
+		
+		this.proView = new ProviderView(this, email);
+		this.login = Login;
+	}
 	
 	public ProviderController(String email) {
 		
 		this.proView = new ProviderView(this, email);
+		
 	}
 	
 	@Override

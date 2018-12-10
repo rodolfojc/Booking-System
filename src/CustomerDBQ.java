@@ -139,6 +139,96 @@ public class CustomerDBQ {
 		this.custView.UpdateFrame(true);	
 	}
 	
+	public void searchAppointRecord() {
+		
+		String[][] data= new String[20][7];
+		
+		String query= "SELECT appoint_ref, pro_name, pro_surname, date, time, available, comments "
+				+ "FROM availabilities INNER JOIN providers "
+				+ "ON availabilities.pro_id = providers.pro_id "
+				+ "INNER JOIN appointments ON availabilities.avai_ref = appointments.avai_ref "
+				+ "INNER JOIN customers ON appointments.cust_id = customers.cust_id "
+				+ "WHERE appointments.cust_id="+this.custView.getCustomerID()+";";
+		
+		try {
+			
+		this.data.rs = this.data.stmt.executeQuery(query);
+		
+		int i = 0;
+		
+		while(this.data.rs.next()) {
+			
+			data[i][0] = this.data.rs.getString("appoint_ref");
+			data[i][1] = this.data.rs.getString("pro_name");
+			data[i][2] = this.data.rs.getString("pro_surname");
+			data[i][3] = this.data.rs.getString("date");
+			data[i][4] = this.data.rs.getString("time");
+			data[i][5] = this.data.rs.getString("available");
+			data[i][6] = this.data.rs.getString("comments");
+			i++;
+		}
+		
+		this.data.rs.close();
+		this.data.stmt.close() ;
+		this.data.conn.close() ;
+		
+		this.custView.setCopyTableStatus(data);;
+			
+				
+		}catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+	}
+
+	
+	public void cancelAppoint(String errorMg, String confMg) {
+		
+		boolean flag=true;
+		
+		try {
+			
+			String query = "UPDATE availabilities INNER JOIN appointments ON availabilities.avai_ref = appointments.avai_ref "
+					+ "SET availabilities.available='Cancelled' "
+					+ "WHERE appointments.appoint_ref="+this.custView.getTableStatus(this.custView.getSelectedRowTTwo(), 0)+";";
+			
+			PreparedStatement preparedStmt = this.data.conn.prepareStatement(query);
+			preparedStmt.execute();
+			this.data.conn.close();
+			
+		}catch (Exception e)
+	    	{
+		      	JOptionPane.showMessageDialog(this.custView, errorMg, "Error",  JOptionPane.ERROR_MESSAGE);
+		      	flag=false;
+				System.err.println("Got an exception!");
+				System.err.println(e.getMessage());
+		    }
+		if(flag)JOptionPane.showMessageDialog(this.custView, confMg);
+				
+	}
+	
+	public void updateRow(String table, String attribute, String value, String where, String ID, String errorMg, String confMg) {
+		
+		boolean flag=true;
+		
+		try {
+			
+			String query = "UPDATE "+table+" SET "+attribute+"='"+value+"' WHERE "+where+"='"+ID+"';";
+			
+			PreparedStatement preparedStmt = this.data.conn.prepareStatement(query);
+			preparedStmt.execute();
+			this.data.conn.close();
+			
+		}catch (Exception e)
+	    	{
+		      	JOptionPane.showMessageDialog(this.custView, errorMg, "Error",  JOptionPane.ERROR_MESSAGE);
+		      	flag=false;
+				System.err.println("Got an exception!");
+				System.err.println(e.getMessage());
+		    }
+		if(flag)JOptionPane.showMessageDialog(this.custView, confMg);
+				
+	}
 	
 	
 }

@@ -22,14 +22,20 @@ public class Database {
 		connectDB();
 	}
 	
-	/*public Database(ProviderView proView) {
-		this.proView = proView;
-		connectDB();
-	}
-	
 	public Database(Register register) {
 		
 		this.register = register;
+		connectDB();
+	}
+	
+	public Database(Login login) {
+		
+		this.login = login;
+		connectDB();
+	}
+	
+	/*public Database(ProviderView proView) {
+		this.proView = proView;
 		connectDB();
 	}
 	

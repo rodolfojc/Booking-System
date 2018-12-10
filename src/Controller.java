@@ -9,7 +9,6 @@ public class Controller implements ActionListener {
 	//View view;
 	Register register;
 	Login login;
-	Model model;
 	Database data;
 	CustomerView custView;
 	ProviderView proView;
@@ -19,13 +18,8 @@ public class Controller implements ActionListener {
 	
 	public Controller() {
 		
-		//this.proView = new ProviderView(this, "jean@jean.com");
-		//this.custView = new CustomerView(this, "rodolfo@rodolfo.com");
-		//this.register = new Register(this);
 		this.login = new Login(this);
-		//this.view = new View ("Online Barber's Appointments", this, 400, 600, false);
-		//this.model = new Model();
-		//this.adminView = new AdminView();
+		
 	}
 
 	@Override
@@ -34,8 +28,7 @@ public class Controller implements ActionListener {
 		if(e.getActionCommand().equals("Open_Register")) {
 			
 			this.register = new Register(this);
-			
-			
+						
 		}
 		
 		if(e.getActionCommand().equals("User_Register")) {
@@ -96,13 +89,16 @@ public class Controller implements ActionListener {
 					if (resultOne) {
 						JOptionPane.showMessageDialog(this.login,"Welcome Customer!!");
 						//this.custView = new CustomerView(this, email);
-						this.custController = new CustomerController(email);
+						this.custController = new CustomerController(email, this.login);
+						this.login.getLogin().setVisible(false);
 					}else if (resultThree==true) {
 						JOptionPane.showMessageDialog(this.login,"Welcome Admin!!");
-						this.adminController = new AdminController(email);
+						this.adminController = new AdminController(email, this.login);
+						this.login.getLogin().setVisible(false);
 					}else if (resultTwo==true && status.equals("Confirmed")){
 						JOptionPane.showMessageDialog(this.login,"Welcome Provider!!");
-						this.proController = new ProviderController(email);
+						this.proController = new ProviderController(email, this.login);
+						this.login.getLogin().setVisible(false);
 						//this.proView = new ProviderView(this, email);
 					}else if (resultTwo==true && status.equals("Pending")){
 						JOptionPane.showMessageDialog(this.login,"Your account is not CONFIRMED, please wait or contact "
@@ -114,7 +110,7 @@ public class Controller implements ActionListener {
 			}
 		
 		
-		if(e.getActionCommand().equals("Add")) {
+		/*if(e.getActionCommand().equals("Add")) {
 			
 			Database data = new Database(this.proView);
 			data.addAvailability();
@@ -128,8 +124,6 @@ public class Controller implements ActionListener {
 			this.custView.UpdateFrame(false);
 		}
 			
-			
-			
 		if (e.getActionCommand().equals("Get Appoint")) {
 			
 			Database data = new Database(this.custView);
@@ -142,7 +136,7 @@ public class Controller implements ActionListener {
 			Database data = new Database(this.proView);
 			String avai_ref = this.proView.getDataBooked(this.proView.getSelectedRowT(),0);
 			data.comfirmAppointPro(avai_ref);
-		}
+		}*/
 		
 				
 	}

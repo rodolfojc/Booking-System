@@ -6,10 +6,12 @@ import javax.swing.JOptionPane;
 public class AdminController implements ActionListener {
 
 	private AdminView adminView;
+	private Login login;
 		
-	public AdminController (String AdminUser) {
+	public AdminController (String AdminUser, Login Login) {
 		
 		this.adminView = new AdminView(this, AdminUser);
+		this.login = Login;
 		
 	}
 	
@@ -125,6 +127,7 @@ public class AdminController implements ActionListener {
 		if(e.getActionCommand().equals("Logout")) {
 			JOptionPane.showMessageDialog(this.adminView, "See you soon!", "Logout", JOptionPane.INFORMATION_MESSAGE);
 			this.adminView.getAdminView().dispose();
+			this.login.getLogin().setVisible(true);
 		}
 
 }

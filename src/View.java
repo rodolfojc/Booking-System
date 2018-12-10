@@ -28,9 +28,6 @@ import com.toedter.calendar.JDateChooser;
 public class View extends JFrame{
 
 	JPanel panel;
-	GridLayout grid;
-	BorderLayout border;
-	BoxLayout box;
 	JMenuBar menu;
 	JTable[] myTable;
 			
@@ -52,27 +49,23 @@ public class View extends JFrame{
 				
 	}
 	
-	public GridLayout setGrid(int a, int b, JPanel panel) {
+	public void setGrid(int a, int b, JPanel panel) {
 		
-		grid = new GridLayout(a, b);
+		GridLayout grid = new GridLayout(a, b);
 		panel.setLayout(grid);
-		return grid;
-	
 	}
 	
-	public BorderLayout setBorder(JPanel panel) {
+	public void setBorder(JPanel panel) {
 		
-		border = new BorderLayout();
+		BorderLayout border = new BorderLayout();
 		panel.setLayout(border);
-		return border;
-	
 	}
 	
-	public BoxLayout setBox(JPanel panel, int a) {
+	public void setBox(JPanel panel, int a) {
 		
-		box = new BoxLayout(panel, a);
+		BoxLayout box = new BoxLayout(panel, a);
 		panel.setLayout(box);
-		return box;
+		
 	}
 	
 	public JMenu addMenu(String name) {

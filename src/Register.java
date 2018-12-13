@@ -21,19 +21,20 @@ public class Register extends JFrame {
 	private View reg;
 	private Controller controller;
 	private String type;
-	private String[] _OPT = {"Customer", "Provider"};
+	//private String[] _OPT = {"Customer", "Provider"};
 	
-	public Register(Controller controller) {
+	public Register(Controller controller, String Type) {
 		
-		this.type=(String)JOptionPane.showInputDialog(this,
-				"Are you?", 
-				"Registration",
-				JOptionPane.PLAIN_MESSAGE,
-				null,
-				_OPT,
-				_OPT[0]);
+//		this.type=(String)JOptionPane.showInputDialog(this,
+//				"Are you?", 
+//				"Registration",
+//				JOptionPane.PLAIN_MESSAGE,
+//				null,
+//				_OPT,
+//				_OPT[0]);
 		
-		this.reg = new View("Registration", 400, 800, false);	
+		this.reg = new View("Registration", 400, 800, false);
+		this.type = Type;
 		this.controller = controller;
 		setupRegisterFrame();
 		}

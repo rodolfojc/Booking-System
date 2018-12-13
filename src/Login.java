@@ -34,6 +34,14 @@ public class Login extends JFrame{
 		return this.email.getText();
 	}
 	
+	public JTextField setEmail() {
+		return this.email;
+	}
+	
+	public JPasswordField setJPass() {
+		return this.passwordIn;
+	}
+	
 	public String getPassField() {
 		return new String(this.passwordIn.getPassword());
 	}

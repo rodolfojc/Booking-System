@@ -27,8 +27,24 @@ public class Controller implements ActionListener {
 		
 		if(e.getActionCommand().equals("Open Register")) {
 			
-			this.register = new Register(this);
-			this.login.getLogin().setVisible(false);
+			String type="";
+			
+			String[] _OPT = {"Customer", "Provider"};
+			type=(String)JOptionPane.showInputDialog(this.login,
+					"Are you?", 
+					"Registration",
+					JOptionPane.PLAIN_MESSAGE,
+					null,
+					_OPT,
+					_OPT[0]);
+			
+						
+			if (type.equals("Customer") || type.equals("Provider")) {
+				this.register = new Register(this, type);
+				this.login.getLogin().setVisible(false);
+			}else if(type.equals(null)) {
+				JOptionPane.showMessageDialog(this.login, "Please, Login");
+			}
 						
 		}
 		
@@ -111,14 +127,20 @@ public class Controller implements ActionListener {
 						JOptionPane.showMessageDialog(this.login,"Welcome Customer!!");
 						//this.custView = new CustomerView(this, email);
 						this.custController = new CustomerController(email, this.login);
+						this.login.setEmail().setText("");
+						this.login.setJPass().setText("");
 						this.login.getLogin().setVisible(false);
 					}else if (resultThree==true) {
 						JOptionPane.showMessageDialog(this.login,"Welcome Admin!!");
 						this.adminController = new AdminController(email, this.login);
+						this.login.setEmail().setText("");
+						this.login.setJPass().setText("");
 						this.login.getLogin().setVisible(false);
 					}else if (resultTwo==true && status.equals("Confirmed")){
 						JOptionPane.showMessageDialog(this.login,"Welcome Provider!!");
 						this.proController = new ProviderController(email, this.login);
+						this.login.setEmail().setText("");
+						this.login.setJPass().setText("");
 						this.login.getLogin().setVisible(false);
 						//this.proView = new ProviderView(this, email);
 					}else if (resultTwo==true && status.equals("Pending")){

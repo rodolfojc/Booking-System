@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 
 public class AdminDBQ {
 
+	// GLOBAL VARIABLES - DECLARATION
 	Database data;
 	AdminView adminView;
 	AdminController adminController;
@@ -12,9 +13,11 @@ public class AdminDBQ {
 	public AdminDBQ(AdminView AdminView) {
 		
 		this.adminView = AdminView;
+		// NEW INSTANCE OF DATABASE FOR CONNECTION
 		this.data = new Database();
 	}
 
+	// TO GET DATA OF ALL CUSTOMERS IN DATABASE
 	public void getCustomer() {
 		
 		String query= "SELECT cust_id, cust_name, cust_surname FROM customers;";
@@ -48,7 +51,7 @@ public class AdminDBQ {
 		
 	}
 		
-		
+	// OPTIONAL METHOD TO DELETE DATA	
 	public void deleteRow(String from, String column, String ID, String errorMg, String confMg) {
 		
 		boolean flag = true;
@@ -71,7 +74,7 @@ public class AdminDBQ {
 		if(flag)JOptionPane.showMessageDialog(this.adminView, confMg);
 	}
 	
-	
+	// TO GET DATA OF ALL PROVIDERS IN DATABASE
 	public void getProviders() {
 		
 		String query= "SELECT pro_id, pro_name, pro_surname, status, reg_day FROM providers;";
@@ -108,6 +111,7 @@ public class AdminDBQ {
 	
 	}
 	
+	// OPTIONAL METHOD TO UPDATE DATA	
 	public void updateRow(String table, String attribute, String value, String where, String ID, String errorMg, String confMg) {
 		
 		boolean flag=true;
@@ -131,9 +135,7 @@ public class AdminDBQ {
 				
 	}
 	
-	
-	
-	
+	// TO GET DATA OF ALL AVAILABILITIES IN DATABASE	
 	public void getAvailabilities() {
 		
 		String query= "SELECT avai_ref, pro_id, date, time, available FROM availabilities;";
@@ -169,6 +171,7 @@ public class AdminDBQ {
 		}
 	}
 	
+	// TO GET DATA OF ALL APPOINTMENTS IN DATABASE
 	public void getAppointments() {
 		
 		String query= "SELECT appoint_ref, avai_ref, cust_id, comments FROM appointments;";
@@ -205,6 +208,7 @@ public class AdminDBQ {
 		
 	}
 	
+	// TO GET DATA OF ALL ADMINISTRATORS IN DATABASE
 	public void getAdministrators() {
 		
 		String query= "SELECT admin_id, admin_user, privilege FROM administrators;";
@@ -239,6 +243,7 @@ public class AdminDBQ {
 		
 	}
 	
+	// TO CREATE AN ADMIN FROM ADMINSTRATOR MANAGER
 	public void createAdmin(String user, String pass) {
 		
 		boolean flag=true;
@@ -267,15 +272,6 @@ public class AdminDBQ {
 		if(flag==true) JOptionPane.showMessageDialog(this.adminView, "The admin has been CREATED ");
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

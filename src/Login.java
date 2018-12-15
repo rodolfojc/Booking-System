@@ -14,28 +14,32 @@ import javax.swing.border.EmptyBorder;
 
 public class Login extends JFrame{
 	
+	//GLOBAL VARIABLES - DECLARATION
 	private View login;
 	private Controller controller;
-	private JButton enter, reg;
-	private JTextField email;
+	private JButton enterBtn, regBtn;
+	private JTextField emailIn;
 	private JPasswordField passwordIn;
 		
 	public Login(Controller controller) {
+		
+		//NEW INSTANCE OF LOGIN VIEW, CONTROLLER, AND FRAME SETUP
 		login = new View ("Online Barber's Appointments", 400, 600, false);
 		this.controller = controller;
 		setupLoginFrame();
 	}
 
+	//GETTER AND SETTER FOR GLOBAL VARIABLES
 	public View getLogin() {
 		return this.login;
 	}
 	
 	public String getEmail() {
-		return this.email.getText();
+		return this.emailIn.getText();
 	}
 	
 	public JTextField setEmail() {
-		return this.email;
+		return this.emailIn;
 	}
 	
 	public JPasswordField setJPass() {
@@ -43,63 +47,63 @@ public class Login extends JFrame{
 	}
 	
 	public String getPassField() {
+		//CASTING JPASSWORDFIELD FROM CHAR TO STRING
 		return new String(this.passwordIn.getPassword());
 	}
-	 
+	
+	//METHOD TO SET UP THE FRAME
 	public void setupLoginFrame() {
 		
+		//CHECK VIEW CLASS TO UNDERTAND METHODS THAT WILL BE USED 
+		//TO SET UP THE FRAME, LOGIN IS AN INSTANCE OF VIEW CLASS
+		
+		//LAYOUT
 		login.setBox(login.panel,1);
 				
+		//MENU
 		JMenu about = login.addMenu("Help");
 		login.addMenuItem(about, "About");
 		JMenu close = login.addMenu("Close");
 		login.addMenuItem(close, "Are you sure?");
 				
+		//PANELS FOR MAIN PANEL
 		JPanel centralOne = new JPanel();
 		JPanel centralTwo = new JPanel();
 		JPanel top = new JPanel();
 		JPanel bottom = new JPanel();
 		JPanel bottomTwo = new JPanel();
 				
-		login.addLabel("Get Appointments",top);
-		login.addLabel("Email", centralOne);
-		email = login.addTextField(10, centralOne);
-		login.addLabel("Password", centralTwo);
+		//WELCOME LOGIN AND PASSWORD
+		this.login.addLabel("Get Appointments",top);
+		this.login.addLabel("Email", centralOne);
+		this.emailIn = login.addTextField(10, centralOne);
+		this.login.addLabel("Password", centralTwo);
+		this.passwordIn = login.addPassField(10, centralTwo);
 		
-		passwordIn = login.addPassField(10, centralTwo);
-		
-		
-		enter = login.addButton("Login", bottom);
-		enter.setActionCommand("Enter");
-		enter.addActionListener(controller);
-		login.addLabel("Not yet a member??", bottomTwo);
-		reg = login.addButton("Register here!", bottomTwo);
-		reg.setActionCommand("Open Register");
-		reg.addActionListener(controller);
+		//BUTTONS LOGIN AND REGISTER
+		this.enterBtn = login.addButton("Login", bottom);
+		this.enterBtn.setActionCommand("Enter");
+		this.enterBtn.addActionListener(controller);
+		this.login.addLabel("Not yet a member??", bottomTwo);
+		this.regBtn = login.addButton("Register here!", bottomTwo);
+		this.regBtn.setActionCommand("Open Register");
+		this.regBtn.addActionListener(controller);
 				
-		login.panel.setBorder(new EmptyBorder(new Insets(130,120,140,120)));
+		//BORDER TO FIT COMPONENTS
+		this.login.panel.setBorder(new EmptyBorder(new Insets(130,120,140,120)));
 				
+		//ADDING TO THE MAIN PANEL
 		top.setBorder(BorderFactory.createTitledBorder("Welcome"));
-		login.panel.add(top);
-				
-		//centralOne.setPreferredSize(new Dimension(5,10));
-		//centralOne.setBorder(BorderFactory.createBevelBorder(0));
-		login.panel.add(centralOne);
-				
-		//centralTwo.setPreferredSize(new Dimension(5,10));
-		//centralTwo.setBorder(BorderFactory.);
-		login.panel.add(centralTwo);
-		login.panel.add(bottom);
-		login.panel.add(bottomTwo);
-				
-						
-		login.validate();
-		login.repaint();
+		this.login.panel.add(top);
+		this.login.panel.add(centralOne);
+		this.login.panel.add(centralTwo);
+		this.login.panel.add(bottom);
+		this.login.panel.add(bottomTwo);
+		
+		//CALLING VALIDATE AND REPAINT METHODS
+		this.login.validate();
+		this.login.repaint();
+	
 	}	
-	
-	
-	
-	
-	
-	
+			
 }

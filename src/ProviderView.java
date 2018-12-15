@@ -168,6 +168,7 @@ public class ProviderView extends JFrame {
 		this.proView.addLabel("Add Availability: ", inleftTop);
 		// CREATING A CALENDAR AND GIVING FORMAT YYY-MM-DD
 		this.calendar = this.proView.addCalen(inleftTop);
+		//SETTING CALENDAR RANGE 
 		java.util.Date now = new java.util.Date();
 		SimpleDateFormat myDateSimp = new SimpleDateFormat("yyy-MM-dd"); // "yyyy-MM-dd"
 		myDateSimp.format(now);

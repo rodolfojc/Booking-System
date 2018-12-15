@@ -16,159 +16,160 @@ import javax.swing.border.EmptyBorder;
 
 public class Register extends JFrame {
 
+	// GLOBAL VARIABLES - DECLARATION
 	private JTextField txtName, txtSur, txtPass, txtVPass, txtMob, txtEmail, txtAddress, txtLocation;
 	private JPasswordField pass;
 	private View reg;
 	private Controller controller;
 	private String type;
 	private JButton registerBtn, cancelBtn;
-	//private String[] _OPT = {"Customer", "Provider"};
-	
+
+	// CONTROLLER
 	public Register(Controller controller, String Type) {
-		
-//		this.type=(String)JOptionPane.showInputDialog(this,
-//				"Are you?", 
-//				"Registration",
-//				JOptionPane.PLAIN_MESSAGE,
-//				null,
-//				_OPT,
-//				_OPT[0]);
-		
+
+		// NEW INSTANCE OF VIEW TO BUILD REGISTRATION VIEW, CONTROLLER
+		// TYPE OF USER IS A PARAMETER TO SET DIFERENT REGISTRATION FOR CUSTOMERS AND
+		// PROVIDERS
 		this.reg = new View("Registration", 400, 800, false);
 		this.type = Type;
 		this.controller = controller;
 		setupRegisterFrame();
-		}
-	
+	}
+
+	// GETTER AND SETTER FOR GLOBAL VARIABLES
 	public View getReg() {
 		return this.reg;
 	}
-	
+
 	public String getName() {
 		return this.txtName.getText();
 	}
-	
+
 	public String getSur() {
 		return this.txtSur.getText();
 	}
-	
+
 	public String getPassField() {
 		return new String(this.pass.getPassword());
 	}
-	
+
 	public String getMob() {
 		return this.txtMob.getText();
 	}
-	
+
 	public String getEmail() {
 		return this.txtEmail.getText();
 	}
-	
+
 	public String getAddress() {
 		return this.txtAddress.getText();
 	}
-	
+
 	public String getLoc() {
 		return this.txtLocation.getText();
 	}
-	
+
 	public String getUserType() {
 		return this.type;
 	}
-	
+
+	// METHOD TO CAST DATE TYPE TO DATE MSQL TYPE FORMAT YYYY-MM-DD
 	public java.sql.Date getRegDatE() throws ParseException {
 		Date now = new Date();
-		SimpleDateFormat myDateSimp = new SimpleDateFormat("yyy-MM-dd"); //"yyyy-MM-dd"
+		SimpleDateFormat myDateSimp = new SimpleDateFormat("yyy-MM-dd"); // "yyyy-MM-dd"
 		String dateStr = myDateSimp.format(now);
 		java.util.Date getCalendar;
 		java.sql.Date dateSql;
 		getCalendar = myDateSimp.parse(dateStr);
 		dateSql = new java.sql.Date(getCalendar.getTime());
-		return dateSql;		
-		
+		return dateSql;
+
 	}
-	
+
 	public void setupRegisterFrame() {
-		
-		reg.setBox(reg.panel,1);
-		
-		//String [] userType = {"Customer", "Provider"};
-		//JComboBox typeUs = new JComboBox(userType);
-		
-		//JPanel typeCombo = new JPanel();
-		//typeCombo.add(typeUs);
-		
+
+		// CHECK VIEW CLASS TO UNDERTAND METHODS THAT WILL BE USED
+		// TO SET UP THE FRAME, REGISTER IS AN INSTANCE OF VIEW CLASS
+
+		// MAIN LAYOUT FOR MAIN PANEL
+		this.reg.setBox(reg.panel, 1);
+
+		// PANELS FOR MAIN PANEL
 		JPanel top = new JPanel();
 		JPanel name = new JPanel();
 		JPanel surname = new JPanel();
 		JPanel password = new JPanel();
-		//JPanel verPassword = new JPanel();
 		JPanel mobile = new JPanel();
 		JPanel email = new JPanel();
-		JPanel address= new JPanel();
+		JPanel address = new JPanel();
 		JPanel location = new JPanel();
 		JPanel regB = new JPanel();
-		
-		
-		//JRadioButton customer = new JRadioButton("Costumer");
-		//JRadioButton provider = new JRadioButton("Provider");
-		//type.add(customer);
-		//type.add(provider);
-		
-		top.setBorder(BorderFactory.createTitledBorder("Sing up for FREE"));		
-		reg.addLabel(this.type.toUpperCase()+" REGISTRATION", top);
-		reg.addLabel("Name", name);
-		txtName = reg.addTextField(20, name);
-		reg.addLabel("Surname", surname);
-		txtSur = reg.addTextField(20, surname);
-		reg.addLabel("Set a Password", password);
-		pass = reg.addPassField(20, password);
-		//txtPass = reg.addTextField(20, password);
-		//reg.addLabel("Re-entry Password", verPassword);
-		//txtVPass = reg.addTextField(20, verPassword);
-		reg.addLabel("Mobile", mobile);
-		txtMob = reg.addTextField(20, mobile);
-		reg.addLabel("Email", email);
-		txtEmail = reg.addTextField(20, email);
-		reg.addLabel("Address", address);
-		txtAddress = reg.addTextField(20, address);
-		
+
+		// TOP PANEL - WELCOME
+		top.setBorder(BorderFactory.createTitledBorder("Sing up for FREE"));
+		this.reg.addLabel(this.type.toUpperCase() + " REGISTRATION", top);
+
+		// NAME PANEL
+		this.reg.addLabel("Name", name);
+		this.txtName = reg.addTextField(20, name);
+
+		// SURNAME PANEL
+		this.reg.addLabel("Surname", surname);
+		this.txtSur = reg.addTextField(20, surname);
+
+		// PASSWORD PANEL
+		this.reg.addLabel("Set a Password", password);
+		this.pass = reg.addPassField(20, password);
+
+		// MOBILE PANEL
+		this.reg.addLabel("Mobile", mobile);
+		this.txtMob = reg.addTextField(20, mobile);
+
+		// EMAIL PANEL
+		this.reg.addLabel("Email", email);
+		this.txtEmail = reg.addTextField(20, email);
+
+		// ADDRESS PANEL
+		this.reg.addLabel("Address", address);
+		this.txtAddress = reg.addTextField(20, address);
+
+		// LOCATION PANEL
+		// THIS PANEL WILL BE SHOW IF THE REGISTRATION IS FOR PROVIDERS
 		if (type.equals("Provider")) {
-		reg.addLabel("Location", location);
-		txtLocation = reg.addTextField(20, location);
+			this.reg.addLabel("Location", location);
+			this.txtLocation = reg.addTextField(20, location);
 		}
-		
+
+		// BUTTON FOR REGISTRATION ACTION
 		this.registerBtn = this.reg.addButton("Register", regB);
-		//JButton register = new JButton("Register");
-		registerBtn.setActionCommand("Register");
-		registerBtn.addActionListener(controller);
-		
+		this.registerBtn.setActionCommand("Register");
+		this.registerBtn.addActionListener(controller);
+
+		// BUTTON FOR CANCEL REGISTRATION ACTION
 		this.cancelBtn = this.reg.addButton("Cancel", regB);
-		//JButton cancel = new JButton("Cancel");
-		cancelBtn.setActionCommand("Cancel");
-		cancelBtn.addActionListener(controller);
-		
-		//regB.add(register);
-		//regB.add(cancel);
-		
-		reg.panel.setBorder(new EmptyBorder(new Insets(40,65,20,65)));
-		//reg.panel.add(typeCombo);
-		reg.panel.add(top);
-		reg.panel.add(name);
-		reg.panel.add(surname);
-		reg.panel.add(password);
-		//reg.panel.add(verPassword);
-		reg.panel.add(mobile);
-		reg.panel.add(email);
-		reg.panel.add(address);
-		
+		this.cancelBtn.setActionCommand("Cancel");
+		this.cancelBtn.addActionListener(controller);
+
+		// ADDING BORDER AND PANELS TO THE MAIN PANEL
+		this.reg.panel.setBorder(new EmptyBorder(new Insets(40, 65, 20, 65)));
+		this.reg.panel.add(top);
+		this.reg.panel.add(name);
+		this.reg.panel.add(surname);
+		this.reg.panel.add(password);
+		this.reg.panel.add(mobile);
+		this.reg.panel.add(email);
+		this.reg.panel.add(address);
+
+		// JUST LACATION PANEL WILL BE ADDED FOR PROVIDER
 		if (type.equals("Provider")) {
-		reg.panel.add(location);}
-		
-		reg.panel.add(regB);
-		
-		reg.validate();
-		reg.repaint();
-		
+			this.reg.panel.add(location);
+		}
+
+		this.reg.panel.add(regB);
+
+		// CALLING VALIDATE AND REPAINT METHODS
+		this.reg.validate();
+		this.reg.repaint();
+
 	}
 }

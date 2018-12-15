@@ -27,40 +27,49 @@ import javax.swing.border.TitledBorder;
 import com.toedter.calendar.JDateChooser;
 
 public class View extends JFrame{
-
+	
+	//GLOBAL VARIABLES - DECLARATION
 	JPanel panel;
 	JMenuBar menu;
 	JTable[] myTable;
-			
+	
+	//CONSTRUCTOR
+	
 	public View(String name, int width, int height, boolean Resizable) {
 		
-		this.setVisible(true);
-		this.setSize(width, height);
-		this.setTitle(name);
-		this.panel = new JPanel();
+		//SETTING UP THE FRAME
+		this.setVisible(true); //VISIBLE
+		this.setSize(width, height); //SIZE
+		this.setTitle(name); //TITLE
+		this.panel = new JPanel(); //PANEL INSTANTIATION
 		this.myTable = new JTable[7];
-		this.add(panel);
-		this.menu = new JMenuBar();
-		this.setJMenuBar(menu);
-		this.setResizable(Resizable);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.getContentPane().setBackground(Color.getHSBColor(169, 206, 6));
-						
+		this.add(panel); //ADDING GLOBAL MAIN PANEL TO THE FRAME
+		this.menu = new JMenuBar(); //MENU INSTANTIATION
+		this.setJMenuBar(menu); //ADDING MENU
+		this.setResizable(Resizable); //RESIZABLE - WINDOW
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //SETTING CLOSE PROGRAM WHEN THE FRAME IS CLOSED
+		this.setLocationRelativeTo(null); // SETTING FRAME IN CENTER LOCATION ON THE SCREEN
+								
 	}
 	
+	//THESE METHODS HAVE BEEN CREATED TO ADD COMPONENTS TO PANELS DIRECTLY
+	//TO SET LAYOUTS TO PANELS, AND TO RETURN OBJECTS THAT ARE CREATED
+	
+	//SET GRIDLAYOUT TO A PANEL
 	public void setGrid(int a, int b, JPanel panel) {
 		
 		GridLayout grid = new GridLayout(a, b);
 		panel.setLayout(grid);
 	}
 	
+	//SET BORDERLAYOUT TO A PANEL
 	public void setBorder(JPanel panel) {
 		
 		BorderLayout border = new BorderLayout();
 		panel.setLayout(border);
 	}
 	
+	//SET BOXLAYOUT TO A PANEL
 	public void setBox(JPanel panel, int a) {
 		
 		BoxLayout box = new BoxLayout(panel, a);
@@ -68,6 +77,7 @@ public class View extends JFrame{
 		
 	}
 	
+	//CREATE JMENU, ADD TO MAIN MENU
 	public JMenu addMenu(String name) {
 		
 		JMenu myMenu = new JMenu(name);
@@ -76,6 +86,7 @@ public class View extends JFrame{
 		
 	}
 	
+	//CREATE JMENUITEM, ADD TO JMENU
 	public JMenuItem addMenuItem(JMenu myMenu, String name) {
 		
 		JMenuItem myMenuItem = new JMenuItem(name);
@@ -83,7 +94,7 @@ public class View extends JFrame{
 		return myMenuItem;
 	}
 	
-	
+	//CREATE A JTEXTFIELD WITH SIZE AND ADD TO A PANEL
 	public JTextField addTextField(int a, JPanel panel) {
 		
 		JTextField myText = new JTextField(a);
@@ -92,6 +103,7 @@ public class View extends JFrame{
 		
 	}
 	
+	//CREATE A JPASSWORDFIELD WITH SIZE AND ADD TO A PANEL
 	public JPasswordField addPassField(int a, JPanel panel) {
 		
 		JPasswordField myPass = new JPasswordField(a);
@@ -99,6 +111,7 @@ public class View extends JFrame{
 		return myPass;
 	}
 	
+	//CREATE A JBUTTON WITH NAME, SET COLOR, AND ADD TO A PANEL
 	public JButton addButton(String name, JPanel panel) {
 		
 		JButton myButton= new JButton(name);
@@ -109,13 +122,15 @@ public class View extends JFrame{
 		return myButton;
 	}
 	
-	public JLabel addLabel(String name, JPanel panel) {
+	//CREATE A JLABEL WITH TEXT AND ADD TO A PANEL
+	public JLabel addLabel(String text, JPanel panel) {
 		
-		JLabel myLabel = new JLabel(name);
+		JLabel myLabel = new JLabel(text);
 		panel.add(myLabel);
 		return myLabel;
 	}
 	
+	//CREATE A JCOMBOBOX WITH DATA OPTIONS AND ADD TO A PANEL
 	public JComboBox addComboB(String[] options, JPanel panel) {
 		
 		JComboBox myComboBox = new JComboBox(options);
@@ -123,6 +138,7 @@ public class View extends JFrame{
 		return myComboBox;
 	}
 	
+	//CREATE A JCALENDAR - JDATECHOOSER WITH SIZE AND ADD TO A PANEL
 	public JDateChooser addCalen(JPanel panel) {
 		JDateChooser myDateChooser = new JDateChooser();
 		myDateChooser.setBounds(20, 20, 200, 20);
@@ -130,6 +146,8 @@ public class View extends JFrame{
 		return myDateChooser;
 	}
 	
+	//CREATE A JSCROOLPANE WITH INDEX FOR MAIN TABLES, DATA (GETTING FROM DATABASE), COLUMNS NAMES, ADD TO A PANEL, AND TITLE FOR BORDER.
+	//ALSO IT CREATES A BORDER WITH A TITLE.
 	public JScrollPane addTableS(int tableNum, String[][] data, String[] columnsName, JPanel panel, String title) {
 		
 		myTable[tableNum] = new JTable(data, columnsName);

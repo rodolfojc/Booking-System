@@ -7,6 +7,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -20,7 +21,7 @@ public class Login extends JFrame {
 	private JButton enterBtn, regBtn;
 	private JTextField emailIn;
 	private JPasswordField passwordIn;
-
+	
 	public Login(Controller controller) {
 
 		// NEW INSTANCE OF VIEW TO BUILD LOGIN VIEW, CONTROLLER, AND FRAME SETUP
@@ -58,14 +59,12 @@ public class Login extends JFrame {
 		// TO SET UP THE FRAME, LOGIN IS AN INSTANCE OF VIEW CLASS
 
 		// MAIN LAYOUT FOR MAIN PANEL
-		login.setBox(login.panel, 1);
+		this.login.setBox(login.panel, 1);
 
 		// MENU
 		JMenu about = login.addMenu("Help");
-		login.addMenuItem(about, "About");
-		JMenu close = login.addMenu("Close");
-		login.addMenuItem(close, "Are you sure?");
-
+		this.login.addMenuItem(about, "Admin email: admin@admin.admin");
+		
 		// PANELS FOR MAIN PANEL
 		JPanel centralOne = new JPanel();
 		JPanel centralTwo = new JPanel();

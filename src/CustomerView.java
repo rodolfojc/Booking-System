@@ -17,263 +17,266 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class CustomerView extends JFrame {
-	
+
 	// GLOBAL VARIABLES - DECLARATION
 	private View custView;
 	private JComboBox option;
 	private JButton search, get, logout, cancel, set;
 	private String custName, custSurName, custEmail;
-	private String [][] dataTableAvai, dataTableStatus;;
+	private String[][] dataTableAvai, dataTableStatus;
 	private JScrollPane scrollAvai, scrollStatus;
 	private JTextField byInput;
-	private String[] searchOp = {"Name", "Location"};
+	private String[] searchOp = { "Name", "Location" };
 	private int selectedRow, selectedRowTwo, customerID;
-	private boolean tableflag=true;
+	private boolean tableflag = true;
 	private CustomerController custController;
-	
-	//CONSTRUCTOR
+
+	// CONSTRUCTOR
 	public CustomerView(CustomerController CustController, String email) {
-		
+
 		// SETTING CUSTOMER ACTION LISTENER CONTROLLER
 		this.custController = CustController;
 		this.custEmail = email;
-		getUserData(); //METHOD THAT GET THE DATA WITH THE EMAIL PRIVIDED IN LOGIN
+		getUserData(); // METHOD THAT GET THE DATA WITH THE EMAIL PRIVIDED IN LOGIN
 		// NEW INSTANCE OF VIEW FOR CUSTOMER VIEW
 		this.custView = new View("Customer Manager", 960, 550, false);
 		costumerViewSetup();
 	}
-	
-	//GETTER AND SETTER FOR GLOBAL VARIABLES
+
+	// GETTER AND SETTER FOR GLOBAL VARIABLES
 	public View getCustView() {
 		return this.custView;
 	}
-	
+
 	public String getCustName() {
 		return this.custName;
 	}
-	
+
 	public String getCustSurN() {
 		return this.custSurName;
 	}
-	
+
 	public String getByOption() {
 		return searchOp[option.getSelectedIndex()];
 	}
-	
+
 	public String getByField() {
 		return byInput.getText();
 	}
-	
+
 	public int getSelectedRowT() {
 		return this.selectedRow;
 	}
-	
+
 	public int getSelectedRowTTwo() {
 		return this.selectedRowTwo;
-	}	
-	
+	}
+
 	public void setCopyDataAvai(String[][] data) {
 		this.dataTableAvai = Arrays.copyOf(data, data.length);
 	}
-	
+
 	public String getDataAvai(int a, int b) {
 		return this.dataTableAvai[a][b];
 	}
-	
+
 	public String getTableStatus(int a, int b) {
 		return this.dataTableStatus[a][b];
 	}
-	
+
 	public void setCopyTableStatus(String[][] data) {
 		this.dataTableStatus = Arrays.copyOf(data, data.length);
 	}
-	
+
 	public void setCustomerID(int custID) {
 		this.customerID = custID;
 	}
-	
+
 	public int getCustomerID() {
 		return this.customerID;
 	}
-	
+
 	public void setCustomerName(String custNam) {
 		this.custName = custNam;
 	}
-	
+
 	public void setCustmerSurName(String custSur) {
 		this.custSurName = custSur;
 	}
-	
+
 	public String getCustomerEmail() {
 		return this.custEmail;
 	}
-	
-	//METHOD TO GET DATA OF THE CUSTOMER FROM THE DATABASE
+
+	// METHOD TO GET DATA OF THE CUSTOMER FROM THE DATABASE
 	public void getUserData() {
-		
+
 		CustomerDBQ custDB = new CustomerDBQ(this);
 		custDB.customerLogged();
-					
+
 	}
-	
+
 	// METHOD TO SET UP THE FRAME
 	public void costumerViewSetup() {
-		
-		//LAYPUT FOR MAIN PANEL 
+
+		// LAYOUT FOR MAIN PANEL
 		this.custView.setBorder(custView.panel);
-		
-		//COLUMNS FOR TABLES
-		String[] columnsNam = {"Nro. Ref", "Name", "Surname", "Date", "Time"};
-		String[] statusColumnsNam = {"Nro. Ref.", "Name", "Surname", "Date", "Time", "Status", "Comments"};
-		
-		//TOP PANEL 
+
+		// COLUMNS FOR TABLES
+		String[] columnsNam = { "Nro. Ref", "Name", "Surname", "Date", "Time" };
+		String[] statusColumnsNam = { "Nro. Ref.", "Name", "Surname", "Date", "Time", "Status", "Comments" };
+
+		// ARRAYS FOR DATA INSTATIATION
+		this.dataTableAvai = new String[40][5];
+		this.dataTableStatus = new String[40][7];
+
+		// TOP PANEL
 		JPanel top = new JPanel();
-		this.custView.addLabel("Welcome "+this.custName+" "+this.custSurName+"", top);
-		
-		//LEFT PANEL IN MAIN PANEL
+		this.custView.addLabel("Welcome " + this.custName + " " + this.custSurName + "", top);
+
+		// LEFT PANEL IN MAIN PANEL
 		JPanel left = new JPanel();
 		this.custView.setBorder(left);
-		
-		//LEFT PANEL FOR TOP IN BORDERLAYOUT
+
+		// LEFT PANEL FOR TOP IN BORDERLAYOUT
 		JPanel inLeftTop = new JPanel();
 		this.custView.addLabel("Find appointment by: ", inLeftTop);
 		this.option = this.custView.addComboB(searchOp, inLeftTop);
 		this.byInput = this.custView.addTextField(10, inLeftTop);
-		inLeftTop.setBorder(new EmptyBorder(new Insets(50,0,0,0)));
-		
-		//LEFT PANEL - FOR CENTER IN BORDERLAYOUT
+		inLeftTop.setBorder(new EmptyBorder(new Insets(50, 0, 0, 0)));
+
+		// LEFT PANEL - FOR CENTER IN BORDERLAYOUT
 		JPanel inLeftCenter = new JPanel();
 		this.search = this.custView.addButton("Search", inLeftCenter);
 		this.search.setActionCommand("Search");
 		this.search.addActionListener(custController);
-		inLeftCenter.setBorder(new EmptyBorder(new Insets(15,0,0,0)));
-		
-		//LEFT PANEL - FOR BUTTOM IN BORDERLAYOUT
+		inLeftCenter.setBorder(new EmptyBorder(new Insets(15, 0, 0, 0)));
+
+		// LEFT PANEL - FOR BUTTOM IN BORDERLAYOUT
 		JPanel inLeftButtom = new JPanel();
 		this.logout = this.custView.addButton("Logout", inLeftButtom);
 		this.logout.setActionCommand("Logout");
 		this.logout.addActionListener(custController);
-		inLeftButtom.setBorder(new EmptyBorder(new Insets(0,0,100,0)));
-		
-		//ADDING PANELS TO THE LEFT PANEL IN MAIN PANEL
+		inLeftButtom.setBorder(new EmptyBorder(new Insets(0, 0, 100, 0)));
+
+		// ADDING PANELS TO THE LEFT PANEL IN MAIN PANEL
 		left.add(inLeftTop, BorderLayout.PAGE_START);
 		left.add(inLeftCenter, BorderLayout.CENTER);
 		left.add(inLeftButtom, BorderLayout.PAGE_END);
-		
-		//CENTER PANEL IN MAIN PANEL
+
+		// CENTER PANEL IN MAIN PANEL
 		JPanel center = new JPanel();
 		this.custView.setBox(center, 1);
-		
-		//PANEL FOR TABLES AND BUTTONS
+
+		// PANEL FOR TABLES AND BUTTONS
 		JPanel tableCenter = new JPanel();
 		this.custView.setBox(tableCenter, 1);
 		JPanel buttonCenter = new JPanel();
 		JPanel tableStatus = new JPanel();
 		center.add(tableCenter);
 		center.add(tableStatus);
-		
-		//TABLE AVAILABILITIES
-		
-		//GETTING DATA FROM THE DATABASE
+
+		// TABLE AVAILABILITIES
+		// GETTING DATA FROM THE DATABASE
 		CustomerDBQ custDB = new CustomerDBQ(this);
-		//FIRST TIME CHECKING, IF TABLES ARE UPDATE, IF CONDITION WILL NOT BE TRUE
-		if (this.tableflag) {custDB.searchProvider("All","All");}
-		
-		//CREATING A TABLE INDEX 0, CALLING METHOD ADDTABLES (VIEW CLASS METHOD)
+		// FIRST TIME CHECKING, IF TABLES ARE UPDATE, IF CONDITION WILL NOT BE TRUE
+		if (this.tableflag) {
+			custDB.searchProvider("All", "All");
+		}
+
+		// CREATING A TABLE INDEX 0, CALLING METHOD ADDTABLES (VIEW CLASS METHOD)
 		this.scrollAvai = this.custView.addTableS(0, this.dataTableAvai, columnsNam, tableCenter, "Availabilities");
-		this.scrollAvai.setPreferredSize(new Dimension(400,150));
-		
-		//LIST SELECTION LISTENER FOR TABLE INDEX 0
+		this.scrollAvai.setPreferredSize(new Dimension(400, 150));
+
+		// LIST SELECTION LISTENER FOR TABLE INDEX 0
 		ListSelectionModel model = this.custView.myTable[0].getSelectionModel();
 		model.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
-				if(!model.isSelectionEmpty()) {
+				if (!model.isSelectionEmpty()) {
 					selectedRow = model.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(custView, "Appointment selected: "+dataTableAvai[selectedRow][0]+" "
-							+ ""+dataTableAvai[selectedRow][1]+" "
-									+ ""+dataTableAvai[selectedRow][2]+" "
-											+ "on "+dataTableAvai[selectedRow][3]+" "
-													+ "at "+dataTableAvai[selectedRow][4]+" o'clock");
+					JOptionPane.showMessageDialog(custView,
+							"Appointment selected: " + dataTableAvai[selectedRow][0] + " " + ""
+									+ dataTableAvai[selectedRow][1] + " " + "" + dataTableAvai[selectedRow][2] + " "
+									+ "on " + dataTableAvai[selectedRow][3] + " " + "at "
+									+ dataTableAvai[selectedRow][4] + " o'clock");
 				}
 			}
 		});
-		
+
+		// BUTTONS
 		tableCenter.add(buttonCenter);
 		this.get = custView.addButton("Get Appointment", buttonCenter);
 		this.get.setActionCommand("Get Appoint");
 		this.get.addActionListener(custController);
-		
-		//TABLE APPOINTMENTS
-		
-		//GETTING DATA FROM THE DATABASE
+
+		// TABLE APPOINTMENTS
+		// GETTING DATA FROM THE DATABASE
 		CustomerDBQ custDBAppoint = new CustomerDBQ(this);
 		custDBAppoint.searchAppointRecord();
-		
-		//CREATING A TABLE INDEX 1, CALLING METHOD ADDTABLES (VIEW CLASS METHOD)
-		this.scrollStatus = this.custView.addTableS(1, this.dataTableStatus, statusColumnsNam, tableStatus, "Appointments");
-		this.scrollStatus.setPreferredSize(new Dimension(600,100));
+
+		// CREATING A TABLE INDEX 1, CALLING METHOD ADDTABLES (VIEW CLASS METHOD)
+		this.scrollStatus = this.custView.addTableS(1, this.dataTableStatus, statusColumnsNam, tableStatus,
+				"Appointments");
+		this.scrollStatus.setPreferredSize(new Dimension(600, 100));
 		center.add(tableStatus);
-		
-		//LIST SELECTION LISTENER FOR TABLE INDEX 1
+
+		// LIST SELECTION LISTENER FOR TABLE INDEX 1
 		ListSelectionModel modeltwo = this.custView.myTable[1].getSelectionModel();
 		modeltwo.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
-				if(!modeltwo.isSelectionEmpty()) {
+				if (!modeltwo.isSelectionEmpty()) {
 					selectedRowTwo = modeltwo.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(custView, "Appointment selected: "+dataTableStatus[selectedRowTwo][0]+" "
-							+ ""+dataTableStatus[selectedRowTwo][1]+" "
-									+ ""+dataTableStatus[selectedRowTwo][2]+" "
-											+ "on "+dataTableStatus[selectedRowTwo][3]+" "
-													+ "at "+dataTableStatus[selectedRowTwo][4]+" o'clock"
-															+ " STATUS "+dataTableStatus[selectedRowTwo][5]+"");
+					JOptionPane.showMessageDialog(custView,
+							"Appointment selected: " + dataTableStatus[selectedRowTwo][0] + " " + ""
+									+ dataTableStatus[selectedRowTwo][1] + " " + "" + dataTableStatus[selectedRowTwo][2]
+									+ " " + "on " + dataTableStatus[selectedRowTwo][3] + " " + "at "
+									+ dataTableStatus[selectedRowTwo][4] + " o'clock" + " STATUS "
+									+ dataTableStatus[selectedRowTwo][5] + "");
 				}
 			}
 		});
-		
-		//BUTTONS
+
+		// BUTTONS
 		JPanel delBtn = new JPanel();
 		this.cancel = this.custView.addButton("Cancel", delBtn);
 		tableStatus.add(delBtn);
 		this.cancel.setActionCommand("Cancel");
 		this.cancel.addActionListener(custController);
-		
+
 		JPanel comentBtn = new JPanel();
 		this.set = this.custView.addButton("Set a feetback/complain", comentBtn);
 		tableStatus.add(comentBtn);
 		this.set.setActionCommand("Set");
 		this.set.addActionListener(custController);
-		
+
 		JPanel showComentBtn = new JPanel();
 		this.set = this.custView.addButton("Show comment", showComentBtn);
 		tableStatus.add(showComentBtn);
 		this.set.setActionCommand("Show");
 		this.set.addActionListener(custController);
-		
-		// ADDING TO THE MAIN PANEL	
+
+		// ADDING TO THE MAIN PANEL
 		this.custView.panel.add(top, BorderLayout.PAGE_START);
 		this.custView.panel.add(left, BorderLayout.LINE_START);
 		this.custView.panel.add(center, BorderLayout.CENTER);
-		
+
 		// CALLING VALIDATE AND REPAINT METHODS
 		this.custView.validate();
 		this.custView.repaint();
-				
+
 	}
-	
-	//METHOD TO UPDATE FRAME BY REMOVING AND CALLING THE FRAME SETUP
+
+	// METHOD TO UPDATE FRAME BY REMOVING AND CALLING THE FRAME SETUP
 	public void UpdateFrame(boolean active) {
 		custView.panel.removeAll();
-		this.tableflag=active;
+		this.tableflag = active;
 		costumerViewSetup();
 	}
-
-
-
 
 }

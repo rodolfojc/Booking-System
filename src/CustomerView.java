@@ -38,6 +38,9 @@ public class CustomerView extends JFrame {
 		this.custController = CustController;
 		this.custEmail = email;
 		getUserData(); // METHOD THAT GET THE DATA WITH THE EMAIL PRIVIDED IN LOGIN
+		// ARRAYS FOR DATA INSTANTIATION
+		this.dataTableAvai = new String[40][5];
+		this.dataTableStatus = new String[40][7];
 		// NEW INSTANCE OF VIEW FOR CUSTOMER VIEW
 		this.custView = new View("Customer Manager", 960, 550, false);
 		costumerViewSetup();
@@ -125,10 +128,6 @@ public class CustomerView extends JFrame {
 		// COLUMNS FOR TABLES
 		String[] columnsNam = { "Nro. Ref", "Name", "Surname", "Date", "Time" };
 		String[] statusColumnsNam = { "Nro. Ref.", "Name", "Surname", "Date", "Time", "Status", "Comments" };
-
-		// ARRAYS FOR DATA INSTANTIATION
-		this.dataTableAvai = new String[40][5];
-		this.dataTableStatus = new String[40][7];
 
 		// TOP PANEL
 		JPanel top = new JPanel();

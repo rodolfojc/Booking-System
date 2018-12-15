@@ -30,6 +30,12 @@ public class AdminView extends JFrame {
 		// SETTING ADMINISTRATORS ACTION LISTENER CONTROLLER
 		this.adminController = AdminController;
 		this.adminUser = adminUser;
+		// ARRAYS FOR DATA INSTANTIATION
+		this.dataCust = new String[30][3];
+		this.dataPro = new String[30][5];
+		this.dataAvai = new String[30][5];
+		this.dataAppoint = new String[30][4];
+		this.dataAdmin = new String[30][3];
 		// NEW INSTANCE OF VIEW FOR ADMINISTRATOR VIEW
 		this.adminView = new View("Administrators Manager", 1300, 800, false);
 		AdmindViewSetup();
@@ -113,13 +119,6 @@ public class AdminView extends JFrame {
 		String[] avaiColumns = { "Reference", "Providers ID", "Date", "Time", "Available" };
 		String[] appoitColumns = { "Reference", "Availability Reference", "Customer ID", "Comments" };
 		String[] adminColumns = { "Admin ID", "Admin User", "Admin Privilege" };
-
-		// ARRAYS FOR DATA INSTANTIATION
-		this.dataCust = new String[30][3];
-		this.dataPro = new String[30][5];
-		this.dataAvai = new String[30][5];
-		this.dataAppoint = new String[30][4];
-		this.dataAdmin = new String[30][3];
 
 		// CUSTOMER PANEL - TABLE
 		JPanel cust = new JPanel();

@@ -47,6 +47,9 @@ public class ProviderView extends JFrame {
 		this.proController = proController;
 		this.proEmail = email;
 		getUserData(); // METHOD THAT GET THE DATA WITH THE EMAIL PRIVIDED IN LOGIN
+		// ARRAYS FOR DATA INSTANTIATION
+		this.dataTableAvai = new String[40][2];
+		this.dataTableBooked = new String[40][4];
 		// NEW INSTANCE OF VIEW FOR PROVIDER VIEW
 		this.proView = new View("Provider Manager", 1200, 400, false);
 		providerViewSetup();
@@ -151,10 +154,6 @@ public class ProviderView extends JFrame {
 		// COLUMNS FOR TABLES
 		String[] columnsNamAvai = { "Reference", "Date", "Time" };
 		String[] columnsNamAppoint = { "Reference", "Name", "Surname", "Date", "Time", "Status", "Comments" };
-
-		// ARRAYS FOR DATA INSTANTIATION
-		this.dataTableAvai = new String[40][2];
-		this.dataTableBooked = new String[40][4];
 
 		// TOP PANEL
 		JPanel top = new JPanel();

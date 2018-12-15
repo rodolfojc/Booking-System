@@ -85,7 +85,8 @@ public class Register extends JFrame {
 		return dateSql;
 
 	}
-
+	
+	// METHOD TO SET UP THE FRAME
 	public void setupRegisterFrame() {
 
 		// CHECK VIEW CLASS TO UNDERTAND METHODS THAT WILL BE USED

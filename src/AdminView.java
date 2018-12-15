@@ -12,125 +12,126 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-public class AdminView extends JFrame{
+public class AdminView extends JFrame {
 
 	// GLOBAL VARIABLES - DECLARATION
 	private View adminView;
 	private AdminController adminController;
 	private String adminUser;
-	private String [][] dataCust, dataPro, dataAvai, dataAppoint, dataAdmin;
+	private String[][] dataCust, dataPro, dataAvai, dataAppoint, dataAdmin;
 	private JScrollPane srCust, srPro, srAvai, srAppoint, srAdmin;
-	private JButton custDel, proDele, proValid, avaiDele, appointDele, appointManage, adminAdd, adminDele, logout, updateTables, showComment;
+	private JButton custDel, proDele, proValid, avaiDele, appointDele, appointManage, adminAdd, adminDele, logout,
+			updateTables, showComment;
 	private int selectedRowCust, selectedRowPro, selectedRowAvai, selectedRowAppoint, selectedRowAdmin;
-	
+
 	// CONSTRUCTOR
 	public AdminView(AdminController AdminController, String adminUser) {
-		
+
 		// SETTING ADMINISTRATORS ACTION LISTENER CONTROLLER
 		this.adminController = AdminController;
 		this.adminUser = adminUser;
 		// NEW INSTANCE OF VIEW FOR ADMINISTRATOR VIEW
 		this.adminView = new View("Administrators Manager", 1300, 800, false);
 		AdmindViewSetup();
-		
+
 	}
-	
+
 	// GETTER AND SETTER FOR GLOBAL VARIABLES
 	public View getAdminView() {
 		return this.adminView;
 	}
-	
+
 	public void setCopyDataCust(String[][] data) {
 		this.dataCust = Arrays.copyOf(data, data.length);
 	}
-	
+
 	public String getDataCust(int a, int b) {
 		return this.dataCust[a][b];
 	}
-	
+
 	public void setCopyDataPro(String[][] data) {
 		this.dataPro = Arrays.copyOf(data, data.length);
 	}
-	
+
 	public String getDataPro(int a, int b) {
 		return this.dataPro[a][b];
 	}
-	
+
 	public void setCopyDataAvai(String[][] data) {
 		this.dataAvai = Arrays.copyOf(data, data.length);
 	}
-	
+
 	public String getDataAvai(int a, int b) {
 		return this.dataAvai[a][b];
 	}
-	
+
 	public void setCopyDataAppoint(String[][] data) {
 		this.dataAppoint = Arrays.copyOf(data, data.length);
 	}
-	
+
 	public String getDataAppoint(int a, int b) {
 		return this.dataAppoint[a][b];
 	}
-	
+
 	public void setCopyDataAdmin(String[][] data) {
 		this.dataAdmin = Arrays.copyOf(data, data.length);
 	}
-	
+
 	public String getDataAdmin(int a, int b) {
 		return this.dataAdmin[a][b];
 	}
-	
+
 	public int getSelectedRowCust() {
 		return this.selectedRowCust;
-	}	
-	
+	}
+
 	public int getSelectedRowPro() {
 		return this.selectedRowPro;
 	}
-	
+
 	public int getSelectedRowAvai() {
 		return this.selectedRowAvai;
 	}
-	
+
 	public int getSelectedRowAppoint() {
 		return this.selectedRowAppoint;
 	}
-	
+
 	public int getSelectedRowAdmin() {
 		return this.selectedRowAdmin;
 	}
-	
+
 	// METHOD TO SET UP THE FRAME
 	public void AdmindViewSetup() {
-		
+
 		// LAYOUT FOR MAIN PANEL
 		this.adminView.setGrid(2, 6, this.adminView.panel);
-		
+
 		// COLUMNS FOR TABLES
-		String[] custColumns = {"ID", "Name", "Surname"};
-		String[] proColumns = {"ID", "Name", "Surname","Status", "Registered" };
-		String[] avaiColumns = {"Reference", "Providers ID", "Date", "Time", "Available"};
-		String[] appoitColumns = {"Reference", "Availability Reference", "Customer ID", "Comments"};
-		String[] adminColumns = {"Admin ID", "Admin User", "Admin Privilege"};
-		
+		String[] custColumns = { "ID", "Name", "Surname" };
+		String[] proColumns = { "ID", "Name", "Surname", "Status", "Registered" };
+		String[] avaiColumns = { "Reference", "Providers ID", "Date", "Time", "Available" };
+		String[] appoitColumns = { "Reference", "Availability Reference", "Customer ID", "Comments" };
+		String[] adminColumns = { "Admin ID", "Admin User", "Admin Privilege" };
+
 		// ARRAYS FOR DATA INSTANTIATION
 		this.dataCust = new String[30][3];
 		this.dataPro = new String[30][5];
 		this.dataAvai = new String[30][5];
 		this.dataAppoint = new String[30][4];
 		this.dataAdmin = new String[30][3];
-		
-		//CUSTOMER PANEL - TABLE		
+
+		// CUSTOMER PANEL - TABLE
 		JPanel cust = new JPanel();
-		
+
 		// GETTING DATA FROM THE DATABASE
 		AdminDBQ dataCustConn = new AdminDBQ(this);
 		dataCustConn.getCustomer();
-		
+
 		// CREATING A TABLE INDEX 0, CALLING METHOD ADDTABLES (VIEW CLASS METHOD)
-		this.srCust= this.adminView.addTableS(0, this.dataCust, custColumns, cust, "Customers");
-		this.srCust.setPreferredSize(new Dimension(350,300));
-		
+		this.srCust = this.adminView.addTableS(0, this.dataCust, custColumns, cust, "Customers");
+		this.srCust.setPreferredSize(new Dimension(350, 300));
+
 		// LIST SELECTION LISTENER FOR TABLE INDEX 0
 		ListSelectionModel modelCust = adminView.myTable[0].getSelectionModel();
 		modelCust.addListSelectionListener(new ListSelectionListener() {
@@ -138,33 +139,33 @@ public class AdminView extends JFrame{
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
-				if(!modelCust.isSelectionEmpty()) {
+				if (!modelCust.isSelectionEmpty()) {
 					selectedRowCust = modelCust.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(adminView, "Customer selected: ID "+dataCust[selectedRowCust][0]+", "
-							+ ""+dataCust[selectedRowCust][1]+" "
-									+ ""+dataCust[selectedRowCust][2]+""
-											+ ". If you want to delete it, press DELETE!");
-											
+					JOptionPane.showMessageDialog(adminView,
+							"Customer selected: ID " + dataCust[selectedRowCust][0] + ", " + ""
+									+ dataCust[selectedRowCust][1] + " " + "" + dataCust[selectedRowCust][2] + ""
+									+ ". If you want to delete it, press DELETE!");
+
 				}
 			}
-			
+
 		});
 		// BUTTONS
 		this.custDel = this.adminView.addButton("Delete", cust);
 		this.custDel.setActionCommand("Delete Customer");
 		this.custDel.addActionListener(adminController);
-		
-		//PROVIDER PANEL - TABLE
+
+		// PROVIDER PANEL - TABLE
 		JPanel prov = new JPanel();
-		
+
 		// GETTING DATA FROM THE DATABASE
 		AdminDBQ dataProConn = new AdminDBQ(this);
 		dataProConn.getProviders();
 
 		// CREATING A TABLE INDEX 1, CALLING METHOD ADDTABLES (VIEW CLASS METHOD)
 		this.srPro = this.adminView.addTableS(1, this.dataPro, proColumns, prov, "Providers");
-		this.srPro.setPreferredSize(new Dimension(400,300));
-		
+		this.srPro.setPreferredSize(new Dimension(400, 300));
+
 		// LIST SELECTION LISTENER FOR TABLE INDEX 1
 		ListSelectionModel modelPro = adminView.myTable[1].getSelectionModel();
 		modelPro.addListSelectionListener(new ListSelectionListener() {
@@ -172,39 +173,39 @@ public class AdminView extends JFrame{
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
-				if(!modelPro.isSelectionEmpty()) {
+				if (!modelPro.isSelectionEmpty()) {
 					selectedRowPro = modelPro.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(adminView, "Provider selected: ID "+dataPro[selectedRowPro][0]+", "
-							+ ""+dataPro[selectedRowPro][1]+" "
-									+ ""+dataPro[selectedRowPro][2]+""
-											+ ". If you want to delete it, press DELETE. "
-												+ "If you want to validate it, press VALIDATE!");
-											
+					JOptionPane.showMessageDialog(adminView,
+							"Provider selected: ID " + dataPro[selectedRowPro][0] + ", " + ""
+									+ dataPro[selectedRowPro][1] + " " + "" + dataPro[selectedRowPro][2] + ""
+									+ ". If you want to delete it, press DELETE. "
+									+ "If you want to validate it, press VALIDATE!");
+
 				}
 			}
-			
+
 		});
-		
+
 		// BUTTONS
 		this.proDele = this.adminView.addButton("Delete", prov);
 		this.proDele.setActionCommand("Delete");
 		this.proDele.addActionListener(adminController);
-		
+
 		this.proValid = this.adminView.addButton("Validate", prov);
 		this.proValid.setActionCommand("Validate Provider");
 		this.proValid.addActionListener(adminController);
-		
-		//AVAILABILITIES PANEL - TABLE		
+
+		// AVAILABILITIES PANEL - TABLE
 		JPanel avail = new JPanel();
-		
+
 		// GETTING DATA FROM THE DATABASE
 		AdminDBQ dataAvaiConn = new AdminDBQ(this);
 		dataAvaiConn.getAvailabilities();
-		
+
 		// CREATING A TABLE INDEX 2, CALLING METHOD ADDTABLES (VIEW CLASS METHOD)
 		this.srAvai = this.adminView.addTableS(2, this.dataAvai, avaiColumns, avail, "Availabilities");
-		this.srAvai.setPreferredSize(new Dimension(400,300));
-		
+		this.srAvai.setPreferredSize(new Dimension(400, 300));
+
 		// LIST SELECTION LISTENER FOR TABLE INDEX 2
 		ListSelectionModel modelAvai = adminView.myTable[2].getSelectionModel();
 		modelAvai.addListSelectionListener(new ListSelectionListener() {
@@ -212,34 +213,34 @@ public class AdminView extends JFrame{
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
-				if(!modelAvai.isSelectionEmpty()) {
+				if (!modelAvai.isSelectionEmpty()) {
 					selectedRowAvai = modelAvai.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(adminView, "Availability selected: ID "+dataAvai[selectedRowAvai][0]+", "
-							+ "Provider ID "+dataAvai[selectedRowAvai][1]+", "
-									+ "On "+dataAvai[selectedRowAvai][2]+""
-											+ ". If you want to delete it, press DELETE!");
-											
+					JOptionPane.showMessageDialog(adminView,
+							"Availability selected: ID " + dataAvai[selectedRowAvai][0] + ", " + "Provider ID "
+									+ dataAvai[selectedRowAvai][1] + ", " + "On " + dataAvai[selectedRowAvai][2] + ""
+									+ ". If you want to delete it, press DELETE!");
+
 				}
 			}
-			
+
 		});
-		
+
 		// BUTTONS
 		this.avaiDele = this.adminView.addButton("Delete", avail);
 		this.avaiDele.setActionCommand("Delete Availability");
 		this.avaiDele.addActionListener(adminController);
-		
-		//APPOINTMENTS PANEL - TABLE
+
+		// APPOINTMENTS PANEL - TABLE
 		JPanel appoints = new JPanel();
-		
+
 		// GETTING DATA FROM THE DATABASE
 		AdminDBQ dataAppointConn = new AdminDBQ(this);
 		dataAppointConn.getAppointments();
-		
+
 		// CREATING A TABLE INDEX 3, CALLING METHOD ADDTABLES (VIEW CLASS METHOD)
 		this.srAppoint = this.adminView.addTableS(3, this.dataAppoint, appoitColumns, appoints, "Appointments");
-		this.srAppoint.setPreferredSize(new Dimension(350,300));
-		
+		this.srAppoint.setPreferredSize(new Dimension(350, 300));
+
 		// LIST SELECTION LISTENER FOR TABLE INDEX 3
 		ListSelectionModel modelAppoint = adminView.myTable[3].getSelectionModel();
 		modelAppoint.addListSelectionListener(new ListSelectionListener() {
@@ -247,42 +248,43 @@ public class AdminView extends JFrame{
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
-				if(!modelAppoint.isSelectionEmpty()) {
+				if (!modelAppoint.isSelectionEmpty()) {
 					selectedRowAppoint = modelAppoint.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(adminView, "Appointment selected: Ref "+dataAppoint[selectedRowAppoint][0]+", "
-							+ "Availability Ref "+dataAppoint[selectedRowAppoint][1]+", "
-									+ "Customer ID "+dataAppoint[selectedRowAppoint][2]+""
-											+ ". If you want to delete it, press DELETE!");
-											
+					JOptionPane.showMessageDialog(adminView,
+							"Appointment selected: Ref " + dataAppoint[selectedRowAppoint][0] + ", "
+									+ "Availability Ref " + dataAppoint[selectedRowAppoint][1] + ", " + "Customer ID "
+									+ dataAppoint[selectedRowAppoint][2] + ""
+									+ ". If you want to delete it, press DELETE!");
+
 				}
 			}
-			
+
 		});
-		
-		// BUTTONS		
+
+		// BUTTONS
 		this.appointDele = this.adminView.addButton("Delete", appoints);
 		this.appointDele.setActionCommand("Delete Appointment");
 		this.appointDele.addActionListener(adminController);
-		
+
 		this.appointManage = this.adminView.addButton("Manage Comments", appoints);
 		this.appointManage.setActionCommand("Manage");
 		this.appointManage.addActionListener(adminController);
-		
+
 		this.showComment = this.adminView.addButton("Show Comment", appoints);
 		this.showComment.setActionCommand("Show");
 		this.showComment.addActionListener(adminController);
-		
-		//ADMINISTRATORS PANEL - TABLE	
+
+		// ADMINISTRATORS PANEL - TABLE
 		JPanel admins = new JPanel();
-		
+
 		// GETTING DATA FROM THE DATABASE
 		AdminDBQ dataAdminConn = new AdminDBQ(this);
 		dataAdminConn.getAdministrators();
-		
+
 		// CREATING A TABLE INDEX 4, CALLING METHOD ADDTABLES (VIEW CLASS METHOD)
 		this.srAdmin = this.adminView.addTableS(4, this.dataAdmin, adminColumns, admins, "Administrators");
-		this.srAdmin.setPreferredSize(new Dimension(380,300));
-		
+		this.srAdmin.setPreferredSize(new Dimension(380, 300));
+
 		// LIST SELECTION LISTENER FOR TABLE INDEX 4
 		ListSelectionModel modelAdmin = adminView.myTable[4].getSelectionModel();
 		modelAdmin.addListSelectionListener(new ListSelectionListener() {
@@ -290,18 +292,19 @@ public class AdminView extends JFrame{
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
-				if(!modelAdmin.isSelectionEmpty()) {
+				if (!modelAdmin.isSelectionEmpty()) {
 					selectedRowAdmin = modelAdmin.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(adminView, "Administrador selected: ID "+dataAdmin[selectedRowAdmin][0]+", "
-							+ "Admin user "+dataAdmin[selectedRowAdmin][1]+", "
-									+ "Privilege "+dataAdmin[selectedRowAdmin][2]+""
-											+ ". If you want to delete it, press DELETE!");
-											
+					JOptionPane.showMessageDialog(adminView,
+							"Administrador selected: ID " + dataAdmin[selectedRowAdmin][0] + ", " + "Admin user "
+									+ dataAdmin[selectedRowAdmin][1] + ", " + "Privilege "
+									+ dataAdmin[selectedRowAdmin][2] + ""
+									+ ". If you want to delete it, press DELETE!");
+
 				}
 			}
-			
+
 		});
-		
+
 		// BUTTONS
 		// IF ADMIN@ADMIN.ADMIN IS LOGIN THEN THE OPTION IS AVAILABLE
 		this.adminAdd = this.adminView.addButton("Add", admins);
@@ -310,7 +313,7 @@ public class AdminView extends JFrame{
 		}
 		this.adminAdd.setActionCommand("Add Admin");
 		this.adminAdd.addActionListener(adminController);
-		
+
 		// IF ADMIN@ADMIN.ADMIN IS LOGIN THEN THE OPTION IS AVAILABLE
 		this.adminDele = this.adminView.addButton("Delete", admins);
 		if (!this.adminUser.equals("admin@admin.admin")) {
@@ -318,22 +321,21 @@ public class AdminView extends JFrame{
 		}
 		this.adminDele.setActionCommand("Delete Admin");
 		this.adminDele.addActionListener(adminController);
-		
-		//CONTROL PANE
+
+		// CONTROL PANE
 		JPanel controlPanel = new JPanel();
-		controlPanel.setBorder(new EmptyBorder(new Insets(150,0,0,0)));
-		
+		controlPanel.setBorder(new EmptyBorder(new Insets(150, 0, 0, 0)));
+
 		// BUTTONS
-		this.adminView.addLabel("Admin: "+this.adminUser+"", controlPanel);
+		this.adminView.addLabel("Admin: " + this.adminUser + "", controlPanel);
 		this.updateTables = this.adminView.addButton("Update Tables", controlPanel);
 		this.updateTables.setActionCommand("Update Tables");
 		this.updateTables.addActionListener(adminController);
-		
+
 		this.logout = this.adminView.addButton("Logout", controlPanel);
 		this.logout.setActionCommand("Logout");
 		this.logout.addActionListener(adminController);
-		
-		
+
 		// ADDING TO THE MAIN PANEL
 		this.adminView.panel.add(cust);
 		this.adminView.panel.add(prov);
@@ -341,22 +343,17 @@ public class AdminView extends JFrame{
 		this.adminView.panel.add(appoints);
 		this.adminView.panel.add(admins);
 		this.adminView.panel.add(controlPanel);
-		
+
 		// CALLING VALIDATE AND REPAINT METHODS
 		this.adminView.validate();
 		this.adminView.repaint();
-		
-		
+
 	}
+
 	// METHOD TO UPDATE FRAME BY REMOVING AND CALLING THE FRAME SETUP
 	public void UpdateFrame() {
 		adminView.panel.removeAll();
 		AdmindViewSetup();
 	}
-	
-	
-	
-	
-	
-	
+
 }

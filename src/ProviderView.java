@@ -34,7 +34,7 @@ public class ProviderView extends JFrame {
 	private int proID;
 	private String proName, proSurName, proEmail, proLocation;
 	private int selectedRow, selectedRowTow;
-	private JButton confirm, cancel, setDone;
+	private JButton confirm, cancel, setDone, showComment;
 	private String [] hrs = {"8:00", "8:30", "9:00", "9:30", "10:00", "10:30",
 			"11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
 			"14:00", "14:30", "15:00", "15:30", "16:00", "16:30",
@@ -149,7 +149,7 @@ public class ProviderView extends JFrame {
 	public void providerViewSetup() {
 
 		String[] columnsNamAvai = {"Reference", "Date", "Time"};
-		String[] columnsNamAppoint = {"Reference", "Name", "Surname", "Date", "Time", "Status"};
+		String[] columnsNamAppoint = {"Reference", "Name", "Surname", "Date", "Time", "Status", "Comments"};
 		
 		
 		dataTableAvai = new String[40][2];
@@ -258,9 +258,10 @@ public class ProviderView extends JFrame {
 		setDone.setActionCommand("Completed");
 		setDone.addActionListener(proController);
 		
+		showComment = this.proView.addButton("Show comment", appointBtns);
+		showComment.setActionCommand("Show");
+		showComment.addActionListener(proController);
 		
-		
-			
 		proView.panel.add(top, BorderLayout.PAGE_START);
 		proView.panel.add(left, BorderLayout.LINE_START);
 		proView.panel.add(rightTable, BorderLayout.CENTER);

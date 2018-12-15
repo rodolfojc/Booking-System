@@ -66,6 +66,11 @@ public class ProviderController implements ActionListener {
 			this.proView.UpdateFrame();
 		}
 		
+		if(e.getActionCommand().equals("Show")) {
+			
+			JOptionPane.showMessageDialog(this.proView, this.proView.getDataBooked(this.proView.getSelectedRowT(), 6));
+			
+		}
 		
 		
 	}

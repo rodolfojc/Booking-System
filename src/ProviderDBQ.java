@@ -104,12 +104,12 @@ public class ProviderDBQ {
 	
 	public void toBeConfirmPro() {
 		
-		String query = "SELECT cust_name, cust_surname, date, time, availabilities.avai_ref, available FROM appointments "
+		String query = "SELECT cust_name, cust_surname, date, time, availabilities.avai_ref, available, comments FROM appointments "
 				+ "INNER JOIN customers ON customers.cust_id = appointments.cust_id "
 					+ "INNER JOIN availabilities ON availabilities.avai_ref = appointments.avai_ref "
 						+ "WHERE availabilities.pro_id = '"+this.proView.getProviderID()+"';";
 							//+ "AND availabilities.available='Unconfirmed';";
-		String[][] data= new String[20][6];
+		String[][] data= new String[20][7];
 		
 		try {
 			
@@ -124,6 +124,7 @@ public class ProviderDBQ {
 				data[i][3] = this.proDB.rs.getString("date");
 				data[i][4] = this.proDB.rs.getString("time");
 				data[i][5] = this.proDB.rs.getString("available");
+				data[i][6] = this.proDB.rs.getString("comments");
 				
 				i++;
 			}

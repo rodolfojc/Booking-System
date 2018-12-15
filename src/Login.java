@@ -21,7 +21,7 @@ public class Login extends JFrame{
 	private JPasswordField passwordIn;
 		
 	public Login(Controller controller) {
-		login = new View ("Online Barber's Appointments", 400, 600, true);
+		login = new View ("Online Barber's Appointments", 400, 600, false);
 		this.controller = controller;
 		setupLoginFrame();
 	}

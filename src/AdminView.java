@@ -19,14 +19,14 @@ public class AdminView extends JFrame{
 	private String adminUser;
 	private String [][] dataCust, dataPro, dataAvai, dataAppoint, dataAdmin;
 	private JScrollPane srCust, srPro, srAvai, srAppoint, srAdmin;
-	private JButton custDel, proDele, proValid, avaiDele, appointDele, appointManage, adminAdd, adminDele, logout, updateTables;
+	private JButton custDel, proDele, proValid, avaiDele, appointDele, appointManage, adminAdd, adminDele, logout, updateTables, showComment;
 	private int selectedRowCust, selectedRowPro, selectedRowAvai, selectedRowAppoint, selectedRowAdmin;
 	
 	public AdminView(AdminController AdminController, String adminUser) {
 		
 		this.adminController = AdminController;
 		this.adminUser = adminUser;
-		this.adminView = new View("Administrators Manager", 1300, 800, true);
+		this.adminView = new View("Administrators Manager", 1300, 800, false);
 		AdmindViewSetup();
 		
 	}
@@ -238,12 +238,16 @@ public class AdminView extends JFrame{
 		this.appointManage.setActionCommand("Manage");
 		this.appointManage.addActionListener(adminController);
 		
+		this.showComment = this.adminView.addButton("Show Comment", appoints);
+		this.showComment.setActionCommand("Show");
+		this.showComment.addActionListener(adminController);
+		
 		///////////////////////////////////////////////////////////////////////////////////////////
 		JPanel admins = new JPanel();
 		AdminDBQ dataAdminConn = new AdminDBQ(this);
 		dataAdminConn.getAdministrators();
 		this.srAdmin = this.adminView.addTableS(4, this.dataAdmin, adminColumns, admins, "Administrators");
-		this.srAdmin.setPreferredSize(new Dimension(350,300));
+		this.srAdmin.setPreferredSize(new Dimension(380,300));
 		ListSelectionModel modelAdmin = adminView.myTable[4].getSelectionModel();
 		modelAdmin.addListSelectionListener(new ListSelectionListener() {
 

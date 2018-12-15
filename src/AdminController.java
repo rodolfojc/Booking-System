@@ -81,8 +81,14 @@ public class AdminController implements ActionListener {
 			String errorMg = "Ups, there is an internal problem, please contact an administrator";
 			String confMg = "Your Comment have been SET!";
 			AdminDBQ data = new AdminDBQ(this.adminView);
-			data.updateRow("appointments", "comments","admin: "+comment+"", "appoint_ref", this.adminView.getDataAppoint(this.adminView.getSelectedRowAppoint(), 0), errorMg, confMg);
+			data.updateRow("appointments", "comments","Admin: "+comment+"", "appoint_ref", this.adminView.getDataAppoint(this.adminView.getSelectedRowAppoint(), 0), errorMg, confMg);
 			adminView.UpdateFrame();
+			
+		}
+		
+		if(e.getActionCommand().equals("Show")) {
+			
+			JOptionPane.showMessageDialog(this.adminView, this.adminView.getDataAppoint(this.adminView.getSelectedRowAppoint(), 3));
 			
 		}
 		

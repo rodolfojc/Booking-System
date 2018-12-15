@@ -20,20 +20,17 @@ public class CustomerView extends JFrame {
 	
 	private View custView;
 	private JComboBox option;
-	private Database data;
-	//private Controller controller;
 	private JButton search, get, logout, cancel, set;
-	private JTable table;
 	private String custName, custSurName, custEmail;
 	private String [][] dataTableAvai, dataTableStatus;;
 	private JScrollPane scrollAvai, scrollStatus;
 	private JTextField byInput;
-	private String byOption, byField;
+	//private String byOption, byField;
 	String[] searchOp = {"Name", "Location"};
 	private int selectedRow, selectedRowTwo, customerID;
 	private boolean tableflag=true;
 	private CustomerController custController;
-	private CustomerDBQ custDB;
+	//private CustomerDBQ custDB;
 	
 	/*public CustomerView(Controller controller, String email) {
 		
@@ -50,7 +47,7 @@ public class CustomerView extends JFrame {
 		this.custController = CustController;
 		this.custEmail = email;
 		getUserData();
-		this.custView = new View("Customer Manager", 960, 550, true);
+		this.custView = new View("Customer Manager", 960, 550, false);
 		this.dataTableAvai = new String[50][5];
 		this.dataTableStatus = new String[10][7];
 		costumerViewSetup();
@@ -125,9 +122,7 @@ public class CustomerView extends JFrame {
 		
 		CustomerDBQ custDB = new CustomerDBQ(this);
 		custDB.customerLogged();
-		//data = new Database(this);
-		//data.customerLogged();
-			
+					
 	}
 	
 	public void costumerViewSetup() {
@@ -242,6 +237,12 @@ public class CustomerView extends JFrame {
 		set = this.custView.addButton("Set a feetback/complain", comentBtn);
 		tableStatus.add(comentBtn);
 		set.setActionCommand("Set");
+		set.addActionListener(custController);
+		
+		JPanel showComentBtn = new JPanel();
+		set = this.custView.addButton("Show comment", showComentBtn);
+		tableStatus.add(showComentBtn);
+		set.setActionCommand("Show");
 		set.addActionListener(custController);
 		
 		

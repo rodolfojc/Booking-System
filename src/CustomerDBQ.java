@@ -194,7 +194,7 @@ public class CustomerDBQ {
 			
 			PreparedStatement preparedStmt = this.data.conn.prepareStatement(query);
 			preparedStmt.execute();
-			this.data.conn.close();
+			//this.data.conn.close();
 			
 		}catch (Exception e)
 	    	{
@@ -204,6 +204,8 @@ public class CustomerDBQ {
 				System.err.println(e.getMessage());
 		    }
 		if(flag)JOptionPane.showMessageDialog(this.custView, confMg);
+		
+		
 				
 	}
 	
@@ -227,8 +229,10 @@ public class CustomerDBQ {
 				System.err.println(e.getMessage());
 		    }
 		if(flag)JOptionPane.showMessageDialog(this.custView, confMg);
-				
+		
+						
 	}
 	
+		
 	
 }

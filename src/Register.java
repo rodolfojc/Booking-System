@@ -21,6 +21,7 @@ public class Register extends JFrame {
 	private View reg;
 	private Controller controller;
 	private String type;
+	private JButton registerBtn, cancelBtn;
 	//private String[] _OPT = {"Customer", "Provider"};
 	
 	public Register(Controller controller, String Type) {
@@ -137,16 +138,18 @@ public class Register extends JFrame {
 		txtLocation = reg.addTextField(20, location);
 		}
 		
-		JButton register = new JButton("Register");
-		register.setActionCommand("Register");
-		register.addActionListener(controller);
+		this.registerBtn = this.reg.addButton("Register", regB);
+		//JButton register = new JButton("Register");
+		registerBtn.setActionCommand("Register");
+		registerBtn.addActionListener(controller);
 		
-		JButton cancel = new JButton("Cancel");
-		cancel.setActionCommand("Cancel");
-		cancel.addActionListener(controller);
+		this.cancelBtn = this.reg.addButton("Cancel", regB);
+		//JButton cancel = new JButton("Cancel");
+		cancelBtn.setActionCommand("Cancel");
+		cancelBtn.addActionListener(controller);
 		
-		regB.add(register);
-		regB.add(cancel);
+		//regB.add(register);
+		//regB.add(cancel);
 		
 		reg.panel.setBorder(new EmptyBorder(new Insets(40,65,20,65)));
 		//reg.panel.add(typeCombo);

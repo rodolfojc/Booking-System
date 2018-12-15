@@ -25,13 +25,10 @@ import com.toedter.calendar.JDateChooser;
 public class ProviderView extends JFrame {
 	
 	private View proView;
-	private Database forUserData;
-	private Controller controller;
 	private ProviderController proController;
 	private JButton add, logout;
 	private JDateChooser calendar;
 	private JComboBox hr;
-	private JTable table;
 	private JScrollPane scrollAvaiTable, scrollBookedTable;
 	private String[][] dataTableAvai, dataTableBooked;
 	private int proID;
@@ -57,7 +54,7 @@ public class ProviderView extends JFrame {
 		this.proController = proController;
 		this.proEmail = email;
 		getUserData(this.proEmail);
-		this.proView = new View("Provider Manager", 1200, 400, true);
+		this.proView = new View("Provider Manager", 1200, 400, false);
 		providerViewSetup();
 	}
 	

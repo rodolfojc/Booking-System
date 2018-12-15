@@ -68,6 +68,11 @@ public class CustomerController implements ActionListener{
 			this.login.getLogin().setVisible(true);
 		}
 		
+		if(e.getActionCommand().equals("Show")) {
+			
+			JOptionPane.showMessageDialog(this.custView, this.custView.getTableStatus(this.custView.getSelectedRowTTwo(), 6));
+			
+		}
 		
 		
 	}

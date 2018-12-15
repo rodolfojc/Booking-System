@@ -126,7 +126,7 @@ public class CustomerView extends JFrame {
 		String[] columnsNam = { "Nro. Ref", "Name", "Surname", "Date", "Time" };
 		String[] statusColumnsNam = { "Nro. Ref.", "Name", "Surname", "Date", "Time", "Status", "Comments" };
 
-		// ARRAYS FOR DATA INSTATIATION
+		// ARRAYS FOR DATA INSTANTIATION
 		this.dataTableAvai = new String[40][5];
 		this.dataTableStatus = new String[40][7];
 

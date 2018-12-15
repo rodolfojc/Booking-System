@@ -152,7 +152,7 @@ public class ProviderView extends JFrame {
 		String[] columnsNamAvai = { "Reference", "Date", "Time" };
 		String[] columnsNamAppoint = { "Reference", "Name", "Surname", "Date", "Time", "Status", "Comments" };
 
-		// ARRAYS FOR DATA INSTATIATION
+		// ARRAYS FOR DATA INSTANTIATION
 		this.dataTableAvai = new String[40][2];
 		this.dataTableBooked = new String[40][4];
 

@@ -12,7 +12,6 @@ public class CustomerDBQ {
 
 	public CustomerDBQ(CustomerView CustView) {
 
-		// NEW INSTANCE OF DATABASE FOR CONNECTION
 		this.custView = CustView;
 		// NEW INSTANCE OF DATABASE FOR CONNECTION
 		this.data = new Database();

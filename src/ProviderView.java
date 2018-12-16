@@ -48,8 +48,8 @@ public class ProviderView extends JFrame {
 		this.proEmail = email;
 		getUserData(); // METHOD THAT GET THE DATA WITH THE EMAIL PRIVIDED IN LOGIN
 		// ARRAYS FOR DATA INSTANTIATION
-		this.dataTableAvai = new String[40][2];
-		this.dataTableBooked = new String[40][4];
+		this.dataTableAvai = new String[40][3];
+		this.dataTableBooked = new String[40][7];
 		// NEW INSTANCE OF VIEW FOR PROVIDER VIEW
 		this.proView = new View("Provider Manager", 1200, 400, false);
 		providerViewSetup();

@@ -2,7 +2,11 @@
 
 ....WELCOME AND THANKS FOR VISITING...
 
+
 Please read Scenario and Requirements PDF file for more details.
+This project has been developed without using any GUI code generator.
+(from scratch)
+
 Database file (sql) is located in "Database" folder.
 Screenshots are located in "Screenshots" folder.
 

@@ -3,7 +3,12 @@
 ....WELCOME AND THANKS FOR VISITING...
 
 Please read Scenario and Requirements PDF file for more details.
-Database file (sql) is located in "Database" folder. 
+Database file (sql) is located in "Database" folder.
+Screenshots are located in "Screenshots" folder.
+
+External libraries:
+MySql driver: mysql-connector-java-5.1.44-bin.jar
+JCalendar: jcalendar-1.4.jar and jgoodies-looks-2.4.1.jar 
 
 
 DATABASE DATA (18/12/2018)

@@ -1,4 +1,12 @@
-DATABASE DATA
+
+
+....WELCOME AND THANKS FOR VISITING...
+
+Please read Scenario and Requirements PDF file for more details.
+Database file (sql) is located in "Database" folder. 
+
+
+DATABASE DATA (18/12/2018)
 
 CUSTOMERS - Registered
 
@@ -19,7 +27,7 @@ PASSWORD: Frank1234!
 
 ----------------------------------
 
-PROVIDERS
+PROVIDERS - Registered
 
 victor@victor.com
 PASSWORD: Victor1234!
@@ -44,17 +52,24 @@ PASSWORD: Orlando1234!
 
 -----------------------------------
 
-ADMINISTRATORS
-FOR ALL THE PASSWORD IS: admin
+ADMINISTRATORS - Registered
+FOR ALL ADMINISTRATOR THE PASSWORD IS: admin
 
 MAIN ADMIN
 admin@admin.admin
 
-OTHER
+OTHERS
 karla@admin.admin
 rodolfo@admin.admin
 chriss@admin.admin
 krisbell@admin.admin
 kamil@admin.admin
 claribel@admin.admin
+
+///////////////////////////////////////
+
+If you have any enquiries.
+rodolfojcarvajalm@gmail.com
+
+///////////////////////////////////////
 

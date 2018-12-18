@@ -115,9 +115,11 @@ public class View extends JFrame{
 	public JButton addButton(String name, JPanel panel) {
 		
 		JButton myButton= new JButton(name);
-		myButton.setBackground(Color.getHSBColor(229, 162, 61));
-		myButton.setContentAreaFilled(false);
-		myButton.setOpaque(true);
+		
+		///////// TO SET COLOR TO BUTTONS ///////////
+		//myButton.setBackground(Color.getHSBColor(229, 162, 61));
+		//myButton.setContentAreaFilled(false);
+		//myButton.setOpaque(true);
 		panel.add(myButton);
 		return myButton;
 	}

@@ -25,7 +25,7 @@ public class Login extends JFrame {
 	public Login(Controller controller) {
 
 		// NEW INSTANCE OF VIEW TO BUILD LOGIN VIEW, CONTROLLER, AND FRAME SETUP
-		login = new View("Online Barber's Appointments", 400, 600, false);
+		login = new View("Online Appointment System", 400, 600, false);
 		this.controller = controller;
 		setupLoginFrame();
 	}

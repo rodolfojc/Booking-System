@@ -203,23 +203,6 @@ public class CustomerView extends JFrame {
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 0
 		this.model = this.custView.myTable[0].getSelectionModel();
-//		model.addListSelectionListener(new ListSelectionListener() {
-//			
-//		
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				// TODO Auto-generated method stub
-//				if (!model.isSelectionEmpty()) {
-//					selectedRow = model.getMinSelectionIndex();
-//					JOptionPane.showMessageDialog(custView,
-//							"Appointment selected: " + dataTableAvai[selectedRow][0] + " " + ""
-//									+ dataTableAvai[selectedRow][1] + " " + "" + dataTableAvai[selectedRow][2] + " "
-//									+ "on " + dataTableAvai[selectedRow][3] + " " + "at "
-//									+ dataTableAvai[selectedRow][4] + " o'clock");
-//				}
-//			}
-//		});
-		
 		model.addListSelectionListener(this.custController);
 
 		// BUTTONS
@@ -241,23 +224,6 @@ public class CustomerView extends JFrame {
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 1
 		modelTwo = this.custView.myTable[1].getSelectionModel();
-//		modelTwo.addListSelectionListener(new ListSelectionListener() {
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				// TODO Auto-generated method stub
-//				if (!modelTwo.isSelectionEmpty()) {
-//					selectedRowTwo = modelTwo.getMinSelectionIndex();
-//					JOptionPane.showMessageDialog(custView,
-//							"Appointment selected: " + dataTableStatus[selectedRowTwo][0] + " " + ""
-//									+ dataTableStatus[selectedRowTwo][1] + " " + "" + dataTableStatus[selectedRowTwo][2]
-//									+ " " + "on " + dataTableStatus[selectedRowTwo][3] + " " + "at "
-//									+ dataTableStatus[selectedRowTwo][4] + " o'clock" + " STATUS "
-//									+ dataTableStatus[selectedRowTwo][5] + "");
-//				}
-//			}
-//		});
-		
 		modelTwo.addListSelectionListener(this.custController);
 
 		// BUTTONS

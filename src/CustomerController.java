@@ -2,8 +2,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class CustomerController implements ActionListener {
+public class CustomerController implements ActionListener, ListSelectionListener {
 
 	// GLOBAL VARIABLES - DECLARATION
 	CustomerView custView;
@@ -79,5 +81,34 @@ public class CustomerController implements ActionListener {
 			this.login.getLogin().setVisible(true);
 		}
 
+	}
+
+	//LISTSELECTIONLISTENERS
+	@Override
+	public void valueChanged(ListSelectionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+		//AVAILABILITIES TABLE 
+		if (!this.custView.getModel().isSelectionEmpty()) {
+			this.custView.setSelectedRowT(this.custView.getModel().getMinSelectionIndex());
+			JOptionPane.showMessageDialog(custView,
+					"Appointment selected: " + this.custView.getDataAvai(this.custView.getSelectedRowT(), 0) + " " + ""
+							+ this.custView.getDataAvai(this.custView.getSelectedRowT(), 1) + " " + "" 
+							+ this.custView.getDataAvai(this.custView.getSelectedRowT(), 2) + " "
+							+ "on " + this.custView.getDataAvai(this.custView.getSelectedRowT(), 3) + " " 
+							+ "at " + this.custView.getDataAvai(this.custView.getSelectedRowT(), 0) + " o'clock");
+		}
+		
+		//STATUS/APPOINTMENTS TABLE
+		if (!this.custView.getModelTwo().isSelectionEmpty()) {
+			this.custView.setSelectedRowTTwo(this.custView.getModelTwo().getMinSelectionIndex());
+			JOptionPane.showMessageDialog(custView,
+					"Appointment selected: " + this.custView.getTableStatus(this.custView.getSelectedRowTTwo(), 0) + " " + ""
+							+ this.custView.getTableStatus(this.custView.getSelectedRowTTwo(), 1) + " " + "" 
+							+ this.custView.getTableStatus(this.custView.getSelectedRowTTwo(), 2) + " "
+							+ "on " + this.custView.getTableStatus(this.custView.getSelectedRowTTwo(), 3) + " " 
+							+ "at " + this.custView.getTableStatus(this.custView.getSelectedRowTTwo(), 4) + " o'clock" 
+							+ " STATUS " + this.custView.getTableStatus(this.custView.getSelectedRowTTwo(), 5) + "");
+		}
 	}
 }

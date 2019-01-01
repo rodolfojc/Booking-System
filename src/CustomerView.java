@@ -6,15 +6,11 @@ import java.util.Arrays;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 public class CustomerView extends JFrame {
 
@@ -30,6 +26,7 @@ public class CustomerView extends JFrame {
 	private int selectedRow, selectedRowTwo, customerID;
 	private boolean tableflag = true;
 	private CustomerController custController;
+	private ListSelectionModel model, modelTwo;
 
 	// CONSTRUCTOR
 	public CustomerView(CustomerController CustController, String email) {
@@ -47,6 +44,15 @@ public class CustomerView extends JFrame {
 	}
 
 	// GETTER AND SETTER FOR GLOBAL VARIABLES
+	
+	public ListSelectionModel getModel() {
+		return this.model;
+	}
+	
+	public ListSelectionModel getModelTwo() {
+		return this.modelTwo;
+	}
+	
 	public View getCustView() {
 		return this.custView;
 	}
@@ -70,9 +76,17 @@ public class CustomerView extends JFrame {
 	public int getSelectedRowT() {
 		return this.selectedRow;
 	}
+	
+	public void setSelectedRowT(int a) {
+		this.selectedRow = a;
+	}
 
 	public int getSelectedRowTTwo() {
 		return this.selectedRowTwo;
+	}
+	
+	public void setSelectedRowTTwo(int a) {
+		this.selectedRowTwo = a;
 	}
 
 	public void setCopyDataAvai(String[][] data) {
@@ -188,22 +202,25 @@ public class CustomerView extends JFrame {
 		this.scrollAvai.setPreferredSize(new Dimension(400, 150));
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 0
-		ListSelectionModel model = this.custView.myTable[0].getSelectionModel();
-		model.addListSelectionListener(new ListSelectionListener() {
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				if (!model.isSelectionEmpty()) {
-					selectedRow = model.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(custView,
-							"Appointment selected: " + dataTableAvai[selectedRow][0] + " " + ""
-									+ dataTableAvai[selectedRow][1] + " " + "" + dataTableAvai[selectedRow][2] + " "
-									+ "on " + dataTableAvai[selectedRow][3] + " " + "at "
-									+ dataTableAvai[selectedRow][4] + " o'clock");
-				}
-			}
-		});
+		this.model = this.custView.myTable[0].getSelectionModel();
+//		model.addListSelectionListener(new ListSelectionListener() {
+//			
+//		
+//			@Override
+//			public void valueChanged(ListSelectionEvent e) {
+//				// TODO Auto-generated method stub
+//				if (!model.isSelectionEmpty()) {
+//					selectedRow = model.getMinSelectionIndex();
+//					JOptionPane.showMessageDialog(custView,
+//							"Appointment selected: " + dataTableAvai[selectedRow][0] + " " + ""
+//									+ dataTableAvai[selectedRow][1] + " " + "" + dataTableAvai[selectedRow][2] + " "
+//									+ "on " + dataTableAvai[selectedRow][3] + " " + "at "
+//									+ dataTableAvai[selectedRow][4] + " o'clock");
+//				}
+//			}
+//		});
+		
+		model.addListSelectionListener(this.custController);
 
 		// BUTTONS
 		tableCenter.add(buttonCenter);
@@ -223,23 +240,25 @@ public class CustomerView extends JFrame {
 		center.add(tableStatus);
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 1
-		ListSelectionModel modeltwo = this.custView.myTable[1].getSelectionModel();
-		modeltwo.addListSelectionListener(new ListSelectionListener() {
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				if (!modeltwo.isSelectionEmpty()) {
-					selectedRowTwo = modeltwo.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(custView,
-							"Appointment selected: " + dataTableStatus[selectedRowTwo][0] + " " + ""
-									+ dataTableStatus[selectedRowTwo][1] + " " + "" + dataTableStatus[selectedRowTwo][2]
-									+ " " + "on " + dataTableStatus[selectedRowTwo][3] + " " + "at "
-									+ dataTableStatus[selectedRowTwo][4] + " o'clock" + " STATUS "
-									+ dataTableStatus[selectedRowTwo][5] + "");
-				}
-			}
-		});
+		modelTwo = this.custView.myTable[1].getSelectionModel();
+//		modelTwo.addListSelectionListener(new ListSelectionListener() {
+//
+//			@Override
+//			public void valueChanged(ListSelectionEvent e) {
+//				// TODO Auto-generated method stub
+//				if (!modelTwo.isSelectionEmpty()) {
+//					selectedRowTwo = modelTwo.getMinSelectionIndex();
+//					JOptionPane.showMessageDialog(custView,
+//							"Appointment selected: " + dataTableStatus[selectedRowTwo][0] + " " + ""
+//									+ dataTableStatus[selectedRowTwo][1] + " " + "" + dataTableStatus[selectedRowTwo][2]
+//									+ " " + "on " + dataTableStatus[selectedRowTwo][3] + " " + "at "
+//									+ dataTableStatus[selectedRowTwo][4] + " o'clock" + " STATUS "
+//									+ dataTableStatus[selectedRowTwo][5] + "");
+//				}
+//			}
+//		});
+		
+		modelTwo.addListSelectionListener(this.custController);
 
 		// BUTTONS
 		JPanel delBtn = new JPanel();

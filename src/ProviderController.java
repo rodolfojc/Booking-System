@@ -85,15 +85,29 @@ public class ProviderController implements ActionListener, ListSelectionListener
 
 	}
 
+	//LISTSELECTIONLISTENERS
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
 		// TODO Auto-generated method stub
+		
+		//AVAILABILITIES TABLE
 		if (!this.proView.getModelTwo().isSelectionEmpty()) {
 			this.proView.setSelectedRowTwo(this.proView.getModelTwo().getMinSelectionIndex());
 			JOptionPane.showMessageDialog(proView,
 					"Availability selected: " + "Ref: " + this.proView.getDataAvai(this.proView.getSelectedRowTwo(), 0) + " " 
 							+ "date " + this.proView.getDataAvai(this.proView.getSelectedRowTwo(), 1) + " " 
 							+ "time " + this.proView.getDataAvai(this.proView.getSelectedRowTwo(), 2) + "");
+		}
+		
+		//BOOKING/APPOINTMENT TABLE
+		if (!this.proView.getModel().isSelectionEmpty()) {
+			this.proView.setSelectedRowT(this.proView.getModel().getMinSelectionIndex());
+			JOptionPane.showMessageDialog(proView,
+					"Appointment selected: " + "" + this.proView.getDataBooked(this.proView.getSelectedRowT(), 0) + " " 
+							+ "" + this.proView.getDataBooked(this.proView.getSelectedRowT(), 1)+ " " 
+							+ "" + this.proView.getDataBooked(this.proView.getSelectedRowT(), 2)+ " " 
+							+ "on " + this.proView.getDataBooked(this.proView.getSelectedRowT(), 3) + " " 
+							+ "at " + this.proView.getDataBooked(this.proView.getSelectedRowT(), 4) + "o'clock");
 		}
 	}
 

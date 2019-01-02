@@ -1,25 +1,17 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Insets;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
 import com.toedter.calendar.JDateChooser;
 
 public class ProviderView extends JFrame {
@@ -99,6 +91,10 @@ public class ProviderView extends JFrame {
 
 	public int getSelectedRowT() {
 		return this.selectedRow;
+	}
+	
+	public void setSelectedRowT(int a) {
+		this.selectedRow = a;
 	}
 
 	public int getSelectedRowTwo() {
@@ -263,22 +259,24 @@ public class ProviderView extends JFrame {
 		this.scrollBookedTable.setPreferredSize(new Dimension(250, 250));
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 1
-		ListSelectionModel model = this.proView.myTable[1].getSelectionModel();
-		model.addListSelectionListener(new ListSelectionListener() {
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				if (!model.isSelectionEmpty()) {
-					selectedRow = model.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(proView,
-							"Appointment selected: " + "" + dataTableBooked[selectedRow][0] + " " + ""
-									+ dataTableBooked[selectedRow][1] + " " + " " + dataTableBooked[selectedRow][2]
-									+ " " + "on " + dataTableBooked[selectedRow][3] + " " + "at "
-									+ dataTableBooked[selectedRow][4] + "o'clock");
-				}
-			}
-		});
+		this.model = this.proView.myTable[1].getSelectionModel();
+//		this.model.addListSelectionListener(new ListSelectionListener() {
+//
+//			@Override
+//			public void valueChanged(ListSelectionEvent e) {
+//				// TODO Auto-generated method stub
+//				if (!model.isSelectionEmpty()) {
+//					selectedRow = model.getMinSelectionIndex();
+//					JOptionPane.showMessageDialog(proView,
+//							"Appointment selected: " + "" + dataTableBooked[selectedRow][0] + " " + ""
+//									+ dataTableBooked[selectedRow][1] + " " + " " + dataTableBooked[selectedRow][2]
+//									+ " " + "on " + dataTableBooked[selectedRow][3] + " " + "at "
+//									+ dataTableBooked[selectedRow][4] + "o'clock");
+//				}
+//			}
+//		});
+		
+		this.model.addListSelectionListener(this.proController);
 
 		// BUTTONS
 		JPanel appointBtns = new JPanel();

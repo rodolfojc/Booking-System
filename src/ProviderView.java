@@ -220,21 +220,6 @@ public class ProviderView extends JFrame {
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 0
 		this.modelTwo = this.proView.myTable[0].getSelectionModel();
-//		this.modelTwo.addListSelectionListener(new ListSelectionListener() {
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				// TODO Auto-generated method stub
-//				if (!modelTwo.isSelectionEmpty()) {
-//					selectedRowTow = modelTwo.getMinSelectionIndex();
-//					JOptionPane.showMessageDialog(proView,
-//							"Availability selected: " + "Ref: " + dataTableAvai[selectedRowTow][0] + " " + "date "
-//									+ dataTableAvai[selectedRowTow][1] + " " + "time "
-//									+ dataTableAvai[selectedRowTow][2] + "");
-//				}
-//			}
-//		});
-		
 		this.modelTwo.addListSelectionListener(this.proController);
 
 		// BUTTONS
@@ -260,22 +245,6 @@ public class ProviderView extends JFrame {
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 1
 		this.model = this.proView.myTable[1].getSelectionModel();
-//		this.model.addListSelectionListener(new ListSelectionListener() {
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				// TODO Auto-generated method stub
-//				if (!model.isSelectionEmpty()) {
-//					selectedRow = model.getMinSelectionIndex();
-//					JOptionPane.showMessageDialog(proView,
-//							"Appointment selected: " + "" + dataTableBooked[selectedRow][0] + " " + ""
-//									+ dataTableBooked[selectedRow][1] + " " + " " + dataTableBooked[selectedRow][2]
-//									+ " " + "on " + dataTableBooked[selectedRow][3] + " " + "at "
-//									+ dataTableBooked[selectedRow][4] + "o'clock");
-//				}
-//			}
-//		});
-		
 		this.model.addListSelectionListener(this.proController);
 
 		// BUTTONS

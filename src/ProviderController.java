@@ -2,8 +2,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class ProviderController implements ActionListener {
+public class ProviderController implements ActionListener, ListSelectionListener {
 
 	// GLOBAL VARIABLES - DECLARATION
 	private ProviderView proView;
@@ -81,6 +83,18 @@ public class ProviderController implements ActionListener {
 			this.login.getLogin().setVisible(true);
 		}
 
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent arg0) {
+		// TODO Auto-generated method stub
+		if (!this.proView.getModelTwo().isSelectionEmpty()) {
+			this.proView.setSelectedRowTwo(this.proView.getModelTwo().getMinSelectionIndex());
+			JOptionPane.showMessageDialog(proView,
+					"Availability selected: " + "Ref: " + this.proView.getDataAvai(this.proView.getSelectedRowTwo(), 0) + " " 
+							+ "date " + this.proView.getDataAvai(this.proView.getSelectedRowTwo(), 1) + " " 
+							+ "time " + this.proView.getDataAvai(this.proView.getSelectedRowTwo(), 2) + "");
+		}
 	}
 
 }

@@ -39,6 +39,7 @@ public class ProviderView extends JFrame {
 	private String[] hrs = { "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
 			"13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30",
 			"19:00", "19:30" };
+	private ListSelectionModel model, modelTwo;
 
 	// CONSTRUCTOR
 	public ProviderView(ProviderController proController, String email) {
@@ -67,6 +68,15 @@ public class ProviderView extends JFrame {
 	}
 
 	// GETTER AND SETTER FOR GLOBAL VARIABLES
+	
+	public ListSelectionModel getModel() {
+		return this.model;
+	}
+	
+	public ListSelectionModel getModelTwo() {
+		return this.modelTwo;
+	}	
+	
 	public View getProView() {
 		return this.proView;
 	}
@@ -93,6 +103,10 @@ public class ProviderView extends JFrame {
 
 	public int getSelectedRowTwo() {
 		return this.selectedRowTow;
+	}
+	
+	public void setSelectedRowTwo(int a) {
+		this.selectedRowTow = a;
 	}
 
 	public String getHour() {
@@ -209,21 +223,23 @@ public class ProviderView extends JFrame {
 		this.scrollAvaiTable.setPreferredSize(new Dimension(300, 250));
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 0
-		ListSelectionModel modelTwo = this.proView.myTable[0].getSelectionModel();
-		modelTwo.addListSelectionListener(new ListSelectionListener() {
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				if (!modelTwo.isSelectionEmpty()) {
-					selectedRowTow = modelTwo.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(proView,
-							"Availability selected: " + "Ref: " + dataTableAvai[selectedRowTow][0] + " " + "date "
-									+ dataTableAvai[selectedRowTow][1] + " " + "time "
-									+ dataTableAvai[selectedRowTow][2] + "");
-				}
-			}
-		});
+		this.modelTwo = this.proView.myTable[0].getSelectionModel();
+//		this.modelTwo.addListSelectionListener(new ListSelectionListener() {
+//
+//			@Override
+//			public void valueChanged(ListSelectionEvent e) {
+//				// TODO Auto-generated method stub
+//				if (!modelTwo.isSelectionEmpty()) {
+//					selectedRowTow = modelTwo.getMinSelectionIndex();
+//					JOptionPane.showMessageDialog(proView,
+//							"Availability selected: " + "Ref: " + dataTableAvai[selectedRowTow][0] + " " + "date "
+//									+ dataTableAvai[selectedRowTow][1] + " " + "time "
+//									+ dataTableAvai[selectedRowTow][2] + "");
+//				}
+//			}
+//		});
+		
+		this.modelTwo.addListSelectionListener(this.proController);
 
 		// BUTTONS
 		JPanel delAvai = new JPanel();

@@ -23,6 +23,7 @@ public class AdminView extends JFrame {
 	private JButton custDel, proDele, proValid, avaiDele, appointDele, appointManage, adminAdd, adminDele, logout,
 			updateTables, showComment;
 	private int selectedRowCust, selectedRowPro, selectedRowAvai, selectedRowAppoint, selectedRowAdmin;
+	private ListSelectionModel modelCust;
 
 	// CONSTRUCTOR
 	public AdminView(AdminController AdminController, String adminUser) {
@@ -43,6 +44,11 @@ public class AdminView extends JFrame {
 	}
 
 	// GETTER AND SETTER FOR GLOBAL VARIABLES
+	
+	public ListSelectionModel getModelCust() {
+		return this.modelCust;
+	}	
+	
 	public View getAdminView() {
 		return this.adminView;
 	}
@@ -90,6 +96,10 @@ public class AdminView extends JFrame {
 	public int getSelectedRowCust() {
 		return this.selectedRowCust;
 	}
+	
+	public void setSelectedRowCust(int a) {
+		this.selectedRowCust = a;
+	}
 
 	public int getSelectedRowPro() {
 		return this.selectedRowPro;
@@ -132,23 +142,26 @@ public class AdminView extends JFrame {
 		this.srCust.setPreferredSize(new Dimension(350, 300));
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 0
-		ListSelectionModel modelCust = adminView.myTable[0].getSelectionModel();
-		modelCust.addListSelectionListener(new ListSelectionListener() {
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				if (!modelCust.isSelectionEmpty()) {
-					selectedRowCust = modelCust.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(adminView,
-							"Customer selected: ID " + dataCust[selectedRowCust][0] + ", " + ""
-									+ dataCust[selectedRowCust][1] + " " + "" + dataCust[selectedRowCust][2] + ""
-									+ ". If you want to delete it, press DELETE!");
-
-				}
-			}
-
-		});
+		this.modelCust = adminView.myTable[0].getSelectionModel();
+//		this.modelCust.addListSelectionListener(new ListSelectionListener() {
+//
+//			@Override
+//			public void valueChanged(ListSelectionEvent e) {
+//				// TODO Auto-generated method stub
+//				if (!modelCust.isSelectionEmpty()) {
+//					selectedRowCust = modelCust.getMinSelectionIndex();
+//					JOptionPane.showMessageDialog(adminView,
+//							"Customer selected: ID " + dataCust[selectedRowCust][0] + ", " + ""
+//									+ dataCust[selectedRowCust][1] + " " + "" + dataCust[selectedRowCust][2] + ""
+//									+ ". If you want to delete it, press DELETE!");
+//
+//				}
+//			}
+//
+//		});
+		
+		this.modelCust.addListSelectionListener(this.adminController);
+		
 		// BUTTONS
 		this.custDel = this.adminView.addButton("Delete", cust);
 		this.custDel.setActionCommand("Delete Customer");

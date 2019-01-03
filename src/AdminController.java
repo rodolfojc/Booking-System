@@ -2,8 +2,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class AdminController implements ActionListener {
+public class AdminController implements ActionListener, ListSelectionListener {
 
 	// GLOBAL VARIABLES - DECLARATION
 	private AdminView adminView;
@@ -146,5 +148,23 @@ public class AdminController implements ActionListener {
 			this.login.getLogin().setVisible(true);
 		}
 
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+		if (!this.adminView.getModelCust().isSelectionEmpty()) {
+			this.adminView.setSelectedRowCust(this.adminView.getModelCust().getMinSelectionIndex());
+			JOptionPane.showMessageDialog(adminView,
+					"Customer selected: ID " + this.adminView.getDataCust(this.adminView.getSelectedRowCust(), 0) + ", " + ""
+							+ this.adminView.getDataCust(this.adminView.getSelectedRowCust(), 1) + " " 
+							+"" + this.adminView.getDataCust(this.adminView.getSelectedRowCust(), 2) +" "
+							+". If you want to delete it, press DELETE!");
+
+		}
+		
+		
+		
 	}
 }

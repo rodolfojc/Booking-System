@@ -150,10 +150,12 @@ public class AdminController implements ActionListener, ListSelectionListener {
 
 	}
 
+	//LISTSELECTIONLISTENERS
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
 		// TODO Auto-generated method stub
 		
+		//CUSTOMERS TABLE
 		if (!this.adminView.getModelCust().isSelectionEmpty()) {
 			this.adminView.setSelectedRowCust(this.adminView.getModelCust().getMinSelectionIndex());
 			JOptionPane.showMessageDialog(adminView,
@@ -161,6 +163,18 @@ public class AdminController implements ActionListener, ListSelectionListener {
 							+ this.adminView.getDataCust(this.adminView.getSelectedRowCust(), 1) + " " 
 							+"" + this.adminView.getDataCust(this.adminView.getSelectedRowCust(), 2) +" "
 							+". If you want to delete it, press DELETE!");
+
+		}
+		
+		//PROVIDERS TABLE
+		if (!this.adminView.getModelPro().isSelectionEmpty()) {
+			this.adminView.setSelectedRowPro(this.adminView.getModelPro().getMinSelectionIndex());
+			JOptionPane.showMessageDialog(adminView,
+					"Provider selected: ID " + this.adminView.getDataPro(this.adminView.getSelectedRowPro(), 0)+ ", " + ""
+							+ this.adminView.getDataPro(this.adminView.getSelectedRowPro(), 1) + " " 
+							+ "" + this.adminView.getDataPro(this.adminView.getSelectedRowPro(), 2) + ""
+							+ ". If you want to delete it, press DELETE. "
+							+ "If you want to validate it, press VALIDATE!");
 
 		}
 		

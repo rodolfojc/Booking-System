@@ -23,7 +23,7 @@ public class AdminView extends JFrame {
 	private JButton custDel, proDele, proValid, avaiDele, appointDele, appointManage, adminAdd, adminDele, logout,
 			updateTables, showComment;
 	private int selectedRowCust, selectedRowPro, selectedRowAvai, selectedRowAppoint, selectedRowAdmin;
-	private ListSelectionModel modelCust;
+	private ListSelectionModel modelCust, modelPro;
 
 	// CONSTRUCTOR
 	public AdminView(AdminController AdminController, String adminUser) {
@@ -44,6 +44,10 @@ public class AdminView extends JFrame {
 	}
 
 	// GETTER AND SETTER FOR GLOBAL VARIABLES
+	
+	public ListSelectionModel getModelPro() {
+		return this.modelPro;
+	}
 	
 	public ListSelectionModel getModelCust() {
 		return this.modelCust;
@@ -103,6 +107,10 @@ public class AdminView extends JFrame {
 
 	public int getSelectedRowPro() {
 		return this.selectedRowPro;
+	}
+	
+	public void setSelectedRowPro(int a) {
+		this.selectedRowPro = a;
 	}
 
 	public int getSelectedRowAvai() {
@@ -179,24 +187,26 @@ public class AdminView extends JFrame {
 		this.srPro.setPreferredSize(new Dimension(400, 300));
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 1
-		ListSelectionModel modelPro = adminView.myTable[1].getSelectionModel();
-		modelPro.addListSelectionListener(new ListSelectionListener() {
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				if (!modelPro.isSelectionEmpty()) {
-					selectedRowPro = modelPro.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(adminView,
-							"Provider selected: ID " + dataPro[selectedRowPro][0] + ", " + ""
-									+ dataPro[selectedRowPro][1] + " " + "" + dataPro[selectedRowPro][2] + ""
-									+ ". If you want to delete it, press DELETE. "
-									+ "If you want to validate it, press VALIDATE!");
-
-				}
-			}
-
-		});
+		this.modelPro = adminView.myTable[1].getSelectionModel();
+//		this.modelPro.addListSelectionListener(new ListSelectionListener() {
+//
+//			@Override
+//			public void valueChanged(ListSelectionEvent e) {
+//				// TODO Auto-generated method stub
+//				if (!modelPro.isSelectionEmpty()) {
+//					selectedRowPro = modelPro.getMinSelectionIndex();
+//					JOptionPane.showMessageDialog(adminView,
+//							"Provider selected: ID " + dataPro[selectedRowPro][0] + ", " + ""
+//									+ dataPro[selectedRowPro][1] + " " + "" + dataPro[selectedRowPro][2] + ""
+//									+ ". If you want to delete it, press DELETE. "
+//									+ "If you want to validate it, press VALIDATE!");
+//
+//				}
+//			}
+//
+//		});
+		
+		this.modelPro.addListSelectionListener(this.adminController);
 
 		// BUTTONS
 		this.proDele = this.adminView.addButton("Delete", prov);

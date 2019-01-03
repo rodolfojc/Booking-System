@@ -23,7 +23,7 @@ public class AdminView extends JFrame {
 	private JButton custDel, proDele, proValid, avaiDele, appointDele, appointManage, adminAdd, adminDele, logout,
 			updateTables, showComment;
 	private int selectedRowCust, selectedRowPro, selectedRowAvai, selectedRowAppoint, selectedRowAdmin;
-	private ListSelectionModel modelCust, modelPro;
+	private ListSelectionModel modelCust, modelPro, modelAvai;
 
 	// CONSTRUCTOR
 	public AdminView(AdminController AdminController, String adminUser) {
@@ -44,6 +44,10 @@ public class AdminView extends JFrame {
 	}
 
 	// GETTER AND SETTER FOR GLOBAL VARIABLES
+	
+	public ListSelectionModel getModelAvai() {
+		return this.modelAvai;
+	}
 	
 	public ListSelectionModel getModelPro() {
 		return this.modelPro;
@@ -115,6 +119,10 @@ public class AdminView extends JFrame {
 
 	public int getSelectedRowAvai() {
 		return this.selectedRowAvai;
+	}
+	
+	public void setSelectedRowAvai(int a) {
+		this.selectedRowAvai = a;
 	}
 
 	public int getSelectedRowAppoint() {
@@ -229,24 +237,26 @@ public class AdminView extends JFrame {
 		this.srAvai.setPreferredSize(new Dimension(400, 300));
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 2
-		ListSelectionModel modelAvai = adminView.myTable[2].getSelectionModel();
-		modelAvai.addListSelectionListener(new ListSelectionListener() {
+		this.modelAvai = adminView.myTable[2].getSelectionModel();
+//		this.modelAvai.addListSelectionListener(new ListSelectionListener() {
+//
+//			@Override
+//			public void valueChanged(ListSelectionEvent e) {
+//				// TODO Auto-generated method stub
+//				if (!modelAvai.isSelectionEmpty()) {
+//					selectedRowAvai = modelAvai.getMinSelectionIndex();
+//					JOptionPane.showMessageDialog(adminView,
+//							"Availability selected: ID " + dataAvai[selectedRowAvai][0] + ", " + "Provider ID "
+//									+ dataAvai[selectedRowAvai][1] + ", " + "On " + dataAvai[selectedRowAvai][2] + ""
+//									+ ". If you want to delete it, press DELETE!");
+//
+//				}
+//			}
+//
+//		});
 
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				if (!modelAvai.isSelectionEmpty()) {
-					selectedRowAvai = modelAvai.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(adminView,
-							"Availability selected: ID " + dataAvai[selectedRowAvai][0] + ", " + "Provider ID "
-									+ dataAvai[selectedRowAvai][1] + ", " + "On " + dataAvai[selectedRowAvai][2] + ""
-									+ ". If you want to delete it, press DELETE!");
-
-				}
-			}
-
-		});
-
+		this.modelAvai.addListSelectionListener(this.adminController);
+		
 		// BUTTONS
 		this.avaiDele = this.adminView.addButton("Delete", avail);
 		this.avaiDele.setActionCommand("Delete Availability");

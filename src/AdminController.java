@@ -178,6 +178,17 @@ public class AdminController implements ActionListener, ListSelectionListener {
 
 		}
 		
+		//AVAILABILITIES TABLE
+		if (!this.adminView.getModelAvai().isSelectionEmpty()) {
+			this.adminView.setSelectedRowAvai(this.adminView.getModelAvai().getMinSelectionIndex());
+			JOptionPane.showMessageDialog(adminView,
+					"Availability selected: Ref " + this.adminView.getDataAvai(this.adminView.getSelectedRowAvai(), 0) + ", " 
+							+ "Provider ID " + this.adminView.getDataAvai(this.adminView.getSelectedRowAvai(), 1) + ", " 
+							+ "On " + this.adminView.getDataAvai(this.adminView.getSelectedRowAvai(), 2) + ""
+							+ ". If you want to delete it, press DELETE!");
+
+		}
+		
 		
 		
 	}

@@ -189,6 +189,16 @@ public class AdminController implements ActionListener, ListSelectionListener {
 
 		}
 		
+		//APPOINTMENTS TABLE
+		if (!this.adminView.getModelAppoint().isSelectionEmpty()) {
+			this.adminView.setSelectedRowAppoint(this.adminView.getModelAppoint().getMinSelectionIndex());
+			JOptionPane.showMessageDialog(adminView,
+					"Appointment selected: Ref " + this.adminView.getDataAppoint(this.adminView.getSelectedRowAppoint(), 0) + ", "
+							+ "Availability Ref " + this.adminView.getDataAppoint(this.adminView.getSelectedRowAppoint(), 1) + ", "
+							+ "Customer ID " + this.adminView.getDataAppoint(this.adminView.getSelectedRowAppoint(), 2) + ""
+							+ ". If you want to delete it, press DELETE!");
+
+		}
 		
 		
 	}

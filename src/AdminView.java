@@ -23,7 +23,7 @@ public class AdminView extends JFrame {
 	private JButton custDel, proDele, proValid, avaiDele, appointDele, appointManage, adminAdd, adminDele, logout,
 			updateTables, showComment;
 	private int selectedRowCust, selectedRowPro, selectedRowAvai, selectedRowAppoint, selectedRowAdmin;
-	private ListSelectionModel modelCust, modelPro, modelAvai;
+	private ListSelectionModel modelCust, modelPro, modelAvai, modelAppoint;
 
 	// CONSTRUCTOR
 	public AdminView(AdminController AdminController, String adminUser) {
@@ -44,6 +44,10 @@ public class AdminView extends JFrame {
 	}
 
 	// GETTER AND SETTER FOR GLOBAL VARIABLES
+	
+	public ListSelectionModel getModelAppoint() {
+		return this.modelAppoint;
+	}
 	
 	public ListSelectionModel getModelAvai() {
 		return this.modelAvai;
@@ -127,6 +131,10 @@ public class AdminView extends JFrame {
 
 	public int getSelectedRowAppoint() {
 		return this.selectedRowAppoint;
+	}
+	
+	public void setSelectedRowAppoint(int a) {
+		this.selectedRowAppoint = a;
 	}
 
 	public int getSelectedRowAdmin() {
@@ -274,24 +282,26 @@ public class AdminView extends JFrame {
 		this.srAppoint.setPreferredSize(new Dimension(350, 300));
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 3
-		ListSelectionModel modelAppoint = adminView.myTable[3].getSelectionModel();
-		modelAppoint.addListSelectionListener(new ListSelectionListener() {
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				if (!modelAppoint.isSelectionEmpty()) {
-					selectedRowAppoint = modelAppoint.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(adminView,
-							"Appointment selected: Ref " + dataAppoint[selectedRowAppoint][0] + ", "
-									+ "Availability Ref " + dataAppoint[selectedRowAppoint][1] + ", " + "Customer ID "
-									+ dataAppoint[selectedRowAppoint][2] + ""
-									+ ". If you want to delete it, press DELETE!");
-
-				}
-			}
-
-		});
+		this.modelAppoint = adminView.myTable[3].getSelectionModel();
+//		this.modelAppoint.addListSelectionListener(new ListSelectionListener() {
+//
+//			@Override
+//			public void valueChanged(ListSelectionEvent e) {
+//				// TODO Auto-generated method stub
+//				if (!modelAppoint.isSelectionEmpty()) {
+//					selectedRowAppoint = modelAppoint.getMinSelectionIndex();
+//					JOptionPane.showMessageDialog(adminView,
+//							"Appointment selected: Ref " + dataAppoint[selectedRowAppoint][0] + ", "
+//									+ "Availability Ref " + dataAppoint[selectedRowAppoint][1] + ", " + "Customer ID "
+//									+ dataAppoint[selectedRowAppoint][2] + ""
+//									+ ". If you want to delete it, press DELETE!");
+//
+//				}
+//			}
+//
+//		});
+		
+		this.modelAppoint.addListSelectionListener(this.adminController);
 
 		// BUTTONS
 		this.appointDele = this.adminView.addButton("Delete", appoints);

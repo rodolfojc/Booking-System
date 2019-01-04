@@ -167,7 +167,7 @@ public class AdminController implements ActionListener, ListSelectionListener {
 		}
 		
 		//PROVIDERS TABLE
-		if (!this.adminView.getModelPro().isSelectionEmpty()) {
+		else if (!this.adminView.getModelPro().isSelectionEmpty()) {
 			this.adminView.setSelectedRowPro(this.adminView.getModelPro().getMinSelectionIndex());
 			JOptionPane.showMessageDialog(adminView,
 					"Provider selected: ID " + this.adminView.getDataPro(this.adminView.getSelectedRowPro(), 0)+ ", " + ""
@@ -179,7 +179,7 @@ public class AdminController implements ActionListener, ListSelectionListener {
 		}
 		
 		//AVAILABILITIES TABLE
-		if (!this.adminView.getModelAvai().isSelectionEmpty()) {
+		else if (!this.adminView.getModelAvai().isSelectionEmpty()) {
 			this.adminView.setSelectedRowAvai(this.adminView.getModelAvai().getMinSelectionIndex());
 			JOptionPane.showMessageDialog(adminView,
 					"Availability selected: Ref " + this.adminView.getDataAvai(this.adminView.getSelectedRowAvai(), 0) + ", " 
@@ -190,7 +190,7 @@ public class AdminController implements ActionListener, ListSelectionListener {
 		}
 		
 		//APPOINTMENTS TABLE
-		if (!this.adminView.getModelAppoint().isSelectionEmpty()) {
+		else if (!this.adminView.getModelAppoint().isSelectionEmpty()) {
 			this.adminView.setSelectedRowAppoint(this.adminView.getModelAppoint().getMinSelectionIndex());
 			JOptionPane.showMessageDialog(adminView,
 					"Appointment selected: Ref " + this.adminView.getDataAppoint(this.adminView.getSelectedRowAppoint(), 0) + ", "
@@ -201,7 +201,7 @@ public class AdminController implements ActionListener, ListSelectionListener {
 		}
 		
 		//ADMINISTRATORS TABLE
-		if (!this.adminView.getModelAdmin().isSelectionEmpty()) {
+		else if (!this.adminView.getModelAdmin().isSelectionEmpty()) {
 			this.adminView.setSelectedRowAdmin(this.adminView.getModelAdmin().getMinSelectionIndex());
 			JOptionPane.showMessageDialog(adminView,
 					"Administrador selected: ID " + this.adminView.getDataAdmin(this.adminView.getSelectedRowAdmin(), 0) + ", " 

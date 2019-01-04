@@ -172,23 +172,6 @@ public class AdminView extends JFrame {
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 0
 		this.modelCust = adminView.myTable[0].getSelectionModel();
-//		this.modelCust.addListSelectionListener(new ListSelectionListener() {
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				// TODO Auto-generated method stub
-//				if (!modelCust.isSelectionEmpty()) {
-//					selectedRowCust = modelCust.getMinSelectionIndex();
-//					JOptionPane.showMessageDialog(adminView,
-//							"Customer selected: ID " + dataCust[selectedRowCust][0] + ", " + ""
-//									+ dataCust[selectedRowCust][1] + " " + "" + dataCust[selectedRowCust][2] + ""
-//									+ ". If you want to delete it, press DELETE!");
-//
-//				}
-//			}
-//
-//		});
-		
 		this.modelCust.addListSelectionListener(this.adminController);
 		
 		// BUTTONS
@@ -209,24 +192,6 @@ public class AdminView extends JFrame {
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 1
 		this.modelPro = adminView.myTable[1].getSelectionModel();
-//		this.modelPro.addListSelectionListener(new ListSelectionListener() {
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				// TODO Auto-generated method stub
-//				if (!modelPro.isSelectionEmpty()) {
-//					selectedRowPro = modelPro.getMinSelectionIndex();
-//					JOptionPane.showMessageDialog(adminView,
-//							"Provider selected: ID " + dataPro[selectedRowPro][0] + ", " + ""
-//									+ dataPro[selectedRowPro][1] + " " + "" + dataPro[selectedRowPro][2] + ""
-//									+ ". If you want to delete it, press DELETE. "
-//									+ "If you want to validate it, press VALIDATE!");
-//
-//				}
-//			}
-//
-//		});
-		
 		this.modelPro.addListSelectionListener(this.adminController);
 
 		// BUTTONS
@@ -251,23 +216,6 @@ public class AdminView extends JFrame {
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 2
 		this.modelAvai = adminView.myTable[2].getSelectionModel();
-//		this.modelAvai.addListSelectionListener(new ListSelectionListener() {
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				// TODO Auto-generated method stub
-//				if (!modelAvai.isSelectionEmpty()) {
-//					selectedRowAvai = modelAvai.getMinSelectionIndex();
-//					JOptionPane.showMessageDialog(adminView,
-//							"Availability selected: ID " + dataAvai[selectedRowAvai][0] + ", " + "Provider ID "
-//									+ dataAvai[selectedRowAvai][1] + ", " + "On " + dataAvai[selectedRowAvai][2] + ""
-//									+ ". If you want to delete it, press DELETE!");
-//
-//				}
-//			}
-//
-//		});
-
 		this.modelAvai.addListSelectionListener(this.adminController);
 		
 		// BUTTONS
@@ -288,24 +236,6 @@ public class AdminView extends JFrame {
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 3
 		this.modelAppoint = adminView.myTable[3].getSelectionModel();
-//		this.modelAppoint.addListSelectionListener(new ListSelectionListener() {
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				// TODO Auto-generated method stub
-//				if (!modelAppoint.isSelectionEmpty()) {
-//					selectedRowAppoint = modelAppoint.getMinSelectionIndex();
-//					JOptionPane.showMessageDialog(adminView,
-//							"Appointment selected: Ref " + dataAppoint[selectedRowAppoint][0] + ", "
-//									+ "Availability Ref " + dataAppoint[selectedRowAppoint][1] + ", " + "Customer ID "
-//									+ dataAppoint[selectedRowAppoint][2] + ""
-//									+ ". If you want to delete it, press DELETE!");
-//
-//				}
-//			}
-//
-//		});
-		
 		this.modelAppoint.addListSelectionListener(this.adminController);
 
 		// BUTTONS
@@ -334,24 +264,6 @@ public class AdminView extends JFrame {
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 4
 		this.modelAdmin = adminView.myTable[4].getSelectionModel();
-//		this.modelAdmin.addListSelectionListener(new ListSelectionListener() {
-//
-//			@Override
-//			public void valueChanged(ListSelectionEvent e) {
-//				// TODO Auto-generated method stub
-//				if (!modelAdmin.isSelectionEmpty()) {
-//					selectedRowAdmin = modelAdmin.getMinSelectionIndex();
-//					JOptionPane.showMessageDialog(adminView,
-//							"Administrador selected: ID " + dataAdmin[selectedRowAdmin][0] + ", " + "Admin user "
-//									+ dataAdmin[selectedRowAdmin][1] + ", " + "Privilege "
-//									+ dataAdmin[selectedRowAdmin][2] + ""
-//									+ ". If you want to delete it, press DELETE!");
-//
-//				}
-//			}
-//
-//		});
-		
 		this.modelAdmin.addListSelectionListener(this.adminController);
 		
 		// BUTTONS

@@ -200,6 +200,17 @@ public class AdminController implements ActionListener, ListSelectionListener {
 
 		}
 		
+		//ADMINISTRATORS TABLE
+		if (!this.adminView.getModelAdmin().isSelectionEmpty()) {
+			this.adminView.setSelectedRowAdmin(this.adminView.getModelAdmin().getMinSelectionIndex());
+			JOptionPane.showMessageDialog(adminView,
+					"Administrador selected: ID " + this.adminView.getDataAdmin(this.adminView.getSelectedRowAdmin(), 0) + ", " 
+							+ "Admin user " + this.adminView.getDataAdmin(this.adminView.getSelectedRowAdmin(), 1) + ", " 
+							+ "Privilege " 	+ this.adminView.getDataAdmin(this.adminView.getSelectedRowAdmin(), 2) + ""
+							+ ". If you want to delete it, press DELETE!");
+
+		}
+		
 		
 	}
 }

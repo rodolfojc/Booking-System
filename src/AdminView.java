@@ -4,13 +4,10 @@ import java.util.Arrays;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 public class AdminView extends JFrame {
 
@@ -23,7 +20,7 @@ public class AdminView extends JFrame {
 	private JButton custDel, proDele, proValid, avaiDele, appointDele, appointManage, adminAdd, adminDele, logout,
 			updateTables, showComment;
 	private int selectedRowCust, selectedRowPro, selectedRowAvai, selectedRowAppoint, selectedRowAdmin;
-	private ListSelectionModel modelCust, modelPro, modelAvai, modelAppoint;
+	private ListSelectionModel modelCust, modelPro, modelAvai, modelAppoint, modelAdmin;
 
 	// CONSTRUCTOR
 	public AdminView(AdminController AdminController, String adminUser) {
@@ -44,6 +41,10 @@ public class AdminView extends JFrame {
 	}
 
 	// GETTER AND SETTER FOR GLOBAL VARIABLES
+	
+	public ListSelectionModel getModelAdmin() {
+		return this.modelAdmin;
+	}
 	
 	public ListSelectionModel getModelAppoint() {
 		return this.modelAppoint;
@@ -139,6 +140,10 @@ public class AdminView extends JFrame {
 
 	public int getSelectedRowAdmin() {
 		return this.selectedRowAdmin;
+	}
+	
+	public void setSelectedRowAdmin(int a) {
+		this.selectedRowAdmin = a;
 	}
 
 	// METHOD TO SET UP THE FRAME
@@ -328,25 +333,27 @@ public class AdminView extends JFrame {
 		this.srAdmin.setPreferredSize(new Dimension(380, 300));
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 4
-		ListSelectionModel modelAdmin = adminView.myTable[4].getSelectionModel();
-		modelAdmin.addListSelectionListener(new ListSelectionListener() {
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				if (!modelAdmin.isSelectionEmpty()) {
-					selectedRowAdmin = modelAdmin.getMinSelectionIndex();
-					JOptionPane.showMessageDialog(adminView,
-							"Administrador selected: ID " + dataAdmin[selectedRowAdmin][0] + ", " + "Admin user "
-									+ dataAdmin[selectedRowAdmin][1] + ", " + "Privilege "
-									+ dataAdmin[selectedRowAdmin][2] + ""
-									+ ". If you want to delete it, press DELETE!");
-
-				}
-			}
-
-		});
-
+		this.modelAdmin = adminView.myTable[4].getSelectionModel();
+//		this.modelAdmin.addListSelectionListener(new ListSelectionListener() {
+//
+//			@Override
+//			public void valueChanged(ListSelectionEvent e) {
+//				// TODO Auto-generated method stub
+//				if (!modelAdmin.isSelectionEmpty()) {
+//					selectedRowAdmin = modelAdmin.getMinSelectionIndex();
+//					JOptionPane.showMessageDialog(adminView,
+//							"Administrador selected: ID " + dataAdmin[selectedRowAdmin][0] + ", " + "Admin user "
+//									+ dataAdmin[selectedRowAdmin][1] + ", " + "Privilege "
+//									+ dataAdmin[selectedRowAdmin][2] + ""
+//									+ ". If you want to delete it, press DELETE!");
+//
+//				}
+//			}
+//
+//		});
+		
+		this.modelAdmin.addListSelectionListener(this.adminController);
+		
 		// BUTTONS
 		// IF ADMIN@ADMIN.ADMIN IS LOGIN THEN THE OPTION IS AVAILABLE
 		this.adminAdd = this.adminView.addButton("Add", admins);

@@ -203,7 +203,7 @@ public class CustomerView extends JFrame {
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 0
 		this.model = this.custView.myTable[0].getSelectionModel();
-		model.addListSelectionListener(this.custController);
+		this.model.addListSelectionListener(this.custController);
 
 		// BUTTONS
 		tableCenter.add(buttonCenter);
@@ -217,8 +217,7 @@ public class CustomerView extends JFrame {
 		custDBAppoint.searchAppointRecord();
 
 		// CREATING A TABLE INDEX 1, CALLING METHOD ADDTABLES (VIEW CLASS METHOD)
-		this.scrollStatus = this.custView.addTableS(1, this.dataTableStatus, statusColumnsNam, tableStatus,
-				"Appointments");
+		this.scrollStatus = this.custView.addTableS(1, this.dataTableStatus, statusColumnsNam, tableStatus, "Appointments");
 		this.scrollStatus.setPreferredSize(new Dimension(600, 100));
 		center.add(tableStatus);
 

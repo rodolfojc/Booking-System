@@ -6,9 +6,9 @@ import javax.swing.JOptionPane;
 public class AdminDBQ {
 
 	// GLOBAL VARIABLES - DECLARATION
-	Database data;
-	AdminView adminView;
-	AdminController adminController;
+	private Database data;
+	private AdminView adminView;
+	private AdminController adminController;
 	
 	public AdminDBQ(AdminView AdminView) {
 		

@@ -6,9 +6,9 @@ import javax.swing.JOptionPane;
 public class ProviderDBQ {
 
 	// GLOBAL VARIABLES - DECLARATION
-	Database proDB;
-	ProviderView proView;
-	ProviderController proController;
+	private Database proDB;
+	private ProviderView proView;
+	private ProviderController proController;
 
 	public ProviderDBQ(ProviderView ProView) {
 

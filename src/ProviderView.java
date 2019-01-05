@@ -214,8 +214,7 @@ public class ProviderView extends JFrame {
 		proDB.availableProvTable();
 
 		// CREATING A TABLE INDEX 0, CALLING METHOD ADDTABLES (VIEW CLASS METHOD)
-		this.scrollAvaiTable = this.proView.addTableS(0, this.dataTableAvai, columnsNamAvai, center,
-				"My Availabilites");
+		this.scrollAvaiTable = this.proView.addTableS(0, this.dataTableAvai, columnsNamAvai, center, "My Availabilites");
 		this.scrollAvaiTable.setPreferredSize(new Dimension(300, 250));
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 0

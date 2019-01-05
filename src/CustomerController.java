@@ -8,8 +8,8 @@ import javax.swing.event.ListSelectionListener;
 public class CustomerController implements ActionListener, ListSelectionListener {
 
 	// GLOBAL VARIABLES - DECLARATION
-	CustomerView custView;
-	Login login;
+	private CustomerView custView;
+	private Login login;
 
 	// CONSTRUCTOR
 	public CustomerController(String email, Login Login) {

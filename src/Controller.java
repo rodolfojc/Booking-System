@@ -7,11 +7,11 @@ import javax.swing.JOptionPane;
 public class Controller implements ActionListener {
 
 	// GLOBAL VARIABLES - DECLARATION
-	Register register;
-	Login login;
-	AdminController adminController;
-	CustomerController custController;
-	ProviderController proController;
+	private Register register;
+	private Login login;
+	private AdminController adminController;
+	private CustomerController custController;
+	private ProviderController proController;
 
 	// CONSTRUCTOR
 	public Controller() {

@@ -5,19 +5,16 @@ import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class Register extends JFrame {
 
 	// GLOBAL VARIABLES - DECLARATION
-	private JTextField txtName, txtSur, txtPass, txtVPass, txtMob, txtEmail, txtAddress, txtLocation;
+	private JTextField txtName, txtSur, txtMob, txtEmail, txtAddress, txtLocation;
 	private JPasswordField pass;
 	private View reg;
 	private Controller controller;

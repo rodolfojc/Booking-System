@@ -43,8 +43,7 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			String errorMg = "Ups, there is an internal problem, please contact an administrator";
 			String confMg = "The availability has been DELETED!";
 			ProviderDBQ proDB = new ProviderDBQ(this.proView);
-			proDB.deleteRow("availabilities", "avai_ref", this.proView.getDataAvai(this.proView.getSelectedRowTwo(), 0),
-					errorMg, confMg);
+			proDB.deleteRow("availabilities", "avai_ref", this.proView.getDataAvai(this.proView.getSelectedRowTwo(), 0), errorMg, confMg);
 			proView.UpdateFrame();
 		}
 
@@ -54,7 +53,6 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			String confMg = "Appointment has been CANCELLED!";
 			ProviderDBQ proDB = new ProviderDBQ(this.proView);
 			proDB.cancelAppointPro(this.proView.getDataBooked(this.proView.getSelectedRowT(), 0), errorMg, confMg);
-			;
 			this.proView.UpdateFrame();
 		}
 
@@ -63,9 +61,7 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			String errorMg = "Ups, there is an internal problem, please contact an administrator";
 			String confMg = "Appointment has been set COMPLETED!";
 			ProviderDBQ proDB = new ProviderDBQ(this.proView);
-			proDB.setCompletedAppointPro(this.proView.getDataBooked(this.proView.getSelectedRowT(), 0), errorMg,
-					confMg);
-			;
+			proDB.setCompletedAppointPro(this.proView.getDataBooked(this.proView.getSelectedRowT(), 0), errorMg, confMg);
 			this.proView.UpdateFrame();
 		}
 

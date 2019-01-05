@@ -30,9 +30,8 @@ public class AdminController implements ActionListener, ListSelectionListener {
 					+ " any availability or appointment registered.";
 			String confMg = "The user has been DELETED!";
 			AdminDBQ data = new AdminDBQ(this.adminView);
-			data.deleteRow("customers", "cust_ID", this.adminView.getDataCust(this.adminView.getSelectedRowCust(), 0),
-					errorMg, confMg);
-			adminView.UpdateFrame();
+			data.deleteRow("customers", "cust_ID", this.adminView.getDataCust(this.adminView.getSelectedRowCust(), 0), errorMg, confMg);
+			this.adminView.UpdateFrame();
 		}
 
 		// TO DELECT A PROVIDER SELECTED IN TABLE BY ID
@@ -41,9 +40,8 @@ public class AdminController implements ActionListener, ListSelectionListener {
 					+ " any availability or appointment registered.";
 			String confMg = "The user has been DELETED!";
 			AdminDBQ data = new AdminDBQ(this.adminView);
-			data.deleteRow("providers", "pro_ID", this.adminView.getDataPro(this.adminView.getSelectedRowPro(), 0),
-					errorMg, confMg);
-			adminView.UpdateFrame();
+			data.deleteRow("providers", "pro_ID", this.adminView.getDataPro(this.adminView.getSelectedRowPro(), 0), errorMg, confMg);
+			this.adminView.UpdateFrame();
 		}
 
 		// TO VALIDATE A CUSTOMER SELECTED IN TABLE BY ID (IN STATUS PENDING)
@@ -53,8 +51,7 @@ public class AdminController implements ActionListener, ListSelectionListener {
 			AdminDBQ data = new AdminDBQ(this.adminView);
 			data.updateRow("providers", "status", "Confirmed", "pro_id",
 					this.adminView.getDataPro(this.adminView.getSelectedRowPro(), 0), errorMg, confMg);
-			;
-			adminView.UpdateFrame();
+			this.adminView.UpdateFrame();
 		}
 
 		// TO DELETE AVAILABILITY SELECTED ON TABLE BY AVAILABILITY REFERENCE
@@ -65,7 +62,7 @@ public class AdminController implements ActionListener, ListSelectionListener {
 			AdminDBQ data = new AdminDBQ(this.adminView);
 			data.deleteRow("availabilities", "avai_ref",
 					this.adminView.getDataAvai(this.adminView.getSelectedRowAvai(), 0), errorMg, confMg);
-			adminView.UpdateFrame();
+			this.adminView.UpdateFrame();
 		}
 
 		// TO DELETE APPOINTMENT SELECTED ON TABLE BY APPOINTMENT REFERENCE
@@ -82,7 +79,7 @@ public class AdminController implements ActionListener, ListSelectionListener {
 			AdminDBQ dataTwo = new AdminDBQ(this.adminView);
 			dataTwo.updateRow("availabilities", "available", "Cancelled", "avai_ref",
 					this.adminView.getDataAppoint(this.adminView.getSelectedRowAppoint(), 1), errorMgTwo, confMgTwo);
-			adminView.UpdateFrame();
+			this.adminView.UpdateFrame();
 		}
 
 		// TO MANAGE/SET A COMMENT TO AN APPOINTMENT SELECTED ON TABLE BY APPOINTMENT REFERENCE
@@ -90,13 +87,12 @@ public class AdminController implements ActionListener, ListSelectionListener {
 			String oldcomment = "Comment: " + this.adminView.getDataAppoint(this.adminView.getSelectedRowAppoint(), 3);
 			String comment = (String) JOptionPane.showInputDialog(this.adminView, oldcomment, "Answer",
 					JOptionPane.PLAIN_MESSAGE, null, null, null);
-
 			String errorMg = "Ups, there is an internal problem, please contact an administrator";
 			String confMg = "Your Comment have been SET!";
 			AdminDBQ data = new AdminDBQ(this.adminView);
 			data.updateRow("appointments", "comments", "Admin: " + comment + "", "appoint_ref",
 					this.adminView.getDataAppoint(this.adminView.getSelectedRowAppoint(), 0), errorMg, confMg);
-			adminView.UpdateFrame();
+			this.adminView.UpdateFrame();
 
 		}
 
@@ -112,15 +108,11 @@ public class AdminController implements ActionListener, ListSelectionListener {
 		if (e.getActionCommand().equals("Add Admin")) {
 			String user = (String) JOptionPane.showInputDialog(this.adminView, "Email address", "Admin Register",
 					JOptionPane.PLAIN_MESSAGE, null, null, null);
-			System.out.println(user);
-
 			String pass = (String) JOptionPane.showInputDialog(this.adminView, "Password?", "Admin Register",
 					JOptionPane.PLAIN_MESSAGE, null, null, null);
-			System.out.println(pass);
-
 			AdminDBQ data = new AdminDBQ(this.adminView);
 			data.createAdmin(user, pass);
-			adminView.UpdateFrame();
+			this.adminView.UpdateFrame();
 
 		}
 
@@ -131,7 +123,7 @@ public class AdminController implements ActionListener, ListSelectionListener {
 			AdminDBQ data = new AdminDBQ(this.adminView);
 			data.deleteRow("administrators", "admin_id",
 					this.adminView.getDataAdmin(this.adminView.getSelectedRowAdmin(), 0), errorMg, confMg);
-			adminView.UpdateFrame();
+			this.adminView.UpdateFrame();
 		}
 
 		// TO UPDATE ALL TABLES IN ADMINISTRATOR MANAGER

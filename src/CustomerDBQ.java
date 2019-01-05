@@ -6,9 +6,9 @@ import javax.swing.JOptionPane;
 public class CustomerDBQ {
 
 	// GLOBAL VARIABLES - DECLARATION
-	Database data;
-	CustomerView custView;
-	CustomerController custController;
+	private Database data;
+	private CustomerView custView;
+	private CustomerController custController;
 
 	public CustomerDBQ(CustomerView CustView) {
 

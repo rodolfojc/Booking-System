@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -14,11 +15,13 @@ public class Controller implements ActionListener {
 	private ProviderController proController;
 
 	// CONSTRUCTOR
-	public Controller() {
+	public Controller() throws ParseException {
 
 		// NEW INSTANCE OF LOGIN VIEW
+		Database cleanAvai = new Database();
+		cleanAvai.cleanAvailabilities();
 		this.login = new Login(this);
-
+		
 	}
 
 	// ACTION LISTENER FOR LOGIN AND REGISTER

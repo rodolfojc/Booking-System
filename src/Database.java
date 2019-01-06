@@ -4,6 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -244,7 +248,7 @@ public class Database {
 		return false;
 	}
 	
-	public void searchProvider(String by, String input) {
+	public void cleanAvailabilities() throws ParseException {
 
 		String query = "";
 
@@ -256,16 +260,32 @@ public class Database {
 			
 			rs = stmt.executeQuery(query);
 
+			Date date;
 			int i = 0;
-
+			
 			while (rs.next()) {
 
 				data[i][0] = rs.getString("avai_ref");
-				data[i][1] = rs.getString("pro_name");
-				data[i][2] = rs.getString("pro_surname");
+				data[i][1] = rs.getString("pro_id");
+				data[i][2] = rs.getString("available");
 				data[i][3] = rs.getString("date");
 				data[i][4] = rs.getString("time");
-				i++;
+				
+				
+				String dateStr = data[i][3];
+				date = new SimpleDateFormat("yyy-MM-dd").parse(dateStr);
+				
+				Calendar cal = Calendar.getInstance();
+				
+				if(date.compareTo(cal.getTime()) < 0) {
+					
+					String queryTwo="DELETE FROM availabilities WHERE avai_ref="+data[i][0]+";";
+					
+					PreparedStatement preparedStmt = conn.prepareStatement(queryTwo);
+					preparedStmt.execute();
+				}
+				
+			i++;
 			}
 						
 			

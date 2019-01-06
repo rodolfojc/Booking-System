@@ -57,7 +57,6 @@ public class ProviderView extends JFrame {
 		getCalendar = myDateSimp.parse(dateStr);
 		dateSql = new java.sql.Date(getCalendar.getTime());
 		return dateSql;
-
 	}
 
 	// GETTER AND SETTER FOR GLOBAL VARIABLES

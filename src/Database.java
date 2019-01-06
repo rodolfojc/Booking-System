@@ -243,5 +243,51 @@ public class Database {
 
 		return false;
 	}
+	
+	public void searchProvider(String by, String input) {
+
+		String query = "";
+
+		String[][] data = new String[20][5];
+
+		try {
+
+			query = "SELECT * FROM availabilities WHERE available='Yes';";
+			
+			rs = stmt.executeQuery(query);
+
+			int i = 0;
+
+			while (rs.next()) {
+
+				data[i][0] = rs.getString("avai_ref");
+				data[i][1] = rs.getString("pro_name");
+				data[i][2] = rs.getString("pro_surname");
+				data[i][3] = rs.getString("date");
+				data[i][4] = rs.getString("time");
+				i++;
+			}
+						
+			
+			rs.close();
+			stmt.close();
+			conn.close();
+
+			// THIS CREATE A COPY OF THE LOCAL DATA TO THE ARRAY[][] SETTER IN CUSTOMER
+			// TABLES
+			
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	// FOR BOKKING AN APPOINTMENT
+	
+	
+	
+	
 }
 	

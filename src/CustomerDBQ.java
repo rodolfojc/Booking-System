@@ -239,5 +239,5 @@ public class CustomerDBQ {
 			JOptionPane.showMessageDialog(this.custView, confMg);
 
 	}
-
+	
 }

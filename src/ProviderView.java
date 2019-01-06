@@ -4,6 +4,7 @@ import java.awt.Insets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -179,10 +180,11 @@ public class ProviderView extends JFrame {
 		// CREATING A CALENDAR AND GIVING FORMAT YYY-MM-DD
 		this.calendar = this.proView.addCalen(inleftTop);
 		//SETTING CALENDAR RANGE 
-		java.util.Date now = new java.util.Date();
-		SimpleDateFormat myDateSimp = new SimpleDateFormat("yyy-MM-dd"); // "yyyy-MM-dd"
-		myDateSimp.format(now);
-		this.calendar.setMinSelectableDate(now);
+		Calendar calMin = Calendar.getInstance();
+		this.calendar.setMinSelectableDate(calMin.getTime());
+		Calendar calMax = Calendar.getInstance();
+		calMax.add(Calendar.DATE, 90); //ADD 30 DAYS FROM CURRENT (TODAY)
+		this.calendar.setMaxSelectableDate(calMax.getTime());
 		this.hr = this.proView.addComboB(hrs, inleftTop);
 
 		// LEFT PANEL - FOR CENTER IN BORDERLAYOUT

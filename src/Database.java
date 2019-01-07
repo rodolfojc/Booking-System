@@ -256,7 +256,8 @@ public class Database {
 
 		try {
 
-			query = "SELECT * FROM availabilities WHERE available='Yes';";
+			//query = "SELECT * FROM availabilities WHERE available='Yes';";
+			query = "SELECT * FROM availabilities;";
 			
 			rs = stmt.executeQuery(query);
 
@@ -279,10 +280,21 @@ public class Database {
 				
 				if(date.compareTo(cal.getTime()) < 0) {
 					
-					String queryTwo="DELETE FROM availabilities WHERE avai_ref="+data[i][0]+";";
+					if(data[i][2].equals("Yes")) {
 					
-					PreparedStatement preparedStmt = conn.prepareStatement(queryTwo);
-					preparedStmt.execute();
+						String queryTwo="DELETE FROM availabilities WHERE avai_ref="+data[i][0]+";";
+					
+						PreparedStatement preparedStmt = conn.prepareStatement(queryTwo);
+						preparedStmt.execute();
+					}
+					else if(data[i][2].equals("Unconfirmed")) {
+					
+						String queryThree = "UPDATE availabilities SET available='NO CONFIRMED' WHERE avai_ref="+data[i][0]+";";
+					
+						PreparedStatement preparedStmt = conn.prepareStatement(queryThree);
+						preparedStmt.execute();
+					}
+														
 				}
 				
 			i++;
@@ -304,7 +316,6 @@ public class Database {
 
 	}
 
-	// FOR BOKKING AN APPOINTMENT
 	
 	
 	

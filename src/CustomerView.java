@@ -153,6 +153,11 @@ public class CustomerView extends JFrame {
 
 		// LEFT PANEL FOR TOP IN BORDERLAYOUT
 		JPanel inLeftTop = new JPanel();
+		JPanel inLeftTopOne = new JPanel();
+		JPanel inLeftTopNameSur = new JPanel();
+		this.custView.addLabel("Name: ", inLeftTopNameSur);
+		this.custView.addLabel(this.custName+" "+this.custSurName, inLeftTopNameSur);
+		this.custView.addLabel("Personal details", inLeftTopOne);
 		this.custView.addLabel("Find appointment by: ", inLeftTop);
 		this.option = this.custView.addComboB(searchOp, inLeftTop);
 		this.byInput = this.custView.addTextField(10, inLeftTop);
@@ -173,6 +178,8 @@ public class CustomerView extends JFrame {
 		inLeftButtom.setBorder(new EmptyBorder(new Insets(0, 0, 100, 0)));
 
 		// ADDING PANELS TO THE LEFT PANEL IN MAIN PANEL
+		left.add(inLeftTopOne, BorderLayout.PAGE_START);
+		left.add(inLeftTopNameSur, BorderLayout.PAGE_START);
 		left.add(inLeftTop, BorderLayout.PAGE_START);
 		left.add(inLeftCenter, BorderLayout.CENTER);
 		left.add(inLeftButtom, BorderLayout.PAGE_END);

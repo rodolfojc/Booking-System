@@ -26,7 +26,7 @@ public class ProviderView extends JFrame {
 	private JScrollPane scrollAvaiTable, scrollBookedTable;
 	private String[][] dataTableAvai, dataTableBooked;
 	private int proID;
-	private String proName, proSurName, proEmail, proLocation;
+	private String proName, proSurName, proMobile, proAddress, proEmail, proLocation;
 	private int selectedRow, selectedRowTow;
 	private JButton confirm, cancel, setDone, showComment;
 	private String[] hrs = { "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",

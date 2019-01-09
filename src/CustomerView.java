@@ -170,8 +170,8 @@ public class CustomerView extends JFrame {
 //		JPanel inLeftTopAdress = new JPanel();
 //		JPanel inLeftTopMobile = new JPanel();
 		
-		this.custView.addLabel("PROFILE ", inLeftTop);
-		this.custView.addLabel("", inLeftTop);
+		this.custView.addLabel("User ID:  ", inLeftTop);
+		this.custView.addLabel("CUST"+Integer.toString(this.customerID), inLeftTop);
 		this.custView.addLabel("Name: ", inLeftTop);
 		this.custView.addLabel(this.custName+" "+this.custSurName, inLeftTop);
 		this.custView.addLabel("Email: ", inLeftTop);

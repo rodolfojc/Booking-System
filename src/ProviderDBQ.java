@@ -21,7 +21,7 @@ public class ProviderDBQ {
 	// METHOD TO GET DATA OF THE PROVIDER LOGGED
 	public void providerLogged() {
 
-		String query = "SELECT pro_id, pro_name, pro_surname, location FROM providers WHERE email='"
+		String query = "SELECT pro_id, pro_name, pro_surname, mob_num, address, location FROM providers WHERE email='"
 				+ this.proView.getProviderEmail() + "';";
 
 		try {
@@ -29,10 +29,12 @@ public class ProviderDBQ {
 			this.proDB.rs = this.proDB.stmt.executeQuery(query);
 
 			while (this.proDB.rs.next()) {
-				proView.setProviderID(this.proDB.rs.getInt("pro_id"));
-				proView.setProviderName(this.proDB.rs.getString("pro_name"));
-				proView.setProviderSurName(this.proDB.rs.getString("pro_surname"));
-				proView.setProviderLocation(this.proDB.rs.getString("location"));
+				this.proView.setProviderID(this.proDB.rs.getInt("pro_id"));
+				this.proView.setProviderName(this.proDB.rs.getString("pro_name"));
+				this.proView.setProviderSurName(this.proDB.rs.getString("pro_surname"));
+				this.proView.setProviderMobile(this.proDB.rs.getString("mob_num"));
+				this.proView.setProviderAddress(this.proDB.rs.getString("address"));
+				this.proView.setProviderLocation(this.proDB.rs.getString("location"));
 			}
 
 			this.proDB.rs.close();

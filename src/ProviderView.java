@@ -149,8 +149,16 @@ public class ProviderView extends JFrame {
 		return this.proAddress;
 	}
 	
+	public void setProviderAddress(String proAddr){
+		this.proAddress = proAddr;
+	}
+	
 	public String getProviderMobile() {
 		return this.proMobile;
+	}
+	
+	public void setProviderMobile(String proMob) {
+		this.proMobile = proMob;
 	}
 
 	public String getHrs(int i) {

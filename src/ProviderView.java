@@ -144,6 +144,14 @@ public class ProviderView extends JFrame {
 	public String getProviderEmail() {
 		return this.proEmail;
 	}
+	
+	public String getProviderAddress() {
+		return this.proAddress;
+	}
+	
+	public String getProviderMobile() {
+		return this.proMobile;
+	}
 
 	public String getHrs(int i) {
 		return this.hrs[i];

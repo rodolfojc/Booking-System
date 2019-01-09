@@ -162,14 +162,7 @@ public class CustomerView extends JFrame {
 		// LEFT PANEL FOR TOP IN BORDERLAYOUT
 		JPanel inLeftTop = new JPanel();
 		this.custView.setGrid(6, 2, inLeftTop);
-		
-		
-//		JPanel inLeftTopOne = new JPanel();
-//		JPanel inLeftTopNameSur = new JPanel();
-//		JPanel inLeftTopEmail = new JPanel();
-//		JPanel inLeftTopAdress = new JPanel();
-//		JPanel inLeftTopMobile = new JPanel();
-		
+				
 		this.custView.addLabel("User ID:  ", inLeftTop);
 		this.custView.addLabel("CUST"+Integer.toString(this.customerID), inLeftTop);
 		this.custView.addLabel("Name: ", inLeftTop);
@@ -185,21 +178,6 @@ public class CustomerView extends JFrame {
 		this.updatePro.setPreferredSize(new Dimension(0,20));
 		this.updatePro.setActionCommand("Edit");
 		this.updatePro.addActionListener(custController);
-		
-		
-//		this.custView.addLabel("Personal details", inLeftTopOne);
-//		this.custView.addLabel("Name: "+this.custName+" "+this.custSurName+"", inLeftTopNameSur);
-//		this.custView.addLabel("Email: "+this.custEmail, inLeftTopEmail);
-//		this.custView.addLabel("Address: "+this.custAddress, inLeftTopAdress);
-//		this.custView.addLabel("Mobile: "+this.custMobile, inLeftTopMobile);
-		
-//		inLeftTop.add(inLeftTopOne);
-//		inLeftTop.add(inLeftTopNameSur);
-//		inLeftTop.add(inLeftTopEmail);
-//		inLeftTop.add(inLeftTopAdress);
-//		inLeftTop.add(inLeftTopMobile);
-		
-		//inLeftTop.add(inLeftCenterSearch);
 		inLeftTop.setBorder(new EmptyBorder(new Insets(10, 25, 0, 25)));
 
 		// LEFT PANEL - FOR CENTER IN BORDERLAYOUT

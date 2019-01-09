@@ -17,7 +17,7 @@ public class CustomerView extends JFrame {
 	// GLOBAL VARIABLES - DECLARATION
 	private View custView;
 	private JComboBox option;
-	private JButton search, get, logout, cancel, set;
+	private JButton search, get, logout, cancel, set, updatePro;
 	private String custName, custSurName, custEmail, custAddress, custMobile;
 	private String[][] dataTableAvai, dataTableStatus;
 	private JScrollPane scrollAvai, scrollStatus;
@@ -161,7 +161,7 @@ public class CustomerView extends JFrame {
 
 		// LEFT PANEL FOR TOP IN BORDERLAYOUT
 		JPanel inLeftTop = new JPanel();
-		this.custView.setGrid(5, 2, inLeftTop);
+		this.custView.setGrid(6, 2, inLeftTop);
 		
 		
 //		JPanel inLeftTopOne = new JPanel();
@@ -180,6 +180,12 @@ public class CustomerView extends JFrame {
 		this.custView.addLabel(this.custAddress, inLeftTop);
 		this.custView.addLabel("Mobile: ", inLeftTop);
 		this.custView.addLabel(this.custMobile, inLeftTop);
+		this.custView.addLabel("", inLeftTop);
+		this.updatePro = this.custView.addButton("Edit", inLeftTop);
+		this.updatePro.setPreferredSize(new Dimension(0,20));
+		this.updatePro.setActionCommand("Edit");
+		this.updatePro.addActionListener(custController);
+		
 		
 //		this.custView.addLabel("Personal details", inLeftTopOne);
 //		this.custView.addLabel("Name: "+this.custName+" "+this.custSurName+"", inLeftTopNameSur);

@@ -39,7 +39,7 @@ public class CustomerView extends JFrame {
 		this.dataTableAvai = new String[40][5];
 		this.dataTableStatus = new String[40][7];
 		// NEW INSTANCE OF VIEW FOR CUSTOMER VIEW
-		this.custView = new View("Customer Manager", 960, 550, false);
+		this.custView = new View("Customer Manager", 980, 550, false);
 		costumerViewSetup();
 	}
 	
@@ -161,28 +161,55 @@ public class CustomerView extends JFrame {
 
 		// LEFT PANEL FOR TOP IN BORDERLAYOUT
 		JPanel inLeftTop = new JPanel();
-		this.custView.setBox(inLeftTop, 1);
+		this.custView.setGrid(5, 2, inLeftTop);
 		
-		JPanel inLeftTopOne = new JPanel();
-		JPanel inLeftTopNameSur = new JPanel();
-		JPanel inLeftTopSearch = new JPanel();
-		this.custView.addLabel("Name: ", inLeftTopNameSur);
-		this.custView.addLabel(this.custName+" "+this.custSurName, inLeftTopNameSur);
-		this.custView.addLabel("Personal details", inLeftTopOne);
-		this.custView.addLabel("Find appointment by: ", inLeftTopSearch);
-		this.option = this.custView.addComboB(searchOp, inLeftTopSearch);
-		this.byInput = this.custView.addTextField(10, inLeftTopSearch);
-		inLeftTop.add(inLeftTopOne);
-		inLeftTop.add(inLeftTopNameSur);
-		inLeftTop.add(inLeftTopSearch);
-		inLeftTop.setBorder(new EmptyBorder(new Insets(50, 0, 0, 0)));
+		
+//		JPanel inLeftTopOne = new JPanel();
+//		JPanel inLeftTopNameSur = new JPanel();
+//		JPanel inLeftTopEmail = new JPanel();
+//		JPanel inLeftTopAdress = new JPanel();
+//		JPanel inLeftTopMobile = new JPanel();
+		
+		this.custView.addLabel("PROFILE ", inLeftTop);
+		this.custView.addLabel("", inLeftTop);
+		this.custView.addLabel("Name: ", inLeftTop);
+		this.custView.addLabel(this.custName+" "+this.custSurName, inLeftTop);
+		this.custView.addLabel("Email: ", inLeftTop);
+		this.custView.addLabel(this.custEmail, inLeftTop);
+		this.custView.addLabel("Address: ", inLeftTop);
+		this.custView.addLabel(this.custAddress, inLeftTop);
+		this.custView.addLabel("Mobile: ", inLeftTop);
+		this.custView.addLabel(this.custMobile, inLeftTop);
+		
+//		this.custView.addLabel("Personal details", inLeftTopOne);
+//		this.custView.addLabel("Name: "+this.custName+" "+this.custSurName+"", inLeftTopNameSur);
+//		this.custView.addLabel("Email: "+this.custEmail, inLeftTopEmail);
+//		this.custView.addLabel("Address: "+this.custAddress, inLeftTopAdress);
+//		this.custView.addLabel("Mobile: "+this.custMobile, inLeftTopMobile);
+		
+//		inLeftTop.add(inLeftTopOne);
+//		inLeftTop.add(inLeftTopNameSur);
+//		inLeftTop.add(inLeftTopEmail);
+//		inLeftTop.add(inLeftTopAdress);
+//		inLeftTop.add(inLeftTopMobile);
+		
+		//inLeftTop.add(inLeftCenterSearch);
+		inLeftTop.setBorder(new EmptyBorder(new Insets(10, 25, 0, 25)));
 
 		// LEFT PANEL - FOR CENTER IN BORDERLAYOUT
 		JPanel inLeftCenter = new JPanel();
-		this.search = this.custView.addButton("Search", inLeftCenter);
+		this.custView.setBox(inLeftCenter, 1);
+		JPanel inLeftCenterSearch = new JPanel();
+		JPanel inLeftCenterBtn = new JPanel();
+		this.custView.addLabel("Find appointment by: ", inLeftCenterSearch);
+		this.option = this.custView.addComboB(searchOp, inLeftCenterSearch);
+		this.byInput = this.custView.addTextField(10, inLeftCenterSearch);
+		this.search = this.custView.addButton("Search", inLeftCenterBtn);
 		this.search.setActionCommand("Search");
 		this.search.addActionListener(custController);
-		inLeftCenter.setBorder(new EmptyBorder(new Insets(15, 0, 0, 0)));
+		inLeftCenter.add(inLeftCenterSearch);
+		inLeftCenter.add(inLeftCenterBtn);
+		inLeftCenter.setBorder(new EmptyBorder(new Insets(25, 0, 0, 0)));
 
 		// LEFT PANEL - FOR BUTTOM IN BORDERLAYOUT
 		JPanel inLeftButtom = new JPanel();

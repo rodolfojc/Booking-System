@@ -32,7 +32,7 @@ public class CustomerDBQ {
 				this.custView.setCustomerName(this.data.rs.getString("cust_name"));
 				this.custView.setCustmerSurName(this.data.rs.getString("cust_surname"));
 				this.custView.setCustomerAddress(this.data.rs.getString("address"));
-				this.custView.setCustomerMobile(this.data.rs.getString("address"));
+				this.custView.setCustomerMobile(this.data.rs.getString("mob_num"));
 			}
 
 			this.data.rs.close();

@@ -18,7 +18,7 @@ public class CustomerView extends JFrame {
 	private View custView;
 	private JComboBox option;
 	private JButton search, get, logout, cancel, set;
-	private String custName, custSurName, custEmail;
+	private String custName, custSurName, custEmail, custAddress, custMobile;
 	private String[][] dataTableAvai, dataTableStatus;
 	private JScrollPane scrollAvai, scrollStatus;
 	private JTextField byInput;
@@ -42,7 +42,7 @@ public class CustomerView extends JFrame {
 		this.custView = new View("Customer Manager", 960, 550, false);
 		costumerViewSetup();
 	}
-
+	
 	// GETTER AND SETTER FOR GLOBAL VARIABLES
 	
 	public ListSelectionModel getModel() {
@@ -64,7 +64,7 @@ public class CustomerView extends JFrame {
 	public String getCustSurN() {
 		return this.custSurName;
 	}
-
+	
 	public String getByOption() {
 		return searchOp[option.getSelectedIndex()];
 	}
@@ -116,6 +116,14 @@ public class CustomerView extends JFrame {
 	public void setCustomerName(String custNam) {
 		this.custName = custNam;
 	}
+	
+	public void setCustomerAddress(String custAddr) {
+		this.custAddress = custAddr;
+	}
+	
+	public void setCustomerMobile(String custMob) {
+		this.custMobile = custMob;
+	}
 
 	public void setCustmerSurName(String custSur) {
 		this.custSurName = custSur;
@@ -153,14 +161,20 @@ public class CustomerView extends JFrame {
 
 		// LEFT PANEL FOR TOP IN BORDERLAYOUT
 		JPanel inLeftTop = new JPanel();
+		this.custView.setBox(inLeftTop, 1);
+		
 		JPanel inLeftTopOne = new JPanel();
 		JPanel inLeftTopNameSur = new JPanel();
+		JPanel inLeftTopSearch = new JPanel();
 		this.custView.addLabel("Name: ", inLeftTopNameSur);
 		this.custView.addLabel(this.custName+" "+this.custSurName, inLeftTopNameSur);
 		this.custView.addLabel("Personal details", inLeftTopOne);
-		this.custView.addLabel("Find appointment by: ", inLeftTop);
-		this.option = this.custView.addComboB(searchOp, inLeftTop);
-		this.byInput = this.custView.addTextField(10, inLeftTop);
+		this.custView.addLabel("Find appointment by: ", inLeftTopSearch);
+		this.option = this.custView.addComboB(searchOp, inLeftTopSearch);
+		this.byInput = this.custView.addTextField(10, inLeftTopSearch);
+		inLeftTop.add(inLeftTopOne);
+		inLeftTop.add(inLeftTopNameSur);
+		inLeftTop.add(inLeftTopSearch);
 		inLeftTop.setBorder(new EmptyBorder(new Insets(50, 0, 0, 0)));
 
 		// LEFT PANEL - FOR CENTER IN BORDERLAYOUT
@@ -178,8 +192,6 @@ public class CustomerView extends JFrame {
 		inLeftButtom.setBorder(new EmptyBorder(new Insets(0, 0, 100, 0)));
 
 		// ADDING PANELS TO THE LEFT PANEL IN MAIN PANEL
-		left.add(inLeftTopOne, BorderLayout.PAGE_START);
-		left.add(inLeftTopNameSur, BorderLayout.PAGE_START);
 		left.add(inLeftTop, BorderLayout.PAGE_START);
 		left.add(inLeftCenter, BorderLayout.CENTER);
 		left.add(inLeftButtom, BorderLayout.PAGE_END);

@@ -20,7 +20,8 @@ public class Controller implements ActionListener {
 		// NEW INSTANCE OF LOGIN VIEW
 		Database cleanAvai = new Database();
 		cleanAvai.cleanAvailabilities();
-		this.login = new Login(this);
+		this.custController = new CustomerController("rodolfo@rodolfo.com", this.login);
+		//this.login = new Login(this);
 		
 	}
 

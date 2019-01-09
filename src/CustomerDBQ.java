@@ -20,7 +20,7 @@ public class CustomerDBQ {
 	// METHOD TO GET DATA OF THE CUSTOMER LOGGED
 	public void customerLogged() {
 
-		String query = "SELECT cust_id, cust_name, cust_surname FROM customers WHERE email='"
+		String query = "SELECT cust_id, cust_name, cust_surname, address, mob_num FROM customers WHERE email='"
 				+ this.custView.getCustomerEmail() + "';";
 
 		try {
@@ -28,9 +28,11 @@ public class CustomerDBQ {
 			this.data.rs = this.data.stmt.executeQuery(query);
 
 			while (this.data.rs.next()) {
-				custView.setCustomerID(this.data.rs.getInt("cust_id"));
-				custView.setCustomerName(this.data.rs.getString("cust_name"));
-				custView.setCustmerSurName(this.data.rs.getString("cust_surname"));
+				this.custView.setCustomerID(this.data.rs.getInt("cust_id"));
+				this.custView.setCustomerName(this.data.rs.getString("cust_name"));
+				this.custView.setCustmerSurName(this.data.rs.getString("cust_surname"));
+				this.custView.setCustomerAddress(this.data.rs.getString("address"));
+				this.custView.setCustomerMobile(this.data.rs.getString("address"));
 			}
 
 			this.data.rs.close();

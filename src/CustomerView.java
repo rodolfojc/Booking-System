@@ -207,6 +207,7 @@ public class CustomerView extends JFrame {
 		this.custView.setBox(inLeftCenter, 1);
 		JPanel inLeftCenterSearch = new JPanel();
 		JPanel inLeftCenterBtn = new JPanel();
+		inLeftCenterBtn.setBorder(new EmptyBorder(new Insets(0, 0, 100, 0)));
 		this.custView.addLabel("Find appointment by: ", inLeftCenterSearch);
 		this.option = this.custView.addComboB(searchOp, inLeftCenterSearch);
 		this.byInput = this.custView.addTextField(10, inLeftCenterSearch);

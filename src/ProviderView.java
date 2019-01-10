@@ -191,19 +191,20 @@ public class ProviderView extends JFrame {
 
 		// LEFT PANEL FOR TOP IN BORDERLAYOUT
 		JPanel inleftTop = new JPanel();
-		this.proView.addLabel("Add Availability: ", inleftTop);
+		this.proView.setGrid(6, 2, inleftTop);
+
+		// LEFT PANEL - FOR CENTER IN BORDERLAYOUT
+		JPanel inLeftCenter = new JPanel();
+		this.proView.addLabel("Add Availability: ", inLeftCenter);
 		// CREATING A CALENDAR AND GIVING FORMAT YYY-MM-DD
-		this.calendar = this.proView.addCalen(inleftTop);
+		this.calendar = this.proView.addCalen(inLeftCenter);
 		//SETTING CALENDAR RANGE 
 		Calendar calMin = Calendar.getInstance();
 		this.calendar.setMinSelectableDate(calMin.getTime());
 		Calendar calMax = Calendar.getInstance();
 		calMax.add(Calendar.DATE, 90); //ADD 30 DAYS FROM CURRENT (TODAY)
 		this.calendar.setMaxSelectableDate(calMax.getTime());
-		this.hr = this.proView.addComboB(hrs, inleftTop);
-
-		// LEFT PANEL - FOR CENTER IN BORDERLAYOUT
-		JPanel inLeftCenter = new JPanel();
+		this.hr = this.proView.addComboB(hrs, inLeftCenter);
 		this.add = this.proView.addButton("Add", inLeftCenter);
 		this.add.setActionCommand("Add");
 		// add.addActionListener(controller);

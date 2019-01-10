@@ -20,7 +20,7 @@ public class ProviderView extends JFrame {
 	// GLOBAL VARIABLES - DECLARATION
 	private View proView;
 	private ProviderController proController;
-	private JButton add, logout;
+	private JButton add, logout, updatePro;
 	private JDateChooser calendar;
 	private JComboBox hr;
 	private JScrollPane scrollAvaiTable, scrollBookedTable;
@@ -190,11 +190,31 @@ public class ProviderView extends JFrame {
 		this.proView.setBorder(left);
 
 		// LEFT PANEL FOR TOP IN BORDERLAYOUT
-		JPanel inleftTop = new JPanel();
-		this.proView.setGrid(6, 2, inleftTop);
-
+		JPanel inLeftTop = new JPanel();
+		this.proView.setGrid(7, 2, inLeftTop);
+		
+		this.proView.addLabel("User ID:  ", inLeftTop);
+		this.proView.addLabel("PROV"+Integer.toString(this.proID), inLeftTop);
+		this.proView.addLabel("Name: ", inLeftTop);
+		this.proView.addLabel(this.proName+" "+this.proSurName, inLeftTop);
+		this.proView.addLabel("Email: ", inLeftTop);
+		this.proView.addLabel(this.proEmail, inLeftTop);
+		this.proView.addLabel("Mobile: ", inLeftTop);
+		this.proView.addLabel(this.proMobile, inLeftTop);
+		this.proView.addLabel("Address: ", inLeftTop);
+		this.proView.addLabel(this.proAddress, inLeftTop);
+		this.proView.addLabel("Location: ", inLeftTop);
+		this.proView.addLabel(this.proLocation, inLeftTop);
+		this.proView.addLabel("", inLeftTop);
+		this.updatePro = this.proView.addButton("Edit", inLeftTop);
+		this.updatePro.setPreferredSize(new Dimension(0,20));
+		this.updatePro.setActionCommand("Edit");
+		this.updatePro.addActionListener(this.proController);
+		inLeftTop.setBorder(new EmptyBorder(new Insets(10, 25, 0, 25)));
+		
 		// LEFT PANEL - FOR CENTER IN BORDERLAYOUT
 		JPanel inLeftCenter = new JPanel();
+		inLeftCenter.setBorder(new EmptyBorder(new Insets(25, 0, 0, 0)));
 		this.proView.addLabel("Add Availability: ", inLeftCenter);
 		// CREATING A CALENDAR AND GIVING FORMAT YYY-MM-DD
 		this.calendar = this.proView.addCalen(inLeftCenter);
@@ -215,10 +235,10 @@ public class ProviderView extends JFrame {
 		this.logout = this.proView.addButton("Logout", inLeftButtom);
 		this.logout.setActionCommand("Logout");
 		this.logout.addActionListener(proController);
-		inLeftButtom.setBorder(new EmptyBorder(new Insets(0, 0, 100, 0)));
+		inLeftButtom.setBorder(new EmptyBorder(new Insets(0, 0, 75, 0)));
 
 		// ADDING PANELS TO THE LEFT PANEL IN MAIN PANEL
-		left.add(inleftTop, BorderLayout.PAGE_START);
+		left.add(inLeftTop, BorderLayout.PAGE_START);
 		left.add(inLeftCenter, BorderLayout.CENTER);
 		left.add(inLeftButtom, BorderLayout.PAGE_END);
 

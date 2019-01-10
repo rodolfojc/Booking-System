@@ -177,7 +177,7 @@ public class CustomerView extends JFrame {
 		this.updatePro = this.custView.addButton("Edit", inLeftTop);
 		this.updatePro.setPreferredSize(new Dimension(0,20));
 		this.updatePro.setActionCommand("Edit");
-		this.updatePro.addActionListener(custController);
+		this.updatePro.addActionListener(this.custController);
 		inLeftTop.setBorder(new EmptyBorder(new Insets(10, 25, 0, 25)));
 
 		// LEFT PANEL - FOR CENTER IN BORDERLAYOUT

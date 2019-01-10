@@ -21,8 +21,8 @@ public class Controller implements ActionListener {
 		Database cleanAvai = new Database();
 		cleanAvai.cleanAvailabilities();
 		//this.custController = new CustomerController("rodolfo@rodolfo.com", this.login);
-		this.proController = new ProviderController("manuel@manuel.com", this.login);
-		//this.login = new Login(this);
+		//this.proController = new ProviderController("manuel@manuel.com", this.login);
+		this.login = new Login(this);
 		
 	}
 

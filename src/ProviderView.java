@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -13,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
+
 import com.toedter.calendar.JDateChooser;
 
 public class ProviderView extends JFrame {
@@ -20,8 +23,8 @@ public class ProviderView extends JFrame {
 	// GLOBAL VARIABLES - DECLARATION
 	private View proView;
 	private ProviderController proController;
-	private JButton add, logout, updatePro;
-	private JDateChooser calendar;
+	private JButton addManual, addByDay, logout, updatePro;
+	private JDateChooser calendarManual, calendarByDay;
 	private JComboBox hr;
 	private JScrollPane scrollAvaiTable, scrollBookedTable;
 	private String[][] dataTableAvai, dataTableBooked;
@@ -42,8 +45,8 @@ public class ProviderView extends JFrame {
 		this.proEmail = email;
 		getUserData(); // METHOD THAT GET THE DATA WITH THE EMAIL PRIVIDED IN LOGIN
 		// ARRAYS FOR DATA INSTANTIATION
-		this.dataTableAvai = new String[40][3];
-		this.dataTableBooked = new String[40][7];
+		this.dataTableAvai = new String[100][3];
+		this.dataTableBooked = new String[100][7];
 		// NEW INSTANCE OF VIEW FOR PROVIDER VIEW
 		this.proView = new View("Provider Manager", 1200, 400, false);
 		providerViewSetup();
@@ -51,7 +54,7 @@ public class ProviderView extends JFrame {
 
 	public java.sql.Date getDatE() throws ParseException {
 		SimpleDateFormat myDateSimp = new SimpleDateFormat("yyy-MM-dd"); // "yyyy-MM-dd"
-		String dateStr = myDateSimp.format(calendar.getDate());
+		String dateStr = myDateSimp.format(calendarManual.getDate());
 		java.util.Date getCalendar;
 		java.sql.Date dateSql;
 		getCalendar = myDateSimp.parse(dateStr);
@@ -213,33 +216,56 @@ public class ProviderView extends JFrame {
 		inLeftTop.setBorder(new EmptyBorder(new Insets(10, 25, 0, 25)));
 		
 		// LEFT PANEL - FOR CENTER IN BORDERLAYOUT
-		JPanel inLeftCenter = new JPanel();
-		inLeftCenter.setBorder(new EmptyBorder(new Insets(25, 0, 0, 0)));
-		this.proView.addLabel("Add Availability: ", inLeftCenter);
+		JPanel inLeftCenterMain = new JPanel();
+		this.proView.setBox(inLeftCenterMain, 1);
+		inLeftCenterMain.setBorder(BorderFactory.createTitledBorder (BorderFactory.createEtchedBorder (),
+                "Add Availabilities",
+                TitledBorder.CENTER,
+                TitledBorder.TOP));
+		//inLeftCenterMain.setBorder(new EmptyBorder(new Insets(25, 0, 0, 0)));
+		
+		//TO ADD AVAILABILITY MANUALLY
+		JPanel inLeftCenterManual = new JPanel();
+		this.proView.addLabel("Add manually: ", inLeftCenterManual);
 		// CREATING A CALENDAR AND GIVING FORMAT YYY-MM-DD
-		this.calendar = this.proView.addCalen(inLeftCenter);
+		this.calendarManual = this.proView.addCalen(inLeftCenterManual);
 		//SETTING CALENDAR RANGE 
 		Calendar calMin = Calendar.getInstance();
-		this.calendar.setMinSelectableDate(calMin.getTime());
+		this.calendarManual.setMinSelectableDate(calMin.getTime());
 		Calendar calMax = Calendar.getInstance();
 		calMax.add(Calendar.DATE, 90); //ADD 30 DAYS FROM CURRENT (TODAY)
-		this.calendar.setMaxSelectableDate(calMax.getTime());
-		this.hr = this.proView.addComboB(hrs, inLeftCenter);
-		this.add = this.proView.addButton("Add", inLeftCenter);
-		this.add.setActionCommand("Add");
-		// add.addActionListener(controller);
-		this.add.addActionListener(proController);
+		this.calendarManual.setMaxSelectableDate(calMax.getTime());
+		this.hr = this.proView.addComboB(hrs, inLeftCenterManual);
+		this.addManual = this.proView.addButton("Add", inLeftCenterManual);
+		this.addManual.setActionCommand("Add");
+		this.addManual.addActionListener(proController);
+		
+		//TO ADD AVAILABILITY FOR FULL DAY
+		JPanel inLeftCenterByDay = new JPanel();
+		this.proView.addLabel("Add ALL DAY - Available   ", inLeftCenterByDay);
+		this.calendarByDay = this.proView.addCalen(inLeftCenterByDay);
+		//SETTING CALENDAR RANGE 
+		//Calendar calMin = Calendar.getInstance();
+		this.calendarByDay.setMinSelectableDate(calMin.getTime());
+		//Calendar calMax = Calendar.getInstance();
+		calMax.add(Calendar.DATE, 90); //ADD 30 DAYS FROM CURRENT (TODAY)
+		this.calendarByDay.setMaxSelectableDate(calMax.getTime());
+		this.addByDay = this.proView.addButton("Add", inLeftCenterByDay);
+		this.addByDay.setActionCommand("Add All");
+		this.addByDay.addActionListener(proController);
+		inLeftCenterMain.add(inLeftCenterManual);
+		inLeftCenterMain.add(inLeftCenterByDay);
 
 		// LEFT PANEL - FOR BUTTOM IN BORDERLAYOUT
 		JPanel inLeftButtom = new JPanel();
 		this.logout = this.proView.addButton("Logout", inLeftButtom);
 		this.logout.setActionCommand("Logout");
 		this.logout.addActionListener(proController);
-		inLeftButtom.setBorder(new EmptyBorder(new Insets(0, 0, 75, 0)));
+		inLeftButtom.setBorder(new EmptyBorder(new Insets(0, 0, 25, 0)));
 
 		// ADDING PANELS TO THE LEFT PANEL IN MAIN PANEL
 		left.add(inLeftTop, BorderLayout.PAGE_START);
-		left.add(inLeftCenter, BorderLayout.CENTER);
+		left.add(inLeftCenterMain, BorderLayout.CENTER);
 		left.add(inLeftButtom, BorderLayout.PAGE_END);
 
 		// CENTER PANEL IN MAIN PANEL
@@ -276,8 +302,7 @@ public class ProviderView extends JFrame {
 		proDBbooked.toBeConfirmPro();
 
 		// CREATING A TABLE INDEX 1, CALLING METHOD ADDTABLES (VIEW CLASS METHOD)
-		this.scrollBookedTable = this.proView.addTableS(1, this.dataTableBooked, columnsNamAppoint, rightTable,
-				"Appointments");
+		this.scrollBookedTable = this.proView.addTableS(1, this.dataTableBooked, columnsNamAppoint, rightTable, "Appointments");
 		this.scrollBookedTable.setPreferredSize(new Dimension(250, 250));
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 1

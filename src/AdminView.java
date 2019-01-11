@@ -29,10 +29,10 @@ public class AdminView extends JFrame {
 		this.adminController = AdminController;
 		this.adminUser = adminUser;
 		// ARRAYS FOR DATA INSTANTIATION
-		this.dataCust = new String[30][3];
-		this.dataPro = new String[30][5];
-		this.dataAvai = new String[30][5];
-		this.dataAppoint = new String[30][4];
+		this.dataCust = new String[500][3];
+		this.dataPro = new String[500][5];
+		this.dataAvai = new String[1000][5];
+		this.dataAppoint = new String[1000][4];
 		this.dataAdmin = new String[30][3];
 		// NEW INSTANCE OF VIEW FOR ADMINISTRATOR VIEW
 		this.adminView = new View("Administrators Manager", 1300, 800, false);

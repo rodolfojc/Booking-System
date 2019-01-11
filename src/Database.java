@@ -252,7 +252,7 @@ public class Database {
 
 		String query = "";
 
-		String[][] data = new String[20][5];
+		String[][] data = new String[100][5];
 
 		try {
 

@@ -21,7 +21,7 @@ public class Login extends JFrame {
 	public Login(Controller controller) {
 
 		// NEW INSTANCE OF VIEW TO BUILD LOGIN VIEW, CONTROLLER, AND FRAME SETUP
-		login = new View("Online Appointment System", 400, 600, false);
+		this.login = new View("Online Appointment System", 400, 600, false);
 		this.controller = controller;
 		setupLoginFrame();
 	}
@@ -56,7 +56,9 @@ public class Login extends JFrame {
 
 		// MAIN LAYOUT FOR MAIN PANEL
 		this.login.setBox(login.panel, 1);
-
+		
+		
+		
 		// MENU
 		JMenu about = login.addMenu("Help");
 		this.login.addMenuItem(about, "Admin email: admin@admin.admin");
@@ -79,6 +81,9 @@ public class Login extends JFrame {
 		this.enterBtn = login.addButton("Login", bottom);
 		this.enterBtn.setActionCommand("Enter");
 		this.enterBtn.addActionListener(controller);
+		//SET ENTER BUTTON AS DEFAULT IF THE KEY "ENTER" IS PRESSED
+		this.login.getRootPane().setDefaultButton(enterBtn);
+		
 		this.login.addLabel("Not yet a member??", bottomTwo);
 		this.regBtn = login.addButton("Register here!", bottomTwo);
 		this.regBtn.setActionCommand("Open Register");

@@ -56,7 +56,7 @@ public class ProviderDBQ {
 
 			PreparedStatement preparedStmt = this.proDB.conn.prepareStatement(query);
 			preparedStmt.setInt(1, this.proView.getProviderID());
-			preparedStmt.setDate(2, this.proView.getDatE());
+			preparedStmt.setDate(2, this.proView.getDateManual());
 			preparedStmt.setString(3, this.proView.getHour());
 			preparedStmt.setString(4, "Yes");
 
@@ -73,13 +73,38 @@ public class ProviderDBQ {
 		this.proView.UpdateFrame();
 
 	}
+	
+	public void addAvailability(String hr) {
+
+		try {
+
+			String query = "INSERT INTO availabilities (pro_id, date, time, available)" + "VALUES (?, ?, ?, ?)";
+
+			PreparedStatement preparedStmt = this.proDB.conn.prepareStatement(query);
+			preparedStmt.setInt(1, this.proView.getProviderID());
+			preparedStmt.setDate(2, this.proView.getDateByDay());
+			preparedStmt.setString(3, hr);
+			preparedStmt.setString(4, "Yes");
+
+			preparedStmt.execute();
+			this.proDB.conn.close();
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this.proView, "Ups, there is a error! try again later", "Data Error!",
+					JOptionPane.ERROR_MESSAGE);
+			System.err.println("Got an exception!");
+			System.err.println(e.getMessage());
+		}
+	
+	}
+
 
 	// TO GET DATA OF CURRENT AVAILABILITIES
 	public void availableProvTable() {
 
 		String query = "SELECT avai_ref, date, time FROM availabilities av INNER JOIN providers pr ON av.pro_id = pr.pro_id  "
 				+ "WHERE email='" + this.proView.getProviderEmail() + "' AND available='Yes';";
-		String[][] data = new String[20][3];
+		String[][] data = new String[1000][3];
 
 		try {
 

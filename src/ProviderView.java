@@ -45,16 +45,26 @@ public class ProviderView extends JFrame {
 		this.proEmail = email;
 		getUserData(); // METHOD THAT GET THE DATA WITH THE EMAIL PRIVIDED IN LOGIN
 		// ARRAYS FOR DATA INSTANTIATION
-		this.dataTableAvai = new String[100][3];
-		this.dataTableBooked = new String[100][7];
+		this.dataTableAvai = new String[1000][3];
+		this.dataTableBooked = new String[1000][7];
 		// NEW INSTANCE OF VIEW FOR PROVIDER VIEW
 		this.proView = new View("Provider Manager", 1200, 400, false);
 		providerViewSetup();
 	}
 
-	public java.sql.Date getDatE() throws ParseException {
+	public java.sql.Date getDateManual() throws ParseException {
 		SimpleDateFormat myDateSimp = new SimpleDateFormat("yyy-MM-dd"); // "yyyy-MM-dd"
 		String dateStr = myDateSimp.format(calendarManual.getDate());
+		java.util.Date getCalendar;
+		java.sql.Date dateSql;
+		getCalendar = myDateSimp.parse(dateStr);
+		dateSql = new java.sql.Date(getCalendar.getTime());
+		return dateSql;
+	}
+	
+	public java.sql.Date getDateByDay() throws ParseException {
+		SimpleDateFormat myDateSimp = new SimpleDateFormat("yyy-MM-dd"); // "yyyy-MM-dd"
+		String dateStr = myDateSimp.format(calendarByDay.getDate());
 		java.util.Date getCalendar;
 		java.sql.Date dateSql;
 		getCalendar = myDateSimp.parse(dateStr);

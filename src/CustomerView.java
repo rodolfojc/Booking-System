@@ -36,8 +36,8 @@ public class CustomerView extends JFrame {
 		this.custEmail = email;
 		getUserData(); // METHOD THAT GET THE DATA WITH THE EMAIL PRIVIDED IN LOGIN
 		// ARRAYS FOR DATA INSTANTIATION
-		this.dataTableAvai = new String[100][5];
-		this.dataTableStatus = new String[100][7];
+		this.dataTableAvai = new String[1000][5];
+		this.dataTableStatus = new String[1000][7];
 		// NEW INSTANCE OF VIEW FOR CUSTOMER VIEW
 		this.custView = new View("Customer Manager", 980, 550, false);
 		costumerViewSetup();

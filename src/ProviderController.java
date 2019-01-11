@@ -30,6 +30,20 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			proDB.addAvailability();
 
 		}
+		
+		//TO ADD ALL DAY AVAILABLE
+		if (e.getActionCommand().equals("Add All")) {
+			
+			//FOR LOOP - WORKING HRS
+			for (int x = 0; x < 24; x++) {
+				String hr = this.proView.getHrs(x);
+				ProviderDBQ proDB = new ProviderDBQ(this.proView);
+				proDB.addAvailability(hr);
+			}
+
+			JOptionPane.showMessageDialog(this.proView, "Your availabilities have been added");
+			this.proView.UpdateFrame();
+		}
 
 		// TO CONFIRM APPOINTMENT SELECTED ON TABLE BY APPOINTMENT REFERENCE
 		if (e.getActionCommand().equals("Confirm")) {

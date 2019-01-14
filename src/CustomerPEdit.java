@@ -11,8 +11,10 @@ public class CustomerPEdit extends JFrame {
 	private JTextField email, mob, address;
 	private JButton submit, cancel;
 	
-	public CustomerPEdit() {
+	public CustomerPEdit(CustomerController CustController, CustomerView CustView) {
 	
+		this.custView = CustView;
+		this.custController = CustController;
 		this.custPedit = new View("Customer Profile Editor", 500, 300, true);
 		setupFrame();
 		
@@ -31,21 +33,21 @@ public class CustomerPEdit extends JFrame {
 		JPanel buttons = new JPanel();
 				
 		this.email = this.custPedit.addTextField(20, oldEmail);
-		this.email.setText("Old email");
+		this.email.setText(this.custView.getCustomerEmail());
 		this.email.setEditable(false);
 		
 		this.custPedit.addLabel("New email ", newEmail);
 		this.custPedit.addTextField(20, newEmail);
 		
 		this.mob = this.custPedit.addTextField(20, oldMob);
-		this.mob.setText("Old Mobile");
+		this.mob.setText(this.custView.getCustomerMobile());
 		this.mob.setEditable(false);
 		
 		this.custPedit.addLabel("New Mobile ", newMob);
 		this.custPedit.addTextField(20, newMob);
 		
 		this.address = this.custPedit.addTextField(20, oldAddress);
-		this.address.setText("Old Address");
+		this.address.setText(this.custView.getCustomerAddress());
 		this.address.setEditable(false);
 		
 		this.custPedit.addLabel("New Address ", newAddress);
@@ -56,7 +58,7 @@ public class CustomerPEdit extends JFrame {
 		this.submit.addActionListener(custController);
 		
 		this.cancel = this.custPedit.addButton("Cancel", buttons);
-		this.cancel.setActionCommand("Cancel");
+		this.cancel.setActionCommand("Cancel Edit");
 		this.cancel.addActionListener(custController);
 		
 		this.custPedit.panel.add(oldEmail);

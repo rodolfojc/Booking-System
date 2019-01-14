@@ -10,6 +10,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 	// GLOBAL VARIABLES - DECLARATION
 	private CustomerView custView;
 	private Login login;
+	private CustomerPEdit custPedit;
 
 	// CONSTRUCTOR
 	public CustomerController(String email, Login Login) {
@@ -79,6 +80,12 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			JOptionPane.showMessageDialog(this.custView, "See you soon!", "Logout", JOptionPane.INFORMATION_MESSAGE);
 			this.custView.getCustView().dispose();
 			this.login.getLogin().setVisible(true);
+		}
+		
+		if (e.getActionCommand().equals("Edit")) {
+			
+			this.custPedit = new CustomerPEdit(this, this.custView);
+			
 		}
 
 	}

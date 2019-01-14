@@ -121,8 +121,16 @@ public class CustomerView extends JFrame {
 		this.custAddress = custAddr;
 	}
 	
+	public String getCustomerAddress() {
+		return this.custAddress;
+	}
+	
 	public void setCustomerMobile(String custMob) {
 		this.custMobile = custMob;
+	}
+	
+	public String getCustomerMobile() {
+		return this.custMobile;
 	}
 
 	public void setCustmerSurName(String custSur) {
@@ -253,8 +261,8 @@ public class CustomerView extends JFrame {
 		center.add(tableStatus);
 
 		// LIST SELECTION LISTENER FOR TABLE INDEX 1
-		modelTwo = this.custView.myTable[1].getSelectionModel();
-		modelTwo.addListSelectionListener(this.custController);
+		this.modelTwo = this.custView.myTable[1].getSelectionModel();
+		this.modelTwo.addListSelectionListener(this.custController);
 
 		// BUTTONS
 		JPanel delBtn = new JPanel();

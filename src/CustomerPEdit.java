@@ -24,6 +24,7 @@ public class CustomerPEdit extends JFrame {
 		JPanel oldMob = new JPanel();
 		JPanel newMob = new JPanel();
 		JPanel oldAddress = new JPanel();
+		JPanel newAddress = new JPanel();
 				
 		this.email = this.custPedit.addTextField(20, oldEmail);
 		this.email.setText("Old email");
@@ -39,10 +40,19 @@ public class CustomerPEdit extends JFrame {
 		this.custPedit.addLabel("New Mobile ", newMob);
 		this.custPedit.addTextField(20, newMob);
 		
+		this.address = this.custPedit.addTextField(20, oldAddress);
+		this.address.setText("Old Address");
+		this.address.setEditable(false);
+		
+		this.custPedit.addLabel("New Address ", newAddress);
+		this.custPedit.addTextField(20, newAddress);
+		
 		this.custPedit.panel.add(oldEmail);
 		this.custPedit.panel.add(newEmail);
 		this.custPedit.panel.add(oldMob);
 		this.custPedit.panel.add(newMob);
+		this.custPedit.panel.add(oldAddress);
+		this.custPedit.panel.add(newAddress);
 		
 		
 		

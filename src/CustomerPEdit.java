@@ -32,26 +32,24 @@ public class CustomerPEdit extends JFrame {
 		JPanel newAddress = new JPanel();
 		JPanel buttons = new JPanel();
 				
-		this.email = this.custPedit.addTextField(20, oldEmail);
+		
+		this.custPedit.addLabel("Email ", newEmail);
+		this.email = this.custPedit.addTextField(20, newEmail);
 		this.email.setText(this.custView.getCustomerEmail());
 		this.email.setEditable(false);
+		this.custPedit.addButton("Edit",newEmail);
 		
-		this.custPedit.addLabel("New email ", newEmail);
-		this.custPedit.addTextField(20, newEmail);
-		
-		this.mob = this.custPedit.addTextField(20, oldMob);
+		this.custPedit.addLabel("Mobile ", newMob);		
+		this.mob = this.custPedit.addTextField(20, newMob);
 		this.mob.setText(this.custView.getCustomerMobile());
 		this.mob.setEditable(false);
+		this.custPedit.addButton("Edit",newMob);
 		
-		this.custPedit.addLabel("New Mobile ", newMob);
-		this.custPedit.addTextField(20, newMob);
-		
-		this.address = this.custPedit.addTextField(20, oldAddress);
+		this.custPedit.addLabel("Address ", newAddress);
+		this.address = this.custPedit.addTextField(20, newAddress);
 		this.address.setText(this.custView.getCustomerAddress());
 		this.address.setEditable(false);
-		
-		this.custPedit.addLabel("New Address ", newAddress);
-		this.custPedit.addTextField(20, newAddress);
+		this.custPedit.addButton("Edit",newAddress);
 		
 		this.submit = this.custPedit.addButton("Submit", buttons);
 		this.submit.setActionCommand("Submit");
@@ -61,11 +59,11 @@ public class CustomerPEdit extends JFrame {
 		this.cancel.setActionCommand("Cancel Edit");
 		this.cancel.addActionListener(custController);
 		
-		this.custPedit.panel.add(oldEmail);
+		//this.custPedit.panel.add(oldEmail);
 		this.custPedit.panel.add(newEmail);
-		this.custPedit.panel.add(oldMob);
+		//this.custPedit.panel.add(oldMob);
 		this.custPedit.panel.add(newMob);
-		this.custPedit.panel.add(oldAddress);
+		//this.custPedit.panel.add(oldAddress);
 		this.custPedit.panel.add(newAddress);
 		this.custPedit.panel.add(buttons);
 		

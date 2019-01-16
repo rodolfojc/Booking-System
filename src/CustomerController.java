@@ -95,6 +95,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 		if (e.getActionCommand().equals("Edit Email")) {
 			
 			this.custPedit.getCurrentEmail().setEditable(true);
+			this.custPedit.setEmailFlag(false);
 			this.custPedit.UpdateFrame();
 		}
 		
@@ -103,7 +104,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			this.custPedit.setNewEmail(this.custPedit.getCurrentEmail().getText());
 			System.out.println(this.custPedit.getCurrentEmail().getText());
 			//this.custPedit.getCurrentEmail().setEditable(false);
-			//this.custPedit.setEmailFlag(true);
+			this.custPedit.setEmailFlag(true);
 			this.custPedit.UpdateFrame();
 		}
 

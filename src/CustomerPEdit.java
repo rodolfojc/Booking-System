@@ -57,8 +57,6 @@ public class CustomerPEdit extends JFrame {
 		this.email.setText(this.currentEmail);
 		if (this.emailFlag) {
 			this.email.setEditable(false);
-		}else {
-			this.email.setEditable(true);
 		}		
 		this.editEmail = this.custPedit.addButton("Edit",newEmail);
 		this.editEmail.setActionCommand("Edit Email");
@@ -106,7 +104,6 @@ public class CustomerPEdit extends JFrame {
 	
 	public void UpdateFrame() {
 		this.custPedit.panel.removeAll();
-		this.emailFlag=false;
 		setupFrame();
 	}
 	

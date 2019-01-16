@@ -11,7 +11,7 @@ public class CustomerPEdit extends JFrame {
 	private JTextField email, mob, address;
 	private String currentEmail, currentMob, currentAddress;
 	private JButton editEmail, setNewEmail, editMob, setNewMob, editAddress, setNewAddress, submit, cancel;
-	private boolean emailFlag = true;
+	private boolean emailFlag = true, mobileFlag = true;
 	
 	public CustomerPEdit(CustomerController CustController, CustomerView CustView) {
 	
@@ -35,8 +35,20 @@ public class CustomerPEdit extends JFrame {
 		return this.email;
 	}
 	
+	public void setNewMobile(String newMobile) {
+		this.currentMob = newMobile;
+	}
+	
+	public JTextField getCurrentMobile() {
+		return this.mob;
+	}
+	
 	public void setEmailFlag(boolean flag) {
 		this.emailFlag = flag;
+	}
+	
+	public void setMobileFlag(boolean flag) {
+		this.mobileFlag = flag;
 	}
 	
 	public void setupFrame() {
@@ -55,9 +67,7 @@ public class CustomerPEdit extends JFrame {
 		this.custPedit.addLabel("Email ", newEmail);
 		this.email = this.custPedit.addTextField(20, newEmail);
 		this.email.setText(this.currentEmail);
-		if (this.emailFlag) {
-			this.email.setEditable(false);
-		}		
+		if (this.emailFlag) {this.email.setEditable(false);}		
 		this.editEmail = this.custPedit.addButton("Edit",newEmail);
 		this.editEmail.setActionCommand("Edit Email");
 		this.editEmail.addActionListener(custController);
@@ -67,11 +77,14 @@ public class CustomerPEdit extends JFrame {
 		
 		this.custPedit.addLabel("Mobile ", newMob);		
 		this.mob = this.custPedit.addTextField(20, newMob);
-		this.mob.setText(this.custView.getCustomerMobile());
-		this.mob.setEditable(false);
+		this.mob.setText(this.currentMob);
+		if (this.mobileFlag) {this.mob.setEditable(false);		}	
 		this.editMob = this.custPedit.addButton("Edit",newMob);
-		this.editMob.setActionCommand("Mobile Edit");
+		this.editMob.setActionCommand("Edit Mobile");
 		this.editMob.addActionListener(custController);
+		this.setNewMob = this.custPedit.addButton("Set", newMob);
+		this.setNewMob.setActionCommand("Set Mobile");
+		this.setNewMob.addActionListener(custController);
 		
 		this.custPedit.addLabel("Address ", newAddress);
 		this.address = this.custPedit.addTextField(20, newAddress);

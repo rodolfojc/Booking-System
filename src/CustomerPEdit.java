@@ -9,12 +9,16 @@ public class CustomerPEdit extends JFrame {
 	private CustomerView custView;
 	private CustomerController custController;
 	private JTextField email, mob, address;
-	private JButton editEmail, editMob, editAddress, submit, cancel;
+	private String currentEmail, currentMob, currentAddress;
+	private JButton editEmail, setNewEmail, editMob, setNewMob, editAddress, setNewAddress, submit, cancel;
 	private boolean emailFlag = true;
 	
 	public CustomerPEdit(CustomerController CustController, CustomerView CustView) {
 	
 		this.custView = CustView;
+		this.currentEmail = this.custView.getCustomerEmail();
+		this.currentMob = this.custView.getCustomerMobile();
+		this.currentAddress = this.custView.getCustomerAddress();
 		this.custController = CustController;
 		this.custPedit = new View("Customer Profile Editor", 500, 300, true);
 		setupFrame();
@@ -23,8 +27,16 @@ public class CustomerPEdit extends JFrame {
 	
 	//GETTERS AND SETTER
 	
+	public void setNewEmail(String newEmail) {
+		this.currentEmail = newEmail;
+	}
+	
 	public JTextField getCurrentEmail() {
 		return this.email;
+	}
+	
+	public void setEmailFlag(boolean flag) {
+		this.emailFlag = flag;
 	}
 	
 	public void setupFrame() {
@@ -42,13 +54,18 @@ public class CustomerPEdit extends JFrame {
 		
 		this.custPedit.addLabel("Email ", newEmail);
 		this.email = this.custPedit.addTextField(20, newEmail);
-		this.email.setText(this.custView.getCustomerEmail());
+		this.email.setText(this.currentEmail);
 		if (this.emailFlag) {
 			this.email.setEditable(false);
+		}else {
+			this.email.setEditable(true);
 		}		
 		this.editEmail = this.custPedit.addButton("Edit",newEmail);
-		this.editEmail.setActionCommand("Email Edit");
+		this.editEmail.setActionCommand("Edit Email");
 		this.editEmail.addActionListener(custController);
+		this.setNewEmail = this.custPedit.addButton("Set", newEmail);
+		this.setNewEmail.setActionCommand("Set Email");
+		this.setNewEmail.addActionListener(custController);
 		
 		this.custPedit.addLabel("Mobile ", newMob);		
 		this.mob = this.custPedit.addTextField(20, newMob);

@@ -10,6 +10,7 @@ public class CustomerPEdit extends JFrame {
 	private CustomerController custController;
 	private JTextField email, mob, address;
 	private JButton editEmail, editMob, editAddress, submit, cancel;
+	private boolean emailFlag = true;
 	
 	public CustomerPEdit(CustomerController CustController, CustomerView CustView) {
 	
@@ -18,6 +19,12 @@ public class CustomerPEdit extends JFrame {
 		this.custPedit = new View("Customer Profile Editor", 500, 300, true);
 		setupFrame();
 		
+	}
+	
+	//GETTERS AND SETTER
+	
+	public JTextField getCurrentEmail() {
+		return this.email;
 	}
 	
 	public void setupFrame() {
@@ -36,7 +43,9 @@ public class CustomerPEdit extends JFrame {
 		this.custPedit.addLabel("Email ", newEmail);
 		this.email = this.custPedit.addTextField(20, newEmail);
 		this.email.setText(this.custView.getCustomerEmail());
-		this.email.setEditable(false);
+		if (this.emailFlag) {
+			this.email.setEditable(false);
+		}		
 		this.editEmail = this.custPedit.addButton("Edit",newEmail);
 		this.editEmail.setActionCommand("Email Edit");
 		this.editEmail.addActionListener(custController);
@@ -76,6 +85,12 @@ public class CustomerPEdit extends JFrame {
 		this.custPedit.validate();
 		this.custPedit.repaint();
 		
+	}
+	
+	public void UpdateFrame() {
+		this.custPedit.panel.removeAll();
+		this.emailFlag=false;
+		setupFrame();
 	}
 	
 	

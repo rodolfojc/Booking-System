@@ -82,10 +82,17 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			this.login.getLogin().setVisible(true);
 		}
 		
+		//CREATE AN INSTANCE OF CUSTOMERPEDIT
 		if (e.getActionCommand().equals("Edit")) {
 			
 			this.custPedit = new CustomerPEdit(this, this.custView);
 			
+		}
+		
+		if (e.getActionCommand().equals("Email Edit")) {
+			
+			this.custPedit.getCurrentEmail().setEditable(true);
+			this.custPedit.UpdateFrame();
 		}
 
 	}

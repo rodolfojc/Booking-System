@@ -102,8 +102,21 @@ public class CustomerController implements ActionListener, ListSelectionListener
 		if (e.getActionCommand().equals("Set Email")) {
 			
 			this.custPedit.setNewEmail(this.custPedit.getCurrentEmail().getText());
-			System.out.println(this.custPedit.getCurrentEmail().getText());
 			this.custPedit.setEmailFlag(true);
+			this.custPedit.UpdateFrame();
+		}
+		
+		if (e.getActionCommand().equals("Edit Mobile")) {
+			
+			this.custPedit.getCurrentMobile().setEditable(true);
+			this.custPedit.setMobileFlag(false);
+			this.custPedit.UpdateFrame();
+		}
+		
+		if (e.getActionCommand().equals("Set Mobile")) {
+			
+			this.custPedit.setNewMobile(this.custPedit.getCurrentMobile().getText());
+			this.custPedit.setMobileFlag(true);
 			this.custPedit.UpdateFrame();
 		}
 

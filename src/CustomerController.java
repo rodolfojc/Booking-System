@@ -119,6 +119,20 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			this.custPedit.setMobileFlag(true);
 			this.custPedit.UpdateFrame();
 		}
+		
+		if (e.getActionCommand().equals("Edit Address")) {
+			
+			this.custPedit.getCurrentAddress().setEditable(true);
+			this.custPedit.setAddressFlag(false);
+			this.custPedit.UpdateFrame();
+		}
+		
+		if (e.getActionCommand().equals("Set Address")) {
+			
+			this.custPedit.setNewAddress(this.custPedit.getCurrentAddress().getText());
+			this.custPedit.setAddressFlag(true);
+			this.custPedit.UpdateFrame();
+		}
 
 	}
 

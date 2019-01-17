@@ -11,7 +11,7 @@ public class CustomerPEdit extends JFrame {
 	private JTextField email, mob, address;
 	private String currentEmail, currentMob, currentAddress;
 	private JButton editEmail, setNewEmail, editMob, setNewMob, editAddress, setNewAddress, submit, cancel;
-	private boolean emailFlag = true, mobileFlag = true;
+	private boolean emailFlag = true, mobileFlag = true, addressFlag = true;
 	
 	public CustomerPEdit(CustomerController CustController, CustomerView CustView) {
 	
@@ -43,12 +43,24 @@ public class CustomerPEdit extends JFrame {
 		return this.mob;
 	}
 	
+	public void setNewAddress(String newAdress) {
+		this.currentAddress = newAdress;
+	}
+	
+	public JTextField getCurrentAddress() {
+		return this.address;
+	}
+	
 	public void setEmailFlag(boolean flag) {
 		this.emailFlag = flag;
 	}
 	
 	public void setMobileFlag(boolean flag) {
 		this.mobileFlag = flag;
+	}
+	
+	public void setAddressFlag(boolean flag) {
+		this.addressFlag = flag;
 	}
 	
 	public void setupFrame() {
@@ -78,7 +90,7 @@ public class CustomerPEdit extends JFrame {
 		this.custPedit.addLabel("Mobile ", newMob);		
 		this.mob = this.custPedit.addTextField(20, newMob);
 		this.mob.setText(this.currentMob);
-		if (this.mobileFlag) {this.mob.setEditable(false);		}	
+		if (this.mobileFlag) {this.mob.setEditable(false);}	
 		this.editMob = this.custPedit.addButton("Edit",newMob);
 		this.editMob.setActionCommand("Edit Mobile");
 		this.editMob.addActionListener(custController);
@@ -88,14 +100,17 @@ public class CustomerPEdit extends JFrame {
 		
 		this.custPedit.addLabel("Address ", newAddress);
 		this.address = this.custPedit.addTextField(20, newAddress);
-		this.address.setText(this.custView.getCustomerAddress());
-		this.address.setEditable(false);
+		this.address.setText(this.currentAddress);
+		if (this.addressFlag) {this.address.setEditable(false);}
 		this.editAddress = this.custPedit.addButton("Edit",newAddress);
-		this.editAddress.setActionCommand("Address Edit");
+		this.editAddress.setActionCommand("Edit Address");
 		this.editAddress.addActionListener(custController);
+		this.setNewAddress = this.custPedit.addButton("Set", newAddress);
+		this.setNewAddress.setActionCommand("Set Address");
+		this.setNewAddress.addActionListener(custController);
 		
 		this.submit = this.custPedit.addButton("Submit", buttons);
-		this.submit.setActionCommand("Submit");
+		this.submit.setActionCommand("Submit Edit");
 		this.submit.addActionListener(custController);
 		
 		this.cancel = this.custPedit.addButton("Cancel", buttons);

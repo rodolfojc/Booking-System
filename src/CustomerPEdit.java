@@ -63,6 +63,10 @@ public class CustomerPEdit extends JFrame {
 		this.addressFlag = flag;
 	}
 	
+	public CustomerView getCustView() {
+		return this.custView;
+	}
+	
 	public void setupFrame() {
 		
 		this.custPedit.setBox(this.custPedit.panel, 1);
@@ -110,11 +114,11 @@ public class CustomerPEdit extends JFrame {
 		this.setNewAddress.addActionListener(custController);
 		
 		this.submit = this.custPedit.addButton("Submit", buttons);
-		this.submit.setActionCommand("Submit Edit");
+		this.submit.setActionCommand("Edit Submit");
 		this.submit.addActionListener(custController);
 		
 		this.cancel = this.custPedit.addButton("Cancel", buttons);
-		this.cancel.setActionCommand("Cancel Edit");
+		this.cancel.setActionCommand("Edit Cancel");
 		this.cancel.addActionListener(custController);
 		
 		//this.custPedit.panel.add(oldEmail);

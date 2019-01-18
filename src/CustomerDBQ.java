@@ -242,4 +242,29 @@ public class CustomerDBQ {
 
 	}
 	
+	/////////////////////////////////////////
+	/////////CUSTOMER PROFILE - EDIT/////////
+	
+	public void updateProfile(String ID, String email, String mobile, String address) {
+
+		try {
+
+			String query = "UPDATE customers SET email = '"+ email +"', mobile = '"+ mobile +"', address = '"+ address +"'"
+					+ " WHERE cust_id='"+ ID + "';";
+
+			PreparedStatement preparedStmt = this.data.conn.prepareStatement(query);
+			preparedStmt.execute();
+			this.data.conn.close();
+
+		} catch (Exception e) {
+
+			System.err.println("Got an exception!");
+			System.err.println(e.getMessage());
+		}
+		
+	}
+	
+	
+	
+	
 }

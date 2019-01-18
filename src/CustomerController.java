@@ -89,7 +89,6 @@ public class CustomerController implements ActionListener, ListSelectionListener
 		if (e.getActionCommand().equals("Edit")) {
 			
 			this.custPedit = new CustomerPEdit(this, this.custView);
-			
 		}
 		
 		if (e.getActionCommand().equals("Edit Email")) {
@@ -132,6 +131,21 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			this.custPedit.setNewAddress(this.custPedit.getCurrentAddress().getText());
 			this.custPedit.setAddressFlag(true);
 			this.custPedit.UpdateFrame();
+		}
+		
+		if (e.getActionCommand().equals("Edit Submit")) {
+			
+			String errorMg = "Ups, there is an internal problem, please contact an administrator";
+			String confMg = "Your Profile have been UPDATE!";
+			CustomerDBQ custDB = new CustomerDBQ(this.custView);
+			this.custPedit.getCustView().getCustomerID();		
+			
+			
+		}
+		
+		if (e.getActionCommand().equals("Edit Cancel")) {
+			
+			
 		}
 
 	}

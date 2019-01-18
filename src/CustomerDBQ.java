@@ -8,11 +8,19 @@ public class CustomerDBQ {
 	// GLOBAL VARIABLES - DECLARATION
 	private Database data;
 	private CustomerView custView;
+	private CustomerPEdit custPedit;
 	private CustomerController custController;
 
 	public CustomerDBQ(CustomerView CustView) {
 
 		this.custView = CustView;
+		// NEW INSTANCE OF DATABASE FOR CONNECTION
+		this.data = new Database();
+	}
+	
+	public CustomerDBQ(CustomerPEdit CustpEdit) {
+
+		this.custPedit = CustpEdit;
 		// NEW INSTANCE OF DATABASE FOR CONNECTION
 		this.data = new Database();
 	}
@@ -245,11 +253,13 @@ public class CustomerDBQ {
 	/////////////////////////////////////////
 	/////////CUSTOMER PROFILE - EDIT/////////
 	
-	public void updateProfile(String ID, String email, String mobile, String address) {
+	public void updateProfile(String ID, String email, String mobile, String address, String errorMg, String confMg) {
 
+		boolean flag = true;
+		
 		try {
 
-			String query = "UPDATE customers SET email = '"+ email +"', mobile = '"+ mobile +"', address = '"+ address +"'"
+			String query = "UPDATE customers SET email = '"+ email +"', mob_num = '"+ mobile +"', address = '"+ address +"'"
 					+ " WHERE cust_id='"+ ID + "';";
 
 			PreparedStatement preparedStmt = this.data.conn.prepareStatement(query);
@@ -257,10 +267,13 @@ public class CustomerDBQ {
 			this.data.conn.close();
 
 		} catch (Exception e) {
-
+			JOptionPane.showMessageDialog(this.custPedit, errorMg, "Error", JOptionPane.ERROR_MESSAGE);
+			flag = false;
 			System.err.println("Got an exception!");
 			System.err.println(e.getMessage());
 		}
+		if (flag)
+			JOptionPane.showMessageDialog(this.custPedit, confMg);
 		
 	}
 	

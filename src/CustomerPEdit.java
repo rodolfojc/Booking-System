@@ -11,7 +11,7 @@ public class CustomerPEdit extends JFrame {
 	private JTextField email, mob, address;
 	private String currentEmail, currentMob, currentAddress;
 	private JButton editEmail, setNewEmail, editMob, setNewMob, editAddress, setNewAddress, submit, cancel;
-	private boolean emailFlag = true, mobileFlag = true, addressFlag = true;
+	private boolean emailFlag = true, mobileFlag = true, addressFlag = true, submitFlag = true;
 	
 	public CustomerPEdit(CustomerController CustController, CustomerView CustView) {
 	
@@ -67,6 +67,10 @@ public class CustomerPEdit extends JFrame {
 		return this.custView;
 	}
 	
+	public void setSubmitFlag(boolean flag) {
+		this.submitFlag = flag;
+	}
+	
 	public void setupFrame() {
 		
 		this.custPedit.setBox(this.custPedit.panel, 1);
@@ -116,6 +120,7 @@ public class CustomerPEdit extends JFrame {
 		this.submit = this.custPedit.addButton("Submit", buttons);
 		this.submit.setActionCommand("Edit Submit");
 		this.submit.addActionListener(custController);
+		if (this.submitFlag) {this.submit.setEnabled(false);}
 		
 		this.cancel = this.custPedit.addButton("Cancel", buttons);
 		this.cancel.setActionCommand("Edit Cancel");

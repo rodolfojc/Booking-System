@@ -95,6 +95,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			
 			this.custPedit.getCurrentEmail().setEditable(true);
 			this.custPedit.setEmailFlag(false);
+			this.custPedit.setSubmitFlag(false);
 			this.custPedit.UpdateFrame();
 		}
 		
@@ -109,6 +110,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			
 			this.custPedit.getCurrentMobile().setEditable(true);
 			this.custPedit.setMobileFlag(false);
+			this.custPedit.setSubmitFlag(false);
 			this.custPedit.UpdateFrame();
 		}
 		
@@ -123,6 +125,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			
 			this.custPedit.getCurrentAddress().setEditable(true);
 			this.custPedit.setAddressFlag(false);
+			this.custPedit.setSubmitFlag(false);
 			this.custPedit.UpdateFrame();
 		}
 		
@@ -148,7 +151,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 		
 		if (e.getActionCommand().equals("Edit Cancel")) {
 			
-			
+			this.custPedit.dispose();
 		}
 
 	}

@@ -151,6 +151,9 @@ public class CustomerController implements ActionListener, ListSelectionListener
 						"The email is already registered, please enter a different email address and try again!",
 						"Email Error", JOptionPane.ERROR_MESSAGE);
 				
+			} else if (!this.custPedit.getCurrentEmail().getText().matches("^(.+)@(.+)$")) {
+				JOptionPane.showMessageDialog(this.custPedit, "The email is not correct or it is empty, " + "try again",
+						"Email Error", JOptionPane.ERROR_MESSAGE);
 			}else {
 			
 				String errorMg = "Ups, there is an internal problem, please contact an administrator";

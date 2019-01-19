@@ -138,15 +138,30 @@ public class CustomerController implements ActionListener, ListSelectionListener
 		
 		if (e.getActionCommand().equals("Edit Submit")) {
 			
-			String errorMg = "Ups, there is an internal problem, please contact an administrator";
-			String confMg = "Your Profile have been UPDATE!";
-			CustomerDBQ custDB = new CustomerDBQ(this.custPedit);
-			custDB.updateProfile(Integer.toString(this.custPedit.getCustView().getCustomerID()), 
+			// DATABASE CONNECTIONS
+			Database emailVerOne = new Database();
+			Database emailVerTwo = new Database();
+
+			// EMAIL VARIFICATION IN DATABASE, RETURN TRUE IF THERE IS A MATCH
+			boolean custEmail = emailVerOne.emailVerification("customers", this.custPedit.getCurrentEmail().getText());
+			boolean proEmail = emailVerTwo.emailVerification("providers", this.custPedit.getCurrentEmail().getText());
+			
+			if (custEmail == true || proEmail == true) {
+				JOptionPane.showMessageDialog(this.custPedit,
+						"The email is already registered, please enter a different email address and try again!",
+						"Email Error", JOptionPane.ERROR_MESSAGE);
+				
+			}else {
+			
+				String errorMg = "Ups, there is an internal problem, please contact an administrator";
+				String confMg = "Your Profile have been UPDATE!";
+				CustomerDBQ custDB = new CustomerDBQ(this.custPedit);
+				custDB.updateProfile(Integer.toString(this.custPedit.getCustView().getCustomerID()), 
 								 this.custPedit.getCurrentEmail().getText(), 
 								 this.custPedit.getCurrentMobile().getText(), 
 								 this.custPedit.getCurrentAddress().getText(),
 								 errorMg, confMg);
-						
+			}		
 		}
 		
 		if (e.getActionCommand().equals("Edit Cancel")) {

@@ -80,15 +80,11 @@ public class CustomerPEdit extends JFrame {
 		
 		this.custPedit.setBox(this.custPedit.panel, 1);
 		
-		//JPanel oldEmail = new JPanel();
 		JPanel newEmail = new JPanel();
-		//JPanel oldMob = new JPanel();
 		JPanel newMob = new JPanel();
-		//JPanel oldAddress = new JPanel();
 		JPanel newAddress = new JPanel();
 		JPanel buttons = new JPanel();
 				
-		
 		this.custPedit.addLabel("Email ", newEmail);
 		this.email = this.custPedit.addTextField(20, newEmail);
 		this.email.setText(this.currentEmail);
@@ -131,11 +127,8 @@ public class CustomerPEdit extends JFrame {
 		this.cancel.setActionCommand("Edit Cancel");
 		this.cancel.addActionListener(custController);
 		
-		//this.custPedit.panel.add(oldEmail);
 		this.custPedit.panel.add(newEmail);
-		//this.custPedit.panel.add(oldMob);
 		this.custPedit.panel.add(newMob);
-		//this.custPedit.panel.add(oldAddress);
 		this.custPedit.panel.add(newAddress);
 		this.custPedit.panel.add(buttons);
 		

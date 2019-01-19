@@ -151,7 +151,8 @@ public class CustomerController implements ActionListener, ListSelectionListener
 		
 		if (e.getActionCommand().equals("Edit Cancel")) {
 			
-			this.custPedit.dispose();
+			this.custPedit.getCustpEdit().dispose();
+			
 		}
 
 	}

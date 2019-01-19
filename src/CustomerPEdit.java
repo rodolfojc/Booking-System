@@ -21,6 +21,7 @@ public class CustomerPEdit extends JFrame {
 		this.currentAddress = this.custView.getCustomerAddress();
 		this.custController = CustController;
 		this.custPedit = new View("Customer Profile Editor", 500, 300, true);
+		this.custPedit.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setupFrame();
 		
 	}
@@ -69,6 +70,10 @@ public class CustomerPEdit extends JFrame {
 	
 	public void setSubmitFlag(boolean flag) {
 		this.submitFlag = flag;
+	}
+	
+	public View getCustpEdit () {
+		return this.custPedit;
 	}
 	
 	public void setupFrame() {

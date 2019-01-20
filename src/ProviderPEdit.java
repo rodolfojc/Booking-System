@@ -69,6 +69,43 @@ public class ProviderPEdit extends JFrame {
 		this.setNewAddress.setActionCommand("Set Address");
 		this.setNewAddress.addActionListener(proController);
 		
+		this.proPedit.addLabel("Location ", newLocation);
+		this.location = this.proPedit.addTextField(20, newLocation);
+		this.location.setText(this.currentLocation);
+		if (this.locationFlag) {this.location.setEditable(false);}
+		this.editLocation = this.proPedit.addButton("Edit",newLocation);
+		this.editLocation.setActionCommand("Edit Location");
+		this.editLocation.addActionListener(proController);
+		this.setNewLocation = this.proPedit.addButton("Set", newLocation);
+		this.setNewLocation.setActionCommand("Set Address");
+		this.setNewLocation.addActionListener(proController);
+		
+		this.submit = this.proPedit.addButton("Submit", buttons);
+		this.submit.setActionCommand("Edit Submit");
+		this.submit.addActionListener(proController);
+		if (this.submitFlag) {this.submit.setEnabled(false);}
+		
+		this.cancel = this.proPedit.addButton("Cancel", buttons);
+		this.cancel.setActionCommand("Edit Cancel");
+		this.cancel.addActionListener(proController);
+		
+		this.proPedit.panel.add(newEmail);
+		this.proPedit.panel.add(newMob);
+		this.proPedit.panel.add(newAddress);
+		this.proPedit.panel.add(newLocation);
+		this.proPedit.panel.add(buttons);
+		
+		
+		this.proPedit.validate();
+		this.proPedit.repaint();
+		
+	}
+	
+	public void UpdateFrame() {
+		this.proPedit.panel.removeAll();
+		setupFrame();
+		
+		
 		
 	}
 	

@@ -47,6 +47,28 @@ public class ProviderPEdit extends JFrame {
 		this.setNewEmail.setActionCommand("Set Email");
 		this.setNewEmail.addActionListener(proController);
 		
+		this.proPedit.addLabel("Mobile ", newMob);		
+		this.mob = this.proPedit.addTextField(20, newMob);
+		this.mob.setText(this.currentMob);
+		if (this.mobileFlag) {this.mob.setEditable(false);}	
+		this.editMob = this.proPedit.addButton("Edit",newMob);
+		this.editMob.setActionCommand("Edit Mobile");
+		this.editMob.addActionListener(proController);
+		this.setNewMob = this.proPedit.addButton("Set", newMob);
+		this.setNewMob.setActionCommand("Set Mobile");
+		this.setNewMob.addActionListener(proController);
+		
+		this.proPedit.addLabel("Address ", newAddress);
+		this.address = this.proPedit.addTextField(20, newAddress);
+		this.address.setText(this.currentAddress);
+		if (this.addressFlag) {this.address.setEditable(false);}
+		this.editAddress = this.proPedit.addButton("Edit",newAddress);
+		this.editAddress.setActionCommand("Edit Address");
+		this.editAddress.addActionListener(proController);
+		this.setNewAddress = this.proPedit.addButton("Set", newAddress);
+		this.setNewAddress.setActionCommand("Set Address");
+		this.setNewAddress.addActionListener(proController);
+		
 		
 	}
 	

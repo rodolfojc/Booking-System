@@ -274,14 +274,14 @@ public class ProviderDBQ {
 	/////////////////////////////////////////
 	/////////CUSTOMER PROFILE - EDIT/////////
 
-	public void updateProfile(String ID, String email, String mobile, String address, String errorMg, String confMg) {
+	public void updateProfile(String ID, String email, String mobile, String address, String location, String errorMg, String confMg) {
 
 		boolean flag = true;
 
 		try {
 
-			String query = "UPDATE customers SET email = '"+ email +"', mob_num = '"+ mobile +"', address = '"+ address +"'"
-						 + " WHERE cust_id='"+ ID + "';";
+			String query = "UPDATE providers SET email = '"+ email +"', mob_num = '"+ mobile +"', address = '"+ address +"', location = '"+ location +"'"
+						 + " WHERE pro_id='"+ ID + "';";
 
 			PreparedStatement preparedStmt = this.proDB.conn.prepareStatement(query);
 			preparedStmt.execute();

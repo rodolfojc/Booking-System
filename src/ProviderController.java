@@ -172,6 +172,48 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			this.proPedit.UpdateFrame();
 		}
 
+		if (e.getActionCommand().equals("Edit Submit")) {
+			
+			// DATABASE CONNECTIONS
+			Database emailVerOne = new Database();
+			Database emailVerTwo = new Database();
+			Database emailVerThree = new Database();
+
+			// EMAIL VARIFICATION IN DATABASE, RETURN TRUE IF THERE IS A MATCH
+			boolean custEmail = emailVerOne.emailVerification("customers", this.proPedit.getCurrentEmail().getText());
+			boolean proEmail = emailVerTwo.emailVerification("providers", this.proPedit.getCurrentEmail().getText());
+			boolean admEmail = emailVerThree.emailVerification("administrators", this.proPedit.getCurrentEmail().getText());
+			
+			if (custEmail == true || proEmail == true || admEmail == true) {
+				JOptionPane.showMessageDialog(this.proPedit,
+						"The email is already registered, please enter a different email address and try again!",
+						"Email Error", JOptionPane.ERROR_MESSAGE);
+				
+			} else if (!this.proPedit.getCurrentEmail().getText().matches("^(.+)@(.+)$")) {
+				JOptionPane.showMessageDialog(this.proPedit, "The email is not correct or it is empty, " + "try again",
+						"Email Error", JOptionPane.ERROR_MESSAGE);
+			}else {
+			
+				String errorMg = "Ups, there is an internal problem, please contact an administrator";
+				String confMg = "Your Profile have been UPDATE!";
+				ProviderDBQ custDB = new ProviderDBQ(this.proPedit);
+				custDB.updateProfile(Integer.toString(this.proPedit.getProView().getProviderID()), 
+								 this.proPedit.getCurrentEmail().getText(), 
+								 this.proPedit.getCurrentMobile().getText(), 
+								 this.proPedit.getCurrentAddress().getText(),
+								 this.proPedit.getCurrentLocation().getText(),
+								 errorMg, confMg);
+			}		
+		}
+		
+		if (e.getActionCommand().equals("Edit Cancel")) {
+			
+			this.proPedit.getProEdit().dispose();
+			
+		}
+		
+		
+		
 	}
 
 	//LISTSELECTIONLISTENERS

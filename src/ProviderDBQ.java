@@ -8,6 +8,7 @@ public class ProviderDBQ {
 	// GLOBAL VARIABLES - DECLARATION
 	private Database proDB;
 	private ProviderView proView;
+	private ProviderPEdit proPedit;
 	private ProviderController proController;
 
 	public ProviderDBQ(ProviderView ProView) {
@@ -16,6 +17,13 @@ public class ProviderDBQ {
 		// NEW INSTANCE OF DATABASE FOR CONNECTION
 		this.proDB = new Database();
 
+	}
+	
+	public ProviderDBQ(ProviderPEdit ProPedit) {
+
+		this.proPedit = ProPedit;
+		// NEW INSTANCE OF DATABASE FOR CONNECTION
+		this.proDB = new Database();
 	}
 
 	// METHOD TO GET DATA OF THE PROVIDER LOGGED
@@ -260,6 +268,33 @@ public class ProviderDBQ {
 		}
 		if (flag)
 			JOptionPane.showMessageDialog(this.proView, confMg);
+
+	}
+	
+	/////////////////////////////////////////
+	/////////CUSTOMER PROFILE - EDIT/////////
+
+	public void updateProfile(String ID, String email, String mobile, String address, String errorMg, String confMg) {
+
+		boolean flag = true;
+
+		try {
+
+			String query = "UPDATE customers SET email = '"+ email +"', mob_num = '"+ mobile +"', address = '"+ address +"'"
+						 + " WHERE cust_id='"+ ID + "';";
+
+			PreparedStatement preparedStmt = this.proDB.conn.prepareStatement(query);
+			preparedStmt.execute();
+			this.proDB.conn.close();
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(this.proPedit, errorMg, "Error", JOptionPane.ERROR_MESSAGE);
+			flag = false;
+			System.err.println("Got an exception!");
+			System.err.println(e.getMessage());
+		}
+		if (flag)
+			JOptionPane.showMessageDialog(this.proPedit, confMg);
 
 	}
 

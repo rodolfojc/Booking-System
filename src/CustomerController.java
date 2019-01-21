@@ -147,12 +147,14 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			// DATABASE CONNECTIONS
 			Database emailVerOne = new Database();
 			Database emailVerTwo = new Database();
+			Database emailVerThree = new Database();
 
 			// EMAIL VARIFICATION IN DATABASE, RETURN TRUE IF THERE IS A MATCH
 			boolean custEmail = emailVerOne.emailVerification("customers", this.custPedit.getCurrentEmail().getText());
 			boolean proEmail = emailVerTwo.emailVerification("providers", this.custPedit.getCurrentEmail().getText());
+			boolean admEmail = emailVerThree.emailVerification("administrators", this.custPedit.getCurrentEmail().getText());
 			
-			if (custEmail == true || proEmail == true) {
+			if (custEmail == true || proEmail == true || admEmail == true) {
 				JOptionPane.showMessageDialog(this.custPedit,
 						"The email is already registered, please enter a different email address and try again!",
 						"Email Error", JOptionPane.ERROR_MESSAGE);

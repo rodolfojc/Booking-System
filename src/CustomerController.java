@@ -91,7 +91,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			this.custPedit = new CustomerPEdit(this, this.custView);
 		}
 		
-		//EMAIL EDIT
+		//EMAIL - EDIT
 		if (e.getActionCommand().equals("Edit Email")) {
 			
 			this.custPedit.getCurrentEmail().setEditable(true);
@@ -100,6 +100,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			this.custPedit.UpdateFrame();
 		}
 		
+		//EMAIL - SET
 		if (e.getActionCommand().equals("Set Email")) {
 			
 			this.custPedit.setNewEmail(this.custPedit.getCurrentEmail().getText());
@@ -107,6 +108,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			this.custPedit.UpdateFrame();
 		}
 		
+		//MOBILE - EDIT
 		if (e.getActionCommand().equals("Edit Mobile")) {
 			
 			this.custPedit.getCurrentMobile().setEditable(true);
@@ -115,6 +117,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			this.custPedit.UpdateFrame();
 		}
 		
+		//MOBILE - SET		
 		if (e.getActionCommand().equals("Set Mobile")) {
 			
 			this.custPedit.setNewMobile(this.custPedit.getCurrentMobile().getText());
@@ -122,6 +125,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			this.custPedit.UpdateFrame();
 		}
 		
+		//ADDRESS - EDIT
 		if (e.getActionCommand().equals("Edit Address")) {
 			
 			this.custPedit.getCurrentAddress().setEditable(true);
@@ -130,6 +134,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			this.custPedit.UpdateFrame();
 		}
 		
+		//ADDRESS - SET		
 		if (e.getActionCommand().equals("Set Address")) {
 			
 			this.custPedit.setNewAddress(this.custPedit.getCurrentAddress().getText());

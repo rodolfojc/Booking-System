@@ -95,7 +95,7 @@ public class ProviderController implements ActionListener, ListSelectionListener
 		}
 		
 		/////////////////////////////////////////
-		/////////CUSTOMER PROFILE - EDIT/////////
+		/////////PROVIDER PROFILE - EDIT/////////
 		//CREATE AN INSTANCE OF CUSTOMERPEDIT////
 
 		if (e.getActionCommand().equals("Edit")) {
@@ -113,6 +113,30 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			this.proPedit.UpdateFrame();
 		}
 		
+		//EMAIL - SET	
+		if (e.getActionCommand().equals("Set Email")) {
+			
+			this.proPedit.setNewEmail(this.proPedit.getCurrentEmail().getText());
+			this.proPedit.setEmailFlag(true);
+			this.proPedit.UpdateFrame();
+		}
+		
+		//MOBILE - EDIT
+		if (e.getActionCommand().equals("Edit Mobile")) {
+			
+			this.proPedit.getCurrentMobile().setEditable(true);
+			this.proPedit.setMobileFlag(false);
+			this.proPedit.setSubmitFlag(false);
+			this.proPedit.UpdateFrame();
+		}
+		
+		//MOBILE - SET
+		if (e.getActionCommand().equals("Set Mobile")) {
+			
+			this.proPedit.setNewMobile(this.proPedit.getCurrentMobile().getText());
+			this.proPedit.setMobileFlag(true);
+			this.proPedit.UpdateFrame();
+		}
 
 	}
 

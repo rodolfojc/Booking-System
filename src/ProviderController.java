@@ -137,6 +137,40 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			this.proPedit.setMobileFlag(true);
 			this.proPedit.UpdateFrame();
 		}
+		
+		//ADDRESS - EDIT
+		if (e.getActionCommand().equals("Edit Address")) {
+					
+			this.proPedit.getCurrentAddress().setEditable(true);
+			this.proPedit.setAddressFlag(false);
+			this.proPedit.setSubmitFlag(false);
+			this.proPedit.UpdateFrame();
+		}
+				
+		//ADDRESS - SET		
+		if (e.getActionCommand().equals("Set Address")) {
+					
+			this.proPedit.setNewAddress(this.proPedit.getCurrentAddress().getText());
+			this.proPedit.setAddressFlag(true);
+			this.proPedit.UpdateFrame();
+		}
+		
+		//LOCATION - EDIT
+		if (e.getActionCommand().equals("Edit Location")) {
+							
+			this.proPedit.getCurrentLocation().setEditable(true);
+			this.proPedit.setLocationFlag(false);
+			this.proPedit.setSubmitFlag(false);
+			this.proPedit.UpdateFrame();
+		}
+						
+		//ADDRESS - SET		
+		if (e.getActionCommand().equals("Set Location")) {
+					
+			this.proPedit.setNewLocation(this.proPedit.getCurrentLocation().getText());
+			this.proPedit.setLocationFlag(true);
+			this.proPedit.UpdateFrame();
+		}
 
 	}
 

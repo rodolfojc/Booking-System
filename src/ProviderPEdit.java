@@ -140,7 +140,7 @@ public class ProviderPEdit extends JFrame {
 		this.editLocation.setActionCommand("Edit Location");
 		this.editLocation.addActionListener(proController);
 		this.setNewLocation = this.proPedit.addButton("Set", newLocation);
-		this.setNewLocation.setActionCommand("Set Address");
+		this.setNewLocation.setActionCommand("Set Location");
 		this.setNewLocation.addActionListener(proController);
 		
 		this.submit = this.proPedit.addButton("Submit", buttons);

@@ -26,6 +26,69 @@ public class ProviderPEdit extends JFrame {
 		setupFrame();
 	}
 	
+	//GETTERS AND SETTER
+	
+		public void setNewEmail(String newEmail) {
+			this.currentEmail = newEmail;
+		}
+		
+		public JTextField getCurrentEmail() {
+			return this.email;
+		}
+		
+		public void setNewMobile(String newMobile) {
+			this.currentMob = newMobile;
+		}
+		
+		public JTextField getCurrentMobile() {
+			return this.mob;
+		}
+		
+		public void setNewAddress(String newAdress) {
+			this.currentAddress = newAdress;
+		}
+		
+		public JTextField getCurrentAddress() {
+			return this.address;
+		}
+		
+		public void setNewLocation(String newLoca) {
+			this.currentLocation = newLoca;
+		}
+		
+		public JTextField getCurrentLocation() {
+			return this.location;
+		}
+		
+		public void setEmailFlag(boolean flag) {
+			this.emailFlag = flag;
+		}
+		
+		public void setMobileFlag(boolean flag) {
+			this.mobileFlag = flag;
+		}
+		
+		public void setAddressFlag(boolean flag) {
+			this.addressFlag = flag;
+		}
+		
+		public void setLocationFlag(boolean flag) {
+			this.locationFlag = flag;
+		}
+		
+		public ProviderView getProView() {
+			return this.proView;
+		}
+		
+		public void setSubmitFlag(boolean flag) {
+			this.submitFlag = flag;
+		}
+		
+		public View getProEdit () {
+			return this.proPedit;
+		}
+		
+	
 	public void setupFrame() {
 		
 		this.proPedit.setBox(this.proPedit.panel, 1);

@@ -101,6 +101,16 @@ public class ProviderController implements ActionListener, ListSelectionListener
 		if (e.getActionCommand().equals("Edit")) {
 
 			this.proPedit = new ProviderPEdit(this, this.proView);
+		
+		}
+		
+		//EMAIL - EDIT
+		if (e.getActionCommand().equals("Edit Email")) {
+			
+			this.proPedit.getCurrentEmail().setEditable(true);
+			this.proPedit.setEmailFlag(false);
+			this.proPedit.setSubmitFlag(false);
+			this.proPedit.UpdateFrame();
 		}
 		
 

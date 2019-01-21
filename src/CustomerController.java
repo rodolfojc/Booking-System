@@ -91,6 +91,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			this.custPedit = new CustomerPEdit(this, this.custView);
 		}
 		
+		//EMAIL EDIT
 		if (e.getActionCommand().equals("Edit Email")) {
 			
 			this.custPedit.getCurrentEmail().setEditable(true);

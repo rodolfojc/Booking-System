@@ -9,6 +9,7 @@ public class ProviderController implements ActionListener, ListSelectionListener
 
 	// GLOBAL VARIABLES - DECLARATION
 	private ProviderView proView;
+	private ProviderPEdit proPedit;
 	private Login login;
 
 	// CONSTRUCTOR
@@ -92,6 +93,16 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			this.proView.getProView().dispose();
 			this.login.getLogin().setVisible(true);
 		}
+		
+		/////////////////////////////////////////
+		/////////CUSTOMER PROFILE - EDIT/////////
+		//CREATE AN INSTANCE OF CUSTOMERPEDIT////
+
+		if (e.getActionCommand().equals("Edit")) {
+
+			this.proPedit = new ProviderPEdit(this, this.proView);
+		}
+		
 
 	}
 

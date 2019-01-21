@@ -11,7 +11,7 @@ public class ProviderPEdit extends JFrame {
 	private String currentEmail, currentMob, currentAddress, currentLocation;
 	private JTextField email, mob, address, location;
 	private JButton editEmail, setNewEmail, editMob, setNewMob, editAddress, setNewAddress, editLocation, setNewLocation, submit, cancel;
-	private boolean emailFlag = true, mobileFlag = true, addressFlag = true, locationFlag, submitFlag = true;
+	private boolean emailFlag = true, mobileFlag = true, addressFlag = true, locationFlag = true, submitFlag = true;
 		
 	public ProviderPEdit(ProviderController ProController, ProviderView ProView ) {
 		
@@ -25,7 +25,7 @@ public class ProviderPEdit extends JFrame {
 		this.proPedit.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setupFrame();
 	}
-
+	
 	public void setupFrame() {
 		
 		this.proPedit.setBox(this.proPedit.panel, 1);

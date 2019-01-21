@@ -7,7 +7,7 @@ public class Main {
 		//CALLING MAIN CONTROLLER
 		new Controller();
 		//new CustomerPEdit();
-		
+		//new ProviderPEdit();
 	}
 
 }

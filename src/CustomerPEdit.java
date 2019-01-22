@@ -36,6 +36,10 @@ public class CustomerPEdit extends JFrame {
 		return this.email;
 	}
 	
+	public String getOriginalEmail() {
+		return this.currentEmail;
+	}
+	
 	public void setNewMobile(String newMobile) {
 		this.currentMob = newMobile;
 	}

@@ -65,8 +65,8 @@ public class Controller implements ActionListener {
 			Database emailVerTwo = new Database();
 
 			// EMAIL VARIFICATION IN DATABASE, RETURN TRUE IF THERE IS A MATCH
-			custEmail = emailVerOne.emailVerification("customers", this.register.getEmail());
-			proEmail = emailVerTwo.emailVerification("providers", this.register.getEmail());
+			custEmail = emailVerOne.emailVerification("customers", "email", this.register.getEmail());
+			proEmail = emailVerTwo.emailVerification("providers", "email", this.register.getEmail());
 
 			// PASSWORD VALIDATION WITH JOPTIONPANE ERRORS MESSAGES
 			// NAME MUST BE LETTER A-Z, NO EMPTY FIELD AND UP TO 24 CHARACTERS

@@ -11,6 +11,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 	private CustomerView custView;
 	private Login login;
 	private CustomerPEdit custPedit;
+	private boolean emailControl = true;
 
 	// CONSTRUCTOR
 	public CustomerController(String email, Login Login) {
@@ -103,9 +104,13 @@ public class CustomerController implements ActionListener, ListSelectionListener
 		//EMAIL - SET
 		if (e.getActionCommand().equals("Set Email")) {
 			
-			this.custPedit.setNewEmail(this.custPedit.getCurrentEmail().getText());
-			this.custPedit.setEmailFlag(true);
-			this.custPedit.UpdateFrame();
+			if(!this.custPedit.getCurrentEmail().getText().equals(this.custPedit.getOriginalEmail())) {
+				this.emailControl = false;
+			}
+				this.custPedit.setNewEmail(this.custPedit.getCurrentEmail().getText());
+				this.custPedit.setEmailFlag(true);
+				this.custPedit.UpdateFrame();
+					
 		}
 		
 		//MOBILE - EDIT
@@ -150,14 +155,15 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			Database emailVerThree = new Database();
 
 			// EMAIL VARIFICATION IN DATABASE, RETURN TRUE IF THERE IS A MATCH
-			boolean custEmail = emailVerOne.emailVerification("customers", this.custPedit.getCurrentEmail().getText());
-			boolean proEmail = emailVerTwo.emailVerification("providers", this.custPedit.getCurrentEmail().getText());
-			boolean admEmail = emailVerThree.emailVerification("administrators", this.custPedit.getCurrentEmail().getText());
+			boolean custEmail = emailVerOne.emailVerification("customers", "email", this.custPedit.getCurrentEmail().getText());
+			boolean proEmail = emailVerTwo.emailVerification("providers", "email", this.custPedit.getCurrentEmail().getText());
+			boolean admEmail = emailVerThree.emailVerification("administrators", "admin_user", this.custPedit.getCurrentEmail().getText());
 			
+			if (this.emailControl == false) {
 			if (custEmail == true || proEmail == true || admEmail == true) {
 				JOptionPane.showMessageDialog(this.custPedit,
 						"The email is already registered, please enter a different email address and try again!",
-						"Email Error", JOptionPane.ERROR_MESSAGE);
+						"Email Error", JOptionPane.ERROR_MESSAGE);}
 				
 			} else if (!this.custPedit.getCurrentEmail().getText().matches("^(.+)@(.+)$")) {
 				JOptionPane.showMessageDialog(this.custPedit, "The email is not correct or it is empty, " + "try again",
@@ -172,6 +178,11 @@ public class CustomerController implements ActionListener, ListSelectionListener
 								 this.custPedit.getCurrentMobile().getText(), 
 								 this.custPedit.getCurrentAddress().getText(),
 								 errorMg, confMg);
+			
+			this.custView.UpdateFrame(false);
+			this.custPedit.getCustpEdit().dispose();
+			
+			
 			}		
 		}
 		

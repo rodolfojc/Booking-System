@@ -180,9 +180,9 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			Database emailVerThree = new Database();
 
 			// EMAIL VARIFICATION IN DATABASE, RETURN TRUE IF THERE IS A MATCH
-			boolean custEmail = emailVerOne.emailVerification("customers", this.proPedit.getCurrentEmail().getText());
-			boolean proEmail = emailVerTwo.emailVerification("providers", this.proPedit.getCurrentEmail().getText());
-			boolean admEmail = emailVerThree.emailVerification("administrators", this.proPedit.getCurrentEmail().getText());
+			boolean custEmail = emailVerOne.emailVerification("customers", "email", this.proPedit.getCurrentEmail().getText());
+			boolean proEmail = emailVerTwo.emailVerification("providers", "email", this.proPedit.getCurrentEmail().getText());
+			boolean admEmail = emailVerThree.emailVerification("administrators", "admin_user", this.proPedit.getCurrentEmail().getText());
 			
 			if (custEmail == true || proEmail == true || admEmail == true) {
 				JOptionPane.showMessageDialog(this.proPedit,

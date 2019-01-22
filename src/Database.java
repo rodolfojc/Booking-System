@@ -222,9 +222,9 @@ public class Database {
 	// METHOD TO CHECK IF THE EMAIL ADDRESS IS ALREADY REGISTER IN A TABLE IN
 	// DATABASE
 	// RETURN TRUE IS THERE IS A MATCH
-	public boolean emailVerification(String user, String email) {
+	public boolean emailVerification(String user, String where, String email) {
 
-		String query = "SELECT * FROM " + user + " WHERE email = '" + email + "';";
+		String query = "SELECT * FROM " + user + " WHERE " + where + " = '" + email + "';";
 
 		try {
 			rs = stmt.executeQuery(query);

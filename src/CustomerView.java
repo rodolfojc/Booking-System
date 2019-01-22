@@ -108,6 +108,10 @@ public class CustomerView extends JFrame {
 	public void setCustomerID(int custID) {
 		this.customerID = custID;
 	}
+	
+	public void setCustomerEmail (String email) {
+		this.custEmail = email;
+	}
 
 	public int getCustomerID() {
 		return this.customerID;

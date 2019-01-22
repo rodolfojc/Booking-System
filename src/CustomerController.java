@@ -172,16 +172,16 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			
 				String errorMg = "Ups, there is an internal problem, please contact an administrator";
 				String confMg = "Your Profile have been UPDATE!";
-				CustomerDBQ custDB = new CustomerDBQ(this.custPedit);
+				CustomerDBQ custDB = new CustomerDBQ(this.custPedit, this.custView);
 				custDB.updateProfile(Integer.toString(this.custPedit.getCustView().getCustomerID()), 
 								 this.custPedit.getCurrentEmail().getText(), 
 								 this.custPedit.getCurrentMobile().getText(), 
 								 this.custPedit.getCurrentAddress().getText(),
 								 errorMg, confMg);
+				
 			
-			this.custView.UpdateFrame(false);
 			this.custPedit.getCustpEdit().dispose();
-			
+			this.custView.UpdateFrame(false);
 			
 			}		
 		}

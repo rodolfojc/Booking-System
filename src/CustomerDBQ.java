@@ -18,9 +18,10 @@ public class CustomerDBQ {
 		this.data = new Database();
 	}
 	
-	public CustomerDBQ(CustomerPEdit CustpEdit) {
+	public CustomerDBQ(CustomerPEdit CustpEdit, CustomerView CustView) {
 
 		this.custPedit = CustpEdit;
+		this.custView = CustView;
 		// NEW INSTANCE OF DATABASE FOR CONNECTION
 		this.data = new Database();
 	}
@@ -274,6 +275,9 @@ public class CustomerDBQ {
 		}
 		if (flag)
 			JOptionPane.showMessageDialog(this.custPedit, confMg);
+			this.custView.setCustomerEmail(email);
+			this.custView.setCustomerMobile(mobile);
+			this.custView.setCustomerAddress(address);
 		
 	}
 	

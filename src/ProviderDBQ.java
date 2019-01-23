@@ -19,9 +19,10 @@ public class ProviderDBQ {
 
 	}
 	
-	public ProviderDBQ(ProviderPEdit ProPedit) {
+	public ProviderDBQ(ProviderPEdit ProPedit, ProviderView ProView) {
 
 		this.proPedit = ProPedit;
+		this.proView = ProView;
 		// NEW INSTANCE OF DATABASE FOR CONNECTION
 		this.proDB = new Database();
 	}
@@ -295,6 +296,10 @@ public class ProviderDBQ {
 		}
 		if (flag)
 			JOptionPane.showMessageDialog(this.proPedit, confMg);
+			this.proView.setProviderEmail(email);
+			this.proView.setProviderMobile(mobile);
+			this.proView.setProviderAddress(address);
+			this.proView.setProviderLocation(location);
 
 	}
 

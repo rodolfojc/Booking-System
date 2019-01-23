@@ -129,6 +129,10 @@ public class ProviderView extends JFrame {
 	public int getProviderID() {
 		return this.proID;
 	}
+	
+	public void setProviderEmail(String email) {
+		this.proEmail = email;
+	}
 
 	public void setProviderName(String proNam) {
 		this.proName = proNam;

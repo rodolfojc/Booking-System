@@ -201,8 +201,8 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			
 				String errorMg = "Ups, there is an internal problem, please contact an administrator";
 				String confMg = "Your Profile have been UPDATE!";
-				ProviderDBQ custDB = new ProviderDBQ(this.proPedit);
-				custDB.updateProfile(Integer.toString(this.proPedit.getProView().getProviderID()), 
+				ProviderDBQ proDB = new ProviderDBQ(this.proPedit, this.proView);
+				proDB.updateProfile(Integer.toString(this.proPedit.getProView().getProviderID()), 
 								 this.proPedit.getCurrentEmail().getText(), 
 								 this.proPedit.getCurrentMobile().getText(), 
 								 this.proPedit.getCurrentAddress().getText(),

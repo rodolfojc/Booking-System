@@ -10,6 +10,7 @@ public class ProviderController implements ActionListener, ListSelectionListener
 	// GLOBAL VARIABLES - DECLARATION
 	private ProviderView proView;
 	private ProviderPEdit proPedit;
+	private boolean emailControl = true;
 	private Login login;
 
 	// CONSTRUCTOR
@@ -116,6 +117,9 @@ public class ProviderController implements ActionListener, ListSelectionListener
 		//EMAIL - SET	
 		if (e.getActionCommand().equals("Set Email")) {
 			
+			if(!this.proPedit.getCurrentEmail().getText().equals(this.proPedit.getOriginalEmail())) {
+				this.emailControl = false;
+			}
 			this.proPedit.setNewEmail(this.proPedit.getCurrentEmail().getText());
 			this.proPedit.setEmailFlag(true);
 			this.proPedit.UpdateFrame();
@@ -184,10 +188,11 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			boolean proEmail = emailVerTwo.emailVerification("providers", "email", this.proPedit.getCurrentEmail().getText());
 			boolean admEmail = emailVerThree.emailVerification("administrators", "admin_user", this.proPedit.getCurrentEmail().getText());
 			
+			if (this.emailControl == false) {
 			if (custEmail == true || proEmail == true || admEmail == true) {
 				JOptionPane.showMessageDialog(this.proPedit,
 						"The email is already registered, please enter a different email address and try again!",
-						"Email Error", JOptionPane.ERROR_MESSAGE);
+						"Email Error", JOptionPane.ERROR_MESSAGE);}
 				
 			} else if (!this.proPedit.getCurrentEmail().getText().matches("^(.+)@(.+)$")) {
 				JOptionPane.showMessageDialog(this.proPedit, "The email is not correct or it is empty, " + "try again",
@@ -203,6 +208,9 @@ public class ProviderController implements ActionListener, ListSelectionListener
 								 this.proPedit.getCurrentAddress().getText(),
 								 this.proPedit.getCurrentLocation().getText(),
 								 errorMg, confMg);
+				
+				this.proPedit.getProEdit().dispose();
+				this.proView.UpdateFrame();
 			}		
 		}
 		

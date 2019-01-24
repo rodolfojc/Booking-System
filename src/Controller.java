@@ -79,7 +79,7 @@ public class Controller implements ActionListener {
 				// SURNAME MUST BE LETTER A-Z, NO EMPTY FIELD AND UP TO 24 CHARACTERS
 			}
 			if (!this.register.getSur().matches("(?i)(^[a-z])((?![ .,'-]$)[a-z .,'-]){0,24}$")) {
-				JOptionPane.showMessageDialog(register, "The surname is not correct or it is empty, " + "try again",
+				JOptionPane.showMessageDialog(register, "The surname is not correct or empty, " + "try again",
 						"Surname Error", JOptionPane.ERROR_MESSAGE);
 				// IT DOES NOT MATCH, FLAG IS SET FALSE
 				flag = false;

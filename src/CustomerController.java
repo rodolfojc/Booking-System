@@ -166,7 +166,7 @@ public class CustomerController implements ActionListener, ListSelectionListener
 						"Email Error", JOptionPane.ERROR_MESSAGE);}
 				
 			} else if (!this.custPedit.getCurrentEmail().getText().matches("^(.+)@(.+)$")) {
-				JOptionPane.showMessageDialog(this.custPedit, "The email is not correct or it is empty, " + "try again",
+				JOptionPane.showMessageDialog(this.custPedit, "The email is not correct or empty, " + "try again",
 						"Email Error", JOptionPane.ERROR_MESSAGE);
 			}else {
 			

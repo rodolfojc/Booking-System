@@ -2,6 +2,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.util.Arrays;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -11,6 +12,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+
+import com.toedter.calendar.JDateChooser;
 
 public class CustomerView extends JFrame {
 
@@ -26,6 +29,7 @@ public class CustomerView extends JFrame {
 	private int selectedRow, selectedRowTwo, customerID;
 	private boolean tableflag = true;
 	private CustomerController custController;
+	private JDateChooser calendarByDay;
 	private ListSelectionModel model, modelTwo;
 
 	// CONSTRUCTOR
@@ -208,7 +212,12 @@ public class CustomerView extends JFrame {
 		this.search.addActionListener(custController);
 		
 		this.custView.addLabel("Find appointment by day: ", inLeftCenterByDay);
-		this.custView.addCalen(inLeftCenterByDay);
+		this.calendarByDay = this.custView.addCalen(inLeftCenterByDay);
+		Calendar calMin = Calendar.getInstance();
+		this.calendarByDay.setMinSelectableDate(calMin.getTime());
+		Calendar calMax = Calendar.getInstance();
+		calMax.add(Calendar.DATE, 90); //ADD 30 DAYS FROM CURRENT (TODAY)
+		this.calendarByDay.setMaxSelectableDate(calMax.getTime());
 		this.searchByDay = this.custView.addButton("Search", inLeftCenterByDay);
 		this.searchByDay.setActionCommand("Search ByDay");
 		this.searchByDay.addActionListener(custController);

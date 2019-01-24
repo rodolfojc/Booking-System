@@ -17,7 +17,7 @@ public class CustomerView extends JFrame {
 	// GLOBAL VARIABLES - DECLARATION
 	private View custView;
 	private JComboBox option;
-	private JButton search, get, logout, cancel, set, updatePro;
+	private JButton search, searchByDay, get, logout, cancel, set, updatePro;
 	private String custName, custSurName, custEmail, custAddress, custMobile;
 	private String[][] dataTableAvai, dataTableStatus;
 	private JScrollPane scrollAvai, scrollStatus;
@@ -39,7 +39,7 @@ public class CustomerView extends JFrame {
 		this.dataTableAvai = new String[1000][5];
 		this.dataTableStatus = new String[1000][7];
 		// NEW INSTANCE OF VIEW FOR CUSTOMER VIEW
-		this.custView = new View("Customer Manager", 980, 550, true);
+		this.custView = new View("Customer Manager", 1100, 550, true);
 		costumerViewSetup();
 	}
 	
@@ -196,26 +196,29 @@ public class CustomerView extends JFrame {
 		JPanel inLeftCenter = new JPanel();
 		this.custView.setBox(inLeftCenter, 1);
 		JPanel inLeftCenterSearch = new JPanel();
-		JPanel inLeftCenterBtn = new JPanel();
+		//JPanel inLeftCenterBtn = new JPanel();
 		JPanel inLeftCenterByDay = new JPanel();
 		
 		
 		this.custView.addLabel("Find appointment by: ", inLeftCenterSearch);
 		this.option = this.custView.addComboB(searchOp, inLeftCenterSearch);
 		this.byInput = this.custView.addTextField(10, inLeftCenterSearch);
-		this.search = this.custView.addButton("Search", inLeftCenterBtn);
+		this.search = this.custView.addButton("Search", inLeftCenterSearch);
 		this.search.setActionCommand("Search");
 		this.search.addActionListener(custController);
 		
 		this.custView.addLabel("Find appointment by day: ", inLeftCenterByDay);
 		this.custView.addCalen(inLeftCenterByDay);
-		
+		this.searchByDay = this.custView.addButton("Search", inLeftCenterByDay);
+		this.searchByDay.setActionCommand("Search ByDay");
+		this.searchByDay.addActionListener(custController);
+		this.custView.addLabel("                        ", inLeftCenterByDay);
 		
 		inLeftCenter.add(inLeftCenterSearch);
 		inLeftCenter.add(inLeftCenterByDay);
-		inLeftCenter.add(inLeftCenterBtn);
-		inLeftCenterBtn.setBorder(new EmptyBorder(new Insets(0, 0, 100, 0)));
-		inLeftCenter.setBorder(new EmptyBorder(new Insets(25, 0, 0, 0)));
+		//inLeftCenter.add(inLeftCenterBtn);
+		//inLeftCenterBtn.setBorder(new EmptyBorder(new Insets(0, 0, 100, 0)));
+		inLeftCenter.setBorder(new EmptyBorder(new Insets(25, 20, 0, 0)));
 
 		// LEFT PANEL - FOR BUTTOM IN BORDERLAYOUT
 		JPanel inLeftButtom = new JPanel();

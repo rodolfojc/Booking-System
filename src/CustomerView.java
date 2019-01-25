@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Insets;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -48,6 +50,16 @@ public class CustomerView extends JFrame {
 	}
 	
 	// GETTER AND SETTER FOR GLOBAL VARIABLES
+	
+	public java.sql.Date getDateByDay() throws ParseException {
+		SimpleDateFormat myDateSimp = new SimpleDateFormat("yyy-MM-dd"); // "yyyy-MM-dd"
+		String dateStr = myDateSimp.format(calendarByDay.getDate());
+		java.util.Date getCalendar;
+		java.sql.Date dateSql;
+		getCalendar = myDateSimp.parse(dateStr);
+		dateSql = new java.sql.Date(getCalendar.getTime());
+		return dateSql;
+	}
 	
 	public ListSelectionModel getModel() {
 		return this.model;

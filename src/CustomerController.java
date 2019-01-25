@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -37,7 +38,12 @@ public class CustomerController implements ActionListener, ListSelectionListener
 		if (e.getActionCommand().equals("Search ByDay")) {
 
 			CustomerDBQ custDB = new CustomerDBQ(this.custView);
-			custDB.searchProvider(custView.getByOption(), custView.getByField());
+			try {
+				custDB.searchByDay(this.custView.getDateByDay());
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			this.custView.UpdateFrame(false);
 		}
 

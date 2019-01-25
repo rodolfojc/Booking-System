@@ -1,3 +1,4 @@
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -112,7 +113,7 @@ public class CustomerDBQ {
 	}
 	
 	// TO SEARCH PROVIDER BY NAME OR LOCATION
-		public void searchByDay(String date) {
+		public void searchByDay(Date date) {
 
 			String query = "";
 

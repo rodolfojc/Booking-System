@@ -33,6 +33,13 @@ public class CustomerController implements ActionListener, ListSelectionListener
 			custDB.searchProvider(custView.getByOption(), custView.getByField());
 			this.custView.UpdateFrame(false);
 		}
+		
+		if (e.getActionCommand().equals("Search ByDay")) {
+
+			CustomerDBQ custDB = new CustomerDBQ(this.custView);
+			custDB.searchProvider(custView.getByOption(), custView.getByField());
+			this.custView.UpdateFrame(false);
+		}
 
 		// FOR GET APPOINTMENT SELECTED ON TABLE BY AVAILABILITY REFERENCE
 		if (e.getActionCommand().equals("Get Appoint")) {

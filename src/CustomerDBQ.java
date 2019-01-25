@@ -110,6 +110,51 @@ public class CustomerDBQ {
 		}
 
 	}
+	
+	// TO SEARCH PROVIDER BY NAME OR LOCATION
+		public void searchByDay(String date) {
+
+			String query = "";
+
+			// LOCAL DATA STORAGE (INTERNAL)
+			String[][] data = new String[20][5];
+
+			try {
+				
+					query = "SELECT avai_ref, pro_name, pro_surname, date, time FROM availabilities "
+							+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id WHERE availabilities.available='Yes' "
+							+ "AND availabilities.date='"+ date +"';";
+				
+
+				this.data.rs = this.data.stmt.executeQuery(query);
+
+				int i = 0;
+
+				while (this.data.rs.next()) {
+
+					data[i][0] = this.data.rs.getString("avai_ref");
+					data[i][1] = this.data.rs.getString("pro_name");
+					data[i][2] = this.data.rs.getString("pro_surname");
+					data[i][3] = this.data.rs.getString("date");
+					data[i][4] = this.data.rs.getString("time");
+					i++;
+				}
+
+				this.data.rs.close();
+				this.data.stmt.close();
+				this.data.conn.close();
+
+				// THIS CREATE A COPY OF THE LOCAL DATA TO THE ARRAY[][] SETTER IN CUSTOMER
+				// TABLES
+				this.custView.setCopyDataAvai(data);
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	
 
 	// FOR BOKKING AN APPOINTMENT
 	public String bookAppointment() {

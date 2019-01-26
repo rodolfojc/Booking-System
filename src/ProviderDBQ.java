@@ -180,6 +180,35 @@ public class ProviderDBQ {
 			e.printStackTrace();
 		}
 	}
+	
+	public boolean checkDuplicate() {
+
+		String query = "SELECT date FROM availabilities "
+				+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id "
+				+ "WHERE availabilities.date='';";
+
+		try {
+			this.proDB.rs = this.proDB.stmt.executeQuery(query);
+
+			// This code is telling us whether we have any results
+			// in our database or not
+			if (this.proDB.rs.isBeforeFirst()) {
+				return true;
+			}
+
+			// Close the result set, statement and the connection
+			this.proDB.rs.close();
+			this.proDB.stmt.close();
+			this.proDB.conn.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
 
 	// SET TO CONFIRMED AN APPOINTMENT
 	public void comfirmAppointPro(String avai_reference) {

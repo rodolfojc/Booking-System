@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -27,9 +28,24 @@ public class ProviderController implements ActionListener, ListSelectionListener
 
 		// TO ADD AN AVAILABILITY
 		if (e.getActionCommand().equals("Add")) {
-
+			
+			boolean check = false;
+			
 			ProviderDBQ proDB = new ProviderDBQ(this.proView);
-			proDB.addAvailability();
+			try {
+				check = proDB.checkDuplicate(this.proView.getDateManual());
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			if (check == false) {
+				proDB.addAvailability();
+			} else {
+				JOptionPane.showMessageDialog(this.proView, "The availability is already added", "Error", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+			
 
 		}
 		

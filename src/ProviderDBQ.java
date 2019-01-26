@@ -1,3 +1,4 @@
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -181,22 +182,22 @@ public class ProviderDBQ {
 		}
 	}
 	
-	public boolean checkDuplicate() {
+	public boolean checkDuplicate(Date date) {
 
 		String query = "SELECT date FROM availabilities "
 				+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id "
-				+ "WHERE availabilities.date='';";
+				+ "WHERE availabilities.available ='Yes' "
+				+ "AND availabilities.date='"+date+"';";
 
 		try {
 			this.proDB.rs = this.proDB.stmt.executeQuery(query);
 
-			// This code is telling us whether we have any results
-			// in our database or not
+			//CHECKING RESULTS
 			if (this.proDB.rs.isBeforeFirst()) {
 				return true;
 			}
 
-			// Close the result set, statement and the connection
+			//CLOSE RESULT, STATEMENT AND CONNECTION
 			this.proDB.rs.close();
 			this.proDB.stmt.close();
 			this.proDB.conn.close();

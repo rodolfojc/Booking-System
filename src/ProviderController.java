@@ -32,7 +32,7 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			boolean check = false;
 			
 			ProviderDBQ proDB = new ProviderDBQ(this.proView);
-			ProviderDBQ ProDBtwo = new ProviderDBQ(this.proView);
+			ProviderDBQ proDBtwo = new ProviderDBQ(this.proView);
 			
 			try {
 				check = proDB.checkDuplicate(this.proView.getDateManual(), this.proView.getProviderID(), this.proView.getHour());
@@ -42,7 +42,7 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			}
 			
 			if (check == false) {
-				ProDBtwo.addAvailability();
+				proDBtwo.addAvailability();
 			} else if (check){
 				JOptionPane.showMessageDialog(this.proView, "The availability is already added", "Error", JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -54,14 +54,37 @@ public class ProviderController implements ActionListener, ListSelectionListener
 		//TO ADD ALL DAY AVAILABLE
 		if (e.getActionCommand().equals("Add All")) {
 			
+			int added=0;
+			int noAdded=0;
+			//java.sql.Date 
+			
 			//FOR LOOP - WORKING HRS
 			for (int x = 0; x < 24; x++) {
+				boolean check = false;
 				String hr = this.proView.getHrs(x);
+				
 				ProviderDBQ proDB = new ProviderDBQ(this.proView);
-				proDB.addAvailability(hr);
+				ProviderDBQ proDBTwo = new ProviderDBQ(this.proView);
+				
+				try {
+					check = proDB.checkDuplicate(this.proView.getDateByDay(), this.proView.getProviderID(), hr);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				if (check == false) {
+					proDBTwo.addAvailability(hr);
+					added++;
+				} else if (check){
+					noAdded++;
+				}
+										
 			}
 
-			JOptionPane.showMessageDialog(this.proView, "Your availabilities have been added");
+			JOptionPane.showMessageDialog(this.proView, "Total availabilities added: "+added);
+			JOptionPane.showMessageDialog(this.proView, "Total availabilities that were already added: "+noAdded, "Error", JOptionPane.INFORMATION_MESSAGE);
+			
 			this.proView.UpdateFrame();
 		}
 

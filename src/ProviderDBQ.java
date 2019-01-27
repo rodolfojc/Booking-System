@@ -182,12 +182,14 @@ public class ProviderDBQ {
 		}
 	}
 	
-	public boolean checkDuplicate(Date date) {
+	public boolean checkDuplicate(Date date, int ID, String hr) {
 
 		String query = "SELECT date FROM availabilities "
 				+ "INNER JOIN providers ON availabilities.pro_id = providers.pro_id "
 				+ "WHERE availabilities.available ='Yes' "
-				+ "AND availabilities.date='"+date+"';";
+				+ "AND availabilities.date='"+date+"' "
+				+ "AND providers.pro_id='"+ID+"' "
+				+ "AND availabilities.time='"+hr+"';";
 
 		try {
 			this.proDB.rs = this.proDB.stmt.executeQuery(query);

@@ -32,16 +32,18 @@ public class ProviderController implements ActionListener, ListSelectionListener
 			boolean check = false;
 			
 			ProviderDBQ proDB = new ProviderDBQ(this.proView);
+			ProviderDBQ ProDBtwo = new ProviderDBQ(this.proView);
+			
 			try {
-				check = proDB.checkDuplicate(this.proView.getDateManual());
+				check = proDB.checkDuplicate(this.proView.getDateManual(), this.proView.getProviderID(), this.proView.getHour());
 			} catch (ParseException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
 			if (check == false) {
-				proDB.addAvailability();
-			} else {
+				ProDBtwo.addAvailability();
+			} else if (check){
 				JOptionPane.showMessageDialog(this.proView, "The availability is already added", "Error", JOptionPane.INFORMATION_MESSAGE);
 			}
 			

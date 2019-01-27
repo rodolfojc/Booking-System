@@ -21,7 +21,7 @@ public class Login extends JFrame {
 	public Login(Controller controller) {
 
 		// NEW INSTANCE OF VIEW TO BUILD LOGIN VIEW, CONTROLLER, AND FRAME SETUP
-		this.login = new View("Online Appointment System", 400, 600, false);
+		this.login = new View("Online Appointments System", 400, 600, false);
 		this.controller = controller;
 		setupLoginFrame();
 	}
@@ -71,7 +71,7 @@ public class Login extends JFrame {
 		JPanel bottomTwo = new JPanel();
 
 		// WELCOME LOGIN AND PASSWORD
-		this.login.addLabel("Get Appointments", top);
+		this.login.addLabel("Appointments System", top);
 		this.login.addLabel("Email", centralOne);
 		this.emailIn = login.addTextField(10, centralOne);
 		this.login.addLabel("Password", centralTwo);

@@ -12,4 +12,14 @@
 <a href="https://github.com/rodolfojc/Booking-System/blob/FinalVersion/Screenshots/Customers%20manager.PNG"><img src="https://github.com/rodolfojc/Booking-System/blob/FinalVersion/Screenshots/Customers%20manager.PNG" title="Customer" alt="Customer" ></a>
 </div>
 
+>Provider View
 
+<div align="center">
+<a href="https://github.com/rodolfojc/Booking-System/blob/FinalVersion/Screenshots/Provider%20manager.PNG"><img src="https://github.com/rodolfojc/Booking-System/blob/FinalVersion/Screenshots/Provider%20manager.PNG" title="Provider" alt="Provider" ></a>
+</div>
+
+>Administrators
+
+<div align="center">
+<a href="https://github.com/rodolfojc/Booking-System/blob/FinalVersion/Screenshots/Administrator%20manager.PNG"><img src="https://github.com/rodolfojc/Booking-System/blob/FinalVersion/Screenshots/Administrator%20manager.PNG" title="Administrator" alt="Administrator" ></a>
+</div>
